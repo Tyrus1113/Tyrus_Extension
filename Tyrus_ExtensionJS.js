@@ -10,7 +10,7 @@ Array.prototype.removeItem = function (x) {
     }
 }
 // 数字从大到小/从小到大排序
-Array.prototype.sortNum = function (k) {
+Array.prototype.sortFromNum = function (k) {
     // 若没有给定参数 则默认从小到大排序
     if (k == undefined) {k = false}
     var n = 0
@@ -34,7 +34,7 @@ Array.prototype.sortNum = function (k) {
     return this
 }
 // 取数组中最大项/最小项
-Array.prototype.getMaxMinItem = function (k) {
+Array.prototype.getMaxORMinItem = function (k) {
     if (k == undefined) {k = false}
     var n = 0
     for (var i = 0; i < this.length; i++) {
@@ -50,15 +50,19 @@ Array.prototype.getMaxMinItem = function (k) {
     }
     return n
 }
+// 获取当前时间日期年月
+var d = new Date()
+var stamp = new Date().getTime()
+console.log(stamp);
 
 var numArr = [6,3,4,2,1,7,0,5]
 var strArr = ['a','b','c','d','e','f','g']
 
-console.log(numArr)
-// numArr.removeItem(2)
-// numArr.sortNum()
 // console.log(numArr)
-console.log(numArr.getMaxMinItem())
+// numArr.removeItem(2)
+// numArr.sortFromNum()
+// console.log(numArr)
+// console.log(numArr.getMaxORMinItem(true))
 
 
 
