@@ -36,7 +36,7 @@ Array.prototype.sortFromNum = function (k) {
 }
 
 // 取数组中最大项/最小项
-Array.prototype.getMaxORMinItem = function (k) {
+Array.prototype.getMaxOrMinItem = function (k) {
     if (k == undefined) {k = false}
     var n = 0
     for (var i = 0; i < this.length; i++) {
@@ -88,12 +88,19 @@ String.prototype.periodTime = function () {
     return result
 }
 
+// 除去左右两边空格
+String.prototype.trimSpace = function () {
+    return this.replace(/(^s+)|(s+$)/g,'')
+}
+
 // 测试区 ------
 var numArr = [6,3,4,2,1,7,0,5]
 var strArr = ['a','b','c','d','e','f','g']
 var strDate = "2018-02-21 21:21:00"
+var strTest = ' 去除两边空白   '
 console.log(strDate.periodTime());
-// console.log(numArr)
+console.log(strTest)
+console.log(strTest.trimSpace());
 // numArr.removeItem(2)
 // numArr.sortFromNum()
 // console.log(numArr)
