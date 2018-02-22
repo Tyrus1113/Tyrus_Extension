@@ -89,22 +89,53 @@ String.prototype.periodTime = function () {
 }
 
 // 除去左右两边空格
-String.prototype.trimSpace = function () {
-    return this.replace(/(^s+)|(s+$)/g,'')
+String.prototype.trimBothSpace = function () {
+    return this.replace(/(^\s*)|(\s*$)/g,'')
+}
+// 除去左边空格
+String.prototype.trimLeftSpace = function () {
+　　return this.replace(/(^\s*)/g,'')
+}
+// 除去右边空格
+String.prototype.trimRightSpace = function () {
+    return this.replace(/(\s*$)/g,'')
+}
+// 除去所有空格
+String.prototype.trimAllSpace = function () {
+    return this.replace(/\s/g,'')
+}
+
+// 数字区间排序
+Array.prototype.numberSection = function () {
+    var n = []
+    for (var i = 0; i < this.length; i++) {
+        if (this[i] == this[this.length-1]) {
+            var r = this[this.length-1] + (this[1] - this[0])
+            var p = this[this.length-1] + '-' + r
+            n.push(p)
+        } else {
+            var p = this[i] + '-' + this[i+1]
+            n.push(p)
+        }
+    }
+    console.log(n);
 }
 
 // 测试区 ------
 var numArr = [6,3,4,2,1,7,0,5]
 var strArr = ['a','b','c','d','e','f','g']
-var strDate = "2018-02-21 21:21:00"
-var strTest = ' 去除两边空白   '
-console.log(strDate.periodTime());
-console.log(strTest)
-console.log(strTest.trimSpace());
+var strDate = "2018-02-22 12:11:00"
+var strTest = ' 去除 两边 空白   '
+// console.log(strDate.periodTime());
+// console.log(strTest)
+// console.log(strTest.trimAllSpace());
+var ar = [0,10,20,30,40,50]
+ar.numberSection()
 // numArr.removeItem(2)
 // numArr.sortFromNum()
 // console.log(numArr)
 // console.log(numArr.getMaxORMinItem(true))
+
 
 // 测试区 end ------
 
