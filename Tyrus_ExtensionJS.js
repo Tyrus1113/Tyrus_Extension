@@ -131,8 +131,8 @@ var strTest = ' 去除 两边 空白   '
 // console.log(strTest.trimAllSpace());
 var ar = [0,10,20,30,40,50]
 ar.numberSection()
-// numArr.removeItem(2)
-// numArr.sortFromNum()
+numArr.removeItem(2)
+numArr.sortFromNum()
 // console.log(numArr)
 // console.log(numArr.getMaxORMinItem(true))
 
