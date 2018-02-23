@@ -121,18 +121,37 @@ Array.prototype.numberSection = function () {
     console.log(n);
 }
 
+// 对象是否为空 true:空 | false:非空
+Object.prototype.isEmptyObj = function () {
+    var k = 'Tyrus_ExtensionJS Error: 不是对象类型'  
+    var s = Object.prototype.toString.call(this)
+    if (s == '[object Object]') {
+        for (var key in this) {
+            if (this.hasOwnProperty(key)) {
+                return false
+            }
+        }
+    } else {
+        return k
+    }
+    return true
+}
+
 // 测试区 ------
+var objTest = {}
 var numArr = [6,3,4,2,1,7,0,5]
 var strArr = ['a','b','c','d','e','f','g']
 var strDate = "2018-02-22 12:11:00"
 var strTest = ' 去除 两边 空白   '
+var ar = [0,10,20,30,40,50]
+console.log(objTest.isEmptyObj());
+// console.log(Object.prototype.toString.call(numArr));
 // console.log(strDate.periodTime());
 // console.log(strTest)
 // console.log(strTest.trimAllSpace());
-var ar = [0,10,20,30,40,50]
-ar.numberSection()
-numArr.removeItem(2)
-numArr.sortFromNum()
+// ar.numberSection()
+// numArr.removeItem(2)
+// numArr.sortFromNum()
 // console.log(numArr)
 // console.log(numArr.getMaxORMinItem(true))
 
