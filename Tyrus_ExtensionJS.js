@@ -126,15 +126,15 @@ var numArr = [6,3,4,2,1,7,0,5]
 var strArr = ['a','b','c','d','e','f','g']
 var strDate = "2018-02-22 12:11:00"
 var strTest = ' 去除 两边 空白   '
-// console.log(strDate.periodTime());
-// console.log(strTest)
-// console.log(strTest.trimAllSpace());
+console.log(strDate.periodTime());
+console.log(strTest)
+console.log(strTest.trimAllSpace());
 var ar = [0,10,20,30,40,50]
 ar.numberSection()
 numArr.removeItem(2)
 numArr.sortFromNum()
-// console.log(numArr)
-// console.log(numArr.getMaxORMinItem(true))
+console.log(numArr)
+console.log(numArr.getMaxORMinItem(true))
 
 
 // 测试区 end ------
