@@ -157,27 +157,34 @@ Array.prototype.concatUniqueSort = function (a1,a2) {
         return n
     }
     var s = concatUniqueFunc(this,a1)
-    for (let i = 1; i < arguments.length; i++) {
+    for (var i = 1; i < arguments.length; i++) {
         // 从第二个参数开始循环执行合并去重
         s = concatUniqueFunc(s,arguments[i])
     }
 
-    var t = []
-    for (var i = 0; i < s.length; i++) {
-        t.push(s[i].replace('-',''))
-    }
-    console.log(t);
-
-
     // 给sort方法添加排序规则
-    function sortFunc (a,b) { return a - b }
+    var t = s.sort(function (a,b) {
+        return a - b
+    })
 
-    var nt = t.sort(sortFunc)
-    var nn = []
-    for (var i = 0; i < nt.length; i++) {
-        nn.push(nt[i].splice(5,0,'-')) // 错误出现在此行  尽快完成此方法
-    }
-    return nn
+    return t
+
+    // 时间字段排序
+    // var t = []
+    // for (var i = 0; i < s.length; i++) {
+    //     t.push(s[i].replace('-',''))
+    // }
+    // console.log(t);
+    // // 给sort方法添加排序规则
+    // var nt = t.sort(function (a,b) {
+    //     return a - b
+    // })
+    // var nn = []
+    // for (var i = 0; i < nt.length; i++) {
+    //     var a = nt[i].replace(/(.{4})(.*)/ , '$1-$2')
+    //     nn.push(a)
+    // }
+    // return nn
 }
 
 // 测试区 ------
@@ -187,13 +194,13 @@ var strArr = ['a','b','c','d','e','f','g']
 var strDate = "2018-02-22 12:11:00"
 var strTest = ' 去除 两边 空白   '
 var ar = [0,10,20,30,40,50]
-// var arr1 = [1,3,5,7,9]  
-// var arr2 = [2,1,6,5,10]  
-// var arr3 = [3,10,7,1,15]
-// var arr4 = [4,21,6,18,7]
-var arr1 = ['2017-01','2017-02','2017-03','2017-04','2017-07','2018-01']  
-var arr2 = ['2017-01','2017-03','2017-04','2017-05','2017-06']  
-var arr3 = ['2017-01','2017-02','2017-03','2017-04']
+var arr1 = [1,3,5,7,9]  
+var arr2 = [2,1,6,5,10]  
+var arr3 = [3,10,7,1,15]
+var arr4 = [4,21,6,18,7]
+// var arr1 = ['2017-01','2017-02','2017-03','2017-04','2017-07','2018-01']  
+// var arr2 = ['2017-01','2017-03','2017-04','2017-05','2017-06']  
+// var arr3 = ['2017-01','2017-02','2017-03','2017-04']
 console.log(objTest.isEmptyObj());
 console.log(arr1.concatUniqueSort(arr2,arr3));
 // console.log(Object.prototype.toString.call(numArr));
