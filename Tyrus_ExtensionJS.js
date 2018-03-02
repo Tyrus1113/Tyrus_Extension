@@ -187,9 +187,27 @@ Array.prototype.concatUniqueSort = function (a1,a2) {
     // return nn
 }
 
+// 数组数字添加千分符
+Array.prototype.addThousandMark = function () {
+    var n = []
+    for (var i = 0; i < this.length; i++) {
+        n.push(this[i].toString().replace(/(\d{1,3})(?=(\d{3})+$)/g,'$1,'))
+    }
+    return n
+}
+
 // 测试区 ------
-var objTest = {}
-var numArr = [6,3,4,2,1,7,0,5]
+var objTest = {
+    a : '123',
+    b : true,
+    c : {
+        d : 1
+    }
+}
+objTest.prototype = {
+    e : 10
+}
+var numArr = [6000,3000,4000,2000,1000,7000]
 var strArr = ['a','b','c','d','e','f','g']
 var strDate = "2018-02-22 12:11:00"
 var strTest = ' 去除 两边 空白   '
@@ -198,11 +216,23 @@ var arr1 = [1,3,5,7,9]
 var arr2 = [2,1,6,5,10]  
 var arr3 = [3,10,7,1,15]
 var arr4 = [4,21,6,18,7]
+
+var bool;
+if (objTest.prototype.hasOwnProperty('e')) {
+    bool = true
+} else {
+    bool = false
+}
+console.log(numArr.addThousandMark());
+// console.log(bool);
+// for (var key in objTest) {
+//         console.log(key,':',objTest[key]);
+// }
 // var arr1 = ['2017-01','2017-02','2017-03','2017-04','2017-07','2018-01']  
 // var arr2 = ['2017-01','2017-03','2017-04','2017-05','2017-06']  
 // var arr3 = ['2017-01','2017-02','2017-03','2017-04']
-console.log(objTest.isEmptyObj());
-console.log(arr1.concatUniqueSort(arr2,arr3));
+// console.log(objTest.isEmptyObj());
+// console.log(arr1.concatUniqueSort(arr2,arr3));
 // console.log(Object.prototype.toString.call(numArr));
 // console.log(strDate.periodTime());
 // console.log(strTest)
