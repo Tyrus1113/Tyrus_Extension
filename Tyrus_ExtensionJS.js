@@ -1,6 +1,18 @@
-// Tyrus_ExtensionJS
+/*
+ * @Tyrus_ExtensionJS
+ * @Author: Tyrus 
+ * @Date: 2018-03-14 16:09:25 
+ * @Last Modified by: Tyrus
+ * @Last Modified time: 2018-03-14 18:21:30
+ */
 
-// 移除数组选中项
+
+// 移除数组选中项 
+/* 
+此方法返回新数组 
+避免splice改变原数组
+参数：索引
+*/
 Array.prototype.removeItem = function (x) {
     for (var i = 0; i < this.length; i++) {
         if (this[i] == x) {
@@ -118,7 +130,8 @@ Array.prototype.numberSection = function () {
             n.push(p)
         }
     }
-    console.log(n);
+    // console.log(n)
+    return n
 }
 
 // 对象是否为空 true:空 | false:非空
@@ -163,28 +176,28 @@ Array.prototype.concatUniqueSort = function (a1,a2) {
     }
 
     // 给sort方法添加排序规则
-    var t = s.sort(function (a,b) {
-        return a - b
-    })
-
-    return t
-
-    // 时间字段排序
-    // var t = []
-    // for (var i = 0; i < s.length; i++) {
-    //     t.push(s[i].replace('-',''))
-    // }
-    // console.log(t);
-    // // 给sort方法添加排序规则
-    // var nt = t.sort(function (a,b) {
+    // var t = s.sort(function (a,b) {
     //     return a - b
     // })
-    // var nn = []
-    // for (var i = 0; i < nt.length; i++) {
-    //     var a = nt[i].replace(/(.{4})(.*)/ , '$1-$2')
-    //     nn.push(a)
-    // }
-    // return nn
+
+    // return t
+
+    // 时间字段排序
+    var t = []
+    for (var i = 0; i < s.length; i++) {
+        t.push(s[i].replace('-',''))
+    }
+    console.log(t);
+    // 给sort方法添加排序规则
+    var nt = t.sort(function (a,b) {
+        return a - b
+    })
+    var nn = []
+    for (var i = 0; i < nt.length; i++) {
+        var a = nt[i].replace(/(.{4})(.*)/ , '$1-$2')
+        nn.push(a)
+    }
+    return nn
 }
 
 // 数组数字添加千分符
@@ -223,21 +236,22 @@ if (objTest.prototype.hasOwnProperty('e')) {
 } else {
     bool = false
 }
-console.log(numArr.addThousandMark());
+// console.log(numArr.addThousandMark());
 // console.log(bool);
 // for (var key in objTest) {
 //         console.log(key,':',objTest[key]);
 // }
-// var arr1 = ['2017-01','2017-02','2017-03','2017-04','2017-07','2018-01']  
-// var arr2 = ['2017-01','2017-03','2017-04','2017-05','2017-06']  
-// var arr3 = ['2017-01','2017-02','2017-03','2017-04']
+var arr1 = ['2017-01','2017-02','2017-03','2017-04','2017-07','2018-01']  
+var arr2 = ['2017-01','2017-03','2017-04','2017-05','2017-06']  
+var arr3 = ['2017-01','2017-02','2017-03','2017-04']
 // console.log(objTest.isEmptyObj());
-// console.log(arr1.concatUniqueSort(arr2,arr3));
+console.log(arr1.concatUniqueSort(arr2,arr3));
 // console.log(Object.prototype.toString.call(numArr));
 // console.log(strDate.periodTime());
 // console.log(strTest)
 // console.log(strTest.trimAllSpace());
-// ar.numberSection()
+
+// console.log(numArr.numberSection())
 // numArr.removeItem(2)
 // numArr.sortFromNum()
 // console.log(numArr)
