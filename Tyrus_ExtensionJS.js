@@ -3,15 +3,15 @@
  * @Author: Tyrus 
  * @Date: 2018-03-14 16:09:25 
  * @Last Modified by: Tyrus
- * @Last Modified time: 2018-03-14 18:21:30
+ * @Last Modified time: 2018-03-16 18:37:45
  */
 
 
 // 移除数组选中项 
 /* 
-此方法返回新数组 
-避免splice改变原数组
-参数：索引
+    此方法返回新数组 
+    避免splice改变原数组
+    参数1：索引
 */
 Array.prototype.removeItem = function (x) {
     for (var i = 0; i < this.length; i++) {
@@ -23,8 +23,12 @@ Array.prototype.removeItem = function (x) {
 }
 
 // 数字从大到小/从小到大排序
-Array.prototype.sortFromNum = function (k) {
-    // 若没有给定参数 则默认从小到大排序
+/* 
+    此方法会改变原始数组
+    参数1：true/1 从大到小排序
+    参数2：默认/false/0 从小到大排序
+*/
+Array.prototype.sortFromNum = function (k) {    
     if (k == undefined) {k = false}
     var n = 0
     for (var i = 0; i < this.length; i++) {
@@ -48,9 +52,17 @@ Array.prototype.sortFromNum = function (k) {
 }
 
 // 取数组中最大项/最小项
+/* 
+    此方法不会改变原始数组
+    参数1：true/1 取数组中最大值
+    参数2：默认/false/0 取数组中最小值
+*/
 Array.prototype.getMaxOrMinItem = function (k) {
     if (k == undefined) {k = false}
-    var n = 0
+    // 返回值在初始化时应当赋值数组其中一项
+    // 否则会在返回最小值时报错
+    var n = this[(Math.random() * (this.length-1)).toFixed(0)]
+    console.log(n)
     for (var i = 0; i < this.length; i++) {
         if (k == true) {
             if (this[i] > n) {
@@ -66,40 +78,53 @@ Array.prototype.getMaxOrMinItem = function (k) {
 }
 
 // 根据时间格式获取间隔时间
+/* 
+    此方法不会改变原始字符串
+    时间格式：yyyy-mm-dd hh:mm:ss
+    无参数
+*/
 String.prototype.periodTime = function () {
+
     //把时间转换为时间戳
-    var d = Date.parse(this.replace(/-/gi,'/'))
+    var d      = Date.parse(this.replace(/-/gi,'/'))
     var minute = 1000 * 60
-    var hour = minute * 60
-    var day = hour * 24
+    var hour   = minute * 60
+    var day    = hour * 24
     var halfamonth = day * 15
-    var month = day * 30
+    var month  = day * 30
+    
     // 获取当前时间戳
     var now = new Date().getTime()
     var diffValue = now - d
     if (diffValue < 0) {return}
     var monthC = diffValue / month
-    var weekC = diffValue / (7 * day)
-    var dayC = diffValue / day
-    var hourC = diffValue / hour
-    var minC = diffValue / minute
+    var weekC  = diffValue / (7 * day)
+    var dayC   = diffValue / day
+    var hourC  = diffValue / hour
+    var minC   = diffValue / minute
     var result = null
+
     if(monthC >= 1) {
         result = parseInt(monthC) + "月前"
     } else if (weekC >= 1) {
-        result = parseInt(weekC) + "周前"
-    } else if (dayC >= 1) {
-        result = parseInt(dayC) + "天前"
+        result = parseInt(weekC)  + "周前"
+    } else if (dayC  >= 1) {
+        result = parseInt(dayC)   + "天前"
     } else if (hourC >= 1) {
-        result = parseInt(hourC) + "小时前"
-    } else if (minC >= 1) {
-        result = parseInt(minC) + "分钟前"
+        result = parseInt(hourC)  + "小时前"
+    } else if (minC  >= 1) {
+        result = parseInt(minC)   + "分钟前"
     } else {
         result = "刚刚"
     }
     return result
 }
 
+// 去除空格
+/* 
+    以下trim方法不会改变原始字符串
+    无参数
+*/
 // 除去左右两边空格
 String.prototype.trimBothSpace = function () {
     return this.replace(/(^\s*)|(\s*$)/g,'')
@@ -118,7 +143,12 @@ String.prototype.trimAllSpace = function () {
 }
 
 // 数字区间排序
-Array.prototype.numberSection = function () {
+/* 
+    此方法不会改变原始数组
+    参数1：数组中最后一项与最后附加项的值或区间
+    ************ 待完善 *****************
+*/
+Array.prototype.numberSection = function (s) {
     var n = []
     for (var i = 0; i < this.length; i++) {
         if (this[i] == this[this.length-1]) {
@@ -130,7 +160,6 @@ Array.prototype.numberSection = function () {
             n.push(p)
         }
     }
-    // console.log(n)
     return n
 }
 
@@ -175,14 +204,14 @@ Array.prototype.concatUniqueSort = function (a1,a2) {
         s = concatUniqueFunc(s,arguments[i])
     }
 
-    // 给sort方法添加排序规则
+    // 给sort方法添加排序规则 默认排序
     // var t = s.sort(function (a,b) {
     //     return a - b
     // })
 
     // return t
 
-    // 时间字段排序
+    // 按时间字段排序
     var t = []
     for (var i = 0; i < s.length; i++) {
         t.push(s[i].replace('-',''))
@@ -210,16 +239,20 @@ Array.prototype.addThousandMark = function () {
 }
 
 // 测试区 ------
-var objTest = {
-    a : '123',
-    b : true,
-    c : {
-        d : 1
-    }
+function Person (name,age) {
+    this.name = name
+    this.age = age
 }
-objTest.prototype = {
-    e : 10
+var boy = new Person('jon',10)
+var gil = new Person('liy',12)
+console.log(boy.name,gil.name)
+
+Person.prototype.hobby = function (hobby) {
+    return this.name + ' ‘s hobby is ' + hobby
 }
+console.log(boy.hobby('swim'))
+console.log(gil.hobby('watchTV'))
+
 var numArr = [6000,3000,4000,2000,1000,7000]
 var strArr = ['a','b','c','d','e','f','g']
 var strDate = "2018-02-22 12:11:00"
@@ -229,23 +262,12 @@ var arr1 = [1,3,5,7,9]
 var arr2 = [2,1,6,5,10]  
 var arr3 = [3,10,7,1,15]
 var arr4 = [4,21,6,18,7]
-
-var bool;
-if (objTest.prototype.hasOwnProperty('e')) {
-    bool = true
-} else {
-    bool = false
-}
-// console.log(numArr.addThousandMark());
-// console.log(bool);
-// for (var key in objTest) {
-//         console.log(key,':',objTest[key]);
-// }
-var arr1 = ['2017-01','2017-02','2017-03','2017-04','2017-07','2018-01']  
+var arr1 = ['2017-03','2017-04','2017-07','2018-01']  
 var arr2 = ['2017-01','2017-03','2017-04','2017-05','2017-06']  
-var arr3 = ['2017-01','2017-02','2017-03','2017-04']
+var arr3 = ['2017-01','2017-02','2017-08','2017-09']
+// console.log(numArr.addThousandMark());
 // console.log(objTest.isEmptyObj());
-console.log(arr1.concatUniqueSort(arr2,arr3));
+// console.log(arr1.concatUniqueSort(arr2,arr3));
 // console.log(Object.prototype.toString.call(numArr));
 // console.log(strDate.periodTime());
 // console.log(strTest)
@@ -253,7 +275,8 @@ console.log(arr1.concatUniqueSort(arr2,arr3));
 
 // console.log(numArr.numberSection())
 // numArr.removeItem(2)
-// numArr.sortFromNum()
+console.log(numArr.numberSection())
+console.log(numArr)
 // console.log(numArr)
 // console.log(numArr.getMaxORMinItem(true))
 
