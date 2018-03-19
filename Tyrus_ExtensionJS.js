@@ -3,7 +3,7 @@
  * @Author: Tyrus 
  * @Date: 2018-03-14 16:09:25 
  * @Last Modified by: Tyrus
- * @Last Modified time: 2018-03-16 18:37:45
+ * @Last Modified time: 2018-03-19 18:40:43
  */
 
 
@@ -21,6 +21,7 @@ Array.prototype.removeItem = function (x) {
         }
     }
 }
+
 
 // 数字从大到小/从小到大排序
 /* 
@@ -51,6 +52,7 @@ Array.prototype.sortFromNum = function (k) {
     return this
 }
 
+
 // 取数组中最大项/最小项
 /* 
     此方法不会改变原始数组
@@ -76,6 +78,7 @@ Array.prototype.getMaxOrMinItem = function (k) {
     }
     return n
 }
+
 
 // 根据时间格式获取间隔时间
 /* 
@@ -120,6 +123,7 @@ String.prototype.periodTime = function () {
     return result
 }
 
+
 // 去除空格
 /* 
     以下trim方法不会改变原始字符串
@@ -142,17 +146,19 @@ String.prototype.trimAllSpace = function () {
     return this.replace(/\s/g,'')
 }
 
+
 // 数字区间排序
 /* 
     此方法不会改变原始数组
-    参数1：数组中最后一项与最后附加项的值或区间
-    ************ 待完善 *****************
+    参数1：数组中最后一项与最后附加项的值或区间    
 */
 Array.prototype.numberSection = function (s) {
     var n = []
+    // 如果没有赋值参数 数组中附加项为最后一项+1
+    if (s == undefined) {s = 1}
     for (var i = 0; i < this.length; i++) {
         if (this[i] == this[this.length-1]) {
-            var r = this[this.length-1] + (this[1] - this[0])
+            var r = this[this.length-1] + s
             var p = this[this.length-1] + '-' + r
             n.push(p)
         } else {
@@ -163,7 +169,11 @@ Array.prototype.numberSection = function (s) {
     return n
 }
 
-// 对象是否为空 true:空 | false:非空
+
+// 对象是否为空 
+/* 
+    true:空 / false:非空
+*/
 Object.prototype.isEmptyObj = function () {
     var e = 'Tyrus_ExtensionJS Error: 不是对象类型'  
     var s = Object.prototype.toString.call(this)
@@ -178,6 +188,7 @@ Object.prototype.isEmptyObj = function () {
     }
     return true
 }
+
 
 // 数组合并 去重 排序
 Array.prototype.concatUniqueSort = function (a1,a2) {
@@ -229,6 +240,7 @@ Array.prototype.concatUniqueSort = function (a1,a2) {
     return nn
 }
 
+
 // 数组数字添加千分符
 Array.prototype.addThousandMark = function () {
     var n = []
@@ -275,7 +287,7 @@ var arr3 = ['2017-01','2017-02','2017-08','2017-09']
 
 // console.log(numArr.numberSection())
 // numArr.removeItem(2)
-console.log(numArr.numberSection())
+console.log(numArr.numberSection(null))
 console.log(numArr)
 // console.log(numArr)
 // console.log(numArr.getMaxORMinItem(true))
