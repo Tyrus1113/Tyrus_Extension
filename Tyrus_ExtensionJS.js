@@ -3,7 +3,7 @@
  * @Author: Tyrus 
  * @Date: 2018-03-14 16:09:25 
  * @Last Modified by: Tyrus
- * @Last Modified time: 2018-03-20 14:48:19
+ * @Last Modified time: 2018-03-20 16:33:55
  */
 
 
@@ -301,39 +301,57 @@ Array.prototype.addThousandMark = function () {
 
 
 
+// 深拷贝引用数据类型
+/* 
+    此方法不会改变原始对象
+    无参数
+*/
+Object.prototype.deepCloneObj = function () {
+    var _o = this instanceof Array ? [] : {}
+    if (this && typeof this === 'object') {
+        for (var key in this) {
+            if (this.hasOwnProperty(key)) {
+                // 判断类型 递归复制调用者的子元素
+                if (this[key] && typeof this[key] === 'object') {
+                    _o[key] = deepCloneObj(this[key])
+                } else {
+                    _o[key] = this[key]
+                }
+            }
+        }
+    }
+    return _o
+    // return JSON.parse(JSON.stringify(this))
+}
+
+
+
 // 测试区 ------
 
 var numArr = [6000,3000,4000,2000,1000,7000]
 var strArr = ['a','b','c','d','e','f','g']
 var strDate = "2018-02-22 12:11:00"
 var strTest = ' 去除 两边 空白   '
-var ar = [0,10,20,30,40,50]
-// var arr1 = [1,3,5,7,9,1]  
-// var arr2 = [2,1,6,5,10]  
-// var arr3 = [3,10,7,1,15]
-// var arr4 = [4,21,6,18,7]
-// var arr5 = [6,22,32,19,4]
-var arr1 = ['2017-03','2017-04','2017-07','2018-01','2017-04']  
-var arr2 = ['2017-01','2017-03','2017-04','2017-05','2017-06']  
-var arr3 = ['2017-01','2017-02','2017-08','2017-09']
-// console.log(numArr.addThousandMark());
-// console.log(objTest.isEmptyObj());
-var aaa = arr1.concatUniqueArray(arr2,arr3)
-// var aaa = arr1.concatUniqueArray()
-console.log(aaa)
-console.log(aaa.yearMonthSort())
-// console.log(Object.prototype.toString.call(numArr));
-// console.log(strDate.periodTime());
-// console.log(strTest)
-// console.log(strTest.trimAllSpace());
+var arr0 = [0,10,20,30,40,50]
+// var arr0 = {
+//     a : 0,
+//     b : 1
+// }
+var arr1 = [1,3,5,7,9,1]  
+var arr2 = [2,1,6,5,10]  
+var arr3 = [3,10,7,1,15]
+var arr4 = [4,21,6,18,7]
+var arr5 = [6,22,32,19,4]
+// var arr1 = ['2017-03','2017-04','2017-07','2018-01','2017-04']  
+// var arr2 = ['2017-01','2017-03','2017-04','2017-05','2017-06']  
+// var arr3 = ['2017-01','2017-02','2017-08','2017-09']
 
-// console.log(numArr.numberSection())
-// numArr.removeItem(2)
-// console.log(numArr.numberSection(null))
-// console.log(numArr)
-// console.log(numArr)
-// console.log(numArr.getMaxORMinItem(true))
-
+var asd = arr0.deepCloneObj()
+arr0[0] = 'a'
+arr0[1] = 'b'
+// arr0.a = 3
+// arr0.b = 4
+console.log(arr0,asd)
 
 // 测试区 end ------
 
