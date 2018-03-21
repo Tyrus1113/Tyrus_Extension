@@ -3,7 +3,7 @@
  * @Author: Tyrus 
  * @Date: 2018-03-14 16:09:25 
  * @Last Modified by: Tyrus
- * @Last Modified time: 2018-03-20 16:33:55
+ * @Last Modified time: 2018-03-21 15:20:57
  */
 
 
@@ -32,7 +32,7 @@ Array.prototype.removeItem = function (x) {
            默认/false/0 从小到大排序
 */
 Array.prototype.sortFromNum = function (k) {    
-    if (k == undefined) {k = false}
+    var k = k || false
     var n = 0
     for (var i = 0; i < this.length; i++) {
         for (var j = 0; j <= i; j++) {
@@ -64,11 +64,10 @@ Array.prototype.sortFromNum = function (k) {
            默认/false/0 取数组中最小值
 */
 Array.prototype.getMaxOrMinItem = function (k) {
-    if (k == undefined) {k = false}
+    var k = k || false
     // 返回值在初始化时应当赋值数组其中一项
     // 否则会在返回最小值时报错
     var n = this[(Math.random() * (this.length-1)).toFixed(0)]
-    console.log(n)
     for (var i = 0; i < this.length; i++) {
         if (k == true) {
             if (this[i] > n) {
@@ -165,7 +164,7 @@ String.prototype.trimAllSpace = function () {
 Array.prototype.numberSection = function (s) {
     var n = []
     // 如果没有赋值参数 数组中附加项为最后一项+1
-    if (s == undefined) {s = 1}
+    var s = s || 1
     for (var i = 0; i < this.length; i++) {
         if (this[i] == this[this.length-1]) {
             var r = this[this.length-1] + s
@@ -351,7 +350,13 @@ arr0[0] = 'a'
 arr0[1] = 'b'
 // arr0.a = 3
 // arr0.b = 4
-console.log(arr0,asd)
+// console.log(arr0,asd)
+// console.log(numArr.getMaxOrMinItem(1))
+
+
+
+
+
 
 // 测试区 end ------
 
