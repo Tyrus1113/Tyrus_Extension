@@ -3,7 +3,7 @@
  * @Author: Tyrus 
  * @Date: 2018-03-14 16:09:25 
  * @Last Modified by: Tyrus
- * @Last Modified time: 2018-03-21 15:20:57
+ * @Last Modified time: 2018-04-26 17:26:15
  */
 
 
@@ -80,6 +80,52 @@ Array.prototype.getMaxOrMinItem = function (k) {
         }
     }
     return n
+}
+
+
+
+
+// 本地存储
+/* 
+    注意：浏览器不会保留打开本地文件（file:///）的Cookie！
+    参数1：cookie名称
+    参数2：cookie值
+    参数3：过期时间 Number类型 单位：天
+*/
+// 存储Cookie
+function setCookieTy (n,v,e) {
+    var d = new Date()
+    d.setTime(d.getTime() + (e * 24 * 60 * 60 * 1000))
+    var expires = 'expires=' + d.toUTCString()
+    document.cookie = n + '=' + v + '; ' + expires
+}
+// 获取Cookie
+function getCookieTy (n) {
+    var _n = n + '='
+    var _c = document.cookie.split(';')
+    console.log(_c)
+    for (var i = 0; i < _c.length; i++) {
+        var _t = _c[i].trim()
+        if (_t.indexOf(_n) == 0) {
+            return _t.substring(_n.length,_t.length)
+        }
+    }
+    return ''
+}
+// 存储localStorage
+function setStorageTy (n,t) {
+    if (typeof t !== 'string') {
+        t = JSON.stringify(t)
+    }
+    window.localStorage.setItem(n,t)
+}
+// 获取localStorage
+function getStorageTy (n) {
+    return JSON.parse(window.localStorage.getItem(n))
+}
+// 删除localStorage
+function removeStorageTy (n) {
+    return window.localStorage.removeItem(n)
 }
 
 
@@ -292,7 +338,9 @@ Array.prototype.yearMonthSort = function (k) {
 Array.prototype.addThousandMark = function () {
     var n = []
     for (var i = 0; i < this.length; i++) {
-        n.push(this[i].toString().replace(/(\d{1,3})(?=(\d{3})+$)/g,'$1,'))
+        var _str = this[i].toString()
+        _str = _str.replace(/(\d{1,3})(?=(\d{3})+$)/g,'$1,')
+        n.push(_str)
     }
     return n
 }
@@ -320,13 +368,15 @@ Object.prototype.deepCloneObj = function () {
         }
     }
     return _o
+    
+    // 简便方式
     // return JSON.parse(JSON.stringify(this))
 }
 
 
 
-// 测试区 ------
 
+// 测试区 ------
 var numArr = [6000,3000,4000,2000,1000,7000]
 var strArr = ['a','b','c','d','e','f','g']
 var strDate = "2018-02-22 12:11:00"
@@ -352,6 +402,7 @@ arr0[1] = 'b'
 // arr0.b = 4
 // console.log(arr0,asd)
 // console.log(numArr.getMaxOrMinItem(1))
+// console.log(numArr.addThousandMark())
 
 
 
