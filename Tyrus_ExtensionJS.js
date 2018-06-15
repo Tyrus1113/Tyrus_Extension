@@ -3,7 +3,7 @@
  * @Author: Tyrus 
  * @Date: 2018-03-14 16:09:25 
  * @Last Modified by: Tyrus
- * @Last Modified time: 2018-04-26 17:26:15
+ * @Last Modified time: 2018-06-15
  */
 
 
@@ -11,15 +11,21 @@
 /* 
     此方法返回新数组 
     避免splice改变原数组
-    参数1：索引
+    参数1：数值 索引
 */
-Array.prototype.removeItem = function (x) {
+Array.prototype.removeTheItem = function (x) {
+
+    if (typeof x !== 'number') 
+        return 'Ty_err: 参数不是Number类型'
+    
+    var n = []
     for (var i = 0; i < this.length; i++) {
-        if (this[i] == x) {
-            this.splice(i,1)
-            break
+        if (i !== x) {
+            n.push(this[i])
         }
     }
+    
+    return n
 }
 
 
@@ -28,26 +34,34 @@ Array.prototype.removeItem = function (x) {
 // 数字从大到小/从小到大排序
 /* 
     此方法会改变原始数组
-    参数1：true/1 从大到小排序
-           默认/false/0 从小到大排序
+    参数1：true 从大到小排序
+          默认/false 从小到大排序
 */
-Array.prototype.sortFromNum = function (k) {    
-    var k = k || false
+Array.prototype.sortFromNum = function (x) {
+
+    if (x != null && typeof x !== 'boolean') 
+        return 'Ty_err: 参数不是Bool类型'
+
+    var x = x || false
     var n = 0
     for (var i = 0; i < this.length; i++) {
         for (var j = 0; j <= i; j++) {
-            if (k == true) {
+
+            if (x == true) {
                 if (this[i] > this[j]) {
                     n = this[i]
                     this[i] = this[j]
                     this[j] = n
                 }
+
             } else {
+                
                 if (this[i] < this[j]) {
                     n = this[i]
                     this[i] = this[j]
                     this[j] = n
                 }
+
             }
         }
     }
@@ -144,7 +158,6 @@ String.prototype.periodTime = function () {
     var minute = 1000 * 60
     var hour   = minute * 60
     var day    = hour * 24
-    var halfamonth = day * 15
     var month  = day * 30
     
     // 获取当前时间戳
@@ -232,7 +245,7 @@ Array.prototype.numberSection = function (s) {
     true:空 / false:非空
 */
 Object.prototype.isEmptyObj = function () {
-    var e = 'Tyrus_ExtensionJS Error: 不是对象类型'  
+    var e = 'Ty_Err: 不是对象类型'  
     var s = Object.prototype.toString.call(this)
     if (s == '[object Object]') {
         for (var k in this) {
@@ -257,7 +270,12 @@ Object.prototype.isEmptyObj = function () {
     参数n：数组 需要合并项可多次添加
     无参数：只给调用者去重
 */
-Array.prototype.concatUniqueArray = function (a1,a2) {
+Array.prototype.concatUniqueArray = function (a1, a2) {
+    for (var i = 0; i < arguments.length; i++) {
+        if (!Array.isArray(arguments[i])) {
+            return 'Ty_Err:第'+ (i+1) +'个参数不是Array类型'
+        }
+    }
     // 如果无参数则去重调用者
     if (arguments.length == 0) {
         var o = []
@@ -276,7 +294,7 @@ Array.prototype.concatUniqueArray = function (a1,a2) {
         }
     }
     // 合并去重两个数组
-    function concatUniqueFunc (r1,r2) {
+    function concatUniqueFunc (r1, r2) {
         // 复制第一个数组 让原数组的值不被改变
         var n = r1.concat()
         for (var i = 0; i < r2.length; i++) {
@@ -288,10 +306,10 @@ Array.prototype.concatUniqueArray = function (a1,a2) {
         }
         return n
     }
-    var s = concatUniqueFunc(self,a1)
+    var s = concatUniqueFunc(self, a1)
     // 从第二个参数开始循环执行合并去重
     for (var i = 1; i < arguments.length; i++) {
-        s = concatUniqueFunc(s,arguments[i])
+        s = concatUniqueFunc(s, arguments[i])
     }
     return s
 }
@@ -391,19 +409,12 @@ var arr2 = [2,1,6,5,10]
 var arr3 = [3,10,7,1,15]
 var arr4 = [4,21,6,18,7]
 var arr5 = [6,22,32,19,4]
-// var arr1 = ['2017-03','2017-04','2017-07','2018-01','2017-04']  
-// var arr2 = ['2017-01','2017-03','2017-04','2017-05','2017-06']  
-// var arr3 = ['2017-01','2017-02','2017-08','2017-09']
+var arr6 = 'asdasdasd'
+var arr7 = ['2017-03','2017-04','2017-07','2018-01','2017-04']  
+var arr8 = ['2017-01','2017-03','2017-04','2017-05','2017-06']  
+var arr9 = ['2017-01','2017-02','2017-08','2017-09']
 
-var asd = arr0.deepCloneObj()
-arr0[0] = 'a'
-arr0[1] = 'b'
-// arr0.a = 3
-// arr0.b = 4
-// console.log(arr0,asd)
-// console.log(numArr.getMaxOrMinItem(1))
-// console.log(numArr.addThousandMark())
-
+console.log(arr1.removeTheItem(4).sortFromNum())
 
 
 
