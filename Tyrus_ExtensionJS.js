@@ -20,9 +20,7 @@ Array.prototype.removeTheItem = function (x) {
     
     var n = []
     for (var i = 0; i < this.length; i++) {
-        if (i !== x) {
-            n.push(this[i])
-        }
+        if (i !== x) n.push(this[i])
     }
     
     return n
@@ -43,11 +41,13 @@ Array.prototype.sortFromNum = function (x) {
         return 'Ty_err: 参数不是Bool类型'
 
     var x = x || false
+
     var n = 0
     for (var i = 0; i < this.length; i++) {
         for (var j = 0; j <= i; j++) {
 
             if (x == true) {
+
                 if (this[i] > this[j]) {
                     n = this[i]
                     this[i] = this[j]
@@ -74,23 +74,34 @@ Array.prototype.sortFromNum = function (x) {
 // 取数组中最大项/最小项
 /* 
     此方法不会改变原始数组
-    参数1：true/1 取数组中最大值
-           默认/false/0 取数组中最小值
+    参数1：true/ 取数组中最大值
+           默认/false/ 取数组中最小值
 */
-Array.prototype.getMaxOrMinItem = function (k) {
-    var k = k || false
+Array.prototype.getMaxOrMinItem = function (x) {
+
+    if (x != null && typeof x !== 'boolean') 
+        return 'Ty_err: 参数不是Bool类型'
+
+    var x = x || false
+    
     // 返回值在初始化时应当赋值数组其中一项
-    // 否则会在返回最小值时报错
-    var n = this[(Math.random() * (this.length-1)).toFixed(0)]
+    // 否则会在返回最小值时出现异常
+    var n = this[0]
+
     for (var i = 0; i < this.length; i++) {
-        if (k == true) {
+
+        if (x == true) {
+
             if (this[i] > n) {
                 n = this[i]
             }
+
         } else {
+
             if (this[i] < n) {
                 n = this[i]
             }
+
         }
     }
     return n
@@ -108,38 +119,52 @@ Array.prototype.getMaxOrMinItem = function (k) {
 */
 // 存储Cookie
 function setCookieTy (n,v,e) {
+
     var d = new Date()
     d.setTime(d.getTime() + (e * 24 * 60 * 60 * 1000))
     var expires = 'expires=' + d.toUTCString()
+
     document.cookie = n + '=' + v + '; ' + expires
 }
+
 // 获取Cookie
 function getCookieTy (n) {
+
     var _n = n + '='
     var _c = document.cookie.split(';')
     console.log(_c)
+
     for (var i = 0; i < _c.length; i++) {
         var _t = _c[i].trim()
         if (_t.indexOf(_n) == 0) {
             return _t.substring(_n.length,_t.length)
         }
     }
+
     return ''
 }
+
 // 存储localStorage
 function setStorageTy (n,t) {
-    if (typeof t !== 'string') {
+
+    if (typeof t !== 'string') 
         t = JSON.stringify(t)
-    }
+    
     window.localStorage.setItem(n,t)
 }
+
 // 获取localStorage
 function getStorageTy (n) {
+
     return JSON.parse(window.localStorage.getItem(n))
+
 }
+
 // 删除localStorage
 function removeStorageTy (n) {
+
     return window.localStorage.removeItem(n)
+
 }
 
 
@@ -184,6 +209,7 @@ String.prototype.periodTime = function () {
     } else {
         result = "刚刚"
     }
+
     return result
 }
 
@@ -197,19 +223,30 @@ String.prototype.periodTime = function () {
 */
 // 除去左右两边空格
 String.prototype.trimBothSpace = function () {
+
     return this.replace(/(^\s*)|(\s*$)/g,'')
+
 }
+
 // 除去左边空格
 String.prototype.trimLeftSpace = function () {
+
 　　return this.replace(/(^\s*)/g,'')
+
 }
+
 // 除去右边空格
 String.prototype.trimRightSpace = function () {
+
     return this.replace(/(\s*$)/g,'')
+
 }
+
 // 除去所有空格
 String.prototype.trimAllSpace = function () {
+
     return this.replace(/\s/g,'')
+
 }
 
 
@@ -221,19 +258,28 @@ String.prototype.trimAllSpace = function () {
     参数1：数组中最后一项与最后附加项的值或区间    
 */
 Array.prototype.numberSection = function (s) {
+
     var n = []
+
     // 如果没有赋值参数 数组中附加项为最后一项+1
     var s = s || 1
+
     for (var i = 0; i < this.length; i++) {
+
         if (this[i] == this[this.length-1]) {
+
             var r = this[this.length-1] + s
             var p = this[this.length-1] + '-' + r
             n.push(p)
+
         } else {
+
             var p = this[i] + '-' + this[i+1]
             n.push(p)
+
         }
     }
+
     return n
 }
 
@@ -245,17 +291,16 @@ Array.prototype.numberSection = function (s) {
     true:空 / false:非空
 */
 Object.prototype.isEmptyObj = function () {
-    var e = 'Ty_Err: 不是对象类型'  
-    var s = Object.prototype.toString.call(this)
-    if (s == '[object Object]') {
-        for (var k in this) {
-            if (this.hasOwnProperty(k)) {
-                return false
-            }
+    
+    if (Object.prototype.toString.call(this) !== '[object Object]')
+        return 'Ty_err: this不是对象类型'
+
+    for (var k in this) {
+        if (this.hasOwnProperty(k)) {
+            return false
         }
-    } else {
-        return e
     }
+
     return true
 }
 
@@ -271,30 +316,32 @@ Object.prototype.isEmptyObj = function () {
     无参数：只给调用者去重
 */
 Array.prototype.concatUniqueArray = function (a1, a2) {
+
     for (var i = 0; i < arguments.length; i++) {
-        if (!Array.isArray(arguments[i])) {
+        if (!Array.isArray(arguments[i])) 
             return 'Ty_Err:第'+ (i+1) +'个参数不是Array类型'
-        }
     }
+
     // 如果无参数则去重调用者
     if (arguments.length == 0) {
+
         var o = []
         for (var i = 0; i < this.length; i++) {
-            if (o.indexOf(this[i]) === -1) {
-                o.push(this[i])
-            }
+            if (o.indexOf(this[i]) === -1) o.push(this[i])
         }
+
         return o
     }
+
     // 进入方法先去重调用者
     var self = []
     for (var i = 0; i < this.length; i++) {
-        if (self.indexOf(this[i]) === -1) {
-            self.push(this[i])
-        }
+        if (self.indexOf(this[i]) === -1) self.push(this[i])
     }
+
     // 合并去重两个数组
     function concatUniqueFunc (r1, r2) {
+
         // 复制第一个数组 让原数组的值不被改变
         var n = r1.concat()
         for (var i = 0; i < r2.length; i++) {
@@ -304,13 +351,16 @@ Array.prototype.concatUniqueArray = function (a1, a2) {
                 n.push(r2[i])
             }
         }
+
         return n
     }
     var s = concatUniqueFunc(self, a1)
+
     // 从第二个参数开始循环执行合并去重
     for (var i = 1; i < arguments.length; i++) {
         s = concatUniqueFunc(s, arguments[i])
     }
+
     return s
 }
 
@@ -321,14 +371,18 @@ Array.prototype.concatUniqueArray = function (a1, a2) {
 /* 
     此方法不会改变原始数组
     时间格式：yyyy-mm
-    参数1：true/1 从近到远排序
-           默认/false/0 从远到近排序
+    参数1：true 从近到远排序
+           默认/false 从远到近排序
 */
 Array.prototype.yearMonthSort = function (k) {
+
+    if (typeof x !== 'boolean') return 'Ty_err: 参数不是Bool类型'
+
     var t = []
     for (var i = 0; i < this.length; i++) {
         t.push(this[i].replace('-',''))
     }
+
     // 给sort方法添加排序规则
     var nt = t.sort(function (a,b) {
         if (k == true) {
@@ -337,11 +391,13 @@ Array.prototype.yearMonthSort = function (k) {
             return a - b
         }
     })
+
     var nn = []
     for (var i = 0; i < nt.length; i++) {
         var a = nt[i].replace(/(.{4})(.*)/ , '$1-$2')
         nn.push(a)
     }
+
     return nn
 }
 
@@ -354,12 +410,15 @@ Array.prototype.yearMonthSort = function (k) {
     无参数
 */
 Array.prototype.addThousandMark = function () {
+
     var n = []
     for (var i = 0; i < this.length; i++) {
         var _str = this[i].toString()
         _str = _str.replace(/(\d{1,3})(?=(\d{3})+$)/g,'$1,')
+
         n.push(_str)
     }
+
     return n
 }
 
@@ -372,22 +431,28 @@ Array.prototype.addThousandMark = function () {
     无参数
 */
 Object.prototype.deepCloneObj = function () {
+
     var _o = this instanceof Array ? [] : {}
+
     if (this && typeof this === 'object') {
+
         for (var key in this) {
+
             if (this.hasOwnProperty(key)) {
+
                 // 判断类型 递归复制调用者的子元素
                 if (this[key] && typeof this[key] === 'object') {
                     _o[key] = deepCloneObj(this[key])
                 } else {
                     _o[key] = this[key]
                 }
+                
             }
         }
     }
     return _o
     
-    // 简便方式
+    // 简化方式
     // return JSON.parse(JSON.stringify(this))
 }
 
@@ -400,11 +465,11 @@ var strArr = ['a','b','c','d','e','f','g']
 var strDate = "2018-02-22 12:11:00"
 var strTest = ' 去除 两边 空白   '
 var arr0 = [0,10,20,30,40,50]
-// var arr0 = {
-//     a : 0,
-//     b : 1
-// }
-var arr1 = [1,3,5,7,9,1]  
+var obj0 = {
+    a : 0,
+    b : 1
+}
+var arr1 = [1,3,5,7,9,1,-1]  
 var arr2 = [2,1,6,5,10]  
 var arr3 = [3,10,7,1,15]
 var arr4 = [4,21,6,18,7]
@@ -413,9 +478,9 @@ var arr6 = 'asdasdasd'
 var arr7 = ['2017-03','2017-04','2017-07','2018-01','2017-04']  
 var arr8 = ['2017-01','2017-03','2017-04','2017-05','2017-06']  
 var arr9 = ['2017-01','2017-02','2017-08','2017-09']
+var ar10 = [10]
 
-console.log(arr1.removeTheItem(4).sortFromNum())
-
+console.log(obj0.isEmptyObj())
 
 
 
