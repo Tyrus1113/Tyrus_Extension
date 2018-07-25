@@ -438,9 +438,7 @@ Object.prototype.ty_deepCloneObj = function () {
     var _o = this instanceof Array ? [] : {}
 
     if (this && typeof this === 'object') {
-
         for (var key in this) {
-
             if (this.hasOwnProperty(key)) {
                 // 判断类型 递归复制调用者的子元素
                 if (this[key] && typeof this[key] === 'object') {
@@ -461,7 +459,75 @@ Object.prototype.ty_deepCloneObj = function () {
 
 
 
+// 一次性函数
+var onceFunc = function () {
+
+    console.log('Just once')
+    
+    onceFunc = function() {
+        
+        console.log('Miss')
+    }
+}
+
+
+
+
+// 通用验证
+/*
+    schema 验证规则
+    validate 通用验证函数
+*/
+var schema = {
+    first : {
+        required : true
+    },
+    second : {
+        required : true
+    }
+}
+function validate (schema, value) {
+
+    for (var field in schema) {
+
+        if (schema[field].required) {
+
+            if (!value[field]) {
+                return false
+            }
+        }
+    }
+    return true
+}
+// 验证
+console.log(validate(schema, {
+    first : 'Bruce',
+    second: 'Wayne'
+}));
+
+
+
+
+// 统计数组中相同项的个数
+/* 
+    此方法不会改变原始对象
+    无参数
+*/
+Array.prototype.getSameItems = function () {
+
+    return this.reduce(function (obj, name) {
+
+        obj[name] = obj[name] ? obj[name] + 1 : 1
+
+        return obj
+
+    }, {})
+}
+
+
+
 // 测试区 如果使用此Ty库文件 请移除本行之后的代码段 ------
+var cars = ['BMW', 'Benz', 'Benz', 'Tesla', 'BMW', 'Toyota']
 var numArr = [6000,3000,4000,2000,1000,7000]
 var strArr = ['a','b','c','d','e','f','g']
 var strDate = "2018-02-22 12:11:00"
@@ -481,6 +547,9 @@ var arr7 = ['2017-03','2017-04','2017-07','2018-01','2017-04']
 var arr8 = ['2017-01','2017-03','2017-04','2017-05','2017-06']
 var arr9 = ['2017-01','2017-02','2017-08','2017-09']
 var ar10 = [10]
+
+let color = ['red', 'blue', 'green']
+console.log(cars.getSameItems())
 
 // 测试区 end ------
 
