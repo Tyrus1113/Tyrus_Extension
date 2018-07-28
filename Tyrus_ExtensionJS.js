@@ -130,14 +130,14 @@ function ty_setCookie (_n, _v, _e) {
 // 获取Cookie
 function ty_getCookie (_n) {
 
-    var _n = _n + '='
     var _c = document.cookie.split(';')
-    console.log(_c)
 
     for (var i = 0; i < _c.length; i++) {
         var _t = _c[i].trim()
-        if (_t.indexOf(_n) == 0) {
-            return _t.substring(_n.length,_t.length)
+        _a = _t.split('=')[0]
+
+        if (_a.indexOf(_n) == 0) {
+            return decodeURIComponent(_t.split('=')[1])
         }
     }
 
@@ -551,6 +551,7 @@ var ar10 = [10]
 let color = ['red', 'blue', 'green']
 console.log(cars.getSameItems())
 
-// 测试区 end ------
 
+// 测试区 end ------
+// ⚡
 // Tyrus_ExtensionJS end -------------------------
