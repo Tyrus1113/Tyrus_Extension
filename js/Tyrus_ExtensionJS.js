@@ -526,6 +526,53 @@ Array.prototype.getSameItems = function () {
 
 
 
+
+
+// 基于promise封装ajax
+const getJSON = function (url) {
+    const promise = new Promise(function (resolve, reject) {
+        const handler = function () {
+            if(this.readyState !== 4) return
+            this.status === 200 ? resolve(this.response) : reject(new Error(this.statusText))    
+        }
+        const client = new XMLHttpRequest()
+        client.open('GET', url)
+        client.onreadystatechange = handler
+        client.responseType = 'json'
+        client.setRequestHeader('Accept', 'application/json')
+        client.send()
+    })
+    return promise
+}
+
+getJSON('https://static.segmentfault.com/sponsor/20180731.json')
+.then(res => {
+    console.log(res)
+})
+.catch(err => {
+    console.log(err)
+})
+
+// 原生fetch
+fetch('https://static.segmentfault.com/sponsor/20180731.json', {
+    method: 'GET',
+    mode: 'cors',
+    // credentials: 'include' // 强制提交cookie
+})
+.then(response => {
+    return response.json()
+})
+.then(res => {
+    console.log(res)
+})
+.catch(err => {
+    console.log(err)
+})
+
+
+
+
+
 // 测试区 如果使用此Ty库文件 请移除本行之后的代码段 ------
 var cars = ['BMW', 'Benz', 'Benz', 'Tesla', 'BMW', 'Toyota']
 var numArr = [6000,3000,4000,2000,1000,7000]
