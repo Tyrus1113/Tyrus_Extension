@@ -4,7 +4,6 @@
 	<meta charset="utf-8" />
 	<title>Tyrus_ExtensionJS</title>
 	<link href="./img/favicon.ico" />
-	<script src="./js/Tyrus_ExtensionJS.js"></script>
 <style>
 body {
 	background-color: #333;
@@ -13,14 +12,27 @@ body {
 ._button {
 	width: 100px;height: 20px;
 	background-color: #f5da55;
-	pointer-events: none
+	/* pointer-events: none; */
+	margin-top: 10px;
+	text-align: center;
+	font-size: 12px;
+	line-height: 20px;
+	cursor: pointer;
 }
+._button:active {
+	background-color: #bfab45;
+}
+
 </style>
 </head>
 <body>
-<div class="_button"></div>
+	<div class="_button">BMW</div>
+	<div class="_button">Benz</div>
+	<div class="_button">Tesla</div>
+	<div class="_button">Cadillac</div>
 </body>
-<script>
+<script type="text/javascript" src="./js/Tyrus_ExtensionJS.js"></script>
+<script type="text/javascript">
 
 </script>
 </html>

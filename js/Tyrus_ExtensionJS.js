@@ -325,7 +325,7 @@ Array.prototype.ty_concatUniqueArray = function (_a1, _a2) {
             return 'Ty_Err:第'+ (i+1) +'个参数不是Array类型'
     }
 
-    // 如果无参数则去重调用者
+    // 如果无参数则只去重调用者
     if (arguments.length == 0) {
 
         var o = []
@@ -367,6 +367,43 @@ Array.prototype.ty_concatUniqueArray = function (_a1, _a2) {
     return s
 }
 
+
+
+
+// 数组动态去重
+/* 
+    异步调用方法
+*/
+var _init = []
+var _el = document.getElementsByClassName('_button')
+
+// 获取所有相同class的元素数组绑定事件
+for (var i = 0; i < _el.length; i++) {
+
+    _el[i].onclick = function () {
+        
+        _init.push(this.innerHTML)
+
+        console.log(ty_dynamicUniqueSort(_init))
+    }
+}
+/* 
+    参数1：数组 异步获取到的字段
+*/
+function ty_dynamicUniqueSort (_a) {
+
+    var _init = []
+
+    for (var i = 0; i < _a.length; i++) {
+
+        if (_init.indexOf(_a[i]) !== -1) 
+            _init.splice(_init.indexOf(_a[i]), 1)
+        
+        _init.push(_a[i])
+    }
+
+    return _init
+}
 
 
 
@@ -446,7 +483,6 @@ Object.prototype.ty_deepCloneObj = function () {
                 } else {
                     _o[key] = this[key]
                 }
-                
             }
         }
     }
@@ -460,6 +496,9 @@ Object.prototype.ty_deepCloneObj = function () {
 
 
 // 一次性函数
+/* 
+    无参数
+*/
 var onceFunc = function () {
 
     console.log('Just once')
@@ -513,7 +552,7 @@ console.log(validate(schema, {
     此方法不会改变原始对象
     无参数
 */
-Array.prototype.getSameItems = function () {
+Array.prototype.ty_getSameItems = function () {
 
     return this.reduce(function (obj, name) {
 
@@ -529,12 +568,20 @@ Array.prototype.getSameItems = function () {
 
 
 // 基于promise封装ajax
+/* 
+    参数1: url
+*/
 const getJSON = function (url) {
+
     const promise = new Promise(function (resolve, reject) {
+
         const handler = function () {
             if(this.readyState !== 4) return
-            this.status === 200 ? resolve(this.response) : reject(new Error(this.statusText))    
+            this.status === 200 
+            ? resolve(this.response) 
+            : reject(new Error(this.statusText))
         }
+
         const client = new XMLHttpRequest()
         client.open('GET', url)
         client.onreadystatechange = handler
@@ -542,6 +589,7 @@ const getJSON = function (url) {
         client.setRequestHeader('Accept', 'application/json')
         client.send()
     })
+    
     return promise
 }
 
@@ -559,8 +607,8 @@ fetch('https://static.segmentfault.com/sponsor/20180731.json', {
     mode: 'cors',
     // credentials: 'include' // 强制提交cookie
 })
-.then(response => {
-    return response.json()
+.then(res => {
+    return res.json()
 })
 .then(res => {
     console.log(res)
@@ -572,9 +620,8 @@ fetch('https://static.segmentfault.com/sponsor/20180731.json', {
 
 
 
-
-// 测试区 如果使用此Ty库文件 请移除本行之后的代码段 ------
-var cars = ['BMW', 'Benz', 'Benz', 'Tesla', 'BMW', 'Toyota']
+// 测试区 如使用此Ty库文件 请移除本行之后的代码段 ------
+var cars = ['BMW', 'Benz', 'Benz', 'Tesla', 'BMW', 'Cadillac']
 var numArr = [6000,3000,4000,2000,1000,7000]
 var strArr = ['a','b','c','d','e','f','g']
 var strDate = "2018-02-22 12:11:00"
@@ -596,7 +643,8 @@ var arr9 = ['2017-01','2017-02','2017-08','2017-09']
 var ar10 = [10]
 
 let color = ['red', 'blue', 'green']
-console.log(cars.getSameItems())
+console.log(cars.ty_getSameItems())
+
 
 
 // 测试区 end ------
