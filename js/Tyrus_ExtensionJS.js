@@ -5,307 +5,374 @@
  * @Last Modified by: Tyrus
  * @Last Modified time: 2018-06-19
  */
+const Ty = {
+
+    /**
+     * 移除数组选中项
+     * 
+     * @method removeArrayItem
+     * @param  {Array}  _a  原数组
+     * @param  {Number} _x  删除项的数组索引
+     * @return {Array}      返回 新数组
+     */
+    removeArrayItem (_a, _x) {
+
+        if (typeof _x !== 'number') 
+            return 'Ty_err: 参数不是Number类型'
+        
+        var n = []
+        for (var i = 0; i < _a.length; i++) {
+            if (i !== _x) n.push(_a[i])
+        }
+        
+        return n
+    },
 
 
-// 移除数组选中项
-/* 
-    此方法返回新数组
-    避免splice改变原数组
-    参数1：数值 索引
-*/
-Array.prototype.ty_removeTheItem = function (_x) {
-
-    if (typeof _x !== 'number') 
-        return 'Ty_err: 参数不是Number类型'
     
-    var n = []
-    for (var i = 0; i < this.length; i++) {
-        if (i !== _x) n.push(this[i])
-    }
+
+    /**
+     * 数字从大到小 或 从小到大排序
+     * 
+     * @method sortArrayNum
+     * @param  {Array}   _a  原数组
+     * @param  {Boolean} _x  true 从大到小 / 默认 false 从小到大
+     * @return {Array}       返回 原数组
+     */
+    sortArrayNum (_a, _x) {
+
+        if (_x != null && typeof _x !== 'boolean') 
+            return 'Ty_err: 参数不是Bool类型'
     
-    return n
-}
-
-
-
-
-// 数字从大到小/从小到大排序
-/* 
-    此方法会改变原始数组
-    参数1：true 从大到小排序
-          默认/false 从小到大排序
-*/
-Array.prototype.ty_sortFromNum = function (_x) {
-
-    if (_x != null && typeof _x !== 'boolean') 
-        return 'Ty_err: 参数不是Bool类型'
-
-    var _x = _x || false
-
-    var n = 0
-    for (var i = 0; i < this.length; i++) {
-        for (var j = 0; j <= i; j++) {
-
-            if (_x == true) {
-
-                if (this[i] > this[j]) {
-                    n = this[i]
-                    this[i] = this[j]
-                    this[j] = n
+        var _x = _x || false
+    
+        var n = 0
+        for (var i = 0; i < _a.length; i++) {
+            for (var j = 0; j <= i; j++) {
+    
+                if (_x == true) {
+    
+                    if (_a[i] > _a[j]) {
+                        n = _a[i]
+                        _a[i] = _a[j]
+                        _a[j] = n
+                    }
+    
+                } else {
+                    
+                    if (_a[i] < _a[j]) {
+                        n = _a[i]
+                        _a[i] = _a[j]
+                        _a[j] = n
+                    }
+    
                 }
+            }
+        }
+        return _a
+    },
+
+
+
+
+    /**
+     * 取数组中最大项 或 最小项
+     * 
+     * @method getArrayTheItem
+     * @param  {Array}  _a  原数组
+     * @param  {Array}  _x  true 取数组中最大值 / 默认 false 取数组中最小值
+     * @return {Array}      返回 新数组
+     */
+    getArrayTheItem (_a, _x) {
+
+        if (_x != null && typeof _x !== 'boolean') 
+            return 'Ty_err: 参数不是Bool类型'
+    
+        var _x = _x || false
+        
+        // 返回值在初始化时应当赋值数组其中一项
+        // 否则会在返回最小值时出现异常
+        var n = _a[0]
+    
+        for (var i = 0; i < _a.length; i++) {
+    
+            if (_x == true) {
+    
+                if (_a[i] > n) {
+                    n = _a[i]
+                }
+    
+            } else {
+    
+                if (_a[i] < n) {
+                    n = _a[i]
+                }
+    
+            }
+        }
+        return n
+    },
+
+
+
+
+    /**
+     * 存储Cookie
+     * 注意：浏览器不会保留打开本地文件（file:///）的Cookie！
+     * 
+     * @method setTheCookie
+     * @param  {String}  _n  cookie名称
+     * @param  {String}  _v  cookie值
+     * @param  {Number}  _e  过期时间 单位：天
+     */
+    setTheCookie (_n, _v, _e) {
+
+        var d = new Date()
+        d.setTime(d.getTime() + (_e * 24 * 60 * 60 * 1000))
+        var expires = 'expires=' + d.toUTCString()
+    
+        document.cookie = _n + '=' + _v + '; ' + expires
+    },
+
+
+
+
+    /**
+     * 获取Cookie
+     * 注意：浏览器不会保留打开本地文件（file:///）的Cookie！
+     * 
+     * @method getTheCookie
+     * @param  {String}  _n  cookie名称
+     * @return {String}      返回 Cookie
+     */
+    getTheCookie (_n) {
+
+        var _c = document.cookie.split(';')
+    
+        for (var i = 0; i < _c.length; i++) {
+            var _t = _c[i].trim()
+            _a = _t.split('=')[0]
+    
+            if (_a.indexOf(_n) == 0) {
+                return decodeURIComponent(_t.split('=')[1])
+            }
+        }
+    
+        return ''
+    },
+
+
+
+
+    /**
+     * 存储localStorage
+     * 
+     * @method setTheStorage
+     * @param  {String}  _n  storage名称
+     * @param  {Any}     _v  storage值
+     */
+    setTheStorage (_n, _v) {
+
+        if (typeof _v !== 'string') 
+            _v = JSON.stringify(_v)
+        
+        window.localStorage.setItem(_n, _v)
+    },
+
+
+
+
+    /**
+     * 获取localStorage
+     * 
+     * @method getTheStorage
+     * @param  {String}  _n  storage名称
+     * @return {Any}        返回 storage
+     */
+    getTheStorage (_n) {
+
+        return JSON.parse(window.localStorage.getItem(_n))
+    },
+
+
+
+
+     /**
+     * 删除localStorage
+     * 
+     * @method getTheStorage
+     * @param  {String}  _n  storage名称
+     * @return {Any}        返回 storage
+     */
+    ty_removeStorage (_n) {
+
+        return window.localStorage.removeItem(_n)
+    },
+
+
+
+
+    /**
+     * 根据时间格式获取间隔时间
+     * 
+     * @example
+     *          let strDate = "2018-08-22 12:11:00"
+     *          Ty.periodTime(strDate)  // 1周前
+     * @method periodTime
+     * @param  {String}     "yyyy-mm-dd hh-mm-ss"
+     * @return {String}     返回 文字叙述 "刚刚“ "N分钟前" "N天前"等
+     */
+    periodTime (_t) {
+
+        //把时间转换为时间戳
+        var d      = Date.parse(_t.replace(/-/gi,'/'))
+        var minute = 1000 * 60
+        var hour   = minute * 60
+        var day    = hour * 24
+        var month  = day * 30
+        
+        // 获取当前时间戳
+        var now = new Date().getTime()
+        var diffValue = now - d
+
+        if (diffValue < 0) {return}
+
+        var monthC = diffValue / month
+        var weekC  = diffValue / (7 * day)
+        var dayC   = diffValue / day
+        var hourC  = diffValue / hour
+        var minC   = diffValue / minute
+        var _r = null
+
+        if(monthC >= 1) {
+            _r = parseInt(monthC) + "个月前"
+        } else if (weekC >= 1) {
+            _r = parseInt(weekC)  + "周前"
+        } else if (dayC  >= 1) {
+            _r = parseInt(dayC)   + "天前"
+        } else if (hourC >= 1) {
+            _r = parseInt(hourC)  + "小时前"
+        } else if (minC  >= 1) {
+            _r = parseInt(minC)   + "分钟前"
+        } else {
+            _r = "刚刚"
+        }
+
+        return _r
+    },
+
+
+
+
+    /**
+     * 去除多余空格
+     * 
+     * @method  
+     * @param  {String}     带有多余空格的字符串
+     * @return {String}     返回 清除空格
+     */
+    // 除去左右两边空格
+    trimBothSpace (_s) {
+
+        return _s.replace(/(^\s*)|(\s*$)/g,'')
+    },
+    // 除去左边空格
+    trimLeftSpace (_s) {
+
+    　　return _s.replace(/(^\s*)/g,'')
+    },
+    // 除去右边空格
+    trimRightSpace (_s) {
+
+        return _s.replace(/(\s*$)/g,'')
+    },
+    // 除去所有空格
+    trimAllSpace (_s) {
+
+        return _s.replace(/\s/g,'')
+    },
+
+
+
+
+    /**
+     * 添加数字区间
+     * 
+     * @method addNumberSection
+     * @param  {Array}   _a    原数组
+     * @param  {Number}  _x    数组中最后一项与最后附加项的值或区间
+     * @return {Array}         返回 新数组
+     */
+    addNumberSection (_a, _x) {
+
+        if (_x != null && typeof _x !== 'number' && typeof _x !== 'string') 
+            return 'Ty_err: 参数不是Number类型'
+
+        var n = []
+
+        // 如果没有赋值参数 数组中附加项为最后一项 +1
+        var _x = _x || 1
+
+        for (var i = 0; i < _a.length; i++) {
+
+            if (_a[i] == _a[_a.length - 1]) {
+
+                var r = _a[_a.length - 1] + _x
+                var p = _a[_a.length - 1] + '-' + r
+                n.push(p)
 
             } else {
-                
-                if (this[i] < this[j]) {
-                    n = this[i]
-                    this[i] = this[j]
-                    this[j] = n
-                }
+
+                var p = _a[i] + '-' + _a[i + 1]
+                n.push(p)
 
             }
         }
-    }
-    return this
-}
+
+        return n
+    },
 
 
 
 
-// 取数组中最大项/最小项
-/* 
-    此方法不会改变原始数组
-    参数1：true/ 取数组中最大值
-           默认/false/ 取数组中最小值
-*/
-Array.prototype.ty_getMaxOrMinItem = function (_x) {
+    /**
+     * 对象是否为空
+     * 
+     * @method addNumberSection
+     * @param  {Object}   _o    原对象
+     * @return {Boolean}        返回 true 空 / false 非空
+     */
+    isEmptyObj (_o) {
+        
+        if (Object.prototype.toString.call(this) !== '[object Object]')
+            return 'Ty_err: this不是对象类型'
 
-    if (_x != null && typeof _x !== 'boolean') 
-        return 'Ty_err: 参数不是Bool类型'
-
-    var _x = _x || false
-    
-    // 返回值在初始化时应当赋值数组其中一项
-    // 否则会在返回最小值时出现异常
-    var n = this[0]
-
-    for (var i = 0; i < this.length; i++) {
-
-        if (_x == true) {
-
-            if (this[i] > n) {
-                n = this[i]
+        for (var k in _o) {
+            if (_o.hasOwnProperty(k)) {
+                return false
             }
-
-        } else {
-
-            if (this[i] < n) {
-                n = this[i]
-            }
-
         }
-    }
-    return n
-}
+
+        return true
+    },
+
+} //  ---- **** Ty end **** ----
 
 
 
 
-// 本地存储
-/* 
-    注意：浏览器不会保留打开本地文件（file:///）的Cookie！
-    参数1：cookie名称
-    参数2：cookie值
-    参数3：过期时间 Number类型 单位：天
-*/
-// 存储Cookie
-function ty_setCookie (_n, _v, _e) {
-
-    var d = new Date()
-    d.setTime(d.getTime() + (_e * 24 * 60 * 60 * 1000))
-    var expires = 'expires=' + d.toUTCString()
-
-    document.cookie = _n + '=' + _v + '; ' + expires
-}
-
-// 获取Cookie
-function ty_getCookie (_n) {
-
-    var _c = document.cookie.split(';')
-
-    for (var i = 0; i < _c.length; i++) {
-        var _t = _c[i].trim()
-        _a = _t.split('=')[0]
-
-        if (_a.indexOf(_n) == 0) {
-            return decodeURIComponent(_t.split('=')[1])
-        }
-    }
-
-    return ''
-}
-
-// 存储localStorage
-function ty_setStorage (_n, _t) {
-
-    if (typeof _t !== 'string') 
-        _t = JSON.stringify(_t)
-    
-    window.localStorage.setItem(_n, _t)
-}
-
-// 获取localStorage
-function ty_getStorage (_n) {
-
-    return JSON.parse(window.localStorage.getItem(_n))
-
-}
-
-// 删除localStorage
-function ty_removeStorage (_n) {
-
-    return window.localStorage.removeItem(_n)
-
-}
 
 
 
 
-// 根据时间格式获取间隔时间
-/* 
-    此方法不会改变原始字符串
-    时间格式：yyyy-mm-dd hh:mm:ss
-    无参数
-*/
-String.prototype.ty_periodTime = function () {
-
-    //把时间转换为时间戳
-    var d      = Date.parse(this.replace(/-/gi,'/'))
-    var minute = 1000 * 60
-    var hour   = minute * 60
-    var day    = hour * 24
-    var month  = day * 30
-    
-    // 获取当前时间戳
-    var now = new Date().getTime()
-    var diffValue = now - d
-    if (diffValue < 0) {return}
-    var monthC = diffValue / month
-    var weekC  = diffValue / (7 * day)
-    var dayC   = diffValue / day
-    var hourC  = diffValue / hour
-    var minC   = diffValue / minute
-    var result = null
-
-    if(monthC >= 1) {
-        result = parseInt(monthC) + "月前"
-    } else if (weekC >= 1) {
-        result = parseInt(weekC)  + "周前"
-    } else if (dayC  >= 1) {
-        result = parseInt(dayC)   + "天前"
-    } else if (hourC >= 1) {
-        result = parseInt(hourC)  + "小时前"
-    } else if (minC  >= 1) {
-        result = parseInt(minC)   + "分钟前"
-    } else {
-        result = "刚刚"
-    }
-
-    return result
-}
 
 
 
 
-// 去除空格
-/* 
-    以下trim方法不会改变原始字符串
-    无参数
-*/
-// 除去左右两边空格
-String.prototype.ty_trimBothSpace = function () {
-
-    return this.replace(/(^\s*)|(\s*$)/g,'')
-
-}
-
-// 除去左边空格
-String.prototype.ty_trimLeftSpace = function () {
-
-　　return this.replace(/(^\s*)/g,'')
-
-}
-
-// 除去右边空格
-String.prototype.ty_trimRightSpace = function () {
-
-    return this.replace(/(\s*$)/g,'')
-
-}
-
-// 除去所有空格
-String.prototype.ty_trimAllSpace = function () {
-
-    return this.replace(/\s/g,'')
-
-}
 
 
 
 
-// 数字区间排序
-/* 
-    此方法不会改变原始数组
-    参数1：数组中最后一项与最后附加项的值或区间    
-*/
-Array.prototype.ty_numberSection = function (_x) {
-
-    if (_x != null && typeof _x !== 'number' && typeof _x !== 'string') 
-        return 'Ty_err: 参数不是Bool类型'
-
-    var n = []
-
-    // 如果没有赋值参数 数组中附加项为最后一项+1
-    var _x = _x || 1
-
-    for (var i = 0; i < this.length; i++) {
-
-        if (this[i] == this[this.length - 1]) {
-
-            var r = this[this.length - 1] + _x
-            var p = this[this.length - 1] + '-' + r
-            n.push(p)
-
-        } else {
-
-            var p = this[i] + '-' + this[i + 1]
-            n.push(p)
-
-        }
-    }
-
-    return n
-}
-
-
-
-
-// 对象是否为空
-/* 
-    true:空 / false:非空
-*/
-Object.prototype.ty_isEmptyObj = function () {
-    
-    if (Object.prototype.toString.call(this) !== '[object Object]')
-        return 'Ty_err: this不是对象类型'
-
-    for (var k in this) {
-        if (this.hasOwnProperty(k)) {
-            return false
-        }
-    }
-
-    return true
-}
 
 
 
@@ -595,10 +662,10 @@ const getJSON = function (url) {
 
 getJSON('https://static.segmentfault.com/sponsor/20180731.json')
 .then(res => {
-    console.log(res)
+    // console.log(res)
 })
 .catch(err => {
-    console.log(err)
+    // console.log(err)
 })
 
 // 原生fetch
@@ -611,10 +678,10 @@ fetch('https://static.segmentfault.com/sponsor/20180731.json', {
     return res.json()
 })
 .then(res => {
-    console.log(res)
+    // console.log(res)
 })
 .catch(err => {
-    console.log(err)
+    // console.log(err)
 })
 
 
@@ -624,7 +691,7 @@ fetch('https://static.segmentfault.com/sponsor/20180731.json', {
 var cars = ['BMW', 'Benz', 'Benz', 'Tesla', 'BMW', 'Cadillac']
 var numArr = [6000,3000,4000,2000,1000,7000]
 var strArr = ['a','b','c','d','e','f','g']
-var strDate = "2018-02-22 12:11:00"
+var strDate = "2018-08-22 12:11:00"
 var strTest = ' 去除 两边 空白   '
 var arr0 = [0,10,20,30,40,50]
 var obj0 = {
@@ -643,9 +710,14 @@ var arr9 = ['2017-01','2017-02','2017-08','2017-09']
 var ar10 = [10]
 
 let color = ['red', 'blue', 'green']
-console.log(cars.ty_getSameItems())
+// console.log(cars.ty_getSameItems())
 
-
+console.log(Ty.removeArrayItem(cars, 3))
+console.log(Ty.sortArrayNum(arr1, true))
+console.log(Ty.getArrayTheItem(arr5, true))
+console.log(Ty.periodTime(strDate))
+console.log(Ty.addNumberSection(numArr, 1000))
+console.log(Ty.isEmptyObj(obj0))
 
 // 测试区 end ------
 // ⚡
