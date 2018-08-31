@@ -17,9 +17,9 @@ const Ty = {
      */
     removeArrayItem : function (_a, _x) {
 
-        if (!Array.isArray(_a)) return 'Ty_err: 参数不是Array类型'
+        if (!Array.isArray(_a)) return 'Ty_err: 第1个参数应为Array类型'
         if (typeof _x !== 'number') 
-            return 'Ty_err: 参数不是Number类型'
+            return 'Ty_err: 第2个参数应为Number类型'
         
         var n = []
         for (var i = 0; i < _a.length; i++) {
@@ -43,9 +43,9 @@ const Ty = {
     sortArrayNum : function (_a, _x) {
 
         if (!Array.isArray(_a)) 
-            return 'Ty_err: 参数不是Array类型'
+            return 'Ty_err: 第1个参数应为Array类型'
         if (_x != null && typeof _x !== 'boolean') 
-            return 'Ty_err: 参数不是Bool类型'
+            return 'Ty_err: 第2个参数应为Bool类型'
     
         var _x = _x || false
     
@@ -82,16 +82,16 @@ const Ty = {
      * 取数组中最大项 或 最小项
      * @method getArrayTheItem
      * 
-     * @param  {Array}  _a  原数组
-     * @param  {Array}  _x  true 取数组中最大值 / 默认 false 取数组中最小值
-     * @return {Array}      返回 新数组
+     * @param  {Array}  _a 原数组
+     * @param  {Array}  _x true 取最大值 / 默认 false 取最小值
+     * @return {Array}     返回 新数组
      */
     getArrayTheItem : function (_a, _x) {
 
         if (!Array.isArray(_a)) 
-            return 'Ty_err: 参数不是Array类型'
+            return 'Ty_err: 第1个参数应为Array类型'
         if (_x != null && typeof _x !== 'boolean') 
-            return 'Ty_err: 参数不是Bool类型'
+            return 'Ty_err: 第2个参数应为Bool类型'
     
         var _x = _x || false
         
@@ -132,6 +132,11 @@ const Ty = {
      */
     setTheCookie : function (_n, _v, _e) {
 
+        if (typeof _n !== 'string') 
+            return 'Ty_err: 第1个参数应为String类型'
+        if (typeof _e !== 'string')
+            return 'Ty_err: 第3个参数应为Number类型'
+
         var d = new Date()
         d.setTime(d.getTime() + (_e * 24 * 60 * 60 * 1000))
         var expires = 'expires=' + d.toUTCString()
@@ -151,6 +156,9 @@ const Ty = {
      * @return {String}      返回 Cookie
      */
     getTheCookie : function (_n) {
+
+        if (typeof _n !== 'string') 
+            return 'Ty_err: 参数应为String类型'
 
         var _c = document.cookie.split(';')
     
@@ -178,6 +186,9 @@ const Ty = {
      */
     setTheStorage : function (_n, _v) {
 
+        if (typeof _n !== 'string') 
+            return 'Ty_err: 第1个参数应为String类型'
+
         if (typeof _v !== 'string') 
             _v = JSON.stringify(_v)
         
@@ -196,6 +207,9 @@ const Ty = {
      */
     getTheStorage : function (_n) {
 
+        if (typeof _n !== 'string') 
+            return 'Ty_err: 参数应为String类型'
+
         return JSON.parse(window.localStorage.getItem(_n))
     },
 
@@ -210,6 +224,9 @@ const Ty = {
      * @return {Any}        返回 storage
      */
     removeStorage : function (_n) {
+
+        if (typeof _n !== 'string') 
+            return 'Ty_err: 参数应为String类型'
 
         return window.localStorage.removeItem(_n)
     },
@@ -228,6 +245,9 @@ const Ty = {
      * @return {String}     返回 文字叙述 "刚刚“ "N分钟前" "N天前"等
      */
     periodTime : function (_t) {
+
+        if (typeof _t !== 'string') 
+            return 'Ty_err: 参数应为String类型'
 
         //把时间转换为时间戳
         var d      = Date.parse(_t.replace(/-/gi,'/'))
@@ -278,21 +298,29 @@ const Ty = {
      */
     // 除去左右两边空格
     trimBothSpace : function (_s) {
+        if (typeof _s !== 'string') 
+            return 'Ty_err: 参数应为String类型'
 
         return _s.replace(/(^\s*)|(\s*$)/g,'')
     },
     // 除去左边空格
     trimLeftSpace : function (_s) {
+        if (typeof _s !== 'string') 
+            return 'Ty_err: 参数应为String类型'
 
     　　return _s.replace(/(^\s*)/g,'')
     },
     // 除去右边空格
     trimRightSpace : function (_s) {
+        if (typeof _s !== 'string') 
+            return 'Ty_err: 参数应为String类型'
 
         return _s.replace(/(\s*$)/g,'')
     },
     // 除去所有空格
     trimAllSpace : function (_s) {
+        if (typeof _s !== 'string') 
+            return 'Ty_err: 参数应为String类型'
 
         return _s.replace(/\s/g,'')
     },
@@ -311,9 +339,11 @@ const Ty = {
     addNumberSection : function (_a, _x) {
 
         if (!Array.isArray(_a)) 
-            return 'Ty_err: 参数不是Array类型'
-        if (_x != null && typeof _x !== 'number' && typeof _x !== 'string') 
-            return 'Ty_err: 参数不是Number类型'
+            return 'Ty_err: 第1个参数应为Array类型'
+        if (_x != null && 
+            typeof _x !== 'number' && 
+            typeof _x !== 'string') 
+            return 'Ty_err: 第2个参数应为Number类型'
 
         var n = []
 
@@ -346,13 +376,13 @@ const Ty = {
      * 对象是否为空
      * @method addNumberSection
      * 
-     * @param  {Object}   _o    原对象
-     * @return {Boolean}        返回 true 空 / false 非空
+     * @param  {Object}   _o  原对象
+     * @return {Boolean}      返回 true 空 / false 非空
      */
     isEmptyObj : function (_o) {
         
         if (Object.prototype.toString.call(this) !== '[object Object]')
-            return 'Ty_err: this不是对象类型'
+            return 'Ty_err: 参数应为对象类型'
 
         for (var k in _o) {
             if (_o.hasOwnProperty(k)) {
@@ -448,7 +478,7 @@ const Ty = {
     asyncUniqueSortArray : function (_a) {
     
         if (!Array.isArray(_a)) 
-            return 'Ty_err: 参数不是Array类型'
+            return 'Ty_err: 参数应为Array类型'
 
         var a = []
     
@@ -478,9 +508,9 @@ const Ty = {
         var _x = _x || false
 
         if (!Array.isArray(_a)) 
-            return 'Ty_err: 参数不是Array类型'
+            return 'Ty_err: 第1个参数应为Array类型'
         if (typeof _x !== 'boolean') 
-            return 'Ty_err: 参数不是Bool类型'
+            return 'Ty_err: 第2个参数应为Bool类型'
 
         var t = []
         for (var i = 0; i < _a.length; i++) {
@@ -517,7 +547,7 @@ const Ty = {
     addThousandMark : function (_a) {
 
         if (!Array.isArray(_a)) 
-            return 'Ty_err: 参数不是Array类型'
+            return 'Ty_err: 参数应为Array类型'
 
         var n = []
         for (var i = 0; i < _a.length; i++) {
