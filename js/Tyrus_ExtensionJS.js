@@ -9,14 +9,15 @@ const Ty = {
 
     /**
      * 移除数组选中项
-     * 
      * @method removeArrayItem
+     * 
      * @param  {Array}  _a  原数组
      * @param  {Number} _x  删除项的数组索引
      * @return {Array}      返回 新数组
      */
     removeArrayItem : function (_a, _x) {
 
+        if (!Array.isArray(_a)) return 'Ty_err: 参数不是Array类型'
         if (typeof _x !== 'number') 
             return 'Ty_err: 参数不是Number类型'
         
@@ -33,14 +34,16 @@ const Ty = {
 
     /**
      * 数字从大到小 或 从小到大排序
-     * 
      * @method sortArrayNum
+     * 
      * @param  {Array}   _a  原数组
      * @param  {Boolean} _x  true 从大到小 / 默认 false 从小到大
      * @return {Array}       返回 原数组
      */
     sortArrayNum : function (_a, _x) {
 
+        if (!Array.isArray(_a)) 
+            return 'Ty_err: 参数不是Array类型'
         if (_x != null && typeof _x !== 'boolean') 
             return 'Ty_err: 参数不是Bool类型'
     
@@ -77,14 +80,16 @@ const Ty = {
 
     /**
      * 取数组中最大项 或 最小项
-     * 
      * @method getArrayTheItem
+     * 
      * @param  {Array}  _a  原数组
      * @param  {Array}  _x  true 取数组中最大值 / 默认 false 取数组中最小值
      * @return {Array}      返回 新数组
      */
     getArrayTheItem : function (_a, _x) {
 
+        if (!Array.isArray(_a)) 
+            return 'Ty_err: 参数不是Array类型'
         if (_x != null && typeof _x !== 'boolean') 
             return 'Ty_err: 参数不是Bool类型'
     
@@ -119,8 +124,8 @@ const Ty = {
     /**
      * 存储Cookie
      * 注意：浏览器不会保留打开本地文件（file:///）的Cookie！
-     * 
      * @method setTheCookie
+     * 
      * @param  {String}  _n  cookie名称
      * @param  {String}  _v  cookie值
      * @param  {Number}  _e  过期时间 单位：天
@@ -140,8 +145,8 @@ const Ty = {
     /**
      * 获取Cookie
      * 注意：浏览器不会保留打开本地文件（file:///）的Cookie！
-     * 
      * @method getTheCookie
+     * 
      * @param  {String}  _n  cookie名称
      * @return {String}      返回 Cookie
      */
@@ -166,8 +171,8 @@ const Ty = {
 
     /**
      * 存储localStorage
-     * 
      * @method setTheStorage
+     * 
      * @param  {String}  _n  storage名称
      * @param  {Any}     _v  storage值
      */
@@ -184,8 +189,8 @@ const Ty = {
 
     /**
      * 获取localStorage
-     * 
      * @method getTheStorage
+     * 
      * @param  {String}  _n  storage名称
      * @return {Any}        返回 storage
      */
@@ -199,8 +204,8 @@ const Ty = {
 
      /**
      * 删除localStorage
-     * 
      * @method removeStorage
+     * 
      * @param  {String}  _n  storage名称
      * @return {Any}        返回 storage
      */
@@ -214,11 +219,11 @@ const Ty = {
 
     /**
      * 根据时间格式获取间隔时间
+     * @method periodTime
      * 
      * @example
      *          var strDate = "2018-08-22 12:11:00"
      *          Ty.periodTime(strDate)  // 1周前
-     * @method periodTime
      * @param  {String}     "yyyy-mm-dd hh-mm-ss"
      * @return {String}     返回 文字叙述 "刚刚“ "N分钟前" "N天前"等
      */
@@ -266,8 +271,8 @@ const Ty = {
 
     /**
      * 去除多余空格
-     * 
      * @method  
+     * 
      * @param  {String}     带有多余空格的字符串
      * @return {String}     返回 清除空格
      */
@@ -297,14 +302,16 @@ const Ty = {
 
     /**
      * 添加数字区间
-     * 
      * @method addNumberSection
+     * 
      * @param  {Array}   _a    原数组
      * @param  {Number}  _x    数组中最后一项与最后附加项的值或区间
      * @return {Array}         返回 新数组
      */
     addNumberSection : function (_a, _x) {
 
+        if (!Array.isArray(_a)) 
+            return 'Ty_err: 参数不是Array类型'
         if (_x != null && typeof _x !== 'number' && typeof _x !== 'string') 
             return 'Ty_err: 参数不是Number类型'
 
@@ -337,8 +344,8 @@ const Ty = {
 
     /**
      * 对象是否为空
-     * 
      * @method addNumberSection
+     * 
      * @param  {Object}   _o    原对象
      * @return {Boolean}        返回 true 空 / false 非空
      */
@@ -361,8 +368,8 @@ const Ty = {
 
     /**
      * 数组合并去重
-     * 
      * @method concatUniqueArray
+     * 
      * @param  {Array} _a0  需去重的数组
      * @param  {Array} _a1  可无限添加
      * @return {Array}      返回 去重合并后的数组
@@ -417,8 +424,8 @@ const Ty = {
 
     /**
      * 异步去重排序
-     * 
      * @method asyncUniqueSortArray
+     * 
      * @example
      *          var _init = []
      *          // 获取所有相同class的元素数组绑定事件
@@ -440,6 +447,9 @@ const Ty = {
      */
     asyncUniqueSortArray : function (_a) {
     
+        if (!Array.isArray(_a)) 
+            return 'Ty_err: 参数不是Array类型'
+
         var a = []
     
         for (var i = 0; i < _a.length; i++) {
@@ -452,116 +462,155 @@ const Ty = {
     
         return a
     },
+
+
+
+    /**
+     * 时间字段排序
+     * @method addYearMonthSort
+     * 
+     * @param  {Array}   _a    原时间字段数组 时间格式：yyyy-mm
+     * @param  {Boolean} _x    true 从近到远排序 / 默认 false 从远到近排序
+     * @return {Array}         返回 新数组
+     */
+    addYearMonthSort : function (_a, _x) {
+        
+        var _x = _x || false
+
+        if (!Array.isArray(_a)) 
+            return 'Ty_err: 参数不是Array类型'
+        if (typeof _x !== 'boolean') 
+            return 'Ty_err: 参数不是Bool类型'
+
+        var t = []
+        for (var i = 0; i < _a.length; i++) {
+            t.push(_a[i].replace('-', ''))
+        }
+    
+        // 给sort方法添加排序规则
+        var nt = t.sort(function (a, b) {
+            if (_x == true) {
+                return b - a
+            } else {
+                return a - b
+            }
+        })
+    
+        var nn = []
+        for (var i = 0; i < nt.length; i++) {
+            var a = nt[i].replace(/(.{4})(.*)/ , '$1-$2')
+            nn.push(a)
+        }
+    
+        return nn
+    },
+
+
+
+    /**
+     * 数字数组添加千分符
+     * @method addThousandMark
+     * 
+     * @param  {Array} _a   原数组
+     * @return {Array}      返回 新数组
+     */
+    addThousandMark : function (_a) {
+
+        if (!Array.isArray(_a)) 
+            return 'Ty_err: 参数不是Array类型'
+
+        var n = []
+        for (var i = 0; i < _a.length; i++) {
+            var _str = _a[i].toString()
+            _str = _str.replace(/(\d{1,3})(?=(\d{3})+$)/g, '$1,')
+    
+            n.push(_str)
+        }
+    
+        return n
+    },
+
+
+
+    /**
+     * 深拷贝引用数据类型
+     * @method deepCloneObj
+     * 
+     * @param  {object} _x  原对象 Object Array Function 等
+     * @return {object}     返回 新对象
+     */
+    deepCloneObj : function (_x) {
+
+        var o = _x instanceof Array ? [] : {}
+    
+        if (_x && typeof _x === 'object') {
+            for (var key in _x) {
+                if (_x.hasOwnProperty(key)) {
+                    // 判断类型 递归复制调用者的子元素
+                    if (_x[key] && typeof _x[key] === 'object') {
+                        o[key] = deepCloneObj(_x[key])
+                    } else {
+                        o[key] = _x[key]
+                    }
+                }
+            }
+        }
+        return o
+        
+        // 简化方式
+        // return JSON.parse(JSON.stringify(_x))
+    },
+
+
+
+
+    /**
+     * 统计数组中相同项的个数
+     * @method getSameItems
+     * 
+     * @param  {Array}   _a    原数组
+     * @return {Number}        遍历数组中出现相同项的数量
+     */
+    getSameItems : function (_a) {
+
+        return _a.reduce(function (obj, name) {
+
+            obj[name] = obj[name] ? obj[name] + 1 : 1
+
+            return obj
+
+        }, {})
+    },
+
+
+
+
+    /**
+     * 一次性函数
+     * @method onceFunc
+     * 
+     * @example 
+     *      Ty.onceFunc()  // Just once
+     *      Ty.onceFunc()  // Miss
+     *      Ty.onceFunc()  // Miss
+     */
+    onceFunc : function () {
+
+        console.log('Just once')
+        
+        Ty.onceFunc = function() {
+            
+            console.log('Miss')
+        }
+    },
+
+
     
 } //  ---- **** Ty end **** ----
 
 
 
 
-
-
-
-// 时间字段排序
-/* 
-    此方法不会改变原始数组
-    时间格式：yyyy-mm
-    参数1：true 从近到远排序
-           默认/false 从远到近排序
-*/
-Array.prototype.ty_yearMonthSort = function (_x) {
-
-    if (typeof _x !== 'boolean') return 'Ty_err: 参数不是Bool类型'
-
-    var t = []
-    for (var i = 0; i < this.length; i++) {
-        t.push(this[i].replace('-', ''))
-    }
-
-    // 给sort方法添加排序规则
-    var nt = t.sort(function (a, b) {
-        if (_x == true) {
-            return b - a
-        } else {
-            return a - b
-        }
-    })
-
-    var nn = []
-    for (var i = 0; i < nt.length; i++) {
-        var a = nt[i].replace(/(.{4})(.*)/ , '$1-$2')
-        nn.push(a)
-    }
-
-    return nn
-}
-
-
-
-
-// 数组数字添加千分符
-/* 
-    此方法不会改变原始数组
-    无参数
-*/
-Array.prototype.ty_addThousandMark = function () {
-
-    var n = []
-    for (var i = 0; i < this.length; i++) {
-        var _str = this[i].toString()
-        _str = _str.replace(/(\d{1,3})(?=(\d{3})+$)/g, '$1,')
-
-        n.push(_str)
-    }
-
-    return n
-}
-
-
-
-
-// 深拷贝引用数据类型
-/* 
-    此方法不会改变原始对象
-    无参数
-*/
-Object.prototype.ty_deepCloneObj = function () {
-
-    var _o = this instanceof Array ? [] : {}
-
-    if (this && typeof this === 'object') {
-        for (var key in this) {
-            if (this.hasOwnProperty(key)) {
-                // 判断类型 递归复制调用者的子元素
-                if (this[key] && typeof this[key] === 'object') {
-                    _o[key] = deepCloneObj(this[key])
-                } else {
-                    _o[key] = this[key]
-                }
-            }
-        }
-    }
-    return _o
-    
-    // 简化方式
-    // return JSON.parse(JSON.stringify(this))
-}
-
-
-
-
-// 一次性函数
-/* 
-    无参数
-*/
-var onceFunc = function () {
-
-    console.log('Just once')
-    
-    onceFunc = function() {
-        
-        console.log('Miss')
-    }
-}
 
 
 
@@ -600,61 +649,6 @@ console.log(validate(schema, {
 
 
 
-
-// 统计数组中相同项的个数
-/* 
-    此方法不会改变原始对象
-    无参数
-*/
-Array.prototype.ty_getSameItems = function () {
-
-    return this.reduce(function (obj, name) {
-
-        obj[name] = obj[name] ? obj[name] + 1 : 1
-
-        return obj
-
-    }, {})
-}
-
-
-
-
-
-// 基于promise封装ajax
-/* 
-    参数1: url
-*/
-const getJSON = function (url) {
-
-    const promise = new Promise(function (resolve, reject) {
-
-        const handler = function () {
-            if(this.readyState !== 4) return
-            this.status === 200 
-            ? resolve(this.response) 
-            : reject(new Error(this.statusText))
-        }
-
-        const client = new XMLHttpRequest()
-        client.open('GET', url)
-        client.onreadystatechange = handler
-        client.responseType = 'json'
-        client.setRequestHeader('Accept', 'application/json')
-        client.send()
-    })
-    
-    return promise
-}
-
-getJSON('https://static.segmentfault.com/sponsor/20180731.json')
-.then(res => {
-    // console.log(res)
-})
-.catch(err => {
-    // console.log(err)
-})
-
 // 原生fetch
 fetch('https://static.segmentfault.com/sponsor/20180731.json', {
     method: 'GET',
@@ -665,10 +659,10 @@ fetch('https://static.segmentfault.com/sponsor/20180731.json', {
     return res.json()
 })
 .then(res => {
-    // console.log(res)
+    console.log(res)
 })
 .catch(err => {
-    // console.log(err)
+    console.log(err)
 })
 
 
@@ -681,10 +675,7 @@ var strArr = ['a','b','c','d','e','f','g']
 var strDate = "2018-08-22 12:11:00"
 var strTest = ' 去除 两边 空白   '
 var arr0 = [0,10,20,30,40,50]
-var obj0 = {
-    a : 0,
-    b : 1
-}
+var obj0 = {a : 0, b : 1}
 var arr1 = [1,3,5,7,9,1,-1]  
 var arr2 = [2,1,6,5,10]
 var arr3 = [3,10,7,1,15]
@@ -695,9 +686,7 @@ var arr7 = ['2017-03','2017-04','2017-07','2018-01','2017-04']
 var arr8 = ['2017-01','2017-03','2017-04','2017-05','2017-06']
 var arr9 = ['2017-01','2017-02','2017-08','2017-09']
 var ar10 = [10]
-
 var color = ['red', 'blue', 'green']
-// console.log(cars.ty_getSameItems())
 
 console.log(Ty.removeArrayItem(cars, 3))
 console.log(Ty.sortArrayNum(arr1, true))
@@ -716,6 +705,16 @@ for (var i = 0; i < el.length; i++) {
         console.log(Ty.getTheStorage('init'))
     }
 }
+
+console.log(Ty.addYearMonthSort(arr7))
+console.log(Ty.addThousandMark(numArr))
+var obj1 = Ty.deepCloneObj(obj0)
+obj1.c = 2
+console.log(obj1 ,obj0)
+console.log(Ty.getSameItems(cars))
+Ty.onceFunc()
+Ty.onceFunc()
+Ty.onceFunc()
 // 测试区 end ------
 // ⚡
 // Tyrus_ExtensionJS end -------------------------
