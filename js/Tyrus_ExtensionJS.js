@@ -15,7 +15,7 @@ const Ty = {
      * @param  {Number} _x  删除项的数组索引
      * @return {Array}      返回 新数组
      */
-    removeArrayItem (_a, _x) {
+    removeArrayItem : function (_a, _x) {
 
         if (typeof _x !== 'number') 
             return 'Ty_err: 参数不是Number类型'
@@ -39,7 +39,7 @@ const Ty = {
      * @param  {Boolean} _x  true 从大到小 / 默认 false 从小到大
      * @return {Array}       返回 原数组
      */
-    sortArrayNum (_a, _x) {
+    sortArrayNum : function (_a, _x) {
 
         if (_x != null && typeof _x !== 'boolean') 
             return 'Ty_err: 参数不是Bool类型'
@@ -83,7 +83,7 @@ const Ty = {
      * @param  {Array}  _x  true 取数组中最大值 / 默认 false 取数组中最小值
      * @return {Array}      返回 新数组
      */
-    getArrayTheItem (_a, _x) {
+    getArrayTheItem : function (_a, _x) {
 
         if (_x != null && typeof _x !== 'boolean') 
             return 'Ty_err: 参数不是Bool类型'
@@ -125,7 +125,7 @@ const Ty = {
      * @param  {String}  _v  cookie值
      * @param  {Number}  _e  过期时间 单位：天
      */
-    setTheCookie (_n, _v, _e) {
+    setTheCookie : function (_n, _v, _e) {
 
         var d = new Date()
         d.setTime(d.getTime() + (_e * 24 * 60 * 60 * 1000))
@@ -145,7 +145,7 @@ const Ty = {
      * @param  {String}  _n  cookie名称
      * @return {String}      返回 Cookie
      */
-    getTheCookie (_n) {
+    getTheCookie : function (_n) {
 
         var _c = document.cookie.split(';')
     
@@ -171,7 +171,7 @@ const Ty = {
      * @param  {String}  _n  storage名称
      * @param  {Any}     _v  storage值
      */
-    setTheStorage (_n, _v) {
+    setTheStorage : function (_n, _v) {
 
         if (typeof _v !== 'string') 
             _v = JSON.stringify(_v)
@@ -189,7 +189,7 @@ const Ty = {
      * @param  {String}  _n  storage名称
      * @return {Any}        返回 storage
      */
-    getTheStorage (_n) {
+    getTheStorage : function (_n) {
 
         return JSON.parse(window.localStorage.getItem(_n))
     },
@@ -200,11 +200,11 @@ const Ty = {
      /**
      * 删除localStorage
      * 
-     * @method getTheStorage
+     * @method removeStorage
      * @param  {String}  _n  storage名称
      * @return {Any}        返回 storage
      */
-    ty_removeStorage (_n) {
+    removeStorage : function (_n) {
 
         return window.localStorage.removeItem(_n)
     },
@@ -216,13 +216,13 @@ const Ty = {
      * 根据时间格式获取间隔时间
      * 
      * @example
-     *          let strDate = "2018-08-22 12:11:00"
+     *          var strDate = "2018-08-22 12:11:00"
      *          Ty.periodTime(strDate)  // 1周前
      * @method periodTime
      * @param  {String}     "yyyy-mm-dd hh-mm-ss"
      * @return {String}     返回 文字叙述 "刚刚“ "N分钟前" "N天前"等
      */
-    periodTime (_t) {
+    periodTime : function (_t) {
 
         //把时间转换为时间戳
         var d      = Date.parse(_t.replace(/-/gi,'/'))
@@ -272,22 +272,22 @@ const Ty = {
      * @return {String}     返回 清除空格
      */
     // 除去左右两边空格
-    trimBothSpace (_s) {
+    trimBothSpace : function (_s) {
 
         return _s.replace(/(^\s*)|(\s*$)/g,'')
     },
     // 除去左边空格
-    trimLeftSpace (_s) {
+    trimLeftSpace : function (_s) {
 
     　　return _s.replace(/(^\s*)/g,'')
     },
     // 除去右边空格
-    trimRightSpace (_s) {
+    trimRightSpace : function (_s) {
 
         return _s.replace(/(\s*$)/g,'')
     },
     // 除去所有空格
-    trimAllSpace (_s) {
+    trimAllSpace : function (_s) {
 
         return _s.replace(/\s/g,'')
     },
@@ -303,7 +303,7 @@ const Ty = {
      * @param  {Number}  _x    数组中最后一项与最后附加项的值或区间
      * @return {Array}         返回 新数组
      */
-    addNumberSection (_a, _x) {
+    addNumberSection : function (_a, _x) {
 
         if (_x != null && typeof _x !== 'number' && typeof _x !== 'string') 
             return 'Ty_err: 参数不是Number类型'
@@ -342,7 +342,7 @@ const Ty = {
      * @param  {Object}   _o    原对象
      * @return {Boolean}        返回 true 空 / false 非空
      */
-    isEmptyObj (_o) {
+    isEmptyObj : function (_o) {
         
         if (Object.prototype.toString.call(this) !== '[object Object]')
             return 'Ty_err: this不是对象类型'
@@ -356,121 +356,108 @@ const Ty = {
         return true
     },
 
+
+
+
+    /**
+     * 数组合并去重
+     * 
+     * @method concatUniqueArray
+     * @param  {Array} _a0  需去重的数组
+     * @param  {Array} _a1  可无限添加
+     * @return {Array}      返回 去重合并后的数组
+     */
+    concatUniqueArray : function (_a0, _a1, _a2) {
+
+        for (var i = 0; i < arguments.length; i++) {
+            if (!Array.isArray(arguments[i])) 
+                return 'Ty_Err:第'+ (i+1) +'个参数不是Array类型'
+        }
+    
+        // 如果只有一个参数 则去重这个单独的参数
+        if (arguments.length === 1) {
+            var self = []
+            for (var i = 0; i < _a0.length; i++) {
+                if (self.indexOf(_a0[i]) === -1) self.push(_a0[i])
+            }
+            return self
+        }
+
+        var self = []
+        for (var i = 0; i < _a0.length; i++) {
+            if (self.indexOf(_a0[i]) === -1) self.push(_a0[i])
+        }
+    
+        // 合并去重两个数组
+        function concatUniqueFunc (r1, r2) {
+    
+            // 复制第一个数组 让原数组的值不被改变
+            var n = r1.concat()
+            for (var i = 0; i < r2.length; i++) {
+                if (n.indexOf(r2[i]) === -1) {
+                    // r2[i]到n中进行查找重复值 
+                    // 返回-1则无重复
+                    n.push(r2[i])
+                }
+            }
+    
+            return n
+        }
+        var s = concatUniqueFunc(self, _a1)
+    
+        // 从第二个参数开始循环执行合并去重
+        for (var i = 1; i < arguments.length; i++) {
+            s = concatUniqueFunc(s, arguments[i])
+        }
+    
+        return s
+    },
+
+
+
+    /**
+     * 异步去重排序
+     * 
+     * @method asyncUniqueSortArray
+     * @example
+     *          var _init = []
+     *          // 获取所有相同class的元素数组绑定事件
+     *          var _el = document.getElementsByClassName('_button')
+     *          for (var i = 0; i < _el.length; i++) {
+     *              _el[i].onclick = function () {
+     * 
+     *                  // 获取值传入初始化的数组中
+     *                  _init.push(this.innerHTML)
+     *                  console.log(asyncUniqueSortArray(_init))
+     * 
+     *                  // 可存储到storage进行验证
+     *                  Ty.setTheStorage('init', Ty.asyncUniqueSortArray(init))
+     *                  console.log(Ty.getTheStorage('init'))
+     *              }
+     *          }
+     * @param  {String} _e  触发异步的Class名称
+     * @return {Array}      返回 去重排序后的数组
+     */
+    asyncUniqueSortArray : function (_a) {
+    
+        var a = []
+    
+        for (var i = 0; i < _a.length; i++) {
+    
+            if (a.indexOf(_a[i]) !== -1) 
+                a.splice(a.indexOf(_a[i]), 1)
+            
+            a.push(_a[i])
+        }
+    
+        return a
+    },
+    
 } //  ---- **** Ty end **** ----
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// 数组合并去重
-/* 
-    此方法会改变原始数组
-    参数1：数组 需要合并的第一项
-    参数2：数组 需要合并的第二项
-    参数n：数组 需要合并项可多次添加
-    无参数：只给调用者去重
-*/
-Array.prototype.ty_concatUniqueArray = function (_a1, _a2) {
-
-    for (var i = 0; i < arguments.length; i++) {
-        if (!Array.isArray(arguments[i])) 
-            return 'Ty_Err:第'+ (i+1) +'个参数不是Array类型'
-    }
-
-    // 如果无参数则只去重调用者
-    if (arguments.length == 0) {
-
-        var o = []
-        for (var i = 0; i < this.length; i++) {
-            if (o.indexOf(this[i]) === -1) o.push(this[i])
-        }
-
-        return o
-    }
-
-    // 进入方法先去重调用者
-    var self = []
-    for (var i = 0; i < this.length; i++) {
-        if (self.indexOf(this[i]) === -1) self.push(this[i])
-    }
-
-    // 合并去重两个数组
-    function concatUniqueFunc (r1, r2) {
-
-        // 复制第一个数组 让原数组的值不被改变
-        var n = r1.concat()
-        for (var i = 0; i < r2.length; i++) {
-            if (n.indexOf(r2[i]) === -1) {
-                // r2[i]到n中进行查找重复值 
-                // 返回-1则无重复
-                n.push(r2[i])
-            }
-        }
-
-        return n
-    }
-    var s = concatUniqueFunc(self, _a1)
-
-    // 从第二个参数开始循环执行合并去重
-    for (var i = 1; i < arguments.length; i++) {
-        s = concatUniqueFunc(s, arguments[i])
-    }
-
-    return s
-}
-
-
-
-
-// 数组动态去重
-/* 
-    异步调用方法
-*/
-var _init = []
-var _el = document.getElementsByClassName('_button')
-
-// 获取所有相同class的元素数组绑定事件
-for (var i = 0; i < _el.length; i++) {
-
-    _el[i].onclick = function () {
-        
-        _init.push(this.innerHTML)
-
-        console.log(ty_dynamicUniqueSort(_init))
-    }
-}
-/* 
-    参数1：数组 异步获取到的字段
-*/
-function ty_dynamicUniqueSort (_a) {
-
-    var _init = []
-
-    for (var i = 0; i < _a.length; i++) {
-
-        if (_init.indexOf(_a[i]) !== -1) 
-            _init.splice(_init.indexOf(_a[i]), 1)
-        
-        _init.push(_a[i])
-    }
-
-    return _init
-}
 
 
 
@@ -709,7 +696,7 @@ var arr8 = ['2017-01','2017-03','2017-04','2017-05','2017-06']
 var arr9 = ['2017-01','2017-02','2017-08','2017-09']
 var ar10 = [10]
 
-let color = ['red', 'blue', 'green']
+var color = ['red', 'blue', 'green']
 // console.log(cars.ty_getSameItems())
 
 console.log(Ty.removeArrayItem(cars, 3))
@@ -718,7 +705,17 @@ console.log(Ty.getArrayTheItem(arr5, true))
 console.log(Ty.periodTime(strDate))
 console.log(Ty.addNumberSection(numArr, 1000))
 console.log(Ty.isEmptyObj(obj0))
+console.log(Ty.concatUniqueArray(arr1, arr2, arr3, arr4, arr5))
 
+var init = []
+var el = document.getElementsByClassName('_button')
+for (var i = 0; i < el.length; i++) {
+    el[i].onclick = function () {
+        init.push(this.innerHTML)
+        Ty.setTheStorage('init', Ty.asyncUniqueSortArray(init))
+        console.log(Ty.getTheStorage('init'))
+    }
+}
 // 测试区 end ------
 // ⚡
 // Tyrus_ExtensionJS end -------------------------
