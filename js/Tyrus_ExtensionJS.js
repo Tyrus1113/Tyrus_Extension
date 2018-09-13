@@ -397,7 +397,7 @@ const Ty = {
 
 
     /**
-     * 数组合并去重
+     * 无限参数数组合并去重
      * @method concatUniqueArray
      * 
      * @param  {Array} _a0  需去重的数组
@@ -614,6 +614,36 @@ const Ty = {
 
 
 
+    /**
+     * 无限参数合并对象
+     * @method getSameItems
+     * 
+     * @param  {Object}   _o   需合并的对象
+     * @return {Object}        返回合并后的对象
+     */
+    mergeObject : function (_o, _s) {
+        
+        function mergeFunc(_o0, _o1) {
+            for (var obj in _o1) {
+                _o0[obj] = _o1[obj]
+            }
+            return _o0
+        }
+
+        // 先创建空对象与第一个参数合并
+        var self = {}
+        var o = mergeFunc(self, _o)
+
+        // 从第二个参数开始循环执行合并
+        for (var i = 0; i < arguments.length; i++) {
+            o = mergeFunc(o, arguments[i])
+        }
+
+        return o
+    },
+
+
+
 
     /**
      * 一次性函数
@@ -745,6 +775,10 @@ console.log(Ty.getSameItems(cars))
 Ty.onceFunc()
 Ty.onceFunc()
 Ty.onceFunc()
+var obj2 = {a : 10}
+var obj3 = {a : 4}
+console.log(Ty.mergeObject(obj0, obj2, obj3))
+console.log(obj0, obj2, obj3)
 // 测试区 end ------
 // ⚡
 // Tyrus_ExtensionJS end -------------------------
