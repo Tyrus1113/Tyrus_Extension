@@ -665,10 +665,67 @@ const Ty = {
     },
 
 
+
     
+    /**
+     * 是否含有class名
+     * @method hasClass
+     * 
+     * @param  {DOM}      _o    DOM元素
+     * @param  {String}   _c    class名称
+     * @return {Array / null}         
+     */
+    hasClass : function (_o, _c) {
+        return _o.className.match(new RegExp('(\\s|^)' + _c + '(\\s|$)'))
+    },
+
+
+
+
+    /**
+     * 添加class
+     * @method addClass
+     * 
+     * @param  {DOM}      _o    DOM元素
+     * @param  {String}   _c    class名称
+     */
+    addClass : function (_o, _c) {
+        if (!this.hasClass(_o, _c))
+            _o.className += ' ' + _c
+    },
+
+
+
+
+    /**
+     * 移除class
+     * @method removeClass
+     * 
+     * @param  {DOM}      _o    DOM元素
+     * @param  {String}   _c    class名称
+     */
+    removeClass : function (_o, _c) {
+        if (this.hasClass(_o, _c)) {
+            var reg = new RegExp('(\\s|^)' + _c + '(\\s|$)')
+            _o.className = _o.className.replace(reg, '');
+        }
+    },
+
+
+
+
+    /**
+     * 切换class
+     * @method toggleClass
+     * 
+     * @param  {DOM}      _o    DOM元素
+     * @param  {String}   _c    class名称
+     */
+    toggleClass : function (_o, _c) {
+        this.hasClass(_o, _c) ? this.removeClass(_o, _c) : this.addClass(_o, _c)
+    },
+
 } //  ---- **** Ty end **** ----
-
-
 
 
 
@@ -725,7 +782,25 @@ fetch('https://static.segmentfault.com/sponsor/20180731.json', {
     console.log(err)
 })
 
-
+// test
+function test(resolve, reject) {
+    var timeOut = Math.random() * 2
+    console.log('set timeout to:' + timeOut + 'seconds.')
+    setTimeout(function() {
+        if (timeOut < 1) {
+            console.log('call resolve()...')
+            resolve('200 OK')
+        } else {
+            console.log('call reject()...')
+            reject('timeOut in ' + timeOut + 'seconds.')
+        }
+    }, timeOut * 1000);
+}
+new Promise(test).then(function(result) {
+    console.log('success: ' + result);
+}).catch(function(reason) {
+    console.log('fail: ' + reason);
+})
 
 
 // 测试区 如使用此Ty库文件 请移除本行之后的代码段 ------
@@ -779,6 +854,12 @@ var obj2 = {a : 10}
 var obj3 = {a : 4}
 console.log(Ty.mergeObject(obj0, obj2, obj3))
 console.log(obj0, obj2, obj3)
+console.log(Ty.hasClass(document.getElementById('_test'), '_button'))
+Ty.addClass(document.getElementById('_test'), 'ads ads1')
+Ty.removeClass(document.getElementById('_test'), 'ads1')
+document.getElementById('_test').onclick = function () {
+    Ty.toggleClass(this, 'toggle')
+}
 // 测试区 end ------
 // ⚡
 // Tyrus_ExtensionJS end -------------------------
