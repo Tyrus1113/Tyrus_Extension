@@ -3,7 +3,7 @@
  * @Author: Tyrus
  * @Date: 2018-03-14 16:09:25
  * @Last Modified by: Tyrus
- * @Last Modified time: 2018-06-19
+ * @Last Modified time: 2019-01-27
  */
 const Ty = {
 
@@ -730,61 +730,6 @@ const Ty = {
 
 
 
-
-
-// 通用验证
-/*
-    schema 验证规则
-    validate 通用验证函数
-*/
-var schema = {
-    first : {
-        required : true
-    },
-    second : {
-        required : true
-    }
-}
-function validate (schema, value) {
-
-    for (var field in schema) {
-
-        if (schema[field].required) {
-
-            if (!value[field]) {
-                return false
-            }
-        }
-    }
-    return true
-}
-// 验证
-console.log(validate(schema, {
-    first : 'Bruce',
-    second: 'Wayne'
-}))
-
-
-
-// 原生fetch
-fetch('https://static.segmentfault.com/sponsor/20180731.json', {
-    method: 'GET',
-    mode: 'cors',
-    // credentials: 'include' // 强制提交cookie
-})
-.then(res => {
-    return res.json()
-})
-.then(res => {
-    // console.log(res)
-})
-.catch(err => {
-    // console.log(err)
-})
-
-const regStr = 'asdfghjkqwehidsafhiadf hi adfdsasdfdsl'
-console.log('/\bhi\b/:', /\bhi\b/.test(regStr))
-console.log('/\bhi\b.*asdf/:', /\bhi\b.*asdf/.test(regStr))
 
 
 // 测试区 如使用此Ty库文件 请移除本行之后的代码段 ------
