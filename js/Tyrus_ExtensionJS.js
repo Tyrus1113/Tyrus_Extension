@@ -602,6 +602,9 @@ const Ty = {
      * @return {Number}        遍历数组中出现相同项的数量
      */
     getSameItems : function (_a) {
+        
+        if (!Array.isArray(_a)) 
+            return 'Ty_err: 参数应为Array类型'
 
         return _a.reduce(function (obj, name) {
 
@@ -616,12 +619,12 @@ const Ty = {
 
     /**
      * 无限参数合并对象
-     * @method getSameItems
+     * @method mergeObject
      * 
      * @param  {Object}   _o   需合并的对象
      * @return {Object}        返回合并后的对象
      */
-    mergeObject : function (_o, _s) {
+    mergeObject : function (_o) {
         
         function mergeFunc(_o0, _o1) {
             for (var obj in _o1) {
@@ -659,7 +662,6 @@ const Ty = {
         console.log('Just once')
         
         Ty.onceFunc = function() {
-            
             console.log('Miss')
         }
     },
@@ -676,6 +678,10 @@ const Ty = {
      * @return {Array / null}         
      */
     hasClass : function (_o, _c) {
+
+        if (typeof _c !== 'string') 
+            return 'Ty_err: 第二个参数应为String类型'
+
         return _o.className.match(new RegExp('(\\s|^)' + _c + '(\\s|$)'))
     },
 
@@ -690,6 +696,10 @@ const Ty = {
      * @param  {String}   _c    class名称
      */
     addClass : function (_o, _c) {
+
+        if (typeof _c !== 'string') 
+            return 'Ty_err: 第二个参数应为String类型'
+
         if (!this.hasClass(_o, _c))
             _o.className += ' ' + _c
     },
@@ -705,9 +715,13 @@ const Ty = {
      * @param  {String}   _c    class名称
      */
     removeClass : function (_o, _c) {
+
+        if (typeof _c !== 'string') 
+            return 'Ty_err: 第二个参数应为String类型'
+
         if (this.hasClass(_o, _c)) {
             var reg = new RegExp('(\\s|^)' + _c + '(\\s|$)')
-            _o.className = _o.className.replace(reg, '');
+            _o.className = _o.className.replace(reg, ' ');
         }
     },
 
@@ -722,12 +736,72 @@ const Ty = {
      * @param  {String}   _c    class名称
      */
     toggleClass : function (_o, _c) {
+
+        if (typeof _c !== 'string') 
+            return 'Ty_err: 第二个参数应为String类型'
+            
         this.hasClass(_o, _c) ? this.removeClass(_o, _c) : this.addClass(_o, _c)
     },
 
+
+
+    /**
+     * 从url中获取某个参数的值
+     * @method getUrlParam
+     * 
+     * @param  {String}   _u    url location.search
+     * @param  {String}   _p    url上的某个参数
+     * @return {String / Null}  返回获取到的值 / null
+     */
+    getUrlParam : function (_u, _p) {
+
+        if (typeof _u !== 'string' || typeof _p !== 'string') 
+            return 'Ty_err: 参数应为String类型'
+
+        var reg = new RegExp('(^|&)' + _p + '=([^&]*)(&|$)')
+        var r = _u.substr(1).match(reg)
+
+        if(r != null) {
+            return decodeURI(r[2])
+        } else {
+            return null
+        }
+    },
+
+
+
+    /**
+     * 从url中获取所有参数
+     * @method getUrlParamsAll
+     * 
+     * @param  {String}   _u    url location.search
+     * @return {Object}         返回获取的参数对象
+     */
+    getUrlParamsAll : function (_u) {
+
+        if (typeof _u !== 'string') 
+            return 'Ty_err: 参数应为String类型'
+
+        var obj = {}
+        var reg = /([^?&=]+)=([^?&=]*)/g
+        // [^?&=]+表示：除了？、&、=之外的一到多个字符
+        // [^?&=]*表示：除了？、&、=之外的0到多个字符（任意多个）
+
+        _u.replace(reg, function (rs, $1, $2) {
+
+            var name = decodeURIComponent($1)
+            var val = decodeURIComponent($2)
+            
+            val = String(val)
+            obj[name] = val
+        })
+        return obj
+    },
+
+
+
+
 } //  ---- **** Ty end **** ----
-
-
 
 
 
@@ -775,20 +849,25 @@ for (var i = 0; i < el.length; i++) {
 var obj1 = Ty.deepCloneObj(obj0)
 obj1.c = 2
 // console.log(obj1 ,obj0)
-// console.log(Ty.getSameItems(cars))
+console.log('getSameItems:', Ty.getSameItems(cars))
 // Ty.onceFunc()
 // Ty.onceFunc()
 // Ty.onceFunc()
 var obj2 = {a : 10}
 var obj3 = {a : 4}
-// console.log(Ty.mergeObject(obj0, obj2, obj3))
+var obj4 = {c : 20}
+console.log('mergeObject:', Ty.mergeObject(obj0, obj2, obj3, obj4))
 // console.log(obj0, obj2, obj3)
-// console.log(Ty.hasClass(document.getElementById('_test'), '_button'))
 Ty.addClass(document.getElementById('_test'), 'ads ads1')
-Ty.removeClass(document.getElementById('_test'), 'ads1')
+console.log(Ty.hasClass(document.getElementById('_test'), 'ads'))
+// Ty.removeClass(document.getElementById('_test'), 'ads1')
 document.getElementById('_test').onclick = function () {
-    Ty.toggleClass(this, 'toggle')
+    Ty.toggleClass(this, '_button')
 }
+
+var testUrlSearch = '?tn=monline_3_dg&ie=utf-8&wd=12306%E7%81%AB%E8%BD%A6%E7%A5%A8%E7%BD%91%E4%B8%8A%E8%AE%A2%E7%A5%A8%E5%AE%98%E7%BD%91'
+console.log('getUrlParamsAll:', Ty.getUrlParamsAll(testUrlSearch))
+console.log('getUrlParam:', Ty.getUrlParam(testUrlSearch, 'wd'))
 // 测试区 end ------
 // ⚡
 // Tyrus_ExtensionJS end -------------------------
