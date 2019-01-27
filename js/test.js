@@ -115,3 +115,25 @@ async function tryCatch(_p) {
     }
 }
 tryCatch()
+
+var numArr = [4, 6, 7, 9, 10, 21, 26]
+
+// 返回数组中所有元素都大于 18 的元素
+let filter = numArr.filter(item => {return item > 8})
+console.log('filter:', filter)
+
+// 检测数组的所有元素是否都大于等于 98
+let every = numArr.every(item => {return item > 98})
+console.log('every:', every)
+
+// 检测数组中是否有元素大于 8
+let some = numArr.some(item => {return item > 8})
+console.log('some:', some)
+
+// 计算数组元素相加后的总和
+let reduce = numArr.reduce((total, num) => {return total + num})
+console.log('reduce:', reduce)
+
+// 获取数组中大于 8的第一个 元素
+let find = numArr.find(item => {return item > 8})
+console.log('find:', find)
