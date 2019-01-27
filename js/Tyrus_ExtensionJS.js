@@ -762,7 +762,7 @@ function validate (schema, value) {
 console.log(validate(schema, {
     first : 'Bruce',
     second: 'Wayne'
-}));
+}))
 
 
 
@@ -776,31 +776,15 @@ fetch('https://static.segmentfault.com/sponsor/20180731.json', {
     return res.json()
 })
 .then(res => {
-    console.log(res)
+    // console.log(res)
 })
 .catch(err => {
-    console.log(err)
+    // console.log(err)
 })
 
-// test
-function test(resolve, reject) {
-    var timeOut = Math.random() * 2
-    console.log('set timeout to:' + timeOut + 'seconds.')
-    setTimeout(function() {
-        if (timeOut < 1) {
-            console.log('call resolve()...')
-            resolve('200 OK')
-        } else {
-            console.log('call reject()...')
-            reject('timeOut in ' + timeOut + 'seconds.')
-        }
-    }, timeOut * 1000);
-}
-new Promise(test).then(function(result) {
-    console.log('success: ' + result);
-}).catch(function(reason) {
-    console.log('fail: ' + reason);
-})
+const regStr = 'asdfghjkqwehidsafhiadf hi adfdsasdfdsl'
+console.log('/\bhi\b/:', /\bhi\b/.test(regStr))
+console.log('/\bhi\b.*asdf/:', /\bhi\b.*asdf/.test(regStr))
 
 
 // 测试区 如使用此Ty库文件 请移除本行之后的代码段 ------
@@ -823,13 +807,13 @@ var arr9 = ['2017-01','2017-02','2017-08','2017-09']
 var ar10 = [10]
 var color = ['red', 'blue', 'green']
 
-console.log(Ty.removeArrayItem(cars, 3))
-console.log(Ty.sortArrayNum(arr1, true))
-console.log(Ty.getArrayTheItem(arr5, true))
-console.log(Ty.periodTime(strDate))
-console.log(Ty.addNumberSection(numArr, 1000))
-console.log(Ty.isEmptyObj(obj0))
-console.log(Ty.concatUniqueArray(arr1, arr2, arr3, arr4, arr5))
+// console.log(Ty.removeArrayItem(cars, 3))
+// console.log(Ty.sortArrayNum(arr1, true))
+// console.log(Ty.getArrayTheItem(arr5, true))
+// console.log(Ty.periodTime(strDate))
+// console.log(Ty.addNumberSection(numArr, 1000))
+// console.log(Ty.isEmptyObj(obj0))
+// console.log(Ty.concatUniqueArray(arr1, arr2, arr3, arr4, arr5))
 
 var init = []
 var el = document.getElementsByClassName('_button')
@@ -841,20 +825,20 @@ for (var i = 0; i < el.length; i++) {
     }
 }
 
-console.log(Ty.addYearMonthSort(arr7))
-console.log(Ty.addThousandMark(numArr))
+// console.log(Ty.addYearMonthSort(arr7))
+// console.log(Ty.addThousandMark(numArr))
 var obj1 = Ty.deepCloneObj(obj0)
 obj1.c = 2
-console.log(obj1 ,obj0)
-console.log(Ty.getSameItems(cars))
-Ty.onceFunc()
-Ty.onceFunc()
-Ty.onceFunc()
+// console.log(obj1 ,obj0)
+// console.log(Ty.getSameItems(cars))
+// Ty.onceFunc()
+// Ty.onceFunc()
+// Ty.onceFunc()
 var obj2 = {a : 10}
 var obj3 = {a : 4}
-console.log(Ty.mergeObject(obj0, obj2, obj3))
-console.log(obj0, obj2, obj3)
-console.log(Ty.hasClass(document.getElementById('_test'), '_button'))
+// console.log(Ty.mergeObject(obj0, obj2, obj3))
+// console.log(obj0, obj2, obj3)
+// console.log(Ty.hasClass(document.getElementById('_test'), '_button'))
 Ty.addClass(document.getElementById('_test'), 'ads ads1')
 Ty.removeClass(document.getElementById('_test'), 'ads1')
 document.getElementById('_test').onclick = function () {
