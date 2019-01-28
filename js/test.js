@@ -3,58 +3,8 @@
  * @Author: Tyrus
  * @Date: 2019-01-27 16:09:25
  * @Last Modified by: Tyrus
- * @Last Modified time: 2019-01-27
+ * @Last Modified time: 2019-01-28
  */
-
- // 通用验证
-/*
-    schema 验证规则
-    validate 通用验证函数
-*/
-var schema = {
-    first : {
-        required : true
-    },
-    second : {
-        required : true
-    }
-}
-function validate (schema, value) {
-
-    for (var field in schema) {
-
-        if (schema[field].required) {
-
-            if (!value[field]) {
-                return false
-            }
-        }
-    }
-    return true
-}
-// 验证
-console.log(validate(schema, {
-    first : 'Bruce',
-    second: 'Wayne'
-}))
-
-
-
-// 原生fetch
-fetch('https://static.segmentfault.com/sponsor/20180731.json', {
-    method: 'GET',
-    mode: 'cors',
-    // credentials: 'include' // 强制提交cookie
-})
-.then(res => {
-    return res.json()
-})
-.then(res => {
-    // console.log(res)
-})
-.catch(err => {
-    // console.log(err)
-})
 
 const regStr = 'asdfghjkqwehidsafhiadf hi adfdsasdfdsl'
 console.log('/\bhi\b/:', /\bhi\b/.test(regStr))
@@ -137,3 +87,4 @@ console.log('reduce:', reduce)
 // 获取数组中大于 8的第一个 元素
 let find = numArr.find(item => {return item > 8})
 console.log('find:', find)
+

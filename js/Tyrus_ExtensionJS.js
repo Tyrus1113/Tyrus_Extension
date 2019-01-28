@@ -667,7 +667,7 @@ const Ty = {
     },
 
 
-
+    
     
     /**
      * 是否含有class名
@@ -682,14 +682,14 @@ const Ty = {
         if (typeof _c !== 'string') 
             return 'Ty_err: 第二个参数应为String类型'
 
-        return _o.className.match(new RegExp('(\\s|^)' + _c + '(\\s|$)'))
+        return _o.classList.contains(_c)
     },
 
 
 
 
     /**
-     * 添加class
+     * 添加多个class
      * @method addClass
      * 
      * @param  {DOM}      _o    DOM元素
@@ -700,15 +700,16 @@ const Ty = {
         if (typeof _c !== 'string') 
             return 'Ty_err: 第二个参数应为String类型'
 
-        if (!this.hasClass(_o, _c))
-            _o.className += ' ' + _c
+        for (var i = 1; i < arguments.length; i++) {
+            _o.classList.add(arguments[i])
+        }
     },
 
 
 
 
     /**
-     * 移除class
+     * 移除多个class
      * @method removeClass
      * 
      * @param  {DOM}      _o    DOM元素
@@ -719,9 +720,8 @@ const Ty = {
         if (typeof _c !== 'string') 
             return 'Ty_err: 第二个参数应为String类型'
 
-        if (this.hasClass(_o, _c)) {
-            var reg = new RegExp('(\\s|^)' + _c + '(\\s|$)')
-            _o.className = _o.className.replace(reg, ' ');
+        for (var i = 1; i < arguments.length; i++) {
+            _o.classList.remove(arguments[i])
         }
     },
 
@@ -740,8 +740,9 @@ const Ty = {
         if (typeof _c !== 'string') 
             return 'Ty_err: 第二个参数应为String类型'
             
-        this.hasClass(_o, _c) ? this.removeClass(_o, _c) : this.addClass(_o, _c)
+        _o.classList.toggle(_c)
     },
+
 
 
 
@@ -858,11 +859,11 @@ var obj3 = {a : 4}
 var obj4 = {c : 20}
 console.log('mergeObject:', Ty.mergeObject(obj0, obj2, obj3, obj4))
 // console.log(obj0, obj2, obj3)
-Ty.addClass(document.getElementById('_test'), 'ads ads1')
-console.log(Ty.hasClass(document.getElementById('_test'), 'ads'))
-// Ty.removeClass(document.getElementById('_test'), 'ads1')
+Ty.addClass(document.getElementById('_test'), 'bbb')
+console.log('hasClass:', Ty.hasClass(document.getElementById('_test'), 'aaa'))
+Ty.removeClass(document.getElementById('_test'), 'bbb')
 document.getElementById('_test').onclick = function () {
-    Ty.toggleClass(this, '_button')
+    Ty.toggleClass(this, 'toggle')
 }
 
 var testUrlSearch = '?tn=monline_3_dg&ie=utf-8&wd=12306%E7%81%AB%E8%BD%A6%E7%A5%A8%E7%BD%91%E4%B8%8A%E8%AE%A2%E7%A5%A8%E5%AE%98%E7%BD%91'
