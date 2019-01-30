@@ -801,6 +801,41 @@ const Ty = {
 
 
 
+    /**
+     * 赋值记录日志
+     * @method VariableLog
+     * 
+     * @example
+     *          var VariableLog = Ty.VariableLog
+     *          var vLog = new VariableLog()
+     *          vLog.archive = 1
+     *          vLog.archive = 2
+     *          vLog.getArchive()
+     * 
+     * @return {Array}         返回记录日志
+     */
+    VariableLog : function () {
+        
+        var archive = null
+        var log = []
+        
+        Object.defineProperty(this, 'archive', {
+
+            get: function () {
+                return archive
+            },
+            set: function (_val) {
+                archive = _val
+                log.push({
+                    val: archive
+                })
+            }
+        })
+
+        this.getArchive = function () {
+            return log
+        }
+    }
 
 } //  ---- **** Ty end **** ----
 
@@ -850,25 +885,31 @@ for (var i = 0; i < el.length; i++) {
 var obj1 = Ty.deepCloneObj(obj0)
 obj1.c = 2
 // console.log(obj1 ,obj0)
-console.log('getSameItems:', Ty.getSameItems(cars))
+// console.log('getSameItems:', Ty.getSameItems(cars))
 // Ty.onceFunc()
 // Ty.onceFunc()
 // Ty.onceFunc()
 var obj2 = {a : 10}
 var obj3 = {a : 4}
 var obj4 = {c : 20}
-console.log('mergeObject:', Ty.mergeObject(obj0, obj2, obj3, obj4))
+// console.log('mergeObject:', Ty.mergeObject(obj0, obj2, obj3, obj4))
 // console.log(obj0, obj2, obj3)
-Ty.addClass(document.getElementById('_test'), 'bbb')
-console.log('hasClass:', Ty.hasClass(document.getElementById('_test'), 'aaa'))
-Ty.removeClass(document.getElementById('_test'), 'bbb')
-document.getElementById('_test').onclick = function () {
-    Ty.toggleClass(this, 'toggle')
-}
+// Ty.addClass(document.getElementById('_test'), 'bbb')
+// console.log('hasClass:', Ty.hasClass(document.getElementById('_test'), 'aaa'))
+// Ty.removeClass(document.getElementById('_test'), 'bbb')
+// document.getElementById('_test').onclick = function () {
+//     Ty.toggleClass(this, 'toggle')
+// }
 
 var testUrlSearch = '?tn=monline_3_dg&ie=utf-8&wd=12306%E7%81%AB%E8%BD%A6%E7%A5%A8%E7%BD%91%E4%B8%8A%E8%AE%A2%E7%A5%A8%E5%AE%98%E7%BD%91'
-console.log('getUrlParamsAll:', Ty.getUrlParamsAll(testUrlSearch))
-console.log('getUrlParam:', Ty.getUrlParam(testUrlSearch, 'wd'))
+// console.log('getUrlParamsAll:', Ty.getUrlParamsAll(testUrlSearch))
+// console.log('getUrlParam:', Ty.getUrlParam(testUrlSearch, 'wd'))
+
+var VariableLog = Ty.VariableLog
+var vLog = new VariableLog()
+vLog.archive = 1
+vLog.archive = 2
+// console.log('vLog.getArchive():', vLog.getArchive())
 // 测试区 end ------
 // ⚡
 // Tyrus_ExtensionJS end -------------------------
