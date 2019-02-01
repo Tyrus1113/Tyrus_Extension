@@ -46,19 +46,23 @@ console.log('Chapter:', /^Chapter [1-9][0-9]{0,1}/.test(chapter))
 console.log('Chapter:', chapter.match(/^Chapter [1-9][0-9]{0,1}/))
 console.log('html - replace:', html.replace(/<\/?.*?>$/g, '<span>'))
 
-var regStr1 = 'abc123de45fgh6789qqq111'
-var regStr2 = 'abcdefghijkl'
-var regNum1 = '1223334444'
-var space = '  space '
-console.log('regStr1:', regStr1.match(/\d+/g))
+let regNum1 = '1223334444'
 console.log('regNum1:', regNum1.match(/\d{2}/g))
 console.log('regNum1:', regNum1.match(/[124]/g))
+
+let regStr1 = 'abc123de45fgh6789qqq111'
+let regStr2 = 'abcdefghijkl'
+console.log('regStr1:', regStr1.match(/\d+/g))
 console.log('regStr2:', regStr2.match(/[a-f]/g))
 console.log('regStr2:', regStr2.match(/.{3}/g))
+
+let space = '  space '
 console.log('space:', space.match(/^\s+|\s+$/g))
 console.log('space:', space.replace(/^\s+|\s+$/g, '空格'))
-var res = space.replace(/^\s+|\s+/g, '')
-console.log('space - res:', `(${res})`)
+console.log('space - res:', `(${space.replace(/^\s+|\s+/g, '')})`)
+
+let age = '18'
+console.log('age:', /(18|19)|([2-5]\d)|(6[0-5])/.test(age))
 
 
 console.log('-------------')
