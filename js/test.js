@@ -30,11 +30,37 @@ console.log('find:', find)
 
 // ---------------------------------------------
 console.log('-------------')
-const regStr = 'ffawtehidsafhiadf hi adfdsasdfdsl'
-const regStr1 = 'pati*ence'
-console.log('/\bhi\b/:', /\bhi\b/.test(regStr))
-console.log('/\bhi\b.*asdf/:', /\bhi\b.*asdf/.test(regStr))
-console.log('/\bpati*\*ence\b/:', /\bpati*\*ence\b/.test(regStr1))
+
+const regStr = 'ffawtehid sa fhiadf hi adfdsasdfdsl'
+const patience = 'pati*ence tience'
+const chapter = 'Chapter 991'
+const html =    `<div>
+                    <h1>ABCDEFG</h1>
+                </div>`
+console.log('regStr:', /\bhi/.test(regStr))
+console.log('regStr:', /\bhi\b.*asdf/.test(regStr))
+console.log('regStr:', regStr.match(/sa/gi))
+console.log('patience:', /pati*\*ence/.test(regStr))
+console.log('patience tience:', patience.match(/\bti/gi))
+console.log('Chapter:', /^Chapter [1-9][0-9]{0,1}/.test(chapter))
+console.log('Chapter:', chapter.match(/^Chapter [1-9][0-9]{0,1}/))
+console.log('html - replace:', html.replace(/<\/?.*?>$/g, '<span>'))
+
+var regStr1 = 'abc123de45fgh6789qqq111'
+var regStr2 = 'abcdefghijkl'
+var regNum1 = '1223334444'
+var space = '  space '
+console.log('regStr1:', regStr1.match(/\d+/g))
+console.log('regNum1:', regNum1.match(/\d{2}/g))
+console.log('regNum1:', regNum1.match(/[124]/g))
+console.log('regStr2:', regStr2.match(/[a-f]/g))
+console.log('regStr2:', regStr2.match(/.{3}/g))
+console.log('space:', space.match(/^\s+|\s+$/g))
+console.log('space:', space.replace(/^\s+|\s+$/g, '空格'))
+var res = space.replace(/^\s+|\s+/g, '')
+console.log('space - res:', `(${res})`)
+
+
 console.log('-------------')
 // ---------------------------------------------
 
@@ -157,3 +183,8 @@ arc.temperature = 1
 arc.temperature = 2
 console.log('arc.getArchive():', arc.getArchive())
 
+// ---------------------------------------------
+
+let numbers = [5, 4, 13, 9]
+let max = Math.max.apply(null, numbers)
+console.log('max', max)
