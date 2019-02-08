@@ -3,10 +3,10 @@
  * @Author: Tyrus
  * @Date: 2019-01-27 16:09:25
  * @Last Modified by: Tyrus
- * @Last Modified time: 2019-01-28
+ * @Last Modified time: 2019-02-08
  */
 
-var numArr = [4, 6, 7, 9, 10, 21, 26]
+let numArr = [4, 6, 7, 9, 10, 21, 26]
 
 // 返回数组中所有元素都大于 18 的元素
 let filter = numArr.filter(item => {return item > 8})
@@ -189,6 +189,46 @@ console.log('arc.getArchive():', arc.getArchive())
 
 // ---------------------------------------------
 
-let numbers = [5, 4, 13, 9]
+let numbers = [5, 4, 13, 9, 5]
+let setStr = 'ababbc'
+
 let max = Math.max.apply(null, numbers)
-console.log('max', max)
+console.log('max:', max)
+
+const _arr = new Set(numbers)
+const _setStr = [...new Set(setStr)].join('')
+console.log('_setStr:', _setStr)
+// const _arr = []
+// for (let i = 0; i < numbers.length; i++) {
+//     for (let j = i + 1; j < numbers.length; j++) {
+//         if (numbers[i] === numbers[j]) {
+//             ++ i
+//         }
+//     }
+//     _arr.push(numbers[i])
+// }
+console.log('uni - numbers:', _arr)
+
+function foo (a, b, c) {
+    console.log('spread_arr:', a, b, c)
+}
+const spread_arr = [0, 1, 2, 3]
+foo(...spread_arr)
+
+const spread_arr1 = [...spread_arr, 5, 6, 7]
+console.log('spread:', spread_arr1, spread_arr1[0])
+
+const spread_arr3 = [...spread_arr]
+console.log('spread_arr3:', spread_arr3)
+// 返回false 深拷贝数组 spread_arr,spread_arr3指向不同的数组
+console.log('deep copy:', spread_arr === spread_arr3)
+
+function rest(...args) {
+    console.log('args:', args)
+}
+rest('params1', 'params2', 'params3')
+
+const redFruits = ['apple', 'strawberry', 'cherry', 'cranberries']
+if (redFruits.includes('apple')) {
+    console.log('redFruits')
+}

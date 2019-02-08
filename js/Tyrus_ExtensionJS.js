@@ -3,9 +3,9 @@
  * @Author: Tyrus
  * @Date: 2018-03-14 16:09:25
  * @Last Modified by: Tyrus
- * @Last Modified time: 2019-01-27
+ * @Last Modified time: 2019-02-08
  */
-const Ty = {
+var Ty = {
 
     /**
      * 移除数组选中项
