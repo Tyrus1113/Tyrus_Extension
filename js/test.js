@@ -7,7 +7,7 @@
  */
 
 const testArr = [4, 6, 7, 9, 10, 21, 26]
-
+const testStr = 'Welcome to Ty_Extension!'
 // 返回数组中所有元素都大于 18 的元素
 let filter = testArr.filter(item => item > 18)
 console.log('filter:', filter)
@@ -28,6 +28,12 @@ console.log('reduce:', reduce)
 let find = testArr.find(item => item > 8)
 console.log('find:', find)
 
+// 判断数组中是否含有指定的值 6
+let includes = testArr.includes(6)
+console.log('includes:', includes)
+let includesStr = testStr.includes('to')
+console.log('includesStr:', includesStr)
+
 // ---------------------------------------------
 console.log('-------------')
 
@@ -44,7 +50,7 @@ console.log('patience:', /pati*\*ence/.test(regStr))
 console.log('patience tience:', patience.match(/\bti/gi))
 console.log('Chapter:', /^Chapter [1-9][0-9]{0,1}/.test(chapter))
 console.log('Chapter:', chapter.match(/^Chapter [1-9][0-9]{0,1}/))
-console.log('html - replace:', html.replace(/<\/?.*?>$/g, '<span>'))
+console.log('html - replace:', html.replace(/<[^\/]\w+>/g, 'span'))
 
 let regNum1 = '1223334444'
 console.log('regNum1:', regNum1.match(/\d{2}/g))
@@ -64,64 +70,39 @@ console.log('space - res:', `(${space.replace(/^\s+|\s+/g, '')})`)
 let age = '18'
 console.log('age:', /(18|19)|([2-5]\d)|(6[0-5])/.test(age))
 
-
-console.log('-------------')
-// ---------------------------------------------
-
-let p1 = Promise.resolve(123)
-let p2 = Promise.resolve('hello')
-let p3 = Promise.resolve('success')
-let p4 = Promise.reject('error')
-Promise.all([p1, p2, p3, p4]).then(result => {
-    console.log('result:', result)
-}).catch(result => {
-    console.log('result:', result)
-})
-
-function sleep(wait) {
-    return new Promise((res, rej) => {
-        setTimeout(() => {
-            res(wait)
-        }, wait)
-    })
-}
-let k1 = sleep(500)
-let k2 = sleep(800)
-let k3 = sleep(1000)
-Promise.race([k1, k2, k3]).then(result => {
-    console.log('race - result:', result)
-})
-sleep(100).then(result => {
-    return sleep(result + 100)
-}).then(result02 => {
-    return sleep(result02 + 100)
-}).then(result03 => {
-    console.log('sleep - result03:', result03)
-})
-
-async function demo() {
-    let result01 = await sleep(100)
-    let result02 = await sleep(result01 + 100)
-    let result03 = await sleep(result02 + 100)
-    return result03
-}
-demo().then(result => {
-    console.log('demo - result:', result)
-})
-
-let p = new Promise((resolve, reject) => {
-    setTimeout(() => {
-        reject('p - error')
-    }, 1000)
-})
-async function tryCatch(_p) {
-    try {
-        let result = await p
-    } catch (e) {
-        console.log(e)
+const caStr = '123asd 45 321 askd89 00'
+let tmp = ''
+const caArr = []
+for (let i = 0; i < caStr.length; i++) {
+    if (caStr.charAt(i) >= '0' && caStr.charAt(i) <= '9') {
+        tmp += caStr.charAt(i)
+    } else {
+        if (tmp) {
+            caArr.push(tmp)
+            tmp = ''
+        }
     }
 }
-tryCatch()
+if (tmp) {
+    caArr.push(tmp)
+    tmp = ''
+}
+console.log('caArr:', caArr)
+console.log('caStr:', caStr.match(/\d+/g))
+
+let tel = '0532-83846666'
+let _tel = /(\d{2,3}-)?[1-9]\d{7}(-\d{1,4})?/
+console.log('tel:', _tel.test(tel))
+
+let mail = 'asd@163.com'
+let _mail = /^\w+@[a-z0-9]+\.[a-z]+$/i
+console.log('mail:', _mail.test(mail))
+
+let phone = '13912341234'
+let _phone = /^1[35789]\d{9}$/
+console.log('phone:', _phone.test(phone))
+
+console.log('-------------')
 
 // ---------------------------------------------
 
@@ -252,3 +233,60 @@ let difference = unique_a.filter(_v => {
     return unique_b.indexOf(_v) === -1
 })
 console.log('difference:', difference)
+
+// ---------------------------------------------
+
+let p1 = Promise.resolve(123)
+let p2 = Promise.resolve('hello')
+let p3 = Promise.resolve('success')
+let p4 = Promise.reject('error')
+Promise.all([p1, p2, p3, p4]).then(result => {
+    console.log('result:', result)
+}).catch(result => {
+    console.log('result:', result)
+})
+
+// function sleep(wait) {
+//     return new Promise((res, rej) => {
+//         setTimeout(() => {
+//             res(wait)
+//         }, wait)
+//     })
+// }
+// let k1 = sleep(500)
+// let k2 = sleep(800)
+// let k3 = sleep(1000)
+// Promise.race([k1, k2, k3]).then(result => {
+//     console.log('race - result:', result)
+// })
+// sleep(100).then(result => {
+//     return sleep(result + 100)
+// }).then(result02 => {
+//     return sleep(result02 + 100)
+// }).then(result03 => {
+//     console.log('sleep - result03:', result03)
+// })
+
+// async function demo() {
+//     let result01 = await sleep(100)
+//     let result02 = await sleep(result01 + 100)
+//     let result03 = await sleep(result02 + 100)
+//     return result03
+// }
+// demo().then(result => {
+//     console.log('demo - result:', result)
+// })
+
+// let p = new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//         reject('p - error')
+//     }, 1000)
+// })
+// async function tryCatch(_p) {
+//     try {
+//         let result = await p
+//     } catch (e) {
+//         console.log(e)
+//     }
+// }
+// tryCatch()
