@@ -6,26 +6,26 @@
  * @Last Modified time: 2019-02-08
  */
 
-let numArr = [4, 6, 7, 9, 10, 21, 26]
+const testArr = [4, 6, 7, 9, 10, 21, 26]
 
 // 返回数组中所有元素都大于 18 的元素
-let filter = numArr.filter(item => {return item > 8})
+let filter = testArr.filter(item => item > 18)
 console.log('filter:', filter)
 
 // 检测数组的所有元素是否都大于等于 98
-let every = numArr.every(item => {return item > 98})
+let every = testArr.every(item => item > 98)
 console.log('every:', every)
 
 // 检测数组中是否有元素大于 8
-let some = numArr.some(item => {return item > 8})
+let some = testArr.some(item => item > 8)
 console.log('some:', some)
 
 // 计算数组元素相加后的总和
-let reduce = numArr.reduce((total, num) => {return total + num})
+let reduce = testArr.reduce((total, num) => total + num)
 console.log('reduce:', reduce)
 
 // 获取数组中大于 8的第一个 元素
-let find = numArr.find(item => {return item > 8})
+let find = testArr.find(item => item > 8)
 console.log('find:', find)
 
 // ---------------------------------------------
@@ -232,3 +232,23 @@ const redFruits = ['apple', 'strawberry', 'cherry', 'cranberries']
 if (redFruits.includes('apple')) {
     console.log('redFruits')
 }
+
+// ---------------------------------------------
+
+const unique_a = [1, 2, 3]
+const unique_b = [2, 4, 5]
+
+let union = unique_a.concat(unique_b.filter(_v => {
+    return unique_a.indexOf(_v) === -1
+}))
+console.log('union:', union)
+
+let intersection = unique_a.filter(_v => {
+    return unique_b.indexOf(_v) > -1
+})
+console.log('intersection:', intersection)
+
+let difference = unique_a.filter(_v => {
+    return unique_b.indexOf(_v) === -1
+})
+console.log('difference:', difference)

@@ -452,6 +452,7 @@ var Ty = {
 
 
 
+
     /**
      * 异步去重排序
      * @method asyncUniqueSortArray
@@ -492,6 +493,49 @@ var Ty = {
     
         return a
     },
+
+
+
+
+    /**
+     * 并集 交集 差集
+     * @method UnionIntersectionDifferenceset
+     * 
+     * @param  {Array} _a0  需要操作的数组
+     * @param  {Array} _a1  需要操作的数组
+     * @param  {Number} _s  指定并:0/交:1/差集:2
+     * @return {Array}      返回 操作后的数组
+     */
+    UnionIntersectionDifferenceset : function (_a0, _a1, _s) {
+    
+        if (!Array.isArray(_a0) || !Array.isArray(_a1)) 
+            return 'Ty_err: 前两个参数应为Array类型'
+        if (typeof _s !== 'number')
+            return 'Ty_err: 第三个参数应为Number类型'
+
+        var _r
+
+        switch (_s) {
+            case 0:
+                _r = _a0.concat(_a1.filter(function (_v) {
+                    return _a0.indexOf(_v) === -1
+                }))
+                break;
+            case 1:
+                _r = _a0.filter(function (_v) {
+                    return _a1.indexOf(_v) > -1
+                })
+                break;
+            case 2:
+                _r = _a0.filter(function(_v) {
+                    return _a1.indexOf(_v) === -1
+                })
+                break;
+        }
+
+        return _r
+    },
+
 
 
 
@@ -869,6 +913,7 @@ var color = ['red', 'blue', 'green']
 // console.log(Ty.addNumberSection(numArr, 1000))
 // console.log(Ty.isEmptyObj(obj0))
 // console.log(Ty.concatUniqueArray(arr1, arr2, arr3, arr4, arr5))
+// console.log(Ty.UnionIntersectionDifferenceset(arr2, arr3, 0))
 
 var init = []
 var el = document.getElementsByClassName('_button')
