@@ -1,0 +1,25 @@
+{
+  "name": "tyrus_extension",
+  "version": "1.0.0",
+  "description": "a javascript extension",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server --open",
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production"
+  },
+  "author": "Tyrus",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-eslint": "^10.0.1",
+    "css-loader": "^2.1.0",
+    "eslint": "^5.13.0",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.29.3",
+    "webpack-cli": "^3.2.3"
+  },
+  "dependencies": {
+    "lodash": "^4.17.11"
+  }
+}
