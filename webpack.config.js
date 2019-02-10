@@ -14,32 +14,8 @@ module.exports = {
 	module: {
 		rules: [
 			{
-				test: /\.(sc|c|sa)ss$/,
-				use: [
-					'style-loader',
-					{
-						loader: 'css-loader',
-						options: {
-							sourceMap: true
-						}
-					},
-					{
-						loader: 'postcss-loader',
-						options: {
-							ident: 'postcss',
-							sourceMap: true,
-							plugins: loader => [
-								require('autoprefixer')({browsers: ['> 0.15% in CN']})
-							]
-						}
-					},
-					{
-						loader: 'sass-loader',
-						options: {
-							sourceMap: true
-						}
-					}
-				]
+				test: /\.css$/,
+				use: ['style-loader', 'css-loader']
 			}
 		]
 	}
