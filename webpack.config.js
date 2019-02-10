@@ -11,6 +11,8 @@ module.exports = {
 		contentBase: path.join(__dirname, 'dist'),
 		port: 8000
 	},
+	// 开启 js 的 source map
+	devtool: 'inline-source-map',
 	module: {
 		rules: [
 			{

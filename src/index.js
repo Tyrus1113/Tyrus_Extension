@@ -8,3 +8,5 @@ if (module.hot) {
 }
 // test_Extension.js
 TEST()
+
+console.log('index')

@@ -1,8 +1,15 @@
 const path = require('path')
+
+// css抽离成单独文件并且设置hash
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+
+// 压缩js css
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+
+// 清理 dist 目录
+const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 module.exports = {
 	entry: './src/index.js',
@@ -10,7 +17,7 @@ module.exports = {
 		filename: 'ty_bundle.[hash].js',
 		path: path.resolve(__dirname, 'dist')
 	},
-	mode: 'production',
+	mode: 'production', // 在dist下打包压缩等操作需要在生产环境下执行
 	devServer: {
 		contentBase: path.join(__dirname, 'dist'),
 		port: 8000
@@ -61,7 +68,8 @@ module.exports = {
 				removeComments: true, // 是否移除注释
 				removeAttributeQuotes: true // 移除属性的引号
 			}
-		})
+		}),
+		new CleanWebpackPlugin(['dist'])
 	],
 	optimization: {
 		minimizer: [
