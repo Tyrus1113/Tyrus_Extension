@@ -1,0 +1,25 @@
+@charset 'utf-8';
+* {
+    list-style: none;
+    text-decoration: none;
+}
+$active: #bfab45;
+$main: #f5da55;
+body {
+	background-color: #333;
+	color: #333;
+	._button {
+		width: 100px;
+		height: 20px;
+		background-color: $main;
+		margin-top: 10px;
+		text-align: center;
+		font-size: 12px;
+		line-height: 20px;
+		cursor: pointer;
+		user-select: none;
+	}
+	._button:active {
+		background-color: $active;
+	}
+}
