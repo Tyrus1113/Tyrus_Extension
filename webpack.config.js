@@ -8,7 +8,8 @@ module.exports = {
 	},
 	mode: 'development',
 	devServer: {
-		contentBase: './dist'
+		contentBase: path.join(__dirname, 'dist'),
+		port: 8000
 	},
 	module: {
 		rules: [

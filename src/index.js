@@ -1,19 +1,10 @@
-import _ from 'lodash'
-import '../static/style/main.css'
-
 import Ty from './Tyrus_Extension'
 import TEST from './test_Extension'
 
-function createDomElement() {
-	let dom = document.createElement('div')
-	dom.innerHTML = _.join(['123', '456', '789'], '')
-	return dom
+import '../static/style/main.css'
+if (module.hot) {
+	// 解决hot reload报错问题
+	module.hot.accept()
 }
-
-let divDom = createDomElement()
-
-document.body.appendChild(divDom)
-
-
 // test_Extension.js
 TEST()
