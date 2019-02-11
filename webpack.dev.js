@@ -10,40 +10,13 @@ let devConfig = {
 	},
 	// 开启 js 的 source map
 	devtool: 'inline-source-map',
-	// devServer: {
-	// 	contentBase: path.join(__dirname, 'dist'),
-	// 	port: 8000
-	// },
+	devServer: {
+		contentBase: path.join(__dirname, 'dist'),
+		port: 8000
+	},
 	module: {
 		rules: [
-			{
-				test: /\.(sc|c|sa)ss$/,
-				use: [
-					'style-loader',
-					{
-						loader: 'css-loader',
-						options: {
-							sourceMap: true
-						}
-					},
-					{
-						loader: 'postcss-loader',
-						options: {
-							ident: 'postcss',
-							sourceMap: true,
-							plugins: loader => [
-								require('autoprefixer')({browsers: ['> 0.15% in CN']})
-							]
-						}
-					},
-					{
-						loader: 'sass-loader',
-						options: {
-							sourceMap: true
-						}
-					}
-				]
-			}
+			
 		]
 	}
 }
