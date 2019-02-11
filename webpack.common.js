@@ -10,62 +10,70 @@ const CleanWebpackPlugin = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
-	entry: './src/index.js',
-	module: {
-		rules: [
-			{
-				test: /\.(sc|c|sa)ss$/,
-				use: [
-					MiniCssExtractPlugin.loader,
-					{
-						loader: 'css-loader',
-						options: {
-							sourceMap: true
-						}
-					},
-					{
-						loader: 'postcss-loader',
-						options: {
-							ident: 'postcss',
-							sourceMap: true,
-							plugins: loader => [
-								require('autoprefixer')({browsers: ['> 0.15% in CN']})
-							]
-						}
-					},
-					{
-						loader: 'sass-loader',
-						options: {
-							sourceMap: true
-						}
-					}
-				]
-			},
-			{
-				test: /\.js$/,
-				use: {
-					loader: 'babel-loader'
-				},
-				// 加快编译速度，不包含node_modules文件夹内容
-				exclude: /(node_module)/
-			}
-		]
-	},
-	plugins: [
-		new CleanWebpackPlugin(['dist']),
-		new HtmlWebpackPlugin({
-			title: 'Webpack App', // 默认值：Webpack App
-			filename: 'index.html', // 默认值： 'index.html'
-			template: path.resolve(__dirname, 'src/index.html'),
-			minify: {
-				collapseWhitespace: true, // 是否移除空格
-				removeComments: true, // 是否移除注释
-				removeAttributeQuotes: true // 移除属性的引号
-			}
-		}),
-		new MiniCssExtractPlugin({
-			filename: '[name].[hash].css', // 设置最终输出的文件名
-			chunkFilename: '[id].[hash].css'
-		})
-	]
+    entry: './src/index.js',
+    module: {
+        rules: [
+            {
+                test: /\.(sc|c|sa)ss$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            sourceMap: true
+                        }
+                    },
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            ident: 'postcss',
+                            sourceMap: true,
+                            plugins: loader => [
+                                require('autoprefixer')({ browsers: ['> 0.15% in CN'] })
+                            ]
+                        }
+                    },
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            sourceMap: true
+                        }
+                    }
+                ]
+            },
+            {
+                test: /\.js$/,
+                use: [
+                    {
+                        loader: 'babel-loader'
+                    },
+                    {
+                        loader: 'eslint-loader',
+                        options: {
+                            fix: true
+                        }
+                    }
+                ],
+                // 加快编译速度，不包含node_modules文件夹内容
+                exclude: /(node_module)/
+            }
+        ]
+    },
+    plugins: [
+        new CleanWebpackPlugin(['dist']),
+        new HtmlWebpackPlugin({
+            title: 'Webpack App', // 默认值：Webpack App
+            filename: 'index.html', // 默认值： 'index.html'
+            template: path.resolve(__dirname, 'src/index.html'),
+            minify: {
+                collapseWhitespace: true, // 是否移除空格
+                removeComments: true, // 是否移除注释
+                removeAttributeQuotes: true // 移除属性的引号
+            }
+        }),
+        new MiniCssExtractPlugin({
+            filename: '[name].[hash].css', // 设置最终输出的文件名
+            chunkFilename: '[id].[hash].css'
+        })
+    ]
 }
