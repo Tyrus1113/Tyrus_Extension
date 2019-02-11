@@ -40,6 +40,14 @@ module.exports = {
 						}
 					}
 				]
+			},
+			{
+				test: /\.js$/,
+				use: {
+					loader: 'babel-loader'
+				},
+				// 加快编译速度，不包含node_modules文件夹内容
+				exclude: /(node_module)/
 			}
 		]
 	},
