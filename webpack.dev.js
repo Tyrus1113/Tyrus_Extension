@@ -1,6 +1,7 @@
 const path = require('path')
 const merge = require('webpack-merge')
 const common = require('./webpack.common')
+const webpack = require('webpack')
 
 let devConfig = {
 	mode: 'development',
@@ -18,7 +19,13 @@ let devConfig = {
 		rules: [
 			
 		]
-	}
+	},
+	plugins: [
+		// 更容易查看(patch)的依赖
+		new webpack.NamedModulesPlugin(),
+		// 替换插件
+		new webpack.HotModuleReplacementPlugin()
+	],
 }
 
 module.exports = merge(common, devConfig)
