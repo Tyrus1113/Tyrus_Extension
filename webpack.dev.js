@@ -1,7 +1,8 @@
 const path = require('path')
+const merge = require('webpack-merge')
+const common = require('./webpack.common')
 
-module.exports = {
-	entry: './src/index.js',
+let devConfig = {
 	output: {
 		filename: 'ty_bundle.js',
 		path: path.resolve(__dirname, 'dist')
@@ -46,3 +47,5 @@ module.exports = {
 		]
 	}
 }
+
+module.exports = merge(common, devConfig)
