@@ -24,12 +24,11 @@ module.exports = {
         semi: ['error', 'never'],
         'no-unexpected-multiline': 'off',
         'space-before-function-paren': ['error', 'never'],
-        // 'quotes': ["error", "double", { "avoidEscape": true }]
         quotes: [
             'error',
             'single',
             {
-            avoidEscape: true
+                avoidEscape: true
             }
         ]
     }

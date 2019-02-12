@@ -7,8 +7,7 @@
  */
 
 function test() {
-
-	console.log('comming soon')
+    console.log('comming soon')
 }
 
 export default test

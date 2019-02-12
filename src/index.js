@@ -11,3 +11,6 @@ if (module.hot) {
 }
 // test_Extension.js
 TEST()
+document.getElementById('_test').onclick = function() {
+    console.log('This is a test ~')
+}
