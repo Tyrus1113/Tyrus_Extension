@@ -11,6 +11,14 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
     entry: './src/index.js',
+    resolve: {
+        // 忽略后缀名 默认值 .js .json
+        extensions: ['.js', '.json'],
+        // 增加路径别名
+        alias: {
+            '@': path.resolve(__dirname, 'src/')
+        }
+    },
     module: {
         rules: [
             {
