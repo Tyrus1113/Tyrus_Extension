@@ -2,6 +2,7 @@ const path = require('path')
 const merge = require('webpack-merge')
 const common = require('./webpack.common')
 const webpack = require('webpack')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 let devConfig = {
     mode: 'development',
@@ -37,7 +38,9 @@ let devConfig = {
         // 查看(patch)的依赖
         new webpack.NamedModulesPlugin(),
         // 替换插件
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin(),
+        // 打包模块报表
+        new BundleAnalyzerPlugin()
     ]
 }
 
