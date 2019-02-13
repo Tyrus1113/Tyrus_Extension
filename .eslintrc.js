@@ -20,7 +20,6 @@ module.exports = {
         'no-unused-vars': 0,
         'import/no-webpack-loader-syntax': 0,
         'no-redeclare': 0,
-        // 添加，分号必须
         semi: ['error', 'never'],
         'no-unexpected-multiline': 'off',
         'space-before-function-paren': ['error', 'never'],
@@ -30,6 +29,8 @@ module.exports = {
             {
                 avoidEscape: true
             }
-        ]
+        ],
+        'padded-blocks': 0,
+        'no-trailing-spaces': 0
     }
 }
