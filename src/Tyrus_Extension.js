@@ -751,8 +751,22 @@ var Ty = {
         this.getArchive = function() {
             return log
         }
-    }
+    },
 
+    /**
+     * 测试数据类型校验方法
+     * @method dataTypeCheck
+     *
+     * @param  {String}   _v    需要校验的数据类型
+     * @param  {String}   _t    预期的数据类型
+     */
+    dataTypeCheck: function(_v, _t) {
+        _v = Object.prototype.toString.call(_v)
+        var val = _v.split(' ')[1].match(/[a-z]+/i)[0]
+        if (val !== _t) {
+            console.warn('Ty_err: 参数应为' + String(_t) + '类型 但获取到' + val + '类型')
+        }
+    }
 } //  ---- **** Ty end **** ----
 
 export default Ty
