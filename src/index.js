@@ -11,3 +11,11 @@ if (module.hot) {
 }
 // test_Extension.js
 TEST()
+
+var arr = [10, 20, 30, 40, 50]
+var arr1 = [40, 20, 30, 80, 90]
+var str = ''
+var obj = {
+    a: 10
+}
+console.log('test :', Ty.concatUniqueArray(arr, arr1))

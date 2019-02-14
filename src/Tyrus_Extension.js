@@ -17,8 +17,8 @@ var Ty = {
      */
     removeArrayItem: function(_a, _x) {
 
-        if (!Array.isArray(_a)) return 'Ty_err: 第1个参数应为Array类型'
-        if (typeof _x !== 'number') { return 'Ty_err: 第2个参数应为Number类型' }
+        // 参数类型校验
+        this.dataTypeCheck(arguments, ['Array', 'Number'])
 
         var n = []
         for (var i = 0; i < _a.length; i++) {
@@ -38,8 +38,8 @@ var Ty = {
      */
     sortArrayNum: function(_a, _x) {
 
-        if (!Array.isArray(_a)) { return 'Ty_err: 第1个参数应为Array类型' }
-        if (_x != null && typeof _x !== 'boolean') { return 'Ty_err: 第2个参数应为Bool类型' }
+        // 参数类型校验
+        this.dataTypeCheck(arguments, ['Array', 'Boolean'])
 
         _x = _x || false
 
@@ -69,13 +69,13 @@ var Ty = {
      * @method getArrayTheItem
      *
      * @param  {Array}  _a 原数组
-     * @param  {Array}  _x true 取最大值 / 默认 false 取最小值
+     * @param  {Boolean}  _x true 取最大值 / 默认 false 取最小值
      * @return {Array}     返回 新数组
      */
     getArrayTheItem: function(_a, _x) {
 
-        if (!Array.isArray(_a)) { return 'Ty_err: 第1个参数应为Array类型' }
-        if (_x != null && typeof _x !== 'boolean') { return 'Ty_err: 第2个参数应为Bool类型' }
+        // 参数类型校验
+        this.dataTypeCheck(arguments, ['Array', 'Boolean'])
 
         _x = _x || false
 
@@ -108,8 +108,8 @@ var Ty = {
      */
     setTheCookie: function(_n, _v, _e) {
 
-        if (typeof _n !== 'string') { return 'Ty_err: 第1个参数应为String类型' }
-        if (typeof _e !== 'string') { return 'Ty_err: 第3个参数应为Number类型' }
+        // 参数类型校验
+        this.dataTypeCheck(arguments, ['String', 'String', 'Number'])
 
         var d = new Date()
         d.setTime(d.getTime() + (_e * 24 * 60 * 60 * 1000))
@@ -128,7 +128,8 @@ var Ty = {
      */
     getTheCookie: function(_n) {
 
-        if (typeof _n !== 'string') { return 'Ty_err: 参数应为String类型' }
+        // 参数类型校验
+        this.dataTypeCheck(arguments, ['String'])
 
         var _c = document.cookie.split(';')
 
@@ -153,7 +154,8 @@ var Ty = {
      */
     setTheStorage: function(_n, _v) {
 
-        if (typeof _n !== 'string') { return 'Ty_err: 第1个参数应为String类型' }
+        // 参数类型校验
+        this.dataTypeCheck(arguments, ['String'])
 
         if (typeof _v !== 'string') { _v = JSON.stringify(_v) }
 
@@ -169,7 +171,8 @@ var Ty = {
      */
     getTheStorage: function(_n) {
 
-        if (typeof _n !== 'string') { return 'Ty_err: 参数应为String类型' }
+        // 参数类型校验
+        this.dataTypeCheck(arguments, ['String'])
 
         return JSON.parse(window.localStorage.getItem(_n))
     },
@@ -183,7 +186,8 @@ var Ty = {
      */
     removeStorage: function(_n) {
 
-        if (typeof _n !== 'string') { return 'Ty_err: 参数应为String类型' }
+        // 参数类型校验
+        this.dataTypeCheck(arguments, ['String'])
 
         return window.localStorage.removeItem(_n)
     },
@@ -193,14 +197,15 @@ var Ty = {
      * @method periodTime
      *
      * @example
-     *          var strDate = "2018-08-22 12:11:00"
+     *          var strDate = "2019-02-14 12:11:00"
      *          Ty.periodTime(strDate)  // 1周前
      * @param  {String}     "yyyy-mm-dd hh-mm-ss"
      * @return {String}     返回 文字叙述 "刚刚“ "N分钟前" "N天前"等
      */
     periodTime: function(_t) {
 
-        if (typeof _t !== 'string') { return 'Ty_err: 参数应为String类型' }
+        // 参数类型校验
+        this.dataTypeCheck(arguments, ['String'])
 
         // 把时间转换为时间戳
         var d = Date.parse(_t.replace(/-/gi, '/'))
@@ -249,28 +254,32 @@ var Ty = {
     // 除去左右两边空格
     trimBothSpace: function(_s) {
 
-        if (typeof _s !== 'string') { return 'Ty_err: 参数应为String类型' }
+        // 参数类型校验
+        this.dataTypeCheck(arguments, ['String'])
 
         return _s.replace(/(^\s*)|(\s*$)/g, '')
     },
     // 除去左边空格
     trimLeftSpace: function(_s) {
 
-        if (typeof _s !== 'string') { return 'Ty_err: 参数应为String类型' }
+        // 参数类型校验
+        this.dataTypeCheck(arguments, ['String'])
 
         return _s.replace(/(^\s*)/g, '')
     },
     // 除去右边空格
     trimRightSpace: function(_s) {
 
-        if (typeof _s !== 'string') { return 'Ty_err: 参数应为String类型' }
+        // 参数类型校验
+        this.dataTypeCheck(arguments, ['String'])
 
         return _s.replace(/(\s*$)/g, '')
     },
     // 除去所有空格
     trimAllSpace: function(_s) {
 
-        if (typeof _s !== 'string') { return 'Ty_err: 参数应为String类型' }
+        // 参数类型校验
+        this.dataTypeCheck(arguments, ['String'])
 
         return _s.replace(/\s/g, '')
     },
@@ -279,16 +288,14 @@ var Ty = {
      * 添加数字区间
      * @method addNumberSection
      *
-     * @param  {Array}   _a    原数组
+     * @param  {Array}   _a    原数组 并且数组中每项均为Number类型
      * @param  {Number}  _x    数组中最后一项与最后附加项的值或区间
      * @return {Array}         返回 新数组
      */
     addNumberSection: function(_a, _x) {
 
-        if (!Array.isArray(_a)) { return 'Ty_err: 第1个参数应为Array类型' }
-        if (_x != null &&
-            typeof _x !== 'number' &&
-            typeof _x !== 'string') { return 'Ty_err: 第2个参数应为Number类型' }
+        // 参数类型校验
+        this.dataTypeCheck(arguments, ['Array', 'Number'])
 
         var n = []
 
@@ -757,16 +764,21 @@ var Ty = {
      * 测试数据类型校验方法
      * @method dataTypeCheck
      *
-     * @param  {String}   _v    需要校验的数据类型
+     * @param  {String}   _a    需要校验的数据类型
      * @param  {String}   _t    预期的数据类型
+     * @param  {Number}   _i    方法中的第几个参数
      */
-    dataTypeCheck: function(_v, _t) {
-        _v = Object.prototype.toString.call(_v)
-        var val = _v.split(' ')[1].match(/[a-z]+/i)[0]
-        if (val !== _t) {
-            console.warn('Ty_err: 参数应为' + String(_t) + '类型 但获取到' + val + '类型')
+    dataTypeCheck: function(_a, _t) {
+        for (var i = 0; i < _a.length; i++) {
+            _a[i] = Object.prototype.toString.call(_a[i])
+            var val = _a[i].split(' ')[1].match(/[a-z]+/i)[0]
+            if (!_t[i]) { return false }
+            if (val !== _t[i]) {
+                console.warn('Ty_err: 第' + (i + 1) + '个参数应为' + String(_t[i]) + '类型 但获取到' + val + '类型')
+            }
         }
     }
+    
 } //  ---- **** Ty end **** ----
 
 export default Ty
