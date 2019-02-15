@@ -1,3 +1,4 @@
+'use strict'
 const path = require('path')
 
 // 把打包后的 CSS 或者 JS 文件引用直接注入到 HTML 模板中
