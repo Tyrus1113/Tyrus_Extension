@@ -3,7 +3,7 @@
  * @Author: Tyrus
  * @Date: 2018-03-14 16:09:25
  * @Last Modified by: Tyrus
- * @Last Modified time: 2019-02-12
+ * @Last Modified time: 2019-02-15
  */
 var Ty = {
 
@@ -325,7 +325,8 @@ var Ty = {
      */
     isEmptyObj: function(_o) {
 
-        if (Object.prototype.toString.call(this) !== '[object Object]') { return 'Ty_err: 参数应为对象类型' }
+        // 参数类型校验
+        this.dataTypeCheck(arguments, ['Object'])
 
         for (var k in _o) {
             if (_o.hasOwnProperty(k)) {
@@ -346,9 +347,12 @@ var Ty = {
      */
     concatUniqueArray: function(_a0, _a1, _a2) {
 
+        // 参数类型校验
+        var arg = []
         for (var i = 0; i < arguments.length; i++) {
-            if (!Array.isArray(arguments[i])) { return 'Ty_Err:第' + (i + 1) + '个参数不是Array类型' }
+            arg.push('Array')
         }
+        this.dataTypeCheck(arguments, arg)
 
         // 如果只有一个参数 则去重这个单独的参数
         if (arguments.length === 1) {
@@ -401,19 +405,20 @@ var Ty = {
      *
      *                  // 获取值传入初始化的数组中
      *                  _init.push(this.innerHTML)
-     *                  console.log(asyncUniqueSortArray(_init))
+     *                  console.log(Ty.asyncUniqueSortArray(_init))
      *
      *                  // 可存储到storage进行验证
-     *                  Ty.setTheStorage('init', Ty.asyncUniqueSortArray(init))
+     *                  Ty.setTheStorage('init', Ty.asyncUniqueSortArray(_init))
      *                  console.log(Ty.getTheStorage('init'))
      *              }
      *          }
-     * @param  {String} _e  触发异步的Class名称
+     * @param  {String} _a  事件传入的数组
      * @return {Array}      返回 去重排序后的数组
      */
     asyncUniqueSortArray: function(_a) {
 
-        if (!Array.isArray(_a)) { return 'Ty_err: 参数应为Array类型' }
+        // 参数类型校验
+        this.dataTypeCheck(arguments, ['Array'])
 
         var a = []
 
@@ -437,8 +442,8 @@ var Ty = {
      */
     UnionIntersectionDifferenceset: function(_a0, _a1, _s) {
 
-        if (!Array.isArray(_a0) || !Array.isArray(_a1)) { return 'Ty_err: 前两个参数应为Array类型' }
-        if (typeof _s !== 'number') { return 'Ty_err: 第三个参数应为Number类型' }
+        // 参数类型校验
+        this.dataTypeCheck(arguments, ['Array', 'Array', 'Number'])
 
         var _r
 
@@ -458,8 +463,12 @@ var Ty = {
                 return _a1.indexOf(_v) === -1
             })
             break
+        default:
+            _r = _a0.concat(_a1.filter(function(_v) {
+                return _a0.indexOf(_v) === -1
+            }))
+            break
         }
-
         return _r
     },
 
@@ -468,16 +477,16 @@ var Ty = {
      * @method addYearMonthSort
      *
      * @param  {Array}   _a    原时间字段数组 时间格式：yyyy-mm
-     * @param  {Boolean} _x    true 从近到远排序 / 默认 false 从远到近排序
+     * @param  {Boolean} _x    true 从前到后排序 / 默认 false 从后到前排序
      * @return {Array}         返回 新数组
      */
     addYearMonthSort: function(_a, _x) {
 
+        // 参数类型校验
+        this.dataTypeCheck(arguments, ['Array', 'Boolean'])
+
         var _x = _x || false
-
-        if (!Array.isArray(_a)) { return 'Ty_err: 第1个参数应为Array类型' }
-        if (typeof _x !== 'boolean') { return 'Ty_err: 第2个参数应为Bool类型' }
-
+        
         var t = []
         for (var i = 0; i < _a.length; i++) {
             t.push(_a[i].replace('-', ''))
@@ -510,10 +519,12 @@ var Ty = {
      */
     addThousandMark: function(_a) {
 
-        if (!Array.isArray(_a)) { return 'Ty_err: 参数应为Array类型' }
+        // 参数类型校验
+        this.dataTypeCheck(arguments, ['Array'])
 
         var n = []
         for (var i = 0; i < _a.length; i++) {
+
             var _str = _a[i].toString()
             _str = _str.replace(/(\d{1,3})(?=(\d{3})+$)/g, '$1,')
 
@@ -531,6 +542,9 @@ var Ty = {
      * @return {object}     返回 新对象
      */
     deepCloneObj: function(_x) {
+
+        // 参数类型校验
+        this.dataTypeCheck(arguments, ['Object'])
 
         var o = _x instanceof Array ? [] : {}
 
@@ -561,7 +575,8 @@ var Ty = {
      */
     getSameItems: function(_a) {
 
-        if (!Array.isArray(_a)) { return 'Ty_err: 参数应为Array类型' }
+        // 参数类型校验
+        this.dataTypeCheck(arguments, ['Array'])
 
         return _a.reduce(function(obj, name) {
             obj[name] = obj[name] ? obj[name] + 1 : 1
@@ -769,9 +784,18 @@ var Ty = {
      * @param  {Number}   _i    方法中的第几个参数
      */
     dataTypeCheck: function(_a, _t) {
-        for (var i = 0; i < _a.length; i++) {
-            _a[i] = Object.prototype.toString.call(_a[i])
-            var val = _a[i].split(' ')[1].match(/[a-z]+/i)[0]
+
+        // 深拷贝传进的 arguments 确保值不会被改变
+        var arg = []
+        for (const key in JSON.parse(JSON.stringify(_a))) {
+            arg.push(JSON.parse(JSON.stringify(_a))[key])
+        }
+
+        for (var i = 0; i < arg.length; i++) {
+
+            arg[i] = Object.prototype.toString.call(arg[i])
+
+            var val = arg[i].split(' ')[1].match(/[a-z]+/i)[0]
             if (!_t[i]) { return false }
             if (val !== _t[i]) {
                 console.warn('Ty_err: 第' + (i + 1) + '个参数应为' + String(_t[i]) + '类型 但获取到' + val + '类型')
