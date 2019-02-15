@@ -75,6 +75,7 @@ module.exports = {
             title: 'Webpack App', // 默认值：Webpack App
             filename: 'index.html', // 默认值： 'index.html'
             template: path.resolve(__dirname, 'src/index.html'),
+            favicon: 'favicon_ty.ico',
             minify: {
                 collapseWhitespace: true, // 是否移除空格
                 removeComments: true, // 是否移除注释
