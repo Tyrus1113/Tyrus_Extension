@@ -594,6 +594,13 @@ var Ty = {
      */
     mergeObject: function(_o) {
 
+        // 参数类型校验
+        var arg = []
+        for (let i = 0; i < arguments.length; i++) {
+            arg.push('Object')
+        }
+        this.dataTypeCheck(arguments, arg)
+
         function mergeFunc(_o0, _o1) {
             for (var obj in _o1) {
                 _o0[obj] = _o1[obj]
@@ -639,9 +646,10 @@ var Ty = {
      * @param  {String}   _c    class名称
      * @return {Array / null}
      */
-    hasClass: function(_o, _c) {
+    hasClass: function(_c, _o) {
 
-        if (typeof _c !== 'string') { return 'Ty_err: 第二个参数应为String类型' }
+        // 参数类型校验
+        this.dataTypeCheck([_c], ['String'])
 
         return _o.classList.contains(_c)
     },
@@ -653,9 +661,10 @@ var Ty = {
      * @param  {DOM}      _o    DOM元素
      * @param  {String}   _c    class名称
      */
-    addClass: function(_o, _c) {
+    addClass: function(_c, _o) {
 
-        if (typeof _c !== 'string') { return 'Ty_err: 第二个参数应为String类型' }
+        // 参数类型校验
+        this.dataTypeCheck([_c], ['String'])
 
         for (var i = 1; i < arguments.length; i++) {
             _o.classList.add(arguments[i])
@@ -669,9 +678,10 @@ var Ty = {
      * @param  {DOM}      _o    DOM元素
      * @param  {String}   _c    class名称
      */
-    removeClass: function(_o, _c) {
+    removeClass: function(_c, _o) {
 
-        if (typeof _c !== 'string') { return 'Ty_err: 第二个参数应为String类型' }
+        // 参数类型校验
+        this.dataTypeCheck([_c], ['String'])
 
         for (var i = 1; i < arguments.length; i++) {
             _o.classList.remove(arguments[i])
@@ -685,9 +695,10 @@ var Ty = {
      * @param  {DOM}      _o    DOM元素
      * @param  {String}   _c    class名称
      */
-    toggleClass: function(_o, _c) {
+    toggleClass: function(_c, _o) {
 
-        if (typeof _c !== 'string') { return 'Ty_err: 第二个参数应为String类型' }
+        // 参数类型校验
+        this.dataTypeCheck([_c], ['String'])
 
         _o.classList.toggle(_c)
     },
@@ -702,7 +713,8 @@ var Ty = {
      */
     getUrlParam: function(_u, _p) {
 
-        if (typeof _u !== 'string' || typeof _p !== 'string') { return 'Ty_err: 参数应为String类型' }
+        // 参数类型校验
+        this.dataTypeCheck(arguments, ['String', 'String'])
 
         var reg = new RegExp('(^|&)' + _p + '=([^&]*)(&|$)')
         var r = _u.substr(1).match(reg)
@@ -723,7 +735,8 @@ var Ty = {
      */
     getUrlParamsAll: function(_u) {
         
-        if (typeof _u !== 'string') { return 'Ty_err: 参数应为String类型' }
+        // 参数类型校验
+        this.dataTypeCheck([_u], ['String'])
 
         var obj = {}
         var reg = /([^?&=]+)=([^?&=]*)/g

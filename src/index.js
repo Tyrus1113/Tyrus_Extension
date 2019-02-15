@@ -11,14 +11,3 @@ if (module.hot) {
 }
 // test_Extension.js
 TEST()
-
-var arr = [10000, 20000, 30000, 4000, 5000]
-var arr1 = [40, 20, 30, 80, 90]
-var arr2 = [3, 45, 76, 1, 10, 20]
-var arr3 = [1, 2, 3, 1, 1, 3]
-var time = ['2019-1', '2019-1', '2019-3', '2018-12']
-var str = ''
-var obj = {
-    a: 10
-}
-console.log('test :', Ty.getSameItems('arr'))
