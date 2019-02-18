@@ -23,6 +23,12 @@ module.exports = {
     module: {
         rules: [
             {
+                test: /\.(png|jpg|jpeg|gif)$/,
+                use: [
+                    { loader: 'file-loader' }
+                ]
+            },
+            {
                 test: /\.(sc|c|sa)ss$/,
                 use: [
                     MiniCssExtractPlugin.loader,
@@ -77,10 +83,11 @@ module.exports = {
             template: path.resolve(__dirname, 'src/index.html'),
             favicon: 'favicon_ty.ico',
             minify: {
-                collapseWhitespace: true, // 是否移除空格
+                collapseWhitespace: true, // 是否移除空格 
                 removeComments: true, // 是否移除注释
                 removeAttributeQuotes: true // 移除属性的引号
             }
+            // hash: true // 生成 hash
         }),
         new MiniCssExtractPlugin({
             filename: '[name].[hash].css', // 设置最终输出的文件名
