@@ -646,9 +646,14 @@ var Ty = {
      * @param  {String}   _c    class名称
      * @return {Array / null}
      */
-    hasClass: function(_c, _o) {
+    hasClass: function(_o, _c) {
 
         // 参数类型校验
+        if (!_o.nodeType) {
+            var vali = Object.prototype.toString.call(_c).split(' ')[1].match(/[a-z]+/i)[0]
+            console.warn('Ty_err: 参数应为DOM元素 但获取到' + vali + '类型')
+            return 
+        }
         this.dataTypeCheck([_c], ['String'])
 
         return _o.classList.contains(_c)
@@ -661,9 +666,14 @@ var Ty = {
      * @param  {DOM}      _o    DOM元素
      * @param  {String}   _c    class名称
      */
-    addClass: function(_c, _o) {
+    addClass: function(_o, _c) {
 
         // 参数类型校验
+        if (!_o.nodeType) {
+            var vali = Object.prototype.toString.call(_c).split(' ')[1].match(/[a-z]+/i)[0]
+            console.warn('Ty_err: 参数应为DOM元素 但获取到' + vali + '类型')
+            return 
+        }
         this.dataTypeCheck([_c], ['String'])
 
         for (var i = 1; i < arguments.length; i++) {
@@ -678,9 +688,14 @@ var Ty = {
      * @param  {DOM}      _o    DOM元素
      * @param  {String}   _c    class名称
      */
-    removeClass: function(_c, _o) {
+    removeClass: function(_o, _c) {
 
         // 参数类型校验
+        if (!_o.nodeType) {
+            var vali = Object.prototype.toString.call(_c).split(' ')[1].match(/[a-z]+/i)[0]
+            console.warn('Ty_err: 参数应为DOM元素 但获取到' + vali + '类型')
+            return 
+        }
         this.dataTypeCheck([_c], ['String'])
 
         for (var i = 1; i < arguments.length; i++) {
@@ -695,9 +710,14 @@ var Ty = {
      * @param  {DOM}      _o    DOM元素
      * @param  {String}   _c    class名称
      */
-    toggleClass: function(_c, _o) {
+    toggleClass: function(_o, _c) {
 
         // 参数类型校验
+        if (!_o.nodeType) {
+            var vali = Object.prototype.toString.call(_c).split(' ')[1].match(/[a-z]+/i)[0]
+            console.warn('Ty_err: 参数应为DOM元素 但获取到' + vali + '类型')
+            return 
+        }
         this.dataTypeCheck([_c], ['String'])
 
         _o.classList.toggle(_c)
