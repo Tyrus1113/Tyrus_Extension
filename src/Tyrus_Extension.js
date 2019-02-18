@@ -824,6 +824,13 @@ var Ty = {
      */
     getSystemInfo: function(_el) {
 
+        // 参数类型校验
+        if (!_el.nodeType) {
+            var vali = Object.prototype.toString.call(_el).split(' ')[1].match(/[a-z]+/i)[0]
+            console.warn('Ty_err: 参数应为DOM元素 但获取到' + vali + '类型')
+            return 
+        }
+
         // 避免重复加载 清空列表中的元素
         _el.innerHTML = ''
 
