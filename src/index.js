@@ -11,3 +11,4 @@ if (module.hot) {
 }
 // test_Extension.js
 TEST()
+Ty.getSystemInfo(document.getElementById('deviceInfo'))

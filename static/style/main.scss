@@ -1,25 +1,41 @@
 @charset 'utf-8';
 * {
     list-style: none;
-    text-decoration: none;
+	text-decoration: none;
+	margin: 0;
+	padding: 0;
 }
 $active: #bfab45;
 $main: #f5da55;
 body {
+	padding: 10px;
 	background-color: #333;
 	color: #333;
-	._button {
-		width: 100px;
-		height: 20px;
-		background-color: $main;
-		margin-top: 10px;
-		text-align: center;
-		font-size: 12px;
-		line-height: 20px;
-		cursor: pointer;
-		user-select: none;
+	.button_group {
+		margin: 20px 0;
+		._button {
+			width: 100px;
+			height: 20px;
+			background-color: $main;
+			margin-top: 10px;
+			text-align: center;
+			font-size: 12px;
+			line-height: 20px;
+			cursor: pointer;
+			user-select: none;
+		}
+		._button:active {
+			background-color: $active;
+		}
 	}
-	._button:active {
-		background-color: $active;
+	.deviceInfo {
+		li {
+			width: 260px;
+			font-size: 16px;
+			padding: 5px 10px;
+			margin: 5px 0;
+			color: $main;
+			background-color: #000;
+		}
 	}
 }

@@ -814,6 +814,36 @@ var Ty = {
                 console.warn('Ty_err: 第' + (i + 1) + '个参数应为' + String(_t[i]) + '类型 但获取到' + val + '类型')
             }
         }
+    },
+
+    /**
+     * 获取系统信息
+     * @method getSystemInfo
+     *
+     * @param  {DOM}   _el    DOM元素的 id 显示信息的容器
+     */
+    getSystemInfo: function(_el) {
+
+        // 避免重复加载 清空列表中的元素
+        _el.innerHTML = ''
+
+        var info = window.navigator.userAgent.split(' ')
+        var _ = new Date()
+        var time = `${_.getFullYear()}年${_.getMonth() + 1}月${_.getDate()}日`
+        var device = info[1].replace(/^\(|;$/g, '')
+        var version = info[6].replace(/_|\)/g, ' ')
+
+        var deviceInfo = [
+            `当前时间: ${time}`,
+            `当前设备: ${device}`,
+            `系统版本号: ${info[3] + ' ' + info[4] + ' ' + info[5] + ' ' + version}`
+        ]
+
+        for (var i = 0; i < deviceInfo.length; i++) {
+            var _li = document.createElement('li')
+            _li.innerHTML = deviceInfo[i]
+            _el.appendChild(_li)
+        }
     }
     
 } //  ---- **** Ty end **** ----
