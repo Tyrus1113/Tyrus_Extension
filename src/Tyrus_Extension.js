@@ -827,16 +827,23 @@ var Ty = {
         // 避免重复加载 清空列表中的元素
         _el.innerHTML = ''
 
+        // 获取 userAgent 信息
         var info = window.navigator.userAgent.split(' ')
         var _ = new Date()
         var time = `${_.getFullYear()}年${_.getMonth() + 1}月${_.getDate()}日`
         var device = info[1].replace(/^\(|;$/g, '')
-        var version = info[6].replace(/_|\)/g, ' ')
+        var version = info[6].replace(/_|;|\)/g, ' ')
+
+        // 获取显卡信息
+        var gl = document.createElement('canvas').getContext('experimental-webgl')
+        var debugInfo = gl.getExtension('WEBGL_debug_renderer_info')
+        var graphics = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL)
 
         var deviceInfo = [
             `当前时间: ${time}`,
             `当前设备: ${device}`,
-            `系统版本号: ${info[3] + ' ' + info[4] + ' ' + info[5] + ' ' + version}`
+            `系统版本号: ${info[3] + ' ' + info[4] + ' ' + info[5] + ' ' + version}`,
+            `设备显卡: ${graphics}`
         ]
 
         for (var i = 0; i < deviceInfo.length; i++) {

@@ -11,4 +11,8 @@ if (module.hot) {
 }
 // test_Extension.js
 TEST()
+
 Ty.getSystemInfo(document.getElementById('deviceInfo'))
+
+console.log(window.screen.width, window.screen.height)
+console.log(window.screen.deviceXDPI)
