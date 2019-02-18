@@ -23,12 +23,6 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.(png|jpg|jpeg|gif)$/,
-                use: [
-                    { loader: 'file-loader' }
-                ]
-            },
-            {
                 test: /\.(sc|c|sa)ss$/,
                 use: [
                     MiniCssExtractPlugin.loader,
@@ -72,6 +66,20 @@ module.exports = {
                 ],
                 // 加快编译速度，不包含node_modules文件夹内容
                 exclude: /(node_module)/
+            },
+            {
+                test: /\.(png|jpg|jpeg|gif)$/,
+                use: {
+                    loader: 'url-loader',
+                    options: {
+                        // 图片小于指定值 转换成 Base64格式
+                        limit: 1000000
+                    }
+                }
+            },
+            {
+                test: /\.html$/,
+                use: 'html-withimg-loader'
             }
         ]
     },
