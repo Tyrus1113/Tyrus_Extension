@@ -12,6 +12,11 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
     entry: './src/index.js',
+    output: {
+        filename: 'ty_bundle.[hash:8].js',
+        path: path.resolve(__dirname, 'dist'),
+        publicPath: '/'
+    },
     resolve: {
         // 忽略后缀名 默认值 .js .json
         extensions: ['.js', '.json'],
@@ -68,12 +73,14 @@ module.exports = {
                 exclude: /(node_module)/
             },
             {
-                test: /\.(png|jpg|jpeg|gif)$/,
+                test: /\.(png|svg|jpe?g|gif)$/,
                 use: {
                     loader: 'url-loader',
                     options: {
                         // 图片小于指定值 转换成 Base64格式
-                        limit: 1000000
+                        // limit: 1000000,
+                        limit: 50000,
+                        outputPath: 'img/'
                     }
                 }
             },
@@ -98,7 +105,7 @@ module.exports = {
             // hash: true // 生成 hash
         }),
         new MiniCssExtractPlugin({
-            filename: '[name].[hash].css', // 设置最终输出的文件名
+            filename: 'css/[name].[hash].css', // 设置最终输出的文件名
             chunkFilename: '[id].[hash].css'
         })
     ]

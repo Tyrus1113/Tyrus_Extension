@@ -7,10 +7,6 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 
 let devConfig = {
     mode: 'development',
-    output: {
-        filename: 'ty_bundle.[hash:8].js',
-        path: path.resolve(__dirname, 'dist')
-    },
     // 开启 js 的 source map
     devtool: 'inline-source-map',
     // 配置 webpack-dev-server
