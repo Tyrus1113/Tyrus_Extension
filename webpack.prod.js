@@ -10,6 +10,8 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 let prodConfig = {
     // 在dist下打包压缩等操作需要在生产环境下执行
     mode: 'production',
+    // 增加映射文件 开启 js 的 source map
+    devtool: 'cheap-module-source-map',
     module: {
         rules: []
     },

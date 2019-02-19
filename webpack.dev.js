@@ -7,8 +7,8 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 
 let devConfig = {
     mode: 'development',
-    // 开启 js 的 source map
-    devtool: 'inline-source-map',
+    // 增加映射文件 开启 js 的 source map
+    devtool: 'cheap-module-eval-source-map',
     // 配置 webpack-dev-server
     devServer: {
         contentBase: path.join(__dirname, 'dist'),
