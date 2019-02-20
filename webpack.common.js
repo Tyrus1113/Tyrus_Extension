@@ -10,6 +10,12 @@ const CleanWebpackPlugin = require('clean-webpack-plugin')
 // css抽离成单独文件并且设置hash
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
+// 拷贝插件
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+
+// 版权声明
+const Webpack = require('webpack')
+
 module.exports = {
     entry: './src/index.js',
     output: {
@@ -107,6 +113,10 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: 'css/[name].[hash].css', // 设置最终输出的文件名
             chunkFilename: '[id].[hash].css'
-        })
+        }),
+        new CopyWebpackPlugin([
+            { from: 'doc', to: './' }
+        ]),
+        new Webpack.BannerPlugin('Develop 2019 by Tyrus')
     ]
 }
