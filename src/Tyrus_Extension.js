@@ -878,6 +878,46 @@ var Ty = {
             _li.innerHTML = deviceInfo[i]
             _el.appendChild(_li)
         }
+    },
+
+    /**
+     * 推送通知
+     * @method sendNotification
+     * 
+     * @param  {String}    _tit  通知的标题
+     * @param  {Object}    _opt  通知的配置参数
+     * @param  {Function}  _cli  点击通知的回调函数
+     * 
+     * @example
+     *      var options = {
+     *          body: '通知的内容',
+     *          requireInteraction: true,
+     *          icon: '../static/img/img01.png'
+     *      }
+     *      sendNotification('推送的内容', options, function() {
+     *          console.log('_cli dosomthing')
+     *      })
+     */
+    sendNotification: function(_tit, _opt, _cli) {
+        // 检查浏览器是否支持
+        if (!window.Notification) {
+            console.warn('Ty_err: 此浏览器不支持通知')
+            return false
+        } else {
+            // 用户未选择 发起询问通知
+            Notification.requestPermission().then(result => {
+                if (result === 'granted' || result === 'default') {
+                    const noti = new Notification(_tit, _opt)
+                    noti.onclick = _cli
+                } else if (result === 'default') {
+                    console.warn('Ty_err: 用户关闭授权 可再次请求授权')
+                } else {
+                    console.warn('Ty_err: 用户拒绝授权')
+                }
+            }).catch(() => {
+                console.warn('Ty_err: 授权失败')
+            })
+        }
     }
     
 } //  ---- **** Ty end **** ----
