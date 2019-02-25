@@ -14,5 +14,19 @@ TEST()
 
 Ty.getSystemInfo(document.getElementById('deviceInfo'))
 
+function showNotice() {   
+    Notification.requestPermission(function(perm) {  
+        if (perm === 'granted') {  
+            var notification = new Notification('这是一个通知撒:', {  
+                dir: 'auto',  
+                lang: 'hi',  
+                tag: 'testTag',  
+                icon: 'https://static.cnblogs.com/images/adminlogo.gif',  
+                body: '通知content'  
+            })  
+        }  
+    })  
+} 
+showNotice()
 console.log(window.screen.width, window.screen.height)
 console.log(window.screen.deviceXDPI)
