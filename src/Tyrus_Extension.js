@@ -918,6 +918,33 @@ var Ty = {
                 console.warn('Ty_err: 授权失败')
             })
         }
+    },
+
+    /**
+     * 展平深层数组中每项数组元素
+     * @method openDeepArrayItem
+     *
+     * @param  {Array}  _a 原数组
+     * @return {Array}     返回 新数组
+     */
+    openDeepArrayItem: function(_a) {
+
+        // 参数类型校验
+        this.dataTypeCheck(arguments, ['Array', 'Boolean'])
+
+        // concat 只能展平到二维数组
+        var n = Array.prototype.concat.apply([], _a)
+        console.log('n :', n)
+        // 循环 n 中如有元素为数组 则深层进行展平
+        while (
+            n.some(function(item) {
+                return item instanceof Array
+            })
+        ) {
+            n = Array.prototype.concat.apply([], n)
+        }
+
+        return n
     }
     
 } //  ---- **** Ty end **** ----

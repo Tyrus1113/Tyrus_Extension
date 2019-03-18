@@ -16,6 +16,8 @@ Ty.getSystemInfo(document.getElementById('deviceInfo'))
 console.log(window.screen.width, window.screen.height)
 console.log(window.screen.deviceXDPI)
 
+console.log('Ty.openArrayItem():', Ty.openDeepArrayItem([1, [2, 3, [5, [6, [7]]]]]))
+
 const options = {
     body: 'Welcome to Tyrus_Extension ~',
     icon: '/favicon_ty.ico'
