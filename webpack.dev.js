@@ -20,6 +20,7 @@ let devConfig = {
         },
         progress: true,
         publicPath: '/' // 此路径下的打包文件可在浏览器中访问
+        // host: '0.0.0.0' // 手机设备通过ip访问devServer服务
     },
     watch: true,
     watchOptions: { // 监视文件相关的控制选项
