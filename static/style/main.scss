@@ -13,7 +13,7 @@ body {
 	color: #333;
 	.button_group {
 		margin: 20px 0;
-		background: url('../img/img01.png');
+		// background: url('../img/img01.png');
 		._button {
 			width: 100px;
 			height: 20px;
@@ -38,5 +38,9 @@ body {
 			color: $main;
 			background-color: #000;
 		}
+	}
+	#canv {
+		width: 200px;
+		height: 100px;
 	}
 }

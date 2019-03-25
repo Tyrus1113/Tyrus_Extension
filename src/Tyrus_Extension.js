@@ -945,6 +945,64 @@ var Ty = {
         }
 
         return n
+    },
+
+    /**
+     * 获取图片色值
+     * @method getImageColor
+     * 
+     * @param  {Object}    _params  画布信息
+     * 
+     * @example
+     *      const canvas = {
+     *          el: document.getElementById('canvas') canvas元素,
+     *          width: 画布宽度,
+     *          height: 画布高度
+     *      }
+     *      const col1 = { x: 30, y: 30 }
+     *      const col2 = { x: 170, y: 70 }
+     *      Ty.getImageColor({
+     *          url: 图片的url,
+     *          canvas,
+     *          el: document.getElementById('canv') 需要设置背景色的元素,
+     *          direction: '45deg' 渐变的方向,
+     *          col1, 第一个色值的坐标
+     *          col2  第二个色值的坐标
+     *      })
+     */
+    getImageColor: function(_params) {
+
+        var img = new Image()
+
+        // 解决跨越
+        img.crossOrigin = ''
+        img.src = _params.url
+
+        // 设置canvas宽高
+        _params.canvas.el.width = _params.canvas.width
+        _params.canvas.el.height = _params.canvas.height
+        
+        var ctx = _params.canvas.el.getContext('2d')
+
+        img.onload = function() {
+            // 开始绘图
+            ctx.drawImage(img, 0, 0, _params.canvas.width, _params.canvas.height)
+            
+            _params.el.style.background = 'linear-gradient(' + _params.direction + ', ' + getRGBA(_params.col1) + ', ' + getRGBA(_params.col2) + ')'
+        }
+
+        function getRGBA(_p) {
+            
+            // 获取图片像素信息
+            var pixel = ctx.getImageData(_p.x, _p.y, _params.canvas.width, _params.canvas.height)
+            var data = pixel.data
+
+            // 获取rgba值
+            var rgba = 'rgba(' + data[0] + ',' + data[1] + ',' + data[2] + ',' + (data[3] / 255) + ')'
+
+            return rgba
+        }
+
     }
     
 } //  ---- **** Ty end **** ----

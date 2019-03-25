@@ -25,3 +25,25 @@ const options = {
 Ty.sendNotification('Tyrus_Extension', options, function() {
     console.log('_cli')
 })
+
+const canvas = {
+    el: document.getElementById('canvas'),
+    width: 200,
+    height: 100
+}
+const col1 = {
+    x: 30,
+    y: 30
+}
+const col2 = {
+    x: 170,
+    y: 70
+}
+Ty.getImageColor({
+    url: 'https://s3.ifanr.com/wp-content/uploads/2019/03/27092132_4843.jpg!260',
+    canvas,
+    el: document.getElementById('canv'),
+    direction: '45deg',
+    col1,
+    col2
+})
