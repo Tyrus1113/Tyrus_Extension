@@ -47,3 +47,51 @@ Ty.getImageColor({
     col1,
     col2
 })
+
+const body = document.body
+console.log('height :', body.scrollTop + body.clientHeight, body.scrollTop, body.clientHeight, body.scrollHeight)
+window.addEventListener('scroll', () => {
+    console.log('test scroll')
+})
+
+function getScrollTop() {
+    let scrollTop = 0
+    let bodyScrollTop = 0
+    let documentScrollTop = 0
+    if (document.body) {
+        bodyScrollTop = document.body.scrollTop
+    }
+    if (document.documentElement) {
+        documentScrollTop = document.documentElement.scrollTop
+    }
+    scrollTop = (bodyScrollTop - documentScrollTop > 0) ? bodyScrollTop : documentScrollTop
+    return scrollTop
+}
+// 文档的总高度,
+function getScrollHeight() {
+    let scrollHeight = 0
+    let bodyScrollHeight = 0
+    let documentScrollHeight = 0
+    if (document.body) {
+        bodyScrollHeight = document.body.scrollHeight
+    }
+    if (document.documentElement) {
+        documentScrollHeight = document.documentElement.scrollHeight
+    }
+    scrollHeight = (bodyScrollHeight - documentScrollHeight > 0) ? bodyScrollHeight : documentScrollHeight
+    return scrollHeight
+}
+function getWindowHeight() {
+    let windowHeight = 0
+    if (document.compatMode === 'CSS1Compat') {
+        windowHeight = document.documentElement.clientHeight
+    } else {
+        windowHeight = document.body.clientHeight
+    }
+    return windowHeight
+}
+function theRem() {
+    let deviceWidth = document.documentElement.clientWidth
+    if (deviceWidth > 750) deviceWidth = 750
+    document.documentElement.style.fontSize = deviceWidth / 10 + 'px'
+}
