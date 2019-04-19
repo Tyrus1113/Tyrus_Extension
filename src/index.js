@@ -51,7 +51,9 @@ Ty.getImageColor({
 const body = document.body
 console.log('height :', body.scrollTop + body.clientHeight, body.scrollTop, body.clientHeight, body.scrollHeight)
 window.addEventListener('scroll', () => {
-    console.log('test scroll')
+    if (getScrollTop() + getWindowHeight() === getScrollHeight()) {
+        console.log('bottom now')
+    }
 })
 
 function getScrollTop() {
@@ -67,7 +69,7 @@ function getScrollTop() {
     scrollTop = (bodyScrollTop - documentScrollTop > 0) ? bodyScrollTop : documentScrollTop
     return scrollTop
 }
-// 文档的总高度,
+// 文档的总高度
 function getScrollHeight() {
     let scrollHeight = 0
     let bodyScrollHeight = 0
