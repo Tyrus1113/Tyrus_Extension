@@ -48,50 +48,83 @@ Ty.getImageColor({
     col2
 })
 
-const body = document.body
-console.log('height :', body.scrollTop + body.clientHeight, body.scrollTop, body.clientHeight, body.scrollHeight)
+const st = document.documentElement.scrollTop || window.pageXOffset || document.body.scrollTop
+console.log('height :', st)
 window.addEventListener('scroll', () => {
-    if (getScrollTop() + getWindowHeight() === getScrollHeight()) {
+    // if (getScrollTop() + getWindowHeight() === getScrollHeight()) {
+    console.log('st :', st)
+    if (isScrollBorwserBottom()) {
         console.log('bottom now')
     }
 })
 
-function getScrollTop() {
+function isScrollBorwserBottom() {
     let scrollTop = 0
     let bodyScrollTop = 0
     let documentScrollTop = 0
-    if (document.body) {
-        bodyScrollTop = document.body.scrollTop
-    }
-    if (document.documentElement) {
-        documentScrollTop = document.documentElement.scrollTop
-    }
-    scrollTop = (bodyScrollTop - documentScrollTop > 0) ? bodyScrollTop : documentScrollTop
-    return scrollTop
-}
-// 文档的总高度
-function getScrollHeight() {
     let scrollHeight = 0
     let bodyScrollHeight = 0
     let documentScrollHeight = 0
+    let windowHeight = 0
+
     if (document.body) {
+        bodyScrollTop = document.body.scrollTop
         bodyScrollHeight = document.body.scrollHeight
-    }
-    if (document.documentElement) {
+    } else if (document.documentElement) {
+        documentScrollTop = document.documentElement.scrollTop
         documentScrollHeight = document.documentElement.scrollHeight
     }
-    scrollHeight = (bodyScrollHeight - documentScrollHeight > 0) ? bodyScrollHeight : documentScrollHeight
-    return scrollHeight
-}
-function getWindowHeight() {
-    let windowHeight = 0
+    
     if (document.compatMode === 'CSS1Compat') {
         windowHeight = document.documentElement.clientHeight
     } else {
         windowHeight = document.body.clientHeight
     }
-    return windowHeight
+
+    scrollTop = (bodyScrollTop - documentScrollTop > 0) ? bodyScrollTop : documentScrollTop
+    scrollHeight = (bodyScrollHeight - documentScrollHeight > 0) ? bodyScrollHeight : documentScrollHeight
+
+    console.log('object :', scrollTop, scrollHeight, windowHeight)
+    if (scrollTop + scrollHeight === windowHeight) {
+        return true
+    }
 }
+// function getScrollTop() {
+//     let scrollTop = 0
+//     let bodyScrollTop = 0
+//     let documentScrollTop = 0
+//     if (document.body) {
+//         bodyScrollTop = document.body.scrollTop
+//     }
+//     if (document.documentElement) {
+//         documentScrollTop = document.documentElement.scrollTop
+//     }
+//     scrollTop = (bodyScrollTop - documentScrollTop > 0) ? bodyScrollTop : documentScrollTop
+//     return scrollTop
+// }
+// // 文档的总高度
+// function getScrollHeight() {
+//     let scrollHeight = 0
+//     let bodyScrollHeight = 0
+//     let documentScrollHeight = 0
+//     if (document.body) {
+//         bodyScrollHeight = document.body.scrollHeight
+//     }
+//     if (document.documentElement) {
+//         documentScrollHeight = document.documentElement.scrollHeight
+//     }
+//     scrollHeight = (bodyScrollHeight - documentScrollHeight > 0) ? bodyScrollHeight : documentScrollHeight
+//     return scrollHeight
+// }
+// function getWindowHeight() {
+//     let windowHeight = 0
+//     if (document.compatMode === 'CSS1Compat') {
+//         windowHeight = document.documentElement.clientHeight
+//     } else {
+//         windowHeight = document.body.clientHeight
+//     }
+//     return windowHeight
+// }
 function theRem() {
     let deviceWidth = document.documentElement.clientWidth
     if (deviceWidth > 750) deviceWidth = 750
