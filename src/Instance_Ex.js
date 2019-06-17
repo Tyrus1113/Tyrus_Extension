@@ -4,11 +4,12 @@
  */
 import Ty from './Tyrus_Extension'
 
+// 设置文档根节点字号
+Ty.setRem()
+window.onresize = Ty.setRem
+
 Ty.getSystemInfo(document.getElementById('deviceInfo'))
 console.log(window.screen.width, window.screen.height)
-console.log(window.screen.deviceXDPI)
-
-console.log('Ty.openArrayItem():', Ty.openDeepArrayItem([1, [2, 3, [5, [6, [7]]]]]))
 
 const options = {
     body: 'Welcome to Tyrus_Extension ~',
@@ -38,9 +39,6 @@ Ty.getImageColor({
 })
 
 window.addEventListener('scroll', () => {
-    // console.log('scrollTopX :', scrollTopX())
+    console.log('scrollTop :', document.documentElement.scrollTop || document.body.scrollTop)
     console.log('isScrollBorwserBottom :', Ty.isScrollBorwserBottom())
 }, false)
-
-Ty.setRem()
-window.onresize = Ty.setRem

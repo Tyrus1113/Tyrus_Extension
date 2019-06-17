@@ -21,7 +21,8 @@ body {
 	.button_group {
 		margin: 20px 0;
 		// background: url('../img/img01.png');
-
+		position: relative;
+		
 		._button {
 			// width: 100px;
 			width: setRem(200);

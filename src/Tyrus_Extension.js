@@ -1036,7 +1036,7 @@ var Ty = {
     },
     
     /**
-     * 文档根节点字号设置
+     * 设置文档根节点字号
      * @method setRem
      *
      * @example
