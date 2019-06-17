@@ -1,9 +1,7 @@
 /*
  * @Tyrus_ExtensionJS
  * @Author: Tyrus
- * @Date: 2018-03-14 16:09:25
- * @Last Modified by: Tyrus
- * @Last Modified time: 2019-02-15
+ * @Last Modified time: 2019-06-17
  */
 var Ty = {
 
@@ -900,7 +898,7 @@ var Ty = {
      */
     sendNotification: function(_tit, _opt, _cli) {
         // 检查浏览器是否支持
-        if (!window.Notification) {
+        if (!window.Notification || !window.Notification.requestPermission()) {
             console.warn('Ty_err: 此浏览器不支持通知')
             return false
         } else {
@@ -954,20 +952,17 @@ var Ty = {
      * @param  {Object}    _params  画布信息
      * 
      * @example
-     *      const canvas = {
-     *          el: document.getElementById('canvas') canvas元素,
-     *          width: 画布宽度,
-     *          height: 画布高度
-     *      }
-     *      const col1 = { x: 30, y: 30 }
-     *      const col2 = { x: 170, y: 70 }
      *      Ty.getImageColor({
      *          url: 图片的url,
-     *          canvas,
+     *          canvas: {
+     *              el: document.getElementById('canvas') canvas元素,
+     *              width: 画布宽度,
+     *              height: 画布高度
+     *          }
      *          el: document.getElementById('canv') 需要设置背景色的元素,
      *          direction: '45deg' 渐变的方向,
-     *          col1, 第一个色值的坐标
-     *          col2  第二个色值的坐标
+     *          col1: { x: 30, y: 30 } 第一个色值的坐标
+     *          col2 : { x: 170, y: 70 }第二个色值的坐标
      *      })
      */
     getImageColor: function(_params) {
@@ -1002,7 +997,37 @@ var Ty = {
 
             return rgba
         }
+    },
+    /**
+     * 判断滚动条是否滚动到页面最底部
+     * @method isScrollBorwserBottom
+     *
+     * @return {Boolean}     返回 是否滚动到页面最底部
+     */
+    isScrollBorwserBottom: function() {
 
+        var pos = 0
+        var isBottom = false
+
+        // scrollHeight clientHeight
+        // 在DTD已声明的情况下用documentElement 未声明的情况下用body
+        // document.compatMode 可以用来判断是否声明了DTD
+        // 值为 BackCompat 未声明  值为 CSS1Compat 已声明
+        if (document.compatMode === 'CSS1Compat') {
+            pos = document.documentElement.scrollHeight - 
+                (document.documentElement.scrollTop + document.body.scrollTop) - 
+                document.documentElement.clientHeight
+        } else {
+            pos = document.body.scrollHeight - 
+                document.body.scrollTop - 
+                document.body.clientHeight
+        }
+
+        if (pos <= 0) {
+            isBottom = true
+            return isBottom
+        }
+        return isBottom
     }
     
 } //  ---- **** Ty end **** ----
