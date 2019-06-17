@@ -1,22 +1,30 @@
 @charset 'utf-8';
+
+@function setRem ($px) {
+	@return $px / 75 * 1rem;
+}
+$active: #bfab45;
+$main: #f5da55;
+
 * {
     list-style: none;
 	text-decoration: none;
 	margin: 0;
 	padding: 0;
 }
-$active: #bfab45;
-$main: #f5da55;
+
 body {
 	padding: 10px;
 	background-color: #333;
 	color: #333;
+
 	.button_group {
 		margin: 20px 0;
 		// background: url('../img/img01.png');
+
 		._button {
-			width: 100px;
-			height: 20px;
+			// width: 100px;
+			width: setRem(200);
 			background-color: $main;
 			margin-top: 10px;
 			text-align: center;
@@ -25,10 +33,12 @@ body {
 			cursor: pointer;
 			user-select: none;
 		}
+		
 		._button:active {
 			background-color: $active;
 		}
 	}
+
 	.deviceInfo {
 		li {
 			width: 260px;
@@ -39,10 +49,12 @@ body {
 			background-color: #000;
 		}
 	}
+
 	#canv {
 		width: 200px;
 		height: 100px;
 	}
+
 	.testHeightBox {
 		width: 200px;
 		height: 900px;

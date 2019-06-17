@@ -42,8 +42,5 @@ window.addEventListener('scroll', () => {
     console.log('isScrollBorwserBottom :', Ty.isScrollBorwserBottom())
 }, false)
 
-function theRem() {
-    let deviceWidth = document.documentElement.clientWidth
-    if (deviceWidth > 750) deviceWidth = 750
-    document.documentElement.style.fontSize = deviceWidth / 10 + 'px'
-}
+Ty.setRem()
+window.onresize = Ty.setRem

@@ -3,6 +3,8 @@
  * @Author: Tyrus
  * @Last Modified time: 2019-06-17
  */
+
+//  ---- **** Ty start **** ----
 var Ty = {
 
     /**
@@ -785,6 +787,7 @@ var Ty = {
      * @return {Array}         返回记录日志
      */
     VariableLog: function() {
+
         var archive = null
         var log = []
 
@@ -897,6 +900,7 @@ var Ty = {
      *      })
      */
     sendNotification: function(_tit, _opt, _cli) {
+
         // 检查浏览器是否支持
         if (!window.Notification || !window.Notification.requestPermission()) {
             console.warn('Ty_err: 此浏览器不支持通知')
@@ -998,6 +1002,7 @@ var Ty = {
             return rgba
         }
     },
+
     /**
      * 判断滚动条是否滚动到页面最底部
      * @method isScrollBorwserBottom
@@ -1028,6 +1033,26 @@ var Ty = {
             return isBottom
         }
         return isBottom
+    },
+    
+    /**
+     * 文档根节点字号设置
+     * @method setRem
+     *
+     * @example
+     * Ty.setRem()
+     * window.onresize = Ty.setRem 浏览器被重置大小时也需要调用
+     * 
+     */
+    setRem: function() {
+
+        var _doc = 0
+        document.compatMode === 'CSS1Compat'
+            ? _doc = document.documentElement
+            : _doc = document.body
+
+        if (_doc.clientWidth > 750) _doc.clientWidth = 750
+        _doc.style.fontSize = _doc.clientWidth / 10 + 'px'
     }
     
 } //  ---- **** Ty end **** ----
