@@ -1047,13 +1047,26 @@ var Ty = {
     setRem: function() {
 
         var _doc = 0
+        var _clWidth = 0
         document.compatMode === 'CSS1Compat'
             ? _doc = document.documentElement
             : _doc = document.body
 
-        if (_doc.clientWidth > 750) _doc.clientWidth = 750
-        _doc.style.fontSize = _doc.clientWidth / 10 + 'px'
+        _clWidth = _doc.clientWidth
+
+        if (_clWidth > 750) _clWidth = 750
+        _doc.style.fontSize = _clWidth / 10 + 'px'
     }
+
+    // isStatic: function(value) {
+    //     return (
+    //         typeof value === 'string' ||
+    //         typeof value === 'number' ||
+    //         typeof value === 'boolean' ||
+    //         typeof value === 'undefined' ||
+    //         value === null
+    //     )
+    // }
     
 } //  ---- **** Ty end **** ----
 
