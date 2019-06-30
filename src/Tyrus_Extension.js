@@ -1057,16 +1057,6 @@ var Ty = {
         if (_clWidth > 750) _clWidth = 750
         _doc.style.fontSize = _clWidth / 10 + 'px'
     }
-
-    // isStatic: function(value) {
-    //     return (
-    //         typeof value === 'string' ||
-    //         typeof value === 'number' ||
-    //         typeof value === 'boolean' ||
-    //         typeof value === 'undefined' ||
-    //         value === null
-    //     )
-    // }
     
 } //  ---- **** Ty end **** ----
 
