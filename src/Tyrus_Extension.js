@@ -832,7 +832,14 @@ var Ty = {
             var val = arg[i].split(' ')[1].match(/[a-z]+/i)[0]
             if (!_t[i]) { return false }
             if (val !== _t[i]) {
-                console.warn('Ty_err: 第' + (i + 1) + '个参数应为' + String(_t[i]) + '类型 但获取到' + val + '类型')
+                console.warn('Ty_err: 第' +
+                    (i + 1) +
+                    '个参数应为' +
+                    String(_t[i]) +
+                    '类型 但获取到' +
+                    val +
+                    '类型'
+                )
             }
         }
     },
@@ -987,17 +994,35 @@ var Ty = {
             // 开始绘图
             ctx.drawImage(img, 0, 0, _params.canvas.width, _params.canvas.height)
             
-            _params.el.style.background = 'linear-gradient(' + _params.direction + ', ' + getRGBA(_params.col1) + ', ' + getRGBA(_params.col2) + ')'
+            _params.el.style.background = 'linear-gradient(' +
+                _params.direction +
+                ', ' +
+                getRGBA(_params.col1) +
+                ', ' +
+                getRGBA(_params.col2) + ')'
         }
 
         function getRGBA(_p) {
             
             // 获取图片像素信息
-            var pixel = ctx.getImageData(_p.x, _p.y, _params.canvas.width, _params.canvas.height)
+            var pixel = ctx.getImageData(
+                _p.x,
+                _p.y,
+                _params.canvas.width,
+                _params.canvas.height
+            )
             var data = pixel.data
 
             // 获取rgba值
-            var rgba = 'rgba(' + data[0] + ',' + data[1] + ',' + data[2] + ',' + (data[3] / 255) + ')'
+            var rgba = 'rgba(' +
+                data[0] +
+                ',' +
+                data[1] +
+                ',' +
+                data[2] +
+                ',' +
+                (data[3] / 255) +
+                ')'
 
             return rgba
         }
