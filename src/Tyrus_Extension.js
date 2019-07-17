@@ -1081,6 +1081,33 @@ var Ty = {
 
         if (_clWidth > 750) _clWidth = 750
         _doc.style.fontSize = _clWidth / 10 + 'px'
+    },
+
+    /**
+     * 实时截取小数点后两位之后的内容
+     * @method formatterToFixed
+     *
+     * @param  {DOM}  _el  DOM元素
+     * 
+     */
+    formatterToFixed: function(_el) {
+        
+        /* eslint no-useless-escape: "error" */
+        // 清除“数字”和“.”以外的字符
+        _el.value = _el.value.replace(/[^\d.]/g, '')
+
+        // 只保留第一个. 清除多余的
+        _el.value = _el.value.replace(/\.{2,}/g, '.')
+        _el.value = _el.value.replace('.', '$#$').replace(/\./g, '').replace('$#$', '.')
+
+        // 只能输入两个小数
+        // eslint-disable-next-line no-useless-escape
+        _el.value = _el.value.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3')
+
+        // 以上已经过滤，此处控制的是如果没有小数点，首位不能为类似于 01、02的数字
+        if (_el.value.indexOf('.') < 0 && _el.value !== '') {
+            _el.value = parseFloat(_el.value)
+        }
     }
     
 } //  ---- **** Ty end **** ----
