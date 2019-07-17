@@ -51,6 +51,11 @@ body {
 		}
 	}
 
+	input[type=text] {
+		display: block;
+		margin: 10px 0;
+	}
+
 	#canv {
 		width: 200px;
 		height: 100px;
