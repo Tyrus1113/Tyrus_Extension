@@ -5,11 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Tyrus_Extension</title>
+    <style>
+        #preview{width:260px;height:190px;border:1px solid #000;overflow:hidden;}
+        #imghead {filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=image);}
+    </style>
 </head>
 <body>
     <ul id="deviceInfo" class="deviceInfo"></ul>
     
     <input type="text" id="formatterTest" />
+
+    <div id="preview">
+        <img id="imghead" width=100% src='../static/img/img01.png'>
+    </div>
+    <input id="uploadImg" type="file" />
 
     <canvas id="canvas"></canvas>
     <div id="canv"></div>
