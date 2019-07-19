@@ -1108,6 +1108,28 @@ var Ty = {
         if (_el.value.indexOf('.') < 0 && _el.value !== '') {
             _el.value = parseFloat(_el.value)
         }
+    },
+
+    /**
+     * 函数节流
+     * @method throttle
+     *
+     * @param  {Function}  _f  回调
+     * @param  {Number}    _d  延迟
+     * 
+     */
+    throttle: function(_f, _d) {
+        var switchCheck = true
+        return function() {
+            if (!switchCheck) {
+                return
+            }
+            switchCheck = false
+            setTimeout(() => {
+                _f.apply(this, arguments)
+                switchCheck = true
+            }, _d)
+        }
     }
     
 } //  ---- **** Ty end **** ----

@@ -38,6 +38,22 @@ Ty.getImageColor({
     }
 })
 
+var box = document.getElementById('canvas')
+box.onmousemove = Ty.throttle(function(e) {
+    console.log(`${e.clientX}, ${e.clientY}`)
+}, 1000)
+
+var ipt = document.getElementById('throttleTest')
+ipt.onkeydown = Ty.throttle(function(e) {
+    fetch(`https://api.myjson.com/bins/jlxrd?&txt=${e.target.value}`, {
+        method: 'get'
+    }).then(function(resp) {
+        resp.json().then((data) => {
+            console.log(data)
+        })
+    })
+}, 1500)
+
 window.addEventListener('scroll', () => {
     console.log('scrollTop :', document.documentElement.scrollTop || document.body.scrollTop)
     console.log('isScrollBorwserBottom :', Ty.isScrollBorwserBottom())
