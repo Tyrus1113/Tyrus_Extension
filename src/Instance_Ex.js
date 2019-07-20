@@ -44,7 +44,7 @@ box.onmousemove = Ty.throttle(function(e) {
 }, 1000)
 
 var ipt = document.getElementById('throttleTest')
-ipt.onkeydown = Ty.throttle(function(e) {
+ipt.onkeydown = Ty.debounce(function(e) {
     console.log(e.target.value)
     fetch(`https://api.myjson.com/bins/jlxrd?&txt=${e.target.value}`, {
         method: 'get'

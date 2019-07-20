@@ -1111,6 +1111,32 @@ var Ty = {
     },
 
     /**
+     * 函数防抖
+     * @method debounce
+     *
+     * @param  {Function}  _f  回调
+     * @param  {Number}    _d  延迟
+     * 
+     * @example 
+     *      input.onkeydown = Ty.debounce(function(e) {}, 1000)
+     * 
+     * @return {FUNCTION}  返回目标函数节流执行
+     */
+    debounce: function(_f, _d) {
+
+        var timer
+
+        return function() {
+
+            clearTimeout(timer)
+
+            timer = setTimeout(() => {
+                _f.apply(this, arguments)
+            }, _d)
+        }
+    },
+
+    /**
      * 函数节流
      * @method throttle
      *
