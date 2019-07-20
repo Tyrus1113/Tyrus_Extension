@@ -5,21 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Tyrus_Extension</title>
-    <style>
-        #preview{width:260px;height:190px;border:1px solid #000;overflow:hidden;}
-        #imghead {filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=image);}
-    </style>
 </head>
 <body>
-    <ul id="deviceInfo" class="deviceInfo"></ul>
+    <ul id="deviceInfo" class="device-info"></ul>
     
     <input type="text" id="formatterTest" />
     <input type="text" id="throttleTest" />
 
-    <div id="preview">
-        <img id="imghead" width=100% src='../static/img/img01.png'>
+    <div class="upload-container">
+        <input id="uploadInput" class="upload-input" type="file" />
+        <div id="uploadPreview" class="upload-preview">
+            <img id="uploadImg" class="upload-img" src="" />
+        </div>
     </div>
-    <input id="uploadImg" type="file" />
 
     <canvas id="canvas"></canvas>
     <div id="canv"></div>
@@ -32,6 +30,6 @@
         <div id="_test" class="_button aaa">Test</div>
     </div>
     
-    <div class="testHeightBox"></div>
+    <div class="test-height-container"></div>
 </body>
 </html>

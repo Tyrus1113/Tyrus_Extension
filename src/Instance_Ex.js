@@ -65,52 +65,23 @@ document.getElementById('formatterTest').onkeyup = function(e) {
 }
 
 function previewImage(file) {
-    var MAXWIDTH = 260 
-    var MAXHEIGHT = 180
-    var div = document.getElementById('preview')
+
+    var div = document.getElementById('uploadPreview')
+
     if (file.files && file.files[0]) {
-        div.innerHTML = '<img id=imghead>'
-        var img = document.getElementById('imghead')
-        img.onload = function() {
-            var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight)
-            img.width = rect.width
-            img.height = rect.height
-            img.style.marginTop = rect.top + 'px'
-        }
+
+        div.innerHTML = '<img id="uploadImg" class="upload-img" />'
+        var img = document.getElementById('uploadImg')
+
         var reader = new FileReader()
-        reader.onload = function(evt) { img.src = evt.target.result }
-        reader.readAsDataURL(file.files[0])
-    } else { // 兼容IE
-        var sFilter = 'filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src="'
-        file.select()
-        var src = document.selection.createRange().text
-        div.innerHTML = '<img id=imghead>'
-        var img = document.getElementById('imghead')
-        img.filters.item('DXImageTransform.Microsoft.AlphaImageLoader').src = src
-        var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight)
-        div.innerHTML = "<div id=divhead style='width:" + rect.width + 'px;height:' + rect.height + 'px;margin-top:' + rect.top + 'px;' + sFilter + src + "\"'></div>"
-    }
-}
-function clacImgZoomParam(maxWidth, maxHeight, width, height) {
-    var param = { top: 0, left: 0, width: width, height: height }
-    var rateWidth, rateHeight
-    if (width > maxWidth || height > maxHeight) {
-        rateWidth = width / maxWidth
-        rateHeight = height / maxHeight
-                
-        if (rateWidth > rateHeight) {
-            param.width = maxWidth
-            param.height = Math.round(height / rateWidth)
-        } else {
-            param.width = Math.round(width / rateHeight)
-            param.height = maxHeight
+        reader.onload = function(e) {
+            console.log('e.target.result:', e.target.result)
+            img.src = e.target.result
         }
+        reader.readAsDataURL(file.files[0])
     }
-    param.left = Math.round((maxWidth - param.width) / 2)
-    param.top = Math.round((maxHeight - param.height) / 2)
-    return param
 }
 
-document.getElementById('uploadImg').onchange = function(e) {
+document.getElementById('uploadInput').onchange = function(e) {
     previewImage(e.target)
 }
