@@ -814,7 +814,7 @@ var Ty = {
      * @method dataTypeCheck
      *
      * @param  {String}   _a    需要校验的数据类型
-     * @param  {String}   _t    预期的数据类型
+     * @param  {Array}    _t     预期的数据类型
      * @param  {Number}   _i    方法中的第几个参数
      */
     dataTypeCheck: function(_a, _t) {
@@ -1117,15 +1117,26 @@ var Ty = {
      * @param  {Function}  _f  回调
      * @param  {Number}    _d  延迟
      * 
+     * @example 
+     *      input.onkeydown = Ty.throttle(function(e) {}, 1000)
+     * 
+     * @return {FUNCTION}  返回目标函数节流执行
      */
     throttle: function(_f, _d) {
+
         var switchCheck = true
+        var timer
+
         return function() {
+
             if (!switchCheck) {
                 return
             }
+
             switchCheck = false
-            setTimeout(() => {
+            clearTimeout(timer)
+
+            timer = setTimeout(() => {
                 _f.apply(this, arguments)
                 switchCheck = true
             }, _d)

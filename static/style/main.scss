@@ -41,6 +41,7 @@ body {
 	}
 
 	.deviceInfo {
+
 		li {
 			width: 260px;
 			font-size: 16px;
@@ -51,14 +52,19 @@ body {
 		}
 	}
 
-	input[type=text] {
+	input[type=text], input[type=file] {
 		display: block;
 		margin: 10px 0;
+	}
+
+	#canvas {
+		display: block;
 	}
 
 	#canv {
 		width: 200px;
 		height: 100px;
+
 	}
 
 	.testHeightBox {
