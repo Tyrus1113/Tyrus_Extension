@@ -64,24 +64,6 @@ document.getElementById('formatterTest').onkeyup = function(e) {
     Ty.formatterToFixed(this)
 }
 
-function previewImage(file) {
-
-    var div = document.getElementById('uploadPreview')
-
-    if (file.files && file.files[0]) {
-
-        div.innerHTML = '<img id="uploadImg" class="upload-img" />'
-        var img = document.getElementById('uploadImg')
-
-        var reader = new FileReader()
-        reader.onload = function(e) {
-            console.log('e.target.result:', e.target.result)
-            img.src = e.target.result
-        }
-        reader.readAsDataURL(file.files[0])
-    }
-}
-
-document.getElementById('uploadInput').onchange = function(e) {
-    previewImage(e.target)
+document.getElementById('previewInput').onchange = function(e) {
+    Ty.previewImg(e.target)
 }

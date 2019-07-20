@@ -1167,6 +1167,41 @@ var Ty = {
                 switchCheck = true
             }, _d)
         }
+    },
+
+    /**
+     * 图片预览
+     * @method previewImg
+     *
+     * @param  {DOMEvent}  _f  回调
+     * 
+     * @example 
+     *      document.getElementById('previewInput').onchange = function(e) {
+     *          Ty.previewImg(e.target)
+     *      }
+     * 
+     */
+    previewImg: function(_f) {
+
+        var div = document.getElementById('previewBox')
+    
+        if (_f.files && _f.files[0]) {
+    
+            div.innerHTML = '<img id="previewImg" class="preview-img" />'
+            var img = document.getElementById('previewImg')
+    
+            var reader
+            window.FileReader
+                ? reader = new FileReader()
+                : console.log('此设备不支持 new FileReader')
+    
+            // 图片文件转换为base64
+            reader.readAsDataURL(_f.files[0])
+    
+            reader.onload = function(e) {
+                img.src = e.target.result
+            }
+        }
     }
     
 } //  ---- **** Ty end **** ----
