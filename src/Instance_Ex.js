@@ -3,6 +3,7 @@
  * @Author: Tyrus
  */
 import Ty from './Tyrus_Extension'
+import TyUI from './Tyrus_UI'
 
 // 设置文档根节点字号
 Ty.setRem()
