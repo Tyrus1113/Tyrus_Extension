@@ -59,7 +59,7 @@ ipt.onkeydown = Ty.debounce(function(e) {
 
 window.addEventListener('scroll', () => {
     console.log('scrollTop :', document.documentElement.scrollTop || document.body.scrollTop)
-    console.log('isScrollBorwserBottom :', Ty.isScrollBorwserBottom())
+    console.log('isScrollBorwserBottom :', TyUI.isScrollBorwserBottom())
 }, false)
 
 document.getElementById('formatterTest').onkeyup = function(e) {
@@ -67,5 +67,5 @@ document.getElementById('formatterTest').onkeyup = function(e) {
 }
 
 document.getElementById('previewInput').onchange = function(e) {
-    Ty.previewImg(e.target)
+    TyUI.previewImg(e.target)
 }

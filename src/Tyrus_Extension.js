@@ -422,7 +422,9 @@ var Ty = {
         var a = []
 
         for (var i = 0; i < _a.length; i++) {
-            if (a.indexOf(_a[i]) !== -1) { a.splice(a.indexOf(_a[i]), 1) }
+            if (a.indexOf(_a[i]) !== -1) {
+                a.splice(a.indexOf(_a[i]), 1)
+            }
 
             a.push(_a[i])
         }
@@ -871,38 +873,6 @@ var Ty = {
     },
 
     /**
-     * 判断滚动条是否滚动到页面最底部
-     * @method isScrollBorwserBottom
-     *
-     * @return {Boolean}     返回 是否滚动到页面最底部
-     */
-    isScrollBorwserBottom: function() {
-
-        var pos = 0
-        var isBottom = false
-
-        // scrollHeight clientHeight
-        // 在DTD已声明的情况下用documentElement 未声明的情况下用body
-        // document.compatMode 可以用来判断是否声明了DTD
-        // 值为 BackCompat 未声明  值为 CSS1Compat 已声明
-        if (document.compatMode === 'CSS1Compat') {
-            pos = document.documentElement.scrollHeight - 
-                (document.documentElement.scrollTop + document.body.scrollTop) - 
-                document.documentElement.clientHeight
-        } else {
-            pos = document.body.scrollHeight - 
-                document.body.scrollTop - 
-                document.body.clientHeight
-        }
-
-        if (pos <= 0) {
-            isBottom = true
-            return isBottom
-        }
-        return isBottom
-    },
-
-    /**
      * 实时截取小数点后两位之后的内容
      * @method formatterToFixed
      *
@@ -985,41 +955,6 @@ var Ty = {
                 _f.apply(this, arguments)
                 switchCheck = true
             }, _d)
-        }
-    },
-
-    /**
-     * 图片预览
-     * @method previewImg
-     *
-     * @param  {DOMEvent}  _f  回调
-     * 
-     * @example 
-     *      document.getElementById('previewInput').onchange = function(e) {
-     *          Ty.previewImg(e.target)
-     *      }
-     * 
-     */
-    previewImg: function(_f) {
-
-        var div = document.getElementById('previewBox')
-    
-        if (_f.files && _f.files[0]) {
-    
-            div.innerHTML = '<img id="previewImg" class="preview-img" />'
-            var img = document.getElementById('previewImg')
-    
-            var reader
-            window.FileReader
-                ? reader = new FileReader()
-                : console.log('此设备不支持 new FileReader')
-    
-            // 图片文件转换为base64
-            reader.readAsDataURL(_f.files[0])
-    
-            reader.onload = function(e) {
-                img.src = e.target.result
-            }
         }
     }
     
