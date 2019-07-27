@@ -2,25 +2,26 @@
  * @instance
  * @Author: Tyrus
  */
+
 import Ty from './Tyrus_Extension'
 import TyUI from './Tyrus_UI'
 
 // 设置文档根节点字号
-Ty.setRem()
+TyUI.setRem()
 window.onresize = Ty.setRem
 
-Ty.getSystemInfo(document.getElementById('deviceInfo'))
+TyUI.getSystemInfo(document.getElementById('deviceInfo'))
 console.log(window.screen.width, window.screen.height)
 
 const options = {
     body: 'Welcome to Tyrus_Extension ~',
     icon: '/favicon_ty.ico'
 }
-Ty.sendNotification('Tyrus_Extension', options, function() {
+TyUI.sendNotification('Tyrus_Extension', options, function() {
     console.log('_cli')
 })
 
-Ty.getImageColor({
+TyUI.getImageColor({
     url: 'https://s3.ifanr.com/wp-content/uploads/2019/03/27092132_4843.jpg!260',
     canvas: {
         el: document.getElementById('canvas'),
