@@ -58,8 +58,9 @@ ipt.onkeydown = Ty.debounce(function(e) {
 }, 1500)
 
 window.addEventListener('scroll', () => {
-    console.log('scrollTop :', document.documentElement.scrollTop || document.body.scrollTop)
+    // console.log('scrollTop :', document.documentElement.scrollTop || document.body.scrollTop)
     console.log('isScrollBorwserBottom :', TyUI.isScrollBorwserBottom())
+    run()
 }, false)
 
 document.getElementById('formatterTest').onkeyup = function(e) {
@@ -72,3 +73,24 @@ document.getElementById('previewInput').onchange = function(e) {
 
 var lazyImage = document.getElementById('lazyImage')
 console.log('lazyImage:', lazyImage.offsetTop, lazyImage.offsetParent)
+
+function isScrollIn(el) {
+    var rect = el.getBoundingClientRect()
+    var clientHeight = window.innerHeight
+    // var clientHeight = document.body.clientHeight || document.documentElement.clientHeight
+    console.log('rect:', rect.top, 'clientHeight:', clientHeight)
+    return rect.top <= clientHeight
+}
+function loadImages(el) {
+    if (!el.src) {
+        el.src = el.dataset.img
+    }
+}
+var imgs = document.getElementsByClassName('lazy-image')
+function run() {
+    for (var i = 0; i < imgs.length; i++) {
+        if (isScrollIn(imgs[i])) {
+            loadImages(imgs[i])
+        }
+    }
+}
