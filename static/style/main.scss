@@ -123,4 +123,25 @@ body {
 		background-color: #666;
 		margin-top: 20px;
 	}
+
+	.lazyload-container {
+		width: 400px;
+		background-color: #ccc;
+		margin-top: 20px;
+		padding: 5px;
+
+		li {
+			height: 200px;
+			margin-bottom: 5px;
+			overflow: hidden;
+
+			&:last-of-type {
+				margin-bottom: 0;
+			}
+
+			img {
+				width: 100%;
+			}
+		}
+	}
 }

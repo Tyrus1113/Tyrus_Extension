@@ -69,3 +69,6 @@ document.getElementById('formatterTest').onkeyup = function(e) {
 document.getElementById('previewInput').onchange = function(e) {
     TyUI.previewImg(e.target)
 }
+
+var lazyImage = document.getElementById('lazyImage')
+console.log('lazyImage:', lazyImage.offsetTop, lazyImage.offsetParent)
