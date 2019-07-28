@@ -83,14 +83,14 @@ var TyUI = {
      * 
      * @example
      *      var options = {
-        *          body: '通知的内容',
-        *          requireInteraction: true,
-        *          icon: '../static/img/img01.png'
-        *      }
-        *      sendNotification('推送的内容', options, function() {
-        *          console.log('_cli dosomthing')
-        *      })
-        */
+     *          body: '通知的内容',
+     *          requireInteraction: true,
+     *          icon: '../static/img/img01.png'
+     *      }
+     *      sendNotification('推送的内容', options, function() {
+     *          console.log('_cli dosomthing')
+     *      })
+     */
     sendNotification: function(_tit, _opt, _cli) {
    
         // 检查浏览器是否支持
@@ -122,18 +122,18 @@ var TyUI = {
      * 
      * @example
      *      Ty.getImageColor({
-        *          url: 图片的url,
-        *          canvas: {
-        *              el: document.getElementById('canvas') canvas元素,
-        *              width: 画布宽度,
-        *              height: 画布高度
-        *          }
-        *          el: document.getElementById('canv') 需要设置背景色的元素,
-        *          direction: '45deg' 渐变的方向,
-        *          col1: { x: 30, y: 30 } 第一个色值的坐标
-        *          col2 : { x: 170, y: 70 }第二个色值的坐标
-        *      })
-        */
+     *          url: 图片的url,
+     *          canvas: {
+     *              el: document.getElementById('canvas') canvas元素,
+     *              width: 画布宽度,
+     *              height: 画布高度
+     *          }
+     *          el: document.getElementById('canv') 需要设置背景色的元素,
+     *          direction: '45deg' 渐变的方向,
+     *          col1: { x: 30, y: 30 } 第一个色值的坐标
+     *          col2 : { x: 170, y: 70 }第二个色值的坐标
+     *      })
+     */
     getImageColor: function(_params) {
    
         var img = new Image()
@@ -226,10 +226,10 @@ var TyUI = {
      * 
      * @example 
      *      document.getElementById('previewInput').onchange = function(e) {
-        *          Ty.previewImg(e.target)
-        *      }
-        * 
-        */
+     *          Ty.previewImg(e.target)
+     *      }
+     * 
+     */
     previewImg: function(_f) {
    
         var div = document.getElementById('previewBox')

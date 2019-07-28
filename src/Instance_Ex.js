@@ -10,9 +10,11 @@ import TyUI from './Tyrus_UI'
 TyUI.setRem()
 window.onresize = Ty.setRem
 
+// 获取系统信息
 TyUI.getSystemInfo(document.getElementById('deviceInfo'))
 console.log(window.screen.width, window.screen.height)
 
+// 推送通知
 const options = {
     body: 'Welcome to Tyrus_Extension ~',
     icon: '/favicon_ty.ico'
@@ -21,6 +23,7 @@ TyUI.sendNotification('Tyrus_Extension', options, function() {
     console.log('_cli')
 })
 
+// 获取图片色值
 TyUI.getImageColor({
     url: 'https://s3.ifanr.com/wp-content/uploads/2019/03/27092132_4843.jpg!260',
     canvas: {
@@ -40,11 +43,13 @@ TyUI.getImageColor({
     }
 })
 
+// 函数节流
 var box = document.getElementById('canvas')
 box.onmousemove = Ty.throttle(function(e) {
     console.log(`${e.clientX}, ${e.clientY}`)
 }, 1000)
 
+// 函数防抖
 var ipt = document.getElementById('throttleTest')
 ipt.onkeydown = Ty.debounce(function(e) {
     console.log(e.target.value)
@@ -58,39 +63,18 @@ ipt.onkeydown = Ty.debounce(function(e) {
 }, 1500)
 
 window.addEventListener('scroll', () => {
-    // console.log('scrollTop :', document.documentElement.scrollTop || document.body.scrollTop)
+    console.log('scrollTop :', document.documentElement.scrollTop || document.body.scrollTop)
+    
+    // 判断滚动条是否滚动到页面最底部
     console.log('isScrollBorwserBottom :', TyUI.isScrollBorwserBottom())
-    run()
 }, false)
 
+// 实时截断小数点后两位之后的内容
 document.getElementById('formatterTest').onkeyup = function(e) {
     Ty.formatterToFixed(this)
 }
 
+// 图片预览
 document.getElementById('previewInput').onchange = function(e) {
     TyUI.previewImg(e.target)
-}
-
-var lazyImage = document.getElementById('lazyImage')
-console.log('lazyImage:', lazyImage.offsetTop, lazyImage.offsetParent)
-
-function isScrollIn(el) {
-    var rect = el.getBoundingClientRect()
-    var clientHeight = window.innerHeight
-    // var clientHeight = document.body.clientHeight || document.documentElement.clientHeight
-    console.log('rect:', rect.top, 'clientHeight:', clientHeight)
-    return rect.top <= clientHeight
-}
-function loadImages(el) {
-    if (!el.src) {
-        el.src = el.dataset.img
-    }
-}
-var imgs = document.getElementsByClassName('lazy-image')
-function run() {
-    for (var i = 0; i < imgs.length; i++) {
-        if (isScrollIn(imgs[i])) {
-            loadImages(imgs[i])
-        }
-    }
 }

@@ -873,7 +873,7 @@ var Ty = {
     },
 
     /**
-     * 实时截取小数点后两位之后的内容
+     * 实时截断小数点后两位之后的内容
      * @method formatterToFixed
      *
      * @param  {DOM}  _el  DOM元素
