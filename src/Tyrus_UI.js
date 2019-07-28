@@ -251,7 +251,50 @@ var TyUI = {
                 img.src = e.target.result
             }
         }
-    }
+    },
 
+    /**
+     * 懒加载
+     * @method lazyLoad
+     *
+     * @param  {DOM}  _imgs  需加载的所有图片元素
+     * 
+     * @example 
+     *      var lazyImgs = document.getElementsByClassName('lazy-image')
+     *      window.addEventListener('scroll', () => {
+     *          TyUI.lazyLoad(lazyImgs)
+     *      }, false)
+     * 
+     */
+    lazyLoad: function(_imgs) {
+
+        function getOffsetParentTop(e) {
+
+            var ost = e.offsetTop
+            // 向上查找所有 offsetParent
+            // 叠加 offsetParent.offsetTop 精确元素到文档顶部的距离
+            while (e.offsetParent) {
+                e = e.offsetParent
+                ost += e.offsetTop
+            }
+
+            return ost
+        }
+    
+        // 如果已声明 <!DOCTYPE html> 
+        // 使用 documentElement.clientHeight 获取浏览器可视高度
+        // 而不是 body.clientHeight
+        var clientHeight = document.documentElement.clientHeight
+        var scrollTop = document.body.scrollTop || document.documentElement.scrollTop
+    
+        for (var i = 0; i < _imgs.length; i++) {
+            
+            // 可视高度 + 滚动高度 > 当前元素距文档顶部的高度 则元素已进入浏览器可视范围
+            if (clientHeight + scrollTop > getOffsetParentTop(_imgs[i])) {
+    
+                _imgs[i].src = _imgs[i].getAttribute('data-img')
+            }
+        }
+    }
 } //  ---- **** Ty end **** ----
 export default TyUI

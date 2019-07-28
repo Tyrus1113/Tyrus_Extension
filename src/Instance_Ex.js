@@ -62,11 +62,17 @@ ipt.onkeydown = Ty.debounce(function(e) {
     })
 }, 1500)
 
+// 懒加载
+var lazyImgs = document.getElementsByClassName('lazy-image')
+
 window.addEventListener('scroll', () => {
     console.log('scrollTop :', document.documentElement.scrollTop || document.body.scrollTop)
     
     // 判断滚动条是否滚动到页面最底部
     console.log('isScrollBorwserBottom :', TyUI.isScrollBorwserBottom())
+    
+    // 懒加载
+    TyUI.lazyLoad(lazyImgs)
 }, false)
 
 // 实时截断小数点后两位之后的内容
