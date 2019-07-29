@@ -84,3 +84,12 @@ document.getElementById('formatterTest').onkeyup = function(e) {
 document.getElementById('previewInput').onchange = function(e) {
     TyUI.previewImg(e.target)
 }
+
+document.getElementById('scrollCross').onclick = function() {
+    document.getElementById('popupMask').style.display = 'block'
+    document.getElementById('popupContainer').style.display = 'block'
+}
+document.getElementById('popupMask').onclick = function() {
+    this.style.display = 'none'
+    document.getElementById('popupContainer').style.display = 'none'
+}
