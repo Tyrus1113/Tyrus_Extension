@@ -295,6 +295,33 @@ var TyUI = {
                 _imgs[i].src = _imgs[i].getAttribute('data-img')
             }
         }
+    },
+
+    /**
+     * 解决滚动穿透问题
+     * @method scrollCrossDebug
+     *
+     * @param  {Boolean}  _isOpen  在popup打开/关闭时调用
+     * 
+     * @example 
+     *      document.getElementById('scrollCross').onclick = function() {
+     *          TyUI.scrollCrossDebug(true)
+     *          // ... 打开/关闭 popup 等操作
+     *      }
+     */
+    scrollCrossDebug: function(_isOpen) {
+
+        if (_isOpen) {
+
+            let scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+            document.body.style.cssText += `position: fixed; top: -${scrollTop}px; width: 100%;`
+        } else {
+
+            let body = document.body
+            body.style.position = 'static'
+            body.style.width = 'auto'
+            document.documentElement.scrollTop = document.body.scrollTop = -parseInt(body.style.top)
+        }
     }
 } //  ---- **** Ty end **** ----
 export default TyUI
