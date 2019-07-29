@@ -11,7 +11,7 @@ var TyUI = {
      * @method setRem
      *
      * @example
-     * Ty.setRem()
+     * TyUI.setRem()
      * window.onresize = Ty.setRem 浏览器被重置大小时也需要调用
      * 
      */
@@ -87,7 +87,7 @@ var TyUI = {
      *          requireInteraction: true,
      *          icon: '../static/img/img01.png'
      *      }
-     *      sendNotification('推送的内容', options, function() {
+     *      TyUI.sendNotification('推送的内容', options, function() {
      *          console.log('_cli dosomthing')
      *      })
      */
@@ -121,7 +121,7 @@ var TyUI = {
      * @param  {Object}    _params  画布信息
      * 
      * @example
-     *      Ty.getImageColor({
+     *      TyUI.getImageColor({
      *          url: 图片的url,
      *          canvas: {
      *              el: document.getElementById('canvas') canvas元素,
@@ -222,19 +222,19 @@ var TyUI = {
      * 图片预览
      * @method previewImg
      *
-     * @param  {DOMEvent}  _f  回调
+     * @param  {DOMEvent}  _t  事件对象 e.target
      * 
      * @example 
-     *      document.getElementById('previewInput').onchange = function(e) {
-     *          Ty.previewImg(e.target)
-     *      }
+     *      ELEMENT.addEventListener('change', function(e) {
+     *          TyUI.previewImg(e.target)
+     *      })
      * 
      */
-    previewImg: function(_f) {
+    previewImg: function(_t) {
    
         var div = document.getElementById('previewBox')
        
-        if (_f.files && _f.files[0]) {
+        if (_t.files && _t.files[0]) {
        
             div.innerHTML = '<img id="previewImg" class="preview-img" />'
             var img = document.getElementById('previewImg')
@@ -245,7 +245,7 @@ var TyUI = {
                 : console.log('此设备不支持 new FileReader')
        
             // 图片文件转换为base64
-            reader.readAsDataURL(_f.files[0])
+            reader.readAsDataURL(_t.files[0])
        
             reader.onload = function(e) {
                 img.src = e.target.result
@@ -304,10 +304,10 @@ var TyUI = {
      * @param  {Boolean}  _isOpen  在popup打开/关闭时调用
      * 
      * @example 
-     *      document.getElementById('scrollCross').onclick = function() {
+     *      ELEMENT.addEventListener('click', function() {
      *          TyUI.scrollCrossDebug(true)
      *          // ... 打开/关闭 popup 等操作
-     *      }
+     *      })
      */
     scrollCrossDebug: function(_isOpen) {
 
@@ -321,6 +321,98 @@ var TyUI = {
             body.style.position = 'static'
             body.style.width = 'auto'
             document.documentElement.scrollTop = document.body.scrollTop = -parseInt(body.style.top)
+        }
+    },
+
+    /**
+     * 实时截断小数点后两位之后的内容
+     * @method formatterToFixed
+     *
+     * @param  {DOMEvent}  _t  事件对象 e.target
+     * 
+     * @example 
+     *      ELEMENT.addEventListener('keyup', function(e) {
+     *          TyUI.formatterToFixed(e.target)
+     *      })
+     * 
+     */
+    formatterToFixed: function(_t) {
+        
+        /* eslint no-useless-escape: "error" */
+        // 清除“数字”和“.”以外的字符
+        _t.value = _t.value.replace(/[^\d.]/g, '')
+
+        // 只保留第一个. 清除多余的
+        _t.value = _t.value.replace(/\.{2,}/g, '.')
+        _t.value = _t.value.replace('.', '$#$').replace(/\./g, '').replace('$#$', '.')
+
+        // 只能输入两个小数
+        // eslint-disable-next-line no-useless-escape
+        _t.value = _t.value.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3')
+
+        // 以上已经过滤，此处控制的是如果没有小数点，首位不能为类似于 01、02的数字
+        if (_t.value.indexOf('.') < 0 && _t.value !== '') {
+            _t.value = parseFloat(_t.value)
+        }
+
+    },
+
+    /**
+     * 函数防抖
+     * @method debounce
+     *
+     * @param  {Function}  _f  回调
+     * @param  {Number}    _d  延迟
+     * 
+     * @example 
+     *      ELEMENT.addEventListener('keydown', TyUI.debounce(function(e) {}, 1500))
+     * 
+     * @return {FUNCTION}  返回目标函数节流执行
+     */
+    debounce: function(_f, _d) {
+
+        var timer
+
+        return function() {
+
+            clearTimeout(timer)
+
+            timer = setTimeout(() => {
+                _f.apply(this, arguments)
+            }, _d)
+        }
+    },
+
+    /**
+     * 函数节流
+     * @method throttle
+     *
+     * @param  {Function}  _f  回调
+     * @param  {Number}    _d  延迟
+     * 
+     * @example 
+     *      ELEMENT.addEventListener('mousemove', TyUI.throttle(e => {}, 1000))
+     * 
+     * @return {FUNCTION}  返回目标函数节流执行
+     */
+    throttle: function(_f, _d) {
+
+        var switchCheck = true
+        var timer
+
+        return function() {
+
+            if (!switchCheck) {
+                return
+            }
+
+            switchCheck = false
+            clearTimeout(timer)
+
+            timer = setTimeout(() => {
+                _f.apply(this, arguments)
+                switchCheck = true
+            }, _d)
         }
     }
 } //  ---- **** Ty end **** ----

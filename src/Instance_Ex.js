@@ -44,14 +44,12 @@ TyUI.getImageColor({
 })
 
 // 函数节流
-var box = document.getElementById('canvas')
-box.onmousemove = Ty.throttle(function(e) {
+document.getElementById('canvas').addEventListener('mousemove', TyUI.throttle(e => {
     console.log(`${e.clientX}, ${e.clientY}`)
-}, 1000)
+}, 1000))
 
 // 函数防抖
-var ipt = document.getElementById('throttleTest')
-ipt.onkeydown = Ty.debounce(function(e) {
+document.getElementById('throttleTest').addEventListener('keydown', TyUI.debounce(function(e) {
     console.log(e.target.value)
     fetch(`https://api.myjson.com/bins/jlxrd?&txt=${e.target.value}`, {
         method: 'get'
@@ -60,7 +58,7 @@ ipt.onkeydown = Ty.debounce(function(e) {
             console.log(data)
         })
     })
-}, 1500)
+}, 1500))
 
 // 懒加载
 var lazyImgs = document.getElementsByClassName('lazy-image')
@@ -76,33 +74,32 @@ window.addEventListener('scroll', () => {
 }, false)
 
 // 实时截断小数点后两位之后的内容
-document.getElementById('formatterTest').onkeyup = function(e) {
-    Ty.formatterToFixed(this)
-}
+document.getElementById('formatterTest').addEventListener('keyup', function(e) {
+    TyUI.formatterToFixed(e.target)
+})
 
 // 图片预览
-document.getElementById('previewInput').onchange = function(e) {
+document.getElementById('previewInput').addEventListener('change', function(e) {
     TyUI.previewImg(e.target)
-}
+})
 
 // 解决滚动穿透问题
-document.getElementById('scrollCross').onclick = function() {
+document.getElementById('scrollCross').addEventListener('click', function() {
     TyUI.scrollCrossDebug(true)
     document.getElementById('popupMask').style.display = 'block'
     document.getElementById('popupContainer').style.display = 'block'
-}
-document.getElementById('popupMask').onclick = function() {
+})
+document.getElementById('popupMask').addEventListener('click', function() {
     TyUI.scrollCrossDebug(false)
     document.getElementById('popupMask').style.display = 'none'
     document.getElementById('popupContainer').style.display = 'none'
-}
+})
 
 // 原生平滑滚动
-document.getElementById('scrollToBottom').onclick = function() {
-
+document.getElementById('scrollToBottom').addEventListener('click', function() {
     // window.scrollTo(0, document.documentElement.scrollHeight)
     window.scrollTo({
         top: document.documentElement.scrollHeight,
         behavior: 'smooth'
     })
-}
+})
