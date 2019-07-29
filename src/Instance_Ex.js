@@ -96,3 +96,13 @@ document.getElementById('popupMask').onclick = function() {
     document.getElementById('popupMask').style.display = 'none'
     document.getElementById('popupContainer').style.display = 'none'
 }
+
+// 原生平滑滚动
+document.getElementById('scrollToBottom').onclick = function() {
+
+    // window.scrollTo(0, document.documentElement.scrollHeight)
+    window.scrollTo({
+        top: document.documentElement.scrollHeight,
+        behavior: 'smooth'
+    })
+}
