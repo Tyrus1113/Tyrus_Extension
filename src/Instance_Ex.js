@@ -86,10 +86,24 @@ document.getElementById('previewInput').onchange = function(e) {
 }
 
 document.getElementById('scrollCross').onclick = function() {
+    scrollCrossDebug(true)
     document.getElementById('popupMask').style.display = 'block'
     document.getElementById('popupContainer').style.display = 'block'
 }
 document.getElementById('popupMask').onclick = function() {
-    this.style.display = 'none'
+    scrollCrossDebug(false)
+    document.getElementById('popupMask').style.display = 'none'
     document.getElementById('popupContainer').style.display = 'none'
+}
+
+function scrollCrossDebug(_isOpen) {
+    if (_isOpen) {
+        let scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+        document.body.style.cssText += `position: fixed; top: -${scrollTop}; width: 100%;`
+    } else {
+        let body = document.body
+        document.documentElement.scrollTop = document.body.scrollTop = -Number(body.style.top)
+        body.style.position = 'static'
+        body.style.width = 'auto'
+    }
 }
