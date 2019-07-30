@@ -131,13 +131,12 @@ var Ty = {
         this.dataTypeCheck(arguments, ['String'])
 
         var _c = document.cookie.split(';')
+        var _a = ''
 
         for (var i = 0; i < _c.length; i++) {
-            var _t = _c[i].trim()
-            var _a = _t.split('=')[0]
 
-            if (_a.indexOf(_n) === 0) {
-                return decodeURIComponent(_t.split('=')[1])
+            // 使用indexOf方法查找会出现问题
+                return decodeURIComponent(_a[1])
             }
         }
 
