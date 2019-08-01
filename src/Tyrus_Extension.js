@@ -135,7 +135,9 @@ var Ty = {
 
         for (var i = 0; i < _c.length; i++) {
 
+            _a = _c[i].trim().split('=')
             // 使用indexOf方法查找会出现问题
+            if (_a[0] === _n) {
                 return decodeURIComponent(_a[1])
             }
         }

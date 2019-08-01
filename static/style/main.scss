@@ -13,6 +13,10 @@ $main: #f5da55;
 	padding: 0;
 }
 
+::-webkit-scrollbar { 
+	display: none; 
+}
+
 body {
 	padding: 10px;
 	background-color: #333;
