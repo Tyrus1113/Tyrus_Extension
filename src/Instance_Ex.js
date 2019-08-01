@@ -103,3 +103,26 @@ document.getElementById('scrollToBottom').addEventListener('click', function() {
         behavior: 'smooth'
     })
 })
+
+function isEqualObj(_o1, _o2) {
+
+    var o1 = Object.keys(_o1)
+    var o2 = Object.keys(_o2)
+
+    if (o1.length !== o2.length) return false
+    
+    for (var i = 0; i < o1.length; i++) {
+
+        var key = o1[i]
+        if (_o1[key] !== _o2[key]) return false
+    }
+
+    return true
+}
+
+var obj1 = { id: 1, test: 'aaa' }
+var obj2 = { id: 2, test: 'bbb', web: 25 }
+var obj3 = { id: 1, test: 'bbb' }
+var obj4 = { id: 1, test: 'aaa' }
+console.log('isEqualObj:', isEqualObj(obj1, obj2))
+console.log('isEqualObj:', isEqualObj(obj1, obj4))
