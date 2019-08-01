@@ -194,28 +194,28 @@ var TyUI = {
      */
     isScrollBorwserBottom: function() {
 
-        var pos = 0
-        var isBottom = false
+        var _pos = 0
+        var _isBottom = false
 
         // scrollHeight clientHeight
         // 在DTD已声明的情况下用documentElement 未声明的情况下用body
         // document.compatMode 可以用来判断是否声明了DTD
         // 值为 BackCompat 未声明  值为 CSS1Compat 已声明
         if (document.compatMode === 'CSS1Compat') {
-            pos = document.documentElement.scrollHeight - 
-                (document.documentElement.scrollTop + document.body.scrollTop) - 
+            _pos = document.documentElement.scrollHeight - 
+                document.documentElement.scrollTop - 
                 document.documentElement.clientHeight
         } else {
-            pos = document.body.scrollHeight - 
+            _pos = document.body.scrollHeight - 
                 document.body.scrollTop - 
                 document.body.clientHeight
         }
 
-        if (pos <= 0) {
-            isBottom = true
-            return isBottom
+        if (_pos <= 0) {
+            _isBottom = true
+            return _isBottom
         }
-        return isBottom
+        return _isBottom
     },
 
     /**
@@ -342,7 +342,7 @@ var TyUI = {
         // 清除“数字”和“.”以外的字符
         _t.value = _t.value.replace(/[^\d.]/g, '')
 
-        // 只保留第一个. 清除多余的
+        // 只保留第一个“.” 清除多余的
         _t.value = _t.value.replace(/\.{2,}/g, '.')
         _t.value = _t.value.replace('.', '$#$').replace(/\./g, '').replace('$#$', '.')
 
@@ -416,4 +416,5 @@ var TyUI = {
         }
     }
 } //  ---- **** Ty end **** ----
+
 export default TyUI
