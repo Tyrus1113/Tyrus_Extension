@@ -871,6 +871,30 @@ var Ty = {
         }
 
         return n
+    },
+    
+    /**
+     * 比较两个对象是否相同
+     * @method isEqualObj
+     *
+     * @param  {Object}  _o1  需要对比的对象
+     * @param  {Object}  _o2  需要对比的对象
+     * @return {Boolean}      返回 是否相同
+     */
+    isEqualObj: function(_o1, _o2) {
+
+        var o1 = Object.keys(_o1)
+        var o2 = Object.keys(_o2)
+    
+        if (o1.length !== o2.length) return false
+        
+        for (var i = 0; i < o1.length; i++) {
+    
+            var key = o1[i]
+            if (_o1[key] !== _o2[key]) return false
+        }
+    
+        return true
     }
     
 } //  ---- **** Ty end **** ----
