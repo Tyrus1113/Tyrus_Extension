@@ -103,10 +103,3 @@ document.getElementById('scrollToBottom').addEventListener('click', function() {
         behavior: 'smooth'
     })
 })
-
-var obj1 = { id: 1, test: 'aaa' }
-var obj2 = { id: 2, test: 'bbb', web: 25 }
-var obj3 = { id: 1, test: 'bbb' }
-var obj4 = { id: 1, test: 'aaa' }
-console.log('isEqualObj:', Ty.isEqualObj(obj1, obj2))
-console.log('isEqualObj:', Ty.isEqualObj(obj1, obj4))
