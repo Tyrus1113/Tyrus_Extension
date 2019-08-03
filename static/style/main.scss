@@ -3,7 +3,8 @@
 @function setRem ($px) {
 	@return $px / 75 * 1rem;
 }
-$active: #bfab45;
+
+$hover: #333;
 $main: #fff;
 
 * {
@@ -17,6 +18,19 @@ $main: #fff;
 	display: none; 
 }
 
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color: #999;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color: #999;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color: #999;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color: #999;
+}
+
 body {
 	padding: 10px;
 	background-color: #f9f9f9;
@@ -25,12 +39,13 @@ body {
 	div, li, input[type=text] {
 		border-radius: 2px;
 		box-shadow: 0px 4px 10px 0px rgba(102, 102, 102, 0.3);
-		transition: all .5s;
+		transition: box-shadow .8s, color .8s;
 		margin: 15px 0;
 		background-color: $main;
 
 		&:hover {
 			box-shadow: 0px 8px 16px 6px rgba(102, 102, 102, 0.3);
+			color: $hover;
 		}
 	}
 
@@ -56,13 +71,17 @@ body {
 	}
 
 	._button {
-		// width: 100px;
 		width: setRem(200);
 		text-align: center;
 		font-size: 12px;
 		line-height: 20px;
 		cursor: pointer;
 		user-select: none;
+		transition: background-color .3s;
+
+		&:active {
+			background-color: #f1f1f1;
+		}
 	}
 	
 	input[type=text] {
@@ -86,6 +105,7 @@ body {
 			align-items: center;
 			justify-content: center;
 			margin: 0;
+			
 	
 			.preview-img {
 				max-width: 100%;
@@ -114,25 +134,29 @@ body {
 			left: 0;
 			font-size: 60px;
 			text-align: center;
-			background-color: rgba(0, 0, 0, .4);
+			background-color: rgba(0, 0, 0, .6);
 			z-index: 1;
+			color: $main;
 		}
 	}
 
 	.lazyload-container {
 		width: 260px;
+		padding-bottom: 5px;
 
 		li {
 			height: 130px;
-			margin-bottom: 5px;
 			overflow: hidden;
+			align-items: center;
+			justify-content: center;
 
 			&:last-of-type {
 				margin-bottom: 0;
 			}
 
 			img {
-				width: 100%;
+				max-width: 100%;
+				max-height: 100%;
 			}
 		}
 	}

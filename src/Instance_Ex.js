@@ -64,7 +64,7 @@ document.getElementById('throttleTest').addEventListener('keydown', TyUI.debounc
 var lazyImgs = document.getElementsByClassName('lazy-image')
 
 window.addEventListener('scroll', () => {
-    console.log('scrollTop :', document.documentElement.scrollTop || document.body.scrollTop)
+    // console.log('scrollTop :', document.documentElement.scrollTop || document.body.scrollTop)
     
     // 判断滚动条是否滚动到页面最底部
     console.log('isScrollBorwserBottom :', TyUI.isScrollBorwserBottom())
@@ -96,7 +96,7 @@ document.getElementById('popupMask').addEventListener('click', function() {
 })
 
 // 原生平滑滚动
-document.getElementById('scrollToBottom').addEventListener('click', function() {
+document.getElementById('ScrollToAnywhere').addEventListener('click', function() {
     // window.scrollTo(0, document.documentElement.scrollHeight)
     window.scrollTo({
         top: document.documentElement.scrollHeight,
