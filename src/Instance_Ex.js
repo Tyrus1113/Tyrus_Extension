@@ -25,7 +25,7 @@ TyUI.sendNotification('Tyrus_Extension', options, function() {
 
 // 获取图片色值
 TyUI.getImageColor({
-    url: 'https://s3.ifanr.com/wp-content/uploads/2019/03/27092132_4843.jpg!260',
+    url: 'https://i.loli.net/2019/08/03/2Of8mBqp1XKgxT4.jpg',
     canvas: {
         el: document.getElementById('canvas'),
         width: 200,
@@ -34,12 +34,12 @@ TyUI.getImageColor({
     el: document.getElementById('canv'),
     direction: '45deg',
     col1: {
-        x: 30,
-        y: 30
+        x: 1,
+        y: 99
     },
     col2: {
-        x: 170,
-        y: 70
+        x: 199,
+        y: 1
     }
 })
 
