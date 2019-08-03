@@ -4,7 +4,7 @@
 	@return $px / 75 * 1rem;
 }
 $active: #bfab45;
-$main: #f5da55;
+$main: #999;
 
 * {
     list-style: none;
@@ -19,8 +19,18 @@ $main: #f5da55;
 
 body {
 	padding: 10px;
-	background-color: #333;
+	background-color: #f9f9f9;
 	color: #333;
+
+	div, li, input[type=text] {
+		border-radius: 2px;
+		box-shadow: 0px 4px 10px 0px rgba(102, 102, 102, 0.3);
+		transition: all .5s;
+
+		&:hover {
+			box-shadow: 0px 8px 14px 0px rgba(102, 102, 102, 0.3);
+		}
+	}
 
 	.button_group {
 		margin: 20px 0;
@@ -49,16 +59,18 @@ body {
 		li {
 			width: 260px;
 			font-size: 16px;
-			padding: 5px 10px;
-			margin: 5px 0;
+			padding: 8px 10px;
+			margin: 15px 0;
 			color: $main;
-			background-color: #000;
 		}
 	}
 
 	input[type=text] {
 		display: block;
-		margin: 10px 0;
+		margin: 15px 0;
+		border: none;
+		outline: none;
+		padding: 10px;
 	}
 
 	#canvas {
