@@ -4,7 +4,7 @@
 	@return $px / 75 * 1rem;
 }
 $active: #bfab45;
-$main: #999;
+$main: #fff;
 
 * {
     list-style: none;
@@ -20,57 +20,30 @@ $main: #999;
 body {
 	padding: 10px;
 	background-color: #f9f9f9;
-	color: #333;
+	color: #666;
 
 	div, li, input[type=text] {
 		border-radius: 2px;
 		box-shadow: 0px 4px 10px 0px rgba(102, 102, 102, 0.3);
 		transition: all .5s;
+		margin: 15px 0;
+		background-color: $main;
 
 		&:hover {
-			box-shadow: 0px 8px 14px 0px rgba(102, 102, 102, 0.3);
-		}
-	}
-
-	.button_group {
-		margin: 20px 0;
-		// background: url('../img/img01.png');
-		position: relative;
-		
-		._button {
-			// width: 100px;
-			width: setRem(200);
-			background-color: $main;
-			margin-top: 10px;
-			text-align: center;
-			font-size: 12px;
-			line-height: 20px;
-			cursor: pointer;
-			user-select: none;
-		}
-		
-		._button:active {
-			background-color: $active;
+			box-shadow: 0px 8px 16px 6px rgba(102, 102, 102, 0.3);
 		}
 	}
 
 	.device-info {
-
 		li {
 			width: 260px;
 			font-size: 16px;
 			padding: 8px 10px;
-			margin: 15px 0;
-			color: $main;
 		}
 	}
 
-	input[type=text] {
-		display: block;
-		margin: 15px 0;
-		border: none;
-		outline: none;
-		padding: 10px;
+	.canvas-container {
+		width: 200px;
 	}
 
 	#canvas {
@@ -82,14 +55,28 @@ body {
 		height: 100px;
 	}
 
+	._button {
+		// width: 100px;
+		width: setRem(200);
+		text-align: center;
+		font-size: 12px;
+		line-height: 20px;
+		cursor: pointer;
+		user-select: none;
+	}
+	
+	input[type=text] {
+		display: block;
+		border: none;
+		outline: none;
+		padding: 10px;
+	}
+
 	.preview-container {
 		width: 260px;
 		height: 190px;
 		line-height: 190px;
-		margin: 10px 0;
 		position: relative;
-		background-color: $main;
-		border: 1px solid #000;
 		overflow: hidden;
 
 		.preview-box {
@@ -126,28 +113,16 @@ body {
 			left: 0;
 			font-size: 60px;
 			text-align: center;
-			color: $active;
 			background-color: rgba(0, 0, 0, .4);
 			z-index: 1;
 		}
 	}
 
-
-	.test-height-container {
-		width: 200px;
-		height: 900px;
-		background-color: #666;
-		margin-top: 20px;
-	}
-
 	.lazyload-container {
-		width: 400px;
-		background-color: #666;
-		margin-top: 20px;
-		padding: 5px;
+		width: 260px;
 
 		li {
-			height: 200px;
+			height: 130px;
 			margin-bottom: 5px;
 			overflow: hidden;
 
@@ -182,7 +157,7 @@ body {
 		left: 0;
 		z-index: 2;
 		margin: auto;
-		background-color: #fff;
+		background-color: $main;
 		padding: 10px;
 		overflow-y: auto;
 		display: none;
