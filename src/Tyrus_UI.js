@@ -417,24 +417,57 @@ var TyUI = {
     },
 
     /**
-     * 滚动到某处 (过渡动画)
-     * @method scrollToSomewhere
+     * X轴滚动到某处 (过渡动画)
+     * @method scrollX
      *
-     * @param  {Number}  _p  Y轴坐标
+     * @param  {Number}  _x  X轴坐标
+     * 
+     * @description
+     *  由于 left 与 top 会同时执行 遇到单独执行某轴 
+     *  另一轴需要重新获取坐标保持不变
+     *  所以分开执行
      * 
      * @example 
      *      ELEMENT.addEventListener('click', () => {
-     *          TyUI.scrollToSomewhere(document.getElementById('canv').offsetTop)
+     *          TyUI.scrollX(document.getElementById('testBtn').offsetWidth)
      *      })
      * 
      */
-    scrollToSomewhere: function(_p) {
+    scrollX: function(_x) {
 
-        // 无参数则默认滚动到页面最底部
-        _p = _p || document.documentElement.scrollHeight
+        // 无参数 则X轴滚动到页面最左边
+        _x = _x || 0
 
         window.scrollTo({
-            top: _p,
+            left: _x,
+            behavior: 'smooth'
+        })
+    },
+
+    /**
+     * Y轴滚动到某处 (过渡动画)
+     * @method scrollY
+     *
+     * @param  {Number}  _y  Y轴坐标
+     * 
+     * @description
+     *  由于 left 与 top 会同时执行 遇到单独执行某轴 
+     *  另一轴需要重新获取坐标保持不变
+     *  所以分开执行
+     * 
+     * @example 
+     *      ELEMENT.addEventListener('click', () => {
+     *          TyUI.scrollY(document.getElementById('canv').offsetTop)
+     *      })
+     * 
+     */
+    scrollY: function(_y) {
+
+        // 无参数 则X轴滚动到页面最左边
+        _y = _y || document.documentElement.scrollHeight
+
+        window.scrollTo({
+            top: _y,
             behavior: 'smooth'
         })
     }

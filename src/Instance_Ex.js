@@ -97,5 +97,5 @@ document.getElementById('popupMask').addEventListener('click', function() {
 
 // 滚动到某处 (过渡动画)
 document.getElementById('ScrollToAnywhere').addEventListener('click', () => {
-    TyUI.scrollToSomewhere(document.getElementById('canv').offsetTop)
+    TyUI.scrollY(document.getElementById('canv').offsetTop)
 })
