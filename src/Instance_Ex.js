@@ -95,11 +95,7 @@ document.getElementById('popupMask').addEventListener('click', function() {
     document.getElementById('popupContainer').style.display = 'none'
 })
 
-// 原生平滑滚动
-document.getElementById('ScrollToAnywhere').addEventListener('click', function() {
-    // window.scrollTo(0, document.documentElement.scrollHeight)
-    window.scrollTo({
-        top: document.documentElement.scrollHeight,
-        behavior: 'smooth'
-    })
+// 滚动到某处 (过渡动画)
+document.getElementById('ScrollToAnywhere').addEventListener('click', () => {
+    TyUI.scrollToSomewhere(document.getElementById('canv').offsetTop)
 })

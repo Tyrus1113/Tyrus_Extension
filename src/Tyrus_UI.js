@@ -414,7 +414,31 @@ var TyUI = {
                 switchCheck = true
             }, _d)
         }
+    },
+
+    /**
+     * 滚动到某处 (过渡动画)
+     * @method scrollToSomewhere
+     *
+     * @param  {Number}  _p  Y轴坐标
+     * 
+     * @example 
+     *      ELEMENT.addEventListener('click', () => {
+     *          TyUI.scrollToSomewhere(document.getElementById('canv').offsetTop)
+     *      })
+     * 
+     */
+    scrollToSomewhere: function(_p) {
+
+        // 无参数则默认滚动到页面最底部
+        _p = _p || document.documentElement.scrollHeight
+
+        window.scrollTo({
+            top: _p,
+            behavior: 'smooth'
+        })
     }
+
 } //  ---- **** Ty end **** ----
 
 export default TyUI
