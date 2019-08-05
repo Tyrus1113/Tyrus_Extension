@@ -817,7 +817,7 @@ var Ty = {
      *
      * @param  {String}   _a    需要校验的数据类型
      * @param  {Array}    _t     预期的数据类型
-     * @param  {Number}   _i    方法中的第几个参数
+     * 
      */
     dataTypeCheck: function(_a, _t) {
 
