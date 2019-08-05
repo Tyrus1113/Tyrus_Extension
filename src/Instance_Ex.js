@@ -25,7 +25,7 @@ TyUI.sendNotification('Tyrus_Extension', options, function() {
 
 // 获取图片色值
 TyUI.getImageColor({
-    url: 'https://s2.ax1x.com/2019/08/05/eRtZM6.md.jpg',
+    url: 'https://i.loli.net/2019/08/05/HoIAjlTLnURGQce.jpg',
     canvas: {
         el: document.getElementById('canvas'),
         width: 200,
