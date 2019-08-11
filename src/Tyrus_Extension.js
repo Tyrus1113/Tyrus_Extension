@@ -213,6 +213,7 @@ var Ty = {
         var hour = minute * 60
         var day = hour * 24
         var month = day * 30
+        var year = month * 12
 
         // 获取当前时间戳
         var now = new Date().getTime()
@@ -220,6 +221,7 @@ var Ty = {
 
         if (diffValue < 0) { return }
 
+        var yearC = diffValue / year
         var monthC = diffValue / month
         var weekC = diffValue / (7 * day)
         var dayC = diffValue / day
@@ -227,7 +229,9 @@ var Ty = {
         var minC = diffValue / minute
         var _r = null
 
-        if (monthC >= 1) {
+        if (yearC >= 1) {
+            _r = parseInt(yearC) + '年前'
+        } else if (monthC >= 1) {
             _r = parseInt(monthC) + '个月前'
         } else if (weekC >= 1) {
             _r = parseInt(weekC) + '周前'

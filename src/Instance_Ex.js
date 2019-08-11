@@ -99,3 +99,5 @@ document.getElementById('popupMask').addEventListener('click', function() {
 document.getElementById('ScrollToAnywhere').addEventListener('click', () => {
     TyUI.scrollY(document.getElementById('canv').offsetTop)
 })
+
+console.log(Ty.periodTime('2018-08-10 10:36'))
