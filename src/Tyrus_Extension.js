@@ -775,6 +775,26 @@ var Ty = {
         return obj
     },
 
+    getUrlParamsAll1: function(_u) {
+        
+        // 参数类型校验
+        this.dataTypeCheck([_u], ['String'])
+
+        var obj = Object.create(null)
+
+        var con = _u.split('&')
+        console.log(con)
+
+        con.forEach(item => {
+            var _item = item.split('=')
+            var _k = decodeURIComponent(_item[0])
+            var _v = decodeURIComponent(_item[1])
+            obj[_k] = _v
+        })
+
+        return obj
+    },
+
     /**
      * 赋值记录日志
      * @method VariableLog
