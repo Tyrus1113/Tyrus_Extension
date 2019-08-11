@@ -100,4 +100,25 @@ document.getElementById('ScrollToAnywhere').addEventListener('click', () => {
     TyUI.scrollY(document.getElementById('canv').offsetTop)
 })
 
+function dateFormatter(_fmt, _d) {
+    var date = _d ? new Date(_d) : new Date()
+    var year = date.getFullYear() + ''
+    var month = date.getMonth() + 1
+    var day = date.getDate()
+    var hour = date.getHours()
+    var minutes = date.getMinutes()
+    var second = date.getSeconds()
+
+    return _fmt.replace(/YYYY|yyyy/g, year)
+        .replace(/YY|yy/g, year.substr(2, 2))
+        .replace(/MM/g, (month < 10 ? '0' : '') + month)
+        .replace(/DD/g, (day < 10 ? '0' : '') + day)
+        .replace(/HH|hh/g, (hour < 10 ? '0' : '') + hour)
+        .replace(/mm/g, (minutes < 10 ? '0' : '') + minutes)
+        .replace(/ss/g, (second < 10 ? '0' : '') + second)
+}
+console.log(new Date())
+console.log(dateFormatter('YYYY-MM-DD HH:mm', new Date()))
+console.log(dateFormatter('YYYYMMDDHHmm', new Date()))
+console.log(Ty.periodTime(dateFormatter('YYYY-MM-DD HH:mm', new Date())))
 console.log(Ty.periodTime('2018-08-10 10:36'))
