@@ -775,24 +775,45 @@ var Ty = {
         return obj
     },
 
-    getUrlParamsAll1: function(_u) {
+    /**
+     * 从url中获取某个参数的值
+     * @method getUrlParams
+     *
+     * @param  {String}   _u             url location.search
+     * @param  {String}   _p             url上的某个参数
+     * @return {Object / String / Null}  返回所有参数的集合 / 返回获取到的值 / null
+     */
+    getUrlParams: function(_u, _p) {
         
         // 参数类型校验
-        this.dataTypeCheck([_u], ['String'])
+        this.dataTypeCheck(arguments, ['String'])
 
-        var obj = Object.create(null)
+        var LENGTH = arguments.length
 
-        var con = _u.split('&')
-        console.log(con)
+        // Object.create(null)不继承 Object 原型上的属性方法 它的原型链没有上层
+        // forin 循环时不再遍历原型上的属性 减少 hasOwnProperty 损耗的性能
+        var returnPar = Object.create(null)
 
-        con.forEach(item => {
-            var _item = item.split('=')
-            var _k = decodeURIComponent(_item[0])
-            var _v = decodeURIComponent(_item[1])
-            obj[_k] = _v
-        })
+        var paramsArr = _u.split('&')
+        
+        for (var i = 0; i < paramsArr.length; i++) {
 
-        return obj
+            var item = paramsArr[i].split('=')
+            var k = decodeURIComponent(item[0])
+            var v = decodeURIComponent(item[1])
+            
+            if (LENGTH > 1) {
+                if (k === _p) {
+                    return v
+                } else {
+                    return null
+                }
+            } else {
+                returnPar[k] = v
+            }
+        }
+
+        return returnPar
     },
 
     /**
