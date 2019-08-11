@@ -99,7 +99,3 @@ document.getElementById('popupMask').addEventListener('click', function() {
 document.getElementById('ScrollToAnywhere').addEventListener('click', () => {
     TyUI.scrollY(document.getElementById('canv').offsetTop)
 })
-
-var url = 'ie=utf-8&f=8&rsv_bp=1&tn=baidu&wd=better-scroll%E4%B8%8A%E6%8B%89%E5%8A%A0%E8%BD%BD&oq=better-scroll&rsv_pq=a0d91a0d00060eaf&rsv_t=19c8L0m%2FPYZ%2BwpD9sJU%2FEqylGhb2ULVoPf5xjkv3d7X1yf14ku10vNEVumE&rqlang=cn&rsv_enter=1&rsv_dl=tb&rsv_sug3=24&rsv_sug1=8&rsv_sug7=100&rsv_sug2=0&inputT=4974&rsv_sug4=7241'
-console.log(Ty.getUrlParams(url))
-console.log(Ty.getUrlParams(url, 'wd1'))
