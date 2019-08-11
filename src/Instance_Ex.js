@@ -118,7 +118,7 @@ function dateFormatter(_fmt, _d) {
         .replace(/ss/g, (second < 10 ? '0' : '') + second)
 }
 console.log(new Date())
-console.log(dateFormatter('YYYY-MM-DD HH:mm', new Date()))
-console.log(dateFormatter('YYYYMMDDHHmm', new Date()))
+console.log(Ty.dateFormatter('YYYY-MM-DD HH:mm', new Date()))
+console.log(Ty.dateFormatter('YYYYMMDDHHmm', new Date()))
 console.log(Ty.periodTime(dateFormatter('YYYY-MM-DD HH:mm', new Date())))
 console.log(Ty.periodTime('2018-08-10 10:36'))

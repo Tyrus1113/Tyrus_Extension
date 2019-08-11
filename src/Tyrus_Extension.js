@@ -249,6 +249,35 @@ var Ty = {
     },
 
     /**
+     * 格式化日期
+     * @method dateFormatter
+     *
+     * @example
+     *          Ty.dateFormatter('YYYY-MM-DD HH:mm', new Date()) // 2019-08-11 15:50
+     *          Ty.dateFormatter('YYYYMMDDHHmm', new Date())     // 201908111550
+     * 
+     * @param  {String}     'YYYY-MM-DD HH:mm' / 'YYYYMMDDHHmm'
+     * @return {String}     2019-08-11 15:50 / 201908111550
+     */
+    dateFormatter: function(_fmt, _d) {
+        var date = _d ? new Date(_d) : new Date()
+        var year = date.getFullYear() + ''
+        var month = date.getMonth() + 1
+        var day = date.getDate()
+        var hour = date.getHours()
+        var minutes = date.getMinutes()
+        var second = date.getSeconds()
+    
+        return _fmt.replace(/YYYY|yyyy/g, year)
+            .replace(/YY|yy/g, year.substr(2, 2))
+            .replace(/MM/g, (month < 10 ? '0' : '') + month)
+            .replace(/DD/g, (day < 10 ? '0' : '') + day)
+            .replace(/HH|hh/g, (hour < 10 ? '0' : '') + hour)
+            .replace(/mm/g, (minutes < 10 ? '0' : '') + minutes)
+            .replace(/ss/g, (second < 10 ? '0' : '') + second)
+    },
+
+    /**
      * 去除多余空格
      * @method
      *
