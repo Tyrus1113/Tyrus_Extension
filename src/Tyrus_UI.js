@@ -74,6 +74,88 @@ var TyUI = {
     },
 
     /**
+     * 根据时间格式获取间隔时间
+     * @method periodTime
+     *
+     * @example
+     *          var strDate = "2019-02-14 12:11:00"
+     *          TyUI.periodTime(strDate)  // 1周前
+     * @param  {String}     "yyyy-mm-dd hh-mm-ss"
+     * @return {String}     返回 文字叙述 "刚刚“ "N分钟前" "N天前"等
+     */
+    periodTime: function(_t) {
+
+        // 把时间转换为时间戳
+        var d = Date.parse(_t.replace(/-/gi, '/'))
+        var minute = 1000 * 60
+        var hour = minute * 60
+        var day = hour * 24
+        var month = day * 30
+        var year = month * 12
+
+        // 获取当前时间戳
+        var now = new Date().getTime()
+        var diffValue = now - d
+
+        if (diffValue < 0) { return }
+
+        var yearC = diffValue / year
+        var monthC = diffValue / month
+        var weekC = diffValue / (7 * day)
+        var dayC = diffValue / day
+        var hourC = diffValue / hour
+        var minC = diffValue / minute
+        var _r = null
+
+        if (yearC >= 1) {
+            _r = parseInt(yearC) + '年前'
+        } else if (monthC >= 1) {
+            _r = parseInt(monthC) + '个月前'
+        } else if (weekC >= 1) {
+            _r = parseInt(weekC) + '周前'
+        } else if (dayC >= 1) {
+            _r = parseInt(dayC) + '天前'
+        } else if (hourC >= 1) {
+            _r = parseInt(hourC) + '小时前'
+        } else if (minC >= 1) {
+            _r = parseInt(minC) + '分钟前'
+        } else {
+            _r = '刚刚'
+        }
+
+        return _r
+    },
+
+    /**
+     * 格式化日期
+     * @method dateFormatter
+     *
+     * @example
+     *          TyUI.dateFormatter('YYYY-MM-DD HH:mm', new Date()) // 2019-08-11 15:50
+     *          TyUI.dateFormatter('YYYYMMDDHHmm', new Date())     // 201908111550
+     * 
+     * @param  {String}     'YYYY-MM-DD HH:mm' / 'YYYYMMDDHHmm'
+     * @return {String}     2019-08-11 15:50 / 201908111550
+     */
+    dateFormatter: function(_fmt, _d) {
+        var date = _d ? new Date(_d) : new Date()
+        var year = date.getFullYear() + ''
+        var month = date.getMonth() + 1
+        var day = date.getDate()
+        var hour = date.getHours()
+        var minutes = date.getMinutes()
+        var second = date.getSeconds()
+    
+        return _fmt.replace(/YYYY|yyyy/g, year)
+            .replace(/YY|yy/g, year.substr(2, 2))
+            .replace(/MM/g, (month < 10 ? '0' : '') + month)
+            .replace(/DD/g, (day < 10 ? '0' : '') + day)
+            .replace(/HH|hh/g, (hour < 10 ? '0' : '') + hour)
+            .replace(/mm/g, (minutes < 10 ? '0' : '') + minutes)
+            .replace(/ss/g, (second < 10 ? '0' : '') + second)
+    },
+
+    /**
      * 推送通知
      * @method sendNotification
      * 

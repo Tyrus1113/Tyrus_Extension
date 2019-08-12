@@ -101,5 +101,6 @@ document.getElementById('ScrollToAnywhere').addEventListener('click', () => {
 })
 
 // 格式化日期
-console.log(Ty.dateFormatter('YYYY-MM-DD HH:mm', new Date()))
-console.log(Ty.dateFormatter('YYYYMMDDHHmm', new Date()))
+console.log(TyUI.periodTime(TyUI.dateFormatter('YYYY-MM-DD HH:mm:ss', new Date())))
+console.log(TyUI.dateFormatter('YYYY-MM-DD HH:mm:ss', new Date()))
+console.log(TyUI.dateFormatter('YYYYMMDDHHmm', new Date()))
