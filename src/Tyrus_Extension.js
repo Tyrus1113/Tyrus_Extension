@@ -539,6 +539,8 @@ var Ty = {
      * 无限参数合并对象
      * @method mergeObject
      *
+     * Object.assgin()
+     * 
      * @param  {Object}   _o   需合并的对象
      * @return {Object}        返回合并后的对象
      */
