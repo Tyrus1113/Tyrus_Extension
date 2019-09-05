@@ -104,3 +104,26 @@ document.getElementById('ScrollToAnywhere').addEventListener('click', () => {
 console.log(TyUI.periodTime(TyUI.dateFormatter('YYYY-MM-DD HH:mm:ss', new Date())))
 console.log(TyUI.dateFormatter('YYYY-MM-DD HH:mm:ss', new Date()))
 console.log(TyUI.dateFormatter('YYYYMMDDHHmm', new Date()))
+
+// 根据时间戳返回时间间隔 (未完成)
+function dateTimeInterval(_start, _end) {
+    var res = _end - _start
+    if (res < 0) {
+        return false
+    }
+
+    var day = Math.floor(res / (24 * 60 * 60 * 1000))
+
+    var surplus1 = res % (24 * 60 * 60 * 1000)
+    var hour = Math.floor(res / (60 * 60 * 1000))
+
+    var surplus2 = surplus1 % (60 * 60 * 1000)
+    var minute = Math.floor(surplus2 / (60 * 60 * 1000))
+
+    var surplus3 = surplus2 % (60 * 1000)
+    var second = Math.floor(surplus3 / 1000)
+
+    console.log(`${day}天 ${hour}时 ${minute}分 ${second}秒`)
+}
+
+// dateTimeInterval(1566867166, 1567693791)
