@@ -138,6 +138,7 @@ var TyUI = {
      * @return {String}     2019-08-11 15:50 / 201908111550
      */
     dateFormatter: function(_fmt, _d) {
+
         var date = _d ? new Date(_d) : new Date()
         var year = date.getFullYear() + ''
         var month = date.getMonth() + 1
@@ -153,6 +154,42 @@ var TyUI = {
             .replace(/HH|hh/g, (hour < 10 ? '0' : '') + hour)
             .replace(/mm/g, (minutes < 10 ? '0' : '') + minutes)
             .replace(/ss/g, (second < 10 ? '0' : '') + second)
+    },
+
+    /**
+     * 根据时间戳返回时间间隔
+     * @method timeInterval
+     *
+     * @example
+     *          TyUI.timeInterval(1566867166000, 1567693791000)
+     * 
+     * @param  {Number}     开始时间 1566867166000
+     * @param  {Number}     结束时间 1567693791000
+     * @return {Object}     { day: 9, hour: 13, minute: 37, second: 5 }
+     */
+    timeInterval: function(_start, _end) {
+        
+        var res = _end - _start
+        if (res < 0) { return false }
+
+        // 计算天数后取余剩余毫秒再次计算
+        var DAY = Math.floor(res / (24 * 60 * 60 * 1000))
+
+        var surplus1 = res % (24 * 60 * 60 * 1000)
+        var HOUR = Math.floor(surplus1 / (60 * 60 * 1000))
+
+        var surplus2 = surplus1 % (60 * 60 * 1000)
+        var MINUTE = Math.floor(surplus2 / (60 * 1000))
+
+        var surplus3 = surplus2 % (60 * 1000)
+        var SECOND = Math.floor(surplus3 / 1000)
+        
+        return {
+            day: DAY,
+            hour: HOUR,
+            minute: MINUTE,
+            second: SECOND
+        }
     },
 
     /**
