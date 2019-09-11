@@ -61,10 +61,11 @@ body {
 
 			// 多行超出显示省略号
 			overflow: hidden;
-			text-overflow: ellipsis;
 			display: -webkit-box;
 			-webkit-line-clamp: 2;
+			/*! autoprefixer: off */
 			-webkit-box-orient: vertical;
+			/*! autoprefixer: on */
 		}
 	}
 
