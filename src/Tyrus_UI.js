@@ -131,11 +131,15 @@ var TyUI = {
      * @method dateFormatter
      *
      * @example
-     *          TyUI.dateFormatter('YYYY-MM-DD HH:mm', new Date()) // 2019-08-11 15:50
-     *          TyUI.dateFormatter('YYYYMMDDHHmm', new Date())     // 201908111550
+     *          TyUI.dateFormatter('YYYY-MM-DD HH:mm:ss', new Date())
+     *          // 2019-09-12 19:06:24
+     *          TyUI.dateFormatter('YYYYMMDDHHmmss', new Date())
+     *          // 20190912191133
      * 
-     * @param  {String}     'YYYY-MM-DD HH:mm' / 'YYYYMMDDHHmm'
-     * @return {String}     2019-08-11 15:50 / 201908111550
+     * // 13位时间戳
+     * @param  {String}  'YYYY-MM-DD HH:mm:ss' / 'YYYYMMDDHHmmss'
+     * 
+     * @return {String}  2019-09-12 19:06:24 / 20190912191133
      */
     dateFormatter: function(_fmt, _d) {
 
@@ -146,7 +150,7 @@ var TyUI = {
         var hour = date.getHours()
         var minutes = date.getMinutes()
         var second = date.getSeconds()
-    
+
         return _fmt.replace(/YYYY|yyyy/g, year)
             .replace(/YY|yy/g, year.substr(2, 2))
             .replace(/MM/g, (month < 10 ? '0' : '') + month)

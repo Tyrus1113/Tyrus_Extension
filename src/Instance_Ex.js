@@ -102,32 +102,6 @@ document.getElementById('ScrollToAnywhere').addEventListener('click', () => {
 
 // 格式化日期
 console.log(TyUI.periodTime(TyUI.dateFormatter('YYYY-MM-DD HH:mm:ss', new Date())))
-console.log(TyUI.dateFormatter('YYYY-MM-DD HH:mm:ss', new Date()))
-console.log(TyUI.dateFormatter('YYYYMMDDHHmm', new Date()))
+console.log(TyUI.dateFormatter('YYYY-MM-DD HH:mm:ss', 1567693791000))
+console.log(TyUI.dateFormatter('YYYYMMDDHHmmss', 1567693791000))
 console.log(TyUI.timeInterval(1566867166000, 1567693791000))
-
-// 时间戳转换为 时分秒 hh-mm-ss (进行中)
-function timeTransfer(_s) {
-    var second = parseInt(_s)
-    var minute = 0
-    var hour = 0
-    if (second > 60) {
-        minute = parseInt(second / 60)
-        second = parseInt(second % 60)
-    }
-    if (minute > 60) {
-        hour = parseInt(minute / 60)
-        minute = parseInt(minute % 60)
-    }
-    var result = ('00' + parseInt(second)).slice(-2)
-    if (minute > 0) {
-        result = ('00' + parseInt(minute)).slice(-2) + ':' + result
-    } else {
-        result = '00:' + result
-    }
-    if (hour > 0) {
-        result = ('00' + parseInt(hour)).slice(-2) + ':' + result
-    }
-    console.log(result)
-}
-// timeTransfer(1567694840000)
