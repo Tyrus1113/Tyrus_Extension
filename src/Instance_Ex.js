@@ -107,34 +107,35 @@ console.log(TyUI.dateFormatter('YYYYMMDDHHmmss', 1567693791000))
 console.log(TyUI.timeInterval(1566867166000, 1567693791000))
 
 // 获取图片原始尺寸
-var la = document.getElementsByClassName('lazy-image')[0]
+// 目标元素与懒加载测试元素相同 先把目标元素 .lazy-image 滑动到可视范围后再测试
+var la = document.getElementById('getNaturalDimensions')
 getNaturalDimensions(la, natural => {
     console.log(natural)
 })
 function getNaturalDimensions(_el, _callback) {
-    setTimeout(() => {
-        if (_el.naturalWidth) {
+
+    if (_el.naturalWidth) {
+        _callback({
+            width: _el.naturalWidth,
+            height: _el.naturalHeight
+        })
+    } else {
+        // IE 6/7/8
+        var img = new Image()
+        img.src = _el.src
+        
+        if (img.complete) {
             _callback({
-                width: _el.naturalWidth,
-                height: _el.naturalHeight
+                width: img.width,
+                height: img.height
             })
         } else {
-            var img = new Image()
-            img.src = _el.src
-        
-            if (img.complete) {
+            img.onload = function() {
                 _callback({
                     width: img.width,
                     height: img.height
                 })
-            } else {
-                img.onload = function() {
-                    _callback({
-                        width: img.width,
-                        height: img.height
-                    })
-                }
             }
         }
-    }, 0)
+    }
 }
