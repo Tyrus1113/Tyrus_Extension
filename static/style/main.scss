@@ -190,18 +190,21 @@ body {
 	}
 
 	.popup-container {
-		width: 300px;
-		height: 400px;
+		// 自使用高度样式
 		position: fixed;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
+		top: 50%;
+		right: 100px;
+		left: 100px;
 		z-index: 2;
-		margin: auto;
-		background-color: $main;
+		transform: translateY(-50%);
 		padding: 10px;
-		overflow-y: auto;
+		text-indent: 20px;
+		background-color: #fff;
+		font-size: 21px;
 		display: none;
+
+		// 测试滚动穿透样式
+		overflow-y: auto;
+		height: 200px;
 	}
 } // body ---- end ----
