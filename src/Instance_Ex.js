@@ -105,3 +105,36 @@ console.log(TyUI.periodTime(TyUI.dateFormatter('YYYY-MM-DD HH:mm:ss', new Date()
 console.log(TyUI.dateFormatter('YYYY-MM-DD HH:mm:ss', 1567693791000))
 console.log(TyUI.dateFormatter('YYYYMMDDHHmmss', 1567693791000))
 console.log(TyUI.timeInterval(1566867166000, 1567693791000))
+
+// 获取图片原始尺寸
+var la = document.getElementsByClassName('lazy-image')[0]
+getNaturalDimensions(la, natural => {
+    console.log(natural)
+})
+function getNaturalDimensions(_el, _callback) {
+    setTimeout(() => {
+        if (_el.naturalWidth) {
+            _callback({
+                width: _el.naturalWidth,
+                height: _el.naturalHeight
+            })
+        } else {
+            var img = new Image()
+            img.src = _el.src
+        
+            if (img.complete) {
+                _callback({
+                    width: img.width,
+                    height: img.height
+                })
+            } else {
+                img.onload = function() {
+                    _callback({
+                        width: img.width,
+                        height: img.height
+                    })
+                }
+            }
+        }
+    }, 0)
+}
