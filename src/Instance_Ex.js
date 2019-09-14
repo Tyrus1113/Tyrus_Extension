@@ -109,33 +109,6 @@ console.log(TyUI.timeInterval(1566867166000, 1567693791000))
 // 获取图片原始尺寸
 // 目标元素与懒加载测试元素相同 先把目标元素 .lazy-image 滑动到可视范围后再测试
 var la = document.getElementById('getNaturalDimensions')
-getNaturalDimensions(la, natural => {
+TyUI.getNaturalDimensions(la, natural => {
     console.log(natural)
 })
-function getNaturalDimensions(_el, _callback) {
-
-    if (_el.naturalWidth) {
-        _callback({
-            width: _el.naturalWidth,
-            height: _el.naturalHeight
-        })
-    } else {
-        // IE 6/7/8
-        var img = new Image()
-        img.src = _el.src
-        
-        if (img.complete) {
-            _callback({
-                width: img.width,
-                height: img.height
-            })
-        } else {
-            img.onload = function() {
-                _callback({
-                    width: img.width,
-                    height: img.height
-                })
-            }
-        }
-    }
-}

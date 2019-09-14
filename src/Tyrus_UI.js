@@ -377,6 +377,47 @@ var TyUI = {
     },
 
     /**
+     * 获取图片原始尺寸
+     * @method getNaturalDimensions
+     *
+     * @param  {DOM}        _el  图片元素
+     * @param  {Function}   _f   回调
+     * 
+     * @example 
+     *       TyUI.getNaturalDimensions(la, natural => {
+     *           console.log(natural)
+     *       })
+     * 
+     */
+    getNaturalDimensions: function(_el, _f) {
+    
+        if (_el.naturalWidth) {
+            _f({
+                width: _el.naturalWidth,
+                height: _el.naturalHeight
+            })
+        } else {
+            // IE 6/7/8
+            var img = new Image()
+            img.src = _el.src
+
+            if (img.complete) {
+                _f({
+                    width: img.width,
+                    height: img.height
+                })
+            } else {
+                img.onload = function() {
+                    _f({
+                        width: img.width,
+                        height: img.height
+                    })
+                }
+            }
+        }
+    },
+
+    /**
      * 懒加载
      * @method lazyLoad
      *
