@@ -112,3 +112,6 @@ var la = document.getElementById('getNaturalDimensions')
 TyUI.getNaturalDimensions(la, natural => {
     console.log(natural)
 })
+
+// 从url中获取所有参数转Object
+console.log(Ty.getUrlParams())

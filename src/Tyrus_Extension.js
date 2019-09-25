@@ -726,43 +726,37 @@ var Ty = {
     },
 
     /**
-     * 从url中获取某个参数的值
+     * 从url中获取所有参数转Object
      * @method getUrlParams
      *
-     * @param  {String}   _u             url location.search
-     * @param  {String}   _p             url上的某个参数
-     * @return {Object / String / Null}  返回所有参数的集合 / 返回获取到的值 / null
+     * @param  {String}   _u    url window.location.search
+     * @return {Object}         返回所有参数的集合
      */
-    getUrlParams: function(_u, _p) {
-        
+    getUrlParams: function(_u = window.location.search) {
+
         // 参数类型校验
         this.dataTypeCheck(arguments, ['String'])
-
-        var LENGTH = arguments.length
-
+  
+        // 如果没有查找到参数 返回null
+        if (!_u.split('?')[1]) { return null }
+  
+        // var LENGTH = arguments.length
+  
         // Object.create(null)不继承 Object 原型上的属性方法 它的原型链没有上层
         // forin 循环时不再遍历原型上的属性 减少 hasOwnProperty 损耗的性能
         var returnPar = Object.create(null)
-
-        var paramsArr = _u.split('&')
-        
+  
+        var paramsArr = _u.split('?')[1].split('&')
+  
         for (var i = 0; i < paramsArr.length; i++) {
-
+  
             var item = paramsArr[i].split('=')
             var k = decodeURIComponent(item[0])
             var v = decodeURIComponent(item[1])
-            
-            if (LENGTH > 1) {
-                if (k === _p) {
-                    return v
-                } else {
-                    return null
-                }
-            } else {
-                returnPar[k] = v
-            }
+  
+            returnPar[k] = v
         }
-
+  
         return returnPar
     },
 
