@@ -120,9 +120,7 @@ console.log(Ty.getUrlParams())
 console.log('isEqualItems:', Ty.isEqualItems([1, 1, 1]))
 
 // 获取数组内的平均值
-const averageItems = arr => arr.reduce((total, item) => total + item, 0) / arr.length
-console.log('averageItems:', averageItems([1, 2, 3, 4, 5]))
+console.log('averageItems:', Ty.averageItems([1, 2, 3, 4, 5]))
 
 // 获取数组内其中一项出现的次数
-const hasItemCount = (arr, tar) => arr.reduce((total, item) => (item === tar ? total + 1 : total), 0)
-console.log('hasItemCount:', hasItemCount([1, 2, 3, 4, 5, 1, 4], 4))
+console.log('hasItemCount:', Ty.hasItemCount([1, 2, 3, 4, 5, 1, 4], 4))

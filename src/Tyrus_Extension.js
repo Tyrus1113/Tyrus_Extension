@@ -884,13 +884,32 @@ var Ty = {
 
     /**
      * 检查数组各项是否相等
-     * @method isEqualObj
+     * @method isEqualItems
      *
      * @param  {Array}   _arr  需要检查的数组
-     * @return {Boolean}      返回 是否相等
+     * @return {Boolean}       返回 是否相等
      */
-    isEqualItems: _arr => _arr.every(_i => _i === _arr[0])
-    
+    isEqualItems: _arr => _arr.every(_i => _i === _arr[0]),
+
+    /**
+     * 获取数组内的平均值
+     * @method averageItems
+     *
+     * @param  {Array}   _arr  需要检查的数组
+     * @return {Number}        返回 平均值
+     */
+    averageItems: _arr => _arr.reduce((_t, _i) => _t + _i, 0) / _arr.length,
+
+    /**
+     * 获取数组内其中一项出现的次数
+     * @method hasItemCount
+     *
+     * @param  {Array}                     _arr  需要检查的数组
+     * @param  {Number/String/Boolean}     _tar  目标值
+     * @return {Number}                          返回 次数
+     */
+    hasItemCount: (_arr, _tar) => _arr.reduce((_t, _i) => (_i === _tar ? _t + 1 : _t), 0)
+
 } //  ---- **** Ty end **** ----
 
 export default Ty
