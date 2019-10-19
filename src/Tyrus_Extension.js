@@ -880,7 +880,16 @@ var Ty = {
         }
     
         return true
-    }
+    },
+
+    /**
+     * 检查数组各项是否相等
+     * @method isEqualObj
+     *
+     * @param  {Array}   _arr  需要检查的数组
+     * @return {Boolean}      返回 是否相等
+     */
+    isEqualItems: _arr => _arr.every(_i => _i === _arr[0])
     
 } //  ---- **** Ty end **** ----
 

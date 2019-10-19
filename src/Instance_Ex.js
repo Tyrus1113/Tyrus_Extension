@@ -117,5 +117,4 @@ TyUI.getNaturalDimensions(la, natural => {
 console.log(Ty.getUrlParams())
 
 // 检查数组各项是否相等
-const isEqualItems = arr => arr.every(item => item === arr[0])
-console.log('isEqualItems:', isEqualItems([1, 1, 1]))
+console.log('isEqualItems:', Ty.isEqualItems([1, 1, 1]))
