@@ -126,5 +126,4 @@ console.log('averageItems:', Ty.averageItems([1, 2, 3, 4, 5]))
 console.log('hasItemCount:', Ty.hasItemCount([1, 2, 3, 4, 5, 1, 4], 4))
 
 // 递归展平数组
-const flattenItems = (_arr) => [].concat(..._arr.map(_i => Array.isArray(_i) ? flattenItems(_i) : _i))
-console.log('flattenItems:', flattenItems([1, 2, 3, [5, ['test'], 7, [9, 10]]]))
+console.log('flattenItems:', Ty.flattenItems([1, 2, 3, [5, ['test'], 7, [9, 10]]]))

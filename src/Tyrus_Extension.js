@@ -867,10 +867,8 @@ var Ty = {
      * @return {Boolean}      返回 是否相同
      */
     isEqualObj: function(_o1, _o2) {
-
         var o1 = Object.keys(_o1)
         var o2 = Object.keys(_o2)
-    
         if (o1.length !== o2.length) return false
         
         for (var i = 0; i < o1.length; i++) {
@@ -908,7 +906,16 @@ var Ty = {
      * @param  {Number/String/Boolean}     _tar  目标值
      * @return {Number}                          返回 次数
      */
-    hasItemCount: (_arr, _tar) => _arr.reduce((_t, _i) => (_i === _tar ? _t + 1 : _t), 0)
+    hasItemCount: (_arr, _tar) => _arr.reduce((_t, _i) => (_i === _tar ? _t + 1 : _t), 0),
+
+    /**
+     * 递归展平数组
+     * @method flattenItems
+     *
+     * @param  {Array}  _arr  需要检查的数组
+     * @return {Number} 返回 展平后的数组
+     */
+    flattenItems: _arr => [].concat(..._arr.map(_i => Array.isArray(_i) ? Ty.flattenItems(_i) : _i))
 
 } //  ---- **** Ty end **** ----
 
