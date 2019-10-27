@@ -97,7 +97,8 @@ document.getElementById('popupMask').addEventListener('click', function() {
 
 // 滚动到某处 (过渡动画)
 document.getElementById('ScrollToAnywhere').addEventListener('click', () => {
-    scrollY(document.getElementById('formatterTest').offsetTop)
+    // TyUI.scrollY()
+    TyUI.scrollY(document.getElementById('formatterTest').offsetTop)
 })
 
 // 获取图片原始尺寸
@@ -131,16 +132,3 @@ console.log('flattenItems:', Ty.flattenItems([1, 2, 3, [5, ['test'], 7, [9, 10]]
 // 删除数组中符合条件的值 Testing...
 // const delItem = (_arr, _fn) => _arr.splice(_arr.findIndex(_i => _fn(_i)), 1)
 // console.log(delItem([1, 2, 3, 4], n => n > 3))
-
-var scrollY = function(_target = 0) {
-    let s = document.documentElement.scrollTop || document.body.scrollTop
-
-    let step = () => {
-        s = s + (_target - s) / 4
-        if (Math.abs(s - _target) < 1) { return }
-        window.scrollTo(0, s)
-        requestAnimationFrame(step)
-    }
-
-    step()
-}

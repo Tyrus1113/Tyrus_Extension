@@ -612,28 +612,40 @@ var TyUI = {
      * Y轴滚动到某处 (过渡动画)
      * @method scrollY
      *
-     * @param  {Number}  _y  Y轴坐标
-     * 
-     * @description
-     *  由于 left 与 top 会同时执行 遇到单独执行某轴 
-     *  另一轴需要重新获取坐标保持不变
-     *  所以分开执行
+     * @param  {Number}  _target  目标元素的offsetTop
      * 
      * @example 
      *      ELEMENT.addEventListener('click', () => {
      *          TyUI.scrollY(document.getElementById('canv').offsetTop)
      *      })
-     * 
      */
-    scrollY: function(_y) {
+    scrollY: (_target = 0) => {
 
-        // 无参数 则X轴滚动到页面最左边
-        _y = _y || document.documentElement.scrollHeight
+        // requestAnimationFrame 兼容处理
+        if (!window.requestAnimationFrame) {
+            window.requestAnimationFrame = function(fn) {
+                setTimeout(fn, 17)
+            }
+        }
 
-        window.scrollTo({
-            top: _y,
-            behavior: 'smooth'
-        })
+        let s = document.documentElement.scrollTop || document.body.scrollTop
+    
+        let step = () => {
+
+            // 下一秒位置 = 当前位置 + (当前位置与目标位置的距离的四分之一)
+            s = s + (_target - s) / 4
+
+            // 滚动高度小于1时 终止动画
+            if (Math.abs(s - _target) < 1) {
+                s = 0
+                return
+            }
+
+            window.scrollTo(0, s)
+            requestAnimationFrame(step)
+        }
+    
+        step()
     }
 
 } //  ---- **** Ty end **** ----
