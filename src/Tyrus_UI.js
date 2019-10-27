@@ -623,9 +623,7 @@ var TyUI = {
 
         // requestAnimationFrame 兼容处理
         if (!window.requestAnimationFrame) {
-            window.requestAnimationFrame = function(fn) {
-                setTimeout(fn, 17)
-            }
+            window.requestAnimationFrame = fn => setTimeout(fn, 17)
         }
 
         let s = document.documentElement.scrollTop || document.body.scrollTop
