@@ -95,11 +95,10 @@ document.getElementById('popupMask').addEventListener('click', function() {
     document.getElementById('popupContainer').style.display = 'none'
 })
 
-// 格式化日期
-console.log(TyUI.periodTime(TyUI.dateFormatter('YYYY-MM-DD HH:mm:ss', new Date())))
-console.log(TyUI.dateFormatter('YYYY-MM-DD HH:mm:ss', 1567693791000))
-console.log(TyUI.dateFormatter('YYYYMMDDHHmmss', 1567693791000))
-console.log(TyUI.timeInterval(1566867166000, 1567693791000))
+// 滚动到某处 (过渡动画)
+document.getElementById('ScrollToAnywhere').addEventListener('click', () => {
+    scrollY(document.getElementById('formatterTest').offsetTop)
+})
 
 // 获取图片原始尺寸
 // 目标元素与懒加载测试元素相同 先把目标元素 .lazy-image 滑动到可视范围后再测试
@@ -107,6 +106,12 @@ var la = document.getElementById('getNaturalDimensions')
 TyUI.getNaturalDimensions(la, natural => {
     console.log(natural)
 })
+
+// 格式化日期
+console.log(TyUI.periodTime(TyUI.dateFormatter('YYYY-MM-DD HH:mm:ss', new Date())))
+console.log(TyUI.dateFormatter('YYYY-MM-DD HH:mm:ss', 1567693791000))
+console.log(TyUI.dateFormatter('YYYYMMDDHHmmss', 1567693791000))
+console.log(TyUI.timeInterval(1566867166000, 1567693791000))
 
 // 从url中获取所有参数转Object
 console.log(Ty.getUrlParams())
@@ -126,11 +131,6 @@ console.log('flattenItems:', Ty.flattenItems([1, 2, 3, [5, ['test'], 7, [9, 10]]
 // 删除数组中符合条件的值 Testing...
 // const delItem = (_arr, _fn) => _arr.splice(_arr.findIndex(_i => _fn(_i)), 1)
 // console.log(delItem([1, 2, 3, 4], n => n > 3))
-
-// 滚动到某处 (过渡动画)
-document.getElementById('ScrollToAnywhere').addEventListener('click', () => {
-    scrollY(document.getElementById('formatterTest').offsetTop)
-})
 
 var scrollY = function(_target = 0) {
     let s = document.documentElement.scrollTop || document.body.scrollTop
