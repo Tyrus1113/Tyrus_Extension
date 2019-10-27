@@ -95,11 +95,6 @@ document.getElementById('popupMask').addEventListener('click', function() {
     document.getElementById('popupContainer').style.display = 'none'
 })
 
-// 滚动到某处 (过渡动画)
-document.getElementById('ScrollToAnywhere').addEventListener('click', () => {
-    TyUI.scrollY(document.getElementById('canv').offsetTop)
-})
-
 // 格式化日期
 console.log(TyUI.periodTime(TyUI.dateFormatter('YYYY-MM-DD HH:mm:ss', new Date())))
 console.log(TyUI.dateFormatter('YYYY-MM-DD HH:mm:ss', 1567693791000))
@@ -129,5 +124,23 @@ console.log('hasItemCount:', Ty.hasItemCount([1, 2, 3, 4, 5, 1, 4], 4))
 console.log('flattenItems:', Ty.flattenItems([1, 2, 3, [5, ['test'], 7, [9, 10]]]))
 
 // 删除数组中符合条件的值 Testing...
-const delItem = (_arr, _fn) => _arr.splice(_arr.findIndex(_i => _fn(_i)), 1)
-console.log(delItem([1, 2, 3, 4], n => n > 3))
+// const delItem = (_arr, _fn) => _arr.splice(_arr.findIndex(_i => _fn(_i)), 1)
+// console.log(delItem([1, 2, 3, 4], n => n > 3))
+
+// 滚动到某处 (过渡动画)
+document.getElementById('ScrollToAnywhere').addEventListener('click', () => {
+    scrollY(document.getElementById('formatterTest').offsetTop)
+})
+
+var scrollY = function(_target = 0) {
+    let s = document.documentElement.scrollTop || document.body.scrollTop
+
+    let step = () => {
+        s = s + (_target - s) / 4
+        if (Math.abs(s - _target) < 1) { return }
+        window.scrollTo(0, s)
+        requestAnimationFrame(step)
+    }
+
+    step()
+}
