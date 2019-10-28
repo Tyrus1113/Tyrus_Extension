@@ -129,14 +129,12 @@ console.log('hasItemCount:', Ty.hasItemCount([1, 2, 3, 4, 5, 1, 4], 4))
 // 递归展平数组
 console.log('flattenItems:', Ty.flattenItems([1, 2, 3, [5, ['test'], 7, [9, 10]]]))
 
+// 差集
+console.log('difference:', Ty.difference([1, 2, 3, 5], [1, 2, 4]))
+
+// 交集
+console.log('intersection:', Ty.intersection([1, 2, 3], [1, 2, 4]))
+
 // 删除数组中符合条件的值 Testing...
 // const delItem = (_arr, _fn) => _arr.splice(_arr.findIndex(_i => _fn(_i)), 1)
 // console.log(delItem([1, 2, 3, 4], n => n > 3))
-
-// 差集
-const difference = (_a, _b) => _a.filter(_i => _b.indexOf(_i) === -1)
-console.log('difference:', difference([1, 2, 3], [1, 2, 4]))
-
-// 交集
-const intersection = (_a, _b) => _a.filter(_i => _b.indexOf(_i) !== -1)
-console.log('intersection:', intersection([1, 2, 3], [1, 2, 4]))

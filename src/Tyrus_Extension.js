@@ -913,9 +913,29 @@ var Ty = {
      * @method flattenItems
      *
      * @param  {Array}  _arr  需要检查的数组
-     * @return {Number} 返回 展平后的数组
+     * @return {Number} 返回   展平后的数组
      */
-    flattenItems: _arr => [].concat(..._arr.map(_i => Array.isArray(_i) ? Ty.flattenItems(_i) : _i))
+    flattenItems: _arr => [].concat(..._arr.map(_i => Array.isArray(_i) ? Ty.flattenItems(_i) : _i)),
+
+    /**
+     * 差集
+     * @method difference
+     *
+     * @param  {Array}  _a  需要检查的数组
+     * @param  {Array}  _b  需要检查的数组
+     * @return {Array} 返回  差异值的数组
+     */
+    difference: (_a, _b) => _a.filter(_i => _b.indexOf(_i) === -1),
+
+    /**
+     * 交集
+     * @method intersection
+     *
+     * @param  {Array}  _a  需要检查的数组
+     * @param  {Array}  _b  需要检查的数组
+     * @return {Array} 返回  相同值的数组
+     */
+    intersection: (_a, _b) => _a.filter(_i => _b.indexOf(_i) !== -1)
 
 } //  ---- **** Ty end **** ----
 
