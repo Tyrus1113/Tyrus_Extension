@@ -884,6 +884,9 @@ var Ty = {
      * 检查数组各项是否相等
      * @method isEqualItems
      *
+     * @example
+     *  Ty.isEqualItems([1, 1, 1])
+     * 
      * @param  {Array}   _arr  需要检查的数组
      * @return {Boolean}       返回 是否相等
      */
@@ -892,6 +895,9 @@ var Ty = {
     /**
      * 获取数组内的平均值
      * @method averageItems
+     * 
+     * @example
+     *  Ty.averageItems([1, 2, 3, 4, 5])
      *
      * @param  {Array}   _arr  需要检查的数组
      * @return {Number}        返回 平均值
@@ -902,6 +908,9 @@ var Ty = {
      * 获取数组内其中一项出现的次数
      * @method hasItemCount
      *
+     * @example
+     *  Ty.hasItemCount([1, 2, 3, 4, 5, 1, 4], 4)
+     * 
      * @param  {Array}                     _arr  需要检查的数组
      * @param  {Number/String/Boolean}     _tar  目标值
      * @return {Number}                          返回 次数
@@ -912,6 +921,9 @@ var Ty = {
      * 递归展平数组
      * @method flattenItems
      *
+     * @example
+     *  Ty.flattenItems([1, 2, 3, [5, ['test'], 7, [9, 10]]])
+     * 
      * @param  {Array}  _arr  需要检查的数组
      * @return {Number} 返回   展平后的数组
      */
@@ -921,6 +933,9 @@ var Ty = {
      * 差集
      * @method difference
      *
+     * @example
+     *  Ty.difference([1, 2, 3, 5], [1, 2, 4])
+     * 
      * @param  {Array}  _a  需要检查的数组
      * @param  {Array}  _b  需要检查的数组
      * @return {Array} 返回  差异值的数组
@@ -931,6 +946,9 @@ var Ty = {
      * 交集
      * @method intersection
      *
+     * @example
+     *  Ty.intersection([1, 2, 3], [1, 2, 4])
+     *  
      * @param  {Array}  _a  需要检查的数组
      * @param  {Array}  _b  需要检查的数组
      * @return {Array} 返回  相同值的数组
