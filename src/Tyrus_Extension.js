@@ -7,46 +7,45 @@
 var Ty = {
 
     /**
-     * 移除数组选中项
-     * @method removeArrayItem
+     * 去除多余空格
+     * @method
      *
-     * @param  {Array}  _a  原数组
-     * @param  {Number} _x  删除项的数组索引
-     * @return {Array}      返回 新数组
+     * @param  {String}     带有多余空格的字符串
+     * @return {String}     返回 清除空格
      */
-    removeArrayItem: (_a, _x) => {
+    // 除去左边空格
+    trimLeft: _s => _s.replace(/(^\s*)/g, ''),
 
-        var n = []
-        for (var i = 0; i < _a.length; i++) {
-            if (i !== _x) n.push(_a[i])
-        }
+    // 除去右边空格
+    trimRight: _s => _s.replace(/(\s*$)/g, ''),
 
-        return n
-    },
+    // 除去所有空格
+    trimAll: _s => _s.replace(/\s/g, ''),
+
+    /**
+     * 是否含有class
+     * @method hasClass
+     *
+     * @param  {DOM}     _d    DOM元素
+     * @param  {String}  _c    class名称
+     * @return {Boolean}       返回是否含有class
+     */
+    hasClass: (_d, _c) => _d.classList.contains(_c),
+
+    /**
+     * 存储localStorage
+     * @method setStorage
+     *
+     * @param  {String}  _n  storage名称
+     * @param  {Any}     _v  storage值
+     */
+    setStorage: (_n, _v) => window.localStorage.setItem(_n, _v),
     
-    /**
-     * 取数组中最大值
-     * @method getMax
-     *
-     * @example
-     *  Ty.getMax([1, 10.1, 3, 4])
-     * 
-     * @param  {Array}  _a 原数组
-     * @return {Array}     返回 最大值
-     */
-    getMax: _a => Math.max(..._a),
+    // 获取localStorage
+    getStorage: _n => JSON.parse(window.localStorage.getItem(_n)),
 
-    /**
-     * 取数组中最小值
-     * @method getMin
-     *
-     * @example
-     *  Ty.getMin([-1, 10.1, 3, 4])
-     * 
-     * @param  {Array}  _a 原数组
-     * @return {Array}     返回 最小值
-     */
-    getMin: _a => Math.min(..._a),
+    // 删除localStorage
+    removeStorage: _n => window.localStorage.removeItem(_n),
 
     /**
      * 存储Cookie
@@ -61,9 +60,9 @@ var Ty = {
 
         const d = new Date()
         d.setTime(d.getTime() + (_e * 24 * 60 * 60 * 1000))
-        const expires = 'expires=' + d.toUTCString()
+        const expires = `expires=${d.toUTCString()}`
 
-        document.cookie = _n + '=' + _v + '; ' + expires
+        document.cookie = `${_n}=${_v};${expires}`
     },
 
     /**
@@ -92,66 +91,20 @@ var Ty = {
     },
 
     /**
-     * 存储localStorage
-     * @method setStorage
+     * 取数组中最大值
+     * @method getMax
      *
-     * @param  {String}  _n  storage名称
-     * @param  {Any}     _v  storage值
+     * @example
+     *  Ty.getMax([1, 10.1, 3, 4])
+     * 
+     * @param  {Array}  _a 原数组
+     * @return {Array}     返回 最大值
      */
-    setStorage: (_n, _v) => window.localStorage.setItem(_n, _v),
+    getMax: _a => Math.max(..._a),
+
+    // 取数组中最小值
+    getMin: _a => Math.min(..._a),
     
-    /**
-     * 获取localStorage
-     * @method getStorage
-     *
-     * @param  {String}  _n  storage名称
-     * @return {Any}        返回 storage
-     */
-    getStorage: _n => JSON.parse(window.localStorage.getItem(_n)),
-
-    /**
-     * 删除localStorage
-     * @method removeStorage
-     *
-     * @param  {String}  _n  storage名称
-     * @return {Any}        返回 storage
-     */
-    removeStorage: _n => window.localStorage.removeItem(_n),
-
-    /**
-     * 去除多余空格
-     * @method
-     *
-     * @param  {String}     带有多余空格的字符串
-     * @return {String}     返回 清除空格
-     */
-    // 除去左边空格
-    trimLeft: _s => _s.replace(/(^\s*)/g, ''),
-
-    // 除去右边空格
-    trimRight: _s => _s.replace(/(\s*$)/g, ''),
-
-    // 除去所有空格
-    trimAll: _s => _s.replace(/\s/g, ''),
-
-    /**
-     * 对象是否为空
-     * @method isEmptyObj
-     *
-     * @param  {Object}   _o  原对象
-     * @return {Boolean}      返回 true 空 / false 非空
-     */
-    isEmptyObj: _o => {
-
-        for (let k in _o) {
-            if (_o.hasOwnProperty(k)) {
-                return false
-            }
-        }
-
-        return true
-    },
-
     /**
      * 数组与对象数组去重
      * @method removeDuplicate
@@ -230,43 +183,6 @@ var Ty = {
     },
 
     /**
-     * 是否含有class
-     * @method hasClass
-     *
-     * @param  {DOM}     _d    DOM元素
-     * @param  {String}  _c    class名称
-     * @return {Boolean}        返回是否含有class
-     */
-    hasClass: (_d, _c) => _d.classList.contains(_c),
-
-    /**
-     * 添加多个class
-     * @method addClass
-     *
-     * @param  {DOM}    _d    DOM元素
-     * @param  {String} _c    class名称
-     */
-    addClass: (_d, _c) => _d.classList.add(_c),
-
-    /**
-     * 移除多个class
-     * @method removeClass
-     *
-     * @param  {DOM}    _d    DOM元素
-     * @param  {String} _c    class名称
-     */
-    removeClass: (_d, _c) => _d.classList.remove(_c),
-
-    /**
-     * 切换class
-     * @method toggleClass
-     *
-     * @param  {DOM}    _d    DOM元素
-     * @param  {String} _c    class名称
-     */
-    toggleClass: (_d, _c) => _d.classList.toggle(_c),
-
-    /**
      * 从url中获取参数
      * @method getUrlParam
      *
@@ -293,7 +209,7 @@ var Ty = {
      * @param  {Object}  _o2  需要对比的对象
      * @return {Boolean}      返回 是否相同
      */
-    isEqualObj: function(_o1, _o2) {
+    isEqualObj: (_o1, _o2) => {
         var o1 = Object.keys(_o1)
         var o2 = Object.keys(_o2)
         if (o1.length !== o2.length) return false
@@ -306,6 +222,15 @@ var Ty = {
     
         return true
     },
+
+    /**
+     * 对象是否为空
+     * @method isEmptyObj
+     *
+     * @param  {Object}   _o  原对象
+     * @return {Boolean}      返回 true 非空 / false 空
+     */
+    isEmptyObj: _o => Object.keys(_o).length !== 0,
 
     /**
      * 检查数组各项是否相等

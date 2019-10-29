@@ -197,4 +197,4 @@ document.getElementById('onceBtn').addEventListener('click', Ty.onceCall(e => {
     console.log('onceFunc called just once', e)
 }))
 
-console.log('hasClass:', Ty.hasClass(document.getElementById('onceBtn'), 'aa'))
+console.log('isEmptyObj:', Ty.isEmptyObj({}))
