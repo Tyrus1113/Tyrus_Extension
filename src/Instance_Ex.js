@@ -105,17 +105,17 @@ document.getElementById('ScrollToAnywhere').addEventListener('click', () => {
 // 目标元素与懒加载测试元素相同 先把目标元素 .lazy-image 滑动到可视范围后再测试
 var la = document.getElementById('getNaturalDimensions')
 TyUI.getNaturalDimensions(la, natural => {
-    console.log(natural)
+    console.log('getNaturalDimensions:', natural)
 })
 
 // 格式化日期
-console.log(TyUI.periodTime(TyUI.dateFormatter('YYYY-MM-DD HH:mm:ss', new Date())))
-console.log(TyUI.dateFormatter('YYYY-MM-DD HH:mm:ss', 1567693791000))
-console.log(TyUI.dateFormatter('YYYYMMDDHHmmss', 1567693791000))
-console.log(TyUI.timeInterval(1566867166000, 1567693791000))
+console.log('periodTime:', TyUI.periodTime(TyUI.dateFormatter('YYYY-MM-DD HH:mm:ss', new Date())))
+console.log('dateFormatter:', TyUI.dateFormatter('YYYY-MM-DD HH:mm:ss', 1567693791000))
+console.log('dateFormatter:', TyUI.dateFormatter('YYYYMMDDHHmmss', 1567693791000))
+console.log('timeInterval:', TyUI.timeInterval(1566867166000, 1567693791000))
 
 // 从url中获取所有参数转Object
-console.log(Ty.getUrlParams())
+console.log('getUrlParams:', Ty.getUrlParams())
 
 // 检查数组各项是否相等
 console.log('isEqualItems:', Ty.isEqualItems([1, 1, 1]))
@@ -140,16 +140,14 @@ console.log('intersection:', Ty.intersection([1, 2, 3], [1, 2, 4]))
 // console.log(delItem([1, 2, 3, 4], n => n > 3))
 
 // 删除字符串中的xml/html标签
-const delHTMLTags = _s => _s.replace(/<[^>]*>/g, '')
-console.log('delHTMLTags:', delHTMLTags('<div id="popupMask"><a href="#">test text</a></div>'))
+console.log('delHTMLTags:', Ty.delHTMLTags('<div id="popupMask"><a href="#">test text</a></div>'))
 
 // 首字母大写
-const capitalize = ([_f, ..._r]) => _f.toUpperCase() + _r.join('')
-console.log('capitalize:', capitalize('tyrus'))
+console.log('capitalize:', Ty.capitalize('tyrus'))
+
 // 每个单词首字母大写
-const capitalizeAllWords = _s => _s.replace(/\b[a-z]/g, _i => _i.toUpperCase())
-console.log('capitalizeAllWords:', capitalizeAllWords('patience. my old friend.'))
-// 字节长度
-const byteLength = _s => new Blob([_s]).size
-console.log('byteLength:', byteLength('abcdefg'))
-console.log('byteLength:', byteLength('中文测试'))
+console.log('capitalizeAllWords:', Ty.capitalizeAllWords('patience. my old friend.'))
+
+// 获取字节长度
+console.log('getByteLength:', Ty.getByteLength('abcdefg'))
+console.log('getByteLength:', Ty.getByteLength('中文测试'))

@@ -953,7 +953,56 @@ var Ty = {
      * @param  {Array}  _b  需要检查的数组
      * @return {Array} 返回  相同值的数组
      */
-    intersection: (_a, _b) => _a.filter(_i => _b.indexOf(_i) !== -1)
+    intersection: (_a, _b) => _a.filter(_i => _b.indexOf(_i) !== -1),
+
+    /**
+     * 删除字符串中的xml/html标签
+     * @method delHTMLTags
+     *
+     * @example
+     *  Ty.delHTMLTags('<div id="popupMask"><a href="#">test text</a></div>')
+     *  
+     * @param  {String}  _s  html / xml 标签
+     * @return {String} 返回  移除标签后的字符串
+     */
+    delHTMLTags: _s => _s.replace(/<[^>]*>/g, ''),
+
+    /**
+     * 首字母大写
+     * @method capitalize
+     *
+     * @example
+     *  Ty.capitalize('tyrus')
+     *  
+     * @param  {Array}  [_f, ..._r] 首字母 和 拆分后的剩余字母
+     * @return {String} 返回        处理后的字符串
+     */
+    capitalize: ([_f, ..._r]) => _f.toUpperCase() + _r.join(''),
+
+    /**
+     * 每个单词首字母大写
+     * @method capitalizeAllWords
+     *
+     * @example
+     *  Ty.capitalizeAllWords('patience. my old friend.')
+     *  
+     * @param  {String}  _s     原字符串
+     * @return {String} 返回    处理后的字符串
+     */
+    capitalizeAllWords: _s => _s.replace(/\b[a-z]/g, _i => _i.toUpperCase()),
+
+    /**
+     * 获取字节长度
+     * @method getByteLength
+     *
+     * @example
+     *  Ty.getByteLength('abcdefg')
+     *  Ty.getByteLength('中文测试')
+     *  
+     * @param  {String}  _s     原字符串
+     * @return {String} 返回    处理后的字符串
+     */
+    getByteLength: _s => new Blob([_s]).size
 
 } //  ---- **** Ty end **** ----
 
