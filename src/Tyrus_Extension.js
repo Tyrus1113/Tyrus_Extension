@@ -1,5 +1,5 @@
 /*
- * @Tyrus_ExtensionJS
+ * @Tyrus_Extension
  * @Author: Tyrus
  */
 
@@ -99,7 +99,7 @@ var Ty = {
      * @param  {Any}     _v  storage值
      */
     setStorage: (_n, _v) => window.localStorage.setItem(_n, _v),
-
+    
     /**
      * 获取localStorage
      * @method getStorage
@@ -233,8 +233,8 @@ var Ty = {
      * 是否含有class
      * @method hasClass
      *
-     * @param  {DOM}      _d    DOM元素
-     * @param  {String}   _c    class名称
+     * @param  {DOM}     _d    DOM元素
+     * @param  {String}  _c    class名称
      * @return {Boolean}        返回是否含有class
      */
     hasClass: (_d, _c) => _d.classList.contains(_c),
@@ -243,8 +243,8 @@ var Ty = {
      * 添加多个class
      * @method addClass
      *
-     * @param  {DOM}      _d    DOM元素
-     * @param  {String}   _c    class名称
+     * @param  {DOM}    _d    DOM元素
+     * @param  {String} _c    class名称
      */
     addClass: (_d, _c) => _d.classList.add(_c),
 
@@ -252,8 +252,8 @@ var Ty = {
      * 移除多个class
      * @method removeClass
      *
-     * @param  {DOM}      _d    DOM元素
-     * @param  {String}   _c    class名称
+     * @param  {DOM}    _d    DOM元素
+     * @param  {String} _c    class名称
      */
     removeClass: (_d, _c) => _d.classList.remove(_c),
 
@@ -261,194 +261,30 @@ var Ty = {
      * 切换class
      * @method toggleClass
      *
-     * @param  {DOM}      _d    DOM元素
-     * @param  {String}   _c    class名称
+     * @param  {DOM}    _d    DOM元素
+     * @param  {String} _c    class名称
      */
     toggleClass: (_d, _c) => _d.classList.toggle(_c),
 
     /**
-     * 从url中获取某个参数的值
+     * 从url中获取参数
      * @method getUrlParam
      *
-     * @param  {String}   _u    url location.search
-     * @param  {String}   _p    url上的某个参数
-     * @return {String / Null}  返回获取到的值 / null
+     * @param  {String} _n     DOM元素
+     * @return {Object / null} 返回所有参数的集合 无则返回null
      */
-    getUrlParam: function(_u, _p) {
-
-        // 参数类型校验
-        this.dataTypeCheck(arguments, ['String', 'String'])
-
-        var reg = new RegExp('(^|&)' + _p + '=([^&]*)(&|$)')
-        var r = _u.substr(1).match(reg)
-
-        if (r != null) {
-            return decodeURI(r[2])
-        } else {
-            return null
-        }
-    },
+    getUrlParam: _n => decodeURIComponent(new URLSearchParams(location.search).get(_n)),
 
     /**
-     * 从url中获取所有参数
-     * @method getUrlParamsAll
+     * 校验数据类型
+     * @method is
      *
-     * @param  {String}   _u    url location.search
-     * @return {Object}         返回获取的参数对象
-     */
-    getUrlParamsAll: function(_u) {
-        
-        // 参数类型校验
-        this.dataTypeCheck([_u], ['String'])
-
-        var obj = {}
-        var reg = /([^?&=]+)=([^?&=]*)/g
-        // [^?&=]+表示：除了？、&、=之外的一到多个字符
-        // [^?&=]*表示：除了？、&、=之外的0到多个字符（任意多个）
-
-        _u.replace(reg, function(rs, $1, $2) {
-            var name = decodeURIComponent($1)
-            var val = decodeURIComponent($2)
-
-            val = String(val)
-            obj[name] = val
-        })
-        return obj
-    },
-
-    /**
-     * 从url中获取所有参数转Object
-     * @method getUrlParams
-     *
-     * @param  {String}   _u    url window.location.search
-     * @return {Object}         返回所有参数的集合
-     */
-    getUrlParams: function(_u = window.location.search) {
-
-        // 参数类型校验
-        this.dataTypeCheck(arguments, ['String'])
-  
-        // 如果没有查找到参数 返回null
-        if (!_u.split('?')[1]) { return null }
-  
-        // var LENGTH = arguments.length
-  
-        // Object.create(null)不继承 Object 原型上的属性方法 它的原型链没有上层
-        // forin 循环时不再遍历原型上的属性 减少 hasOwnProperty 损耗的性能
-        var returnPar = Object.create(null)
-  
-        var paramsArr = _u.split('?')[1].split('&')
-  
-        for (var i = 0; i < paramsArr.length; i++) {
-  
-            var item = paramsArr[i].split('=')
-            var k = decodeURIComponent(item[0])
-            var v = decodeURIComponent(item[1])
-  
-            returnPar[k] = v
-        }
-  
-        return returnPar
-    },
-
-    /**
-     * 赋值记录日志
-     * @method VariableLog
-     *
-     * @example
-     *          var VariableLog = Ty.VariableLog
-     *          var vLog = new VariableLog()
-     *          vLog.archive = 1
-     *          vLog.archive = 2
-     *          vLog.getArchive()
-     *
-     * @return {Array}         返回记录日志
-     */
-    VariableLog: function() {
-
-        var archive = null
-        var log = []
-
-        Object.defineProperty(this, 'archive', {
-
-            get: function() {
-                return archive
-            },
-            set: function(_val) {
-                archive = _val
-                log.push({
-                    val: archive
-                })
-            }
-        })
-
-        this.getArchive = function() {
-            return log
-        }
-    },
-
-    /**
-     * 测试数据类型校验方法
-     * @method dataTypeCheck
-     *
-     * @param  {String}   _a    需要校验的数据类型
-     * @param  {Array}    _t     预期的数据类型
+     * @param  {String}  _t    需要校验的数据类型
+     * @param  {ALL}     _v    需要校验的值
      * 
      */
-    dataTypeCheck: function(_a, _t) {
+    is: (_t, _v) => ![undefined, null].includes(_v) && _v.constructor === _t,
 
-        // 深拷贝传进的 arguments 确保值不会被改变
-        var arg = []
-        for (const key in JSON.parse(JSON.stringify(_a))) {
-            arg.push(JSON.parse(JSON.stringify(_a))[key])
-        }
-
-        for (var i = 0; i < arg.length; i++) {
-
-            arg[i] = Object.prototype.toString.call(arg[i])
-
-            var val = arg[i].split(' ')[1].match(/[a-z]+/i)[0]
-            if (!_t[i]) { return false }
-            if (val !== _t[i]) {
-                console.warn('Ty_err: 第' +
-                    (i + 1) +
-                    '个参数应为' +
-                    String(_t[i]) +
-                    '类型 但获取到' +
-                    val +
-                    '类型'
-                )
-            }
-        }
-    },
-
-    /**
-     * 展平深层数组中每项数组元素
-     * @method openDeepArrayItem
-     *
-     * @param  {Array}  _a 原数组
-     * @return {Array}     返回 新数组
-     */
-    openDeepArrayItem: function(_a) {
-
-        // 参数类型校验
-        this.dataTypeCheck(arguments, ['Array', 'Boolean'])
-
-        // concat 只能展平到二维数组
-        var n = Array.prototype.concat.apply([], _a)
-        console.log('n :', n)
-        // 循环 n 中如有元素为数组 则深层进行展平
-        while (
-            n.some(function(item) {
-                return item instanceof Array
-            })
-        ) {
-            n = Array.prototype.concat.apply([], n)
-        }
-
-        return n
-    },
-    
     /**
      * 比较两个对象是否相同
      * @method isEqualObj
