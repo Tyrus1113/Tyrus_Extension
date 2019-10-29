@@ -138,3 +138,18 @@ console.log('intersection:', Ty.intersection([1, 2, 3], [1, 2, 4]))
 // 删除数组中符合条件的值 Testing...
 // const delItem = (_arr, _fn) => _arr.splice(_arr.findIndex(_i => _fn(_i)), 1)
 // console.log(delItem([1, 2, 3, 4], n => n > 3))
+
+// 删除字符串中的xml/html标签
+const delHTMLTags = _s => _s.replace(/<[^>]*>/g, '')
+console.log('delHTMLTags:', delHTMLTags('<div id="popupMask"><a href="#">test text</a></div>'))
+
+// 首字母大写
+const capitalize = ([_f, ..._r]) => _f.toUpperCase() + _r.join('')
+console.log('capitalize:', capitalize('tyrus'))
+// 每个单词首字母大写
+const capitalizeAllWords = _s => _s.replace(/\b[a-z]/g, _i => _i.toUpperCase())
+console.log('capitalizeAllWords:', capitalizeAllWords('patience. my old friend.'))
+// 字节长度
+const byteLength = _s => new Blob([_s]).size
+console.log('byteLength:', byteLength('abcdefg'))
+console.log('byteLength:', byteLength('中文测试'))
