@@ -14,10 +14,7 @@ var Ty = {
      * @param  {Number} _x  删除项的数组索引
      * @return {Array}      返回 新数组
      */
-    removeArrayItem: function(_a, _x) {
-
-        // 参数类型校验
-        this.dataTypeCheck(arguments, ['Array', 'Number'])
+    removeArrayItem: (_a, _x) => {
 
         var n = []
         for (var i = 0; i < _a.length; i++) {
@@ -28,91 +25,43 @@ var Ty = {
     },
     
     /**
-     * 数字从大到小 或 从小到大排序
-     * @method sortArrayNum
+     * 取数组中最大值
+     * @method getMax
      *
-     * @param  {Array}   _a  原数组
-     * @param  {Boolean} _x  true 从大到小 / 默认 false 从小到大
-     * @return {Array}       返回 原数组
+     * @example
+     *  Ty.getMax([1, 10.1, 3, 4])
+     * 
+     * @param  {Array}  _a 原数组
+     * @return {Array}     返回 最大值
      */
-    sortArrayNum: function(_a, _x) {
-
-        // 参数类型校验
-        this.dataTypeCheck(arguments, ['Array', 'Boolean'])
-
-        _x = _x || false
-
-        var n = 0
-        for (var i = 0; i < _a.length; i++) {
-            for (var j = 0; j <= i; j++) {
-                if (_x === true) {
-                    if (_a[i] > _a[j]) {
-                        n = _a[i]
-                        _a[i] = _a[j]
-                        _a[j] = n
-                    }
-                } else {
-                    if (_a[i] < _a[j]) {
-                        n = _a[i]
-                        _a[i] = _a[j]
-                        _a[j] = n
-                    }
-                }
-            }
-        }
-        return _a
-    },
+    getMax: _a => Math.max(..._a),
 
     /**
-     * 取数组中最大项 或 最小项
-     * @method getArrayTheItem
+     * 取数组中最小值
+     * @method getMin
      *
+     * @example
+     *  Ty.getMin([-1, 10.1, 3, 4])
+     * 
      * @param  {Array}  _a 原数组
-     * @param  {Boolean}  _x true 取最大值 / 默认 false 取最小值
-     * @return {Array}     返回 新数组
+     * @return {Array}     返回 最小值
      */
-    getArrayTheItem: function(_a, _x) {
-
-        // 参数类型校验
-        this.dataTypeCheck(arguments, ['Array', 'Boolean'])
-
-        _x = _x || false
-
-        // 返回值在初始化时应当赋值数组其中一项
-        // 否则会在返回最小值时出现异常
-        var n = _a[0]
-
-        for (var i = 0; i < _a.length; i++) {
-            if (_x === true) {
-                if (_a[i] > n) {
-                    n = _a[i]
-                }
-            } else {
-                if (_a[i] < n) {
-                    n = _a[i]
-                }
-            }
-        }
-        return n
-    },
+    getMin: _a => Math.min(..._a),
 
     /**
      * 存储Cookie
      * 注意：浏览器不会保留打开本地文件（file:///）的Cookie！
-     * @method setTheCookie
+     * @method setCookie
      *
      * @param  {String}  _n  cookie名称
      * @param  {String}  _v  cookie值
      * @param  {Number}  _e  过期时间 单位：天
      */
-    setTheCookie: function(_n, _v, _e) {
+    setCookie: (_n, _v, _e) => {
 
-        // 参数类型校验
-        this.dataTypeCheck(arguments, ['String', 'String', 'Number'])
-
-        var d = new Date()
+        const d = new Date()
         d.setTime(d.getTime() + (_e * 24 * 60 * 60 * 1000))
-        var expires = 'expires=' + d.toUTCString()
+        const expires = 'expires=' + d.toUTCString()
 
         document.cookie = _n + '=' + _v + '; ' + expires
     },
@@ -120,20 +69,17 @@ var Ty = {
     /**
      * 获取Cookie
      * 注意：浏览器不会保留打开本地文件（file:///）的Cookie！
-     * @method getTheCookie
+     * @method getCookie
      *
      * @param  {String}  _n  cookie名称
      * @return {String}      返回 Cookie
      */
-    getTheCookie: function(_n) {
+    getCookie: _n => {
 
-        // 参数类型校验
-        this.dataTypeCheck(arguments, ['String'])
+        let _c = document.cookie.split(';')
+        let _a = ''
 
-        var _c = document.cookie.split(';')
-        var _a = ''
-
-        for (var i = 0; i < _c.length; i++) {
+        for (let i = 0; i < _c.length; i++) {
 
             _a = _c[i].trim().split('=')
             // 使用indexOf方法查找会出现问题
@@ -147,35 +93,21 @@ var Ty = {
 
     /**
      * 存储localStorage
-     * @method setTheStorage
+     * @method setStorage
      *
      * @param  {String}  _n  storage名称
      * @param  {Any}     _v  storage值
      */
-    setTheStorage: function(_n, _v) {
-
-        // 参数类型校验
-        this.dataTypeCheck(arguments, ['String'])
-
-        if (typeof _v !== 'string') { _v = JSON.stringify(_v) }
-
-        window.localStorage.setItem(_n, _v)
-    },
+    setStorage: (_n, _v) => window.localStorage.setItem(_n, _v),
 
     /**
      * 获取localStorage
-     * @method getTheStorage
+     * @method getStorage
      *
      * @param  {String}  _n  storage名称
      * @return {Any}        返回 storage
      */
-    getTheStorage: function(_n) {
-
-        // 参数类型校验
-        this.dataTypeCheck(arguments, ['String'])
-
-        return JSON.parse(window.localStorage.getItem(_n))
-    },
+    getStorage: _n => JSON.parse(window.localStorage.getItem(_n)),
 
     /**
      * 删除localStorage
@@ -184,13 +116,7 @@ var Ty = {
      * @param  {String}  _n  storage名称
      * @return {Any}        返回 storage
      */
-    removeStorage: function(_n) {
-
-        // 参数类型校验
-        this.dataTypeCheck(arguments, ['String'])
-
-        return window.localStorage.removeItem(_n)
-    },
+    removeStorage: _n => window.localStorage.removeItem(_n),
 
     /**
      * 去除多余空格
@@ -199,70 +125,14 @@ var Ty = {
      * @param  {String}     带有多余空格的字符串
      * @return {String}     返回 清除空格
      */
-    // 除去左右两边空格
-    trimBothSpace: function(_s) {
-
-        // 参数类型校验
-        this.dataTypeCheck(arguments, ['String'])
-
-        return _s.replace(/(^\s*)|(\s*$)/g, '')
-    },
     // 除去左边空格
-    trimLeftSpace: function(_s) {
+    trimLeft: _s => _s.replace(/(^\s*)/g, ''),
 
-        // 参数类型校验
-        this.dataTypeCheck(arguments, ['String'])
-
-        return _s.replace(/(^\s*)/g, '')
-    },
     // 除去右边空格
-    trimRightSpace: function(_s) {
+    trimRight: _s => _s.replace(/(\s*$)/g, ''),
 
-        // 参数类型校验
-        this.dataTypeCheck(arguments, ['String'])
-
-        return _s.replace(/(\s*$)/g, '')
-    },
     // 除去所有空格
-    trimAllSpace: function(_s) {
-
-        // 参数类型校验
-        this.dataTypeCheck(arguments, ['String'])
-
-        return _s.replace(/\s/g, '')
-    },
-
-    /**
-     * 添加数字区间
-     * @method addNumberSection
-     *
-     * @param  {Array}   _a    原数组 并且数组中每项均为Number类型
-     * @param  {Number}  _x    数组中最后一项与最后附加项的值或区间
-     * @return {Array}         返回 新数组
-     */
-    addNumberSection: function(_a, _x) {
-
-        // 参数类型校验
-        this.dataTypeCheck(arguments, ['Array', 'Number'])
-
-        var n = []
-
-        // 如果没有赋值参数 数组中附加项为最后一项 +1
-        _x = _x || 1
-
-        for (var i = 0; i < _a.length; i++) {
-            if (_a[i] === _a[_a.length - 1]) {
-                var r = _a[_a.length - 1] + _x
-                var p = _a[_a.length - 1] + '-' + r
-                n.push(p)
-            } else {
-                var p = _a[i] + '-' + _a[i + 1]
-                n.push(p)
-            }
-        }
-
-        return n
-    },
+    trimAll: _s => _s.replace(/\s/g, ''),
 
     /**
      * 对象是否为空
@@ -286,58 +156,32 @@ var Ty = {
     },
 
     /**
-     * 无限参数数组合并去重
-     * @method concatUniqueArray
+     * 数组与对象数组去重
+     * @method removeDuplicate
+     * 
+     * @example
+     *  Ty.removeDuplicate(ARR, 'name')
+     *  Ty.removeDuplicate(ARR01)
      *
-     * @param  {Array} _a0  需去重的数组
-     * @param  {Array} _a1  可无限添加
-     * @return {Array}      返回 去重合并后的数组
+     * @param  {Array / Array-Object} _a  需去重的数组(或数组对象)
+     * @param  {String}               _k  可无限添加(非必填)
+     * @return {Array}                    返回 去重后的数组
      */
-    concatUniqueArray: function(_a0, _a1, _a2) {
+    removeDuplicate: (_a, _k) => {
 
-        // 参数类型校验
-        var arg = []
-        for (var i = 0; i < arguments.length; i++) {
-            arg.push('Array')
-        }
-        this.dataTypeCheck(arguments, arg)
+        const arr = []
+        const obj = {}
 
-        // 如果只有一个参数 则去重这个单独的参数
-        if (arguments.length === 1) {
-            var self = []
-            for (var i = 0; i < _a0.length; i++) {
-                if (self.indexOf(_a0[i]) === -1) self.push(_a0[i])
+        _a.forEach((item, index) => {
+
+            const attr = _k ? item[_k] : item
+
+            if (!obj[attr]) {
+                obj[attr] = attr
+                arr.push(item)
             }
-            return self
-        }
-
-        var self = []
-        for (var i = 0; i < _a0.length; i++) {
-            if (self.indexOf(_a0[i]) === -1) self.push(_a0[i])
-        }
-
-        // 合并去重两个数组
-        function concatUniqueFunc(r1, r2) {
-            // 复制第一个数组 让原数组的值不被改变
-            var n = r1.concat()
-            for (var i = 0; i < r2.length; i++) {
-                if (n.indexOf(r2[i]) === -1) {
-                    // r2[i]到n中进行查找重复值
-                    // 返回-1则无重复
-                    n.push(r2[i])
-                }
-            }
-
-            return n
-        }
-        var s = concatUniqueFunc(self, _a1)
-
-        // 从第二个参数开始循环执行合并去重
-        for (var i = 1; i < arguments.length; i++) {
-            s = concatUniqueFunc(s, arguments[i])
-        }
-
-        return s
+        })
+        return arr
     },
 
     /**

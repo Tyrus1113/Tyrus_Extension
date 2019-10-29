@@ -165,17 +165,6 @@ console.log('is RegExp:', is(RegExp, /./g))
 console.log('is Number:', is(Number, Number('123')))
 
 // 数组与对象数组去重
-const unique = (data, key) => {
-    const arr = []; const obj = {}
-    data.forEach((item, index) => {
-        const attr = key ? item[key] : item
-        if (!obj[attr]) {
-            obj[attr] = attr
-            arr.push(item)
-        }
-    })
-    return arr
-}
 const ARR = [
     { name: 'Allen', age: 10 },
     { name: 'Ben', age: 7 },
@@ -184,5 +173,9 @@ const ARR = [
     { name: 'Candy', age: 8 }
 ]
 const ARR01 = [1, 2, 2, 4, 4, 6, 8]
-console.log('unique:', unique(ARR, 'name'))
-console.log('unique:', unique(ARR01))
+console.log('unique:', Ty.removeDuplicate(ARR, 'name'))
+console.log('unique:', Ty.removeDuplicate(ARR01))
+
+// 取数组中最大值 最小值
+console.log('getMax:', Ty.getMax([1, 10.1, 3, 4]), ...ARR01)
+console.log('getMin:', Ty.getMin([-1, 10.1, 3, 4]))
