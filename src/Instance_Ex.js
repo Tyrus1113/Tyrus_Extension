@@ -115,7 +115,7 @@ console.log('dateFormatter:', TyUI.dateFormatter('YYYYMMDDHHmmss', 1567693791000
 console.log('timeInterval:', TyUI.timeInterval(1566867166000, 1567693791000))
 
 // 从url中获取参数
-console.log('getUrlParam:', Ty.getUrlParam('aa'))
+console.log('getUrlParam:', Ty.getUrlParam('ch'))
 
 // 检查数组各项是否相等
 console.log('isEqualItems:', Ty.isEqualItems([1, 1, 1]))
@@ -153,13 +153,6 @@ console.log('getByteLength:', Ty.getByteLength('abcdefg'))
 console.log('getByteLength:', Ty.getByteLength('中文测试'))
 
 // 判断类型
-// eslint-disable-next-line no-sparse-arrays
-// const is = (type, val) => {
-//     // eslint-disable-next-line no-sparse-arrays
-//     var a = ![, null].includes(val) && val.constructor === type
-//     console.log('val:', val)
-//     return a
-// }
 console.log('is Set:', Ty.is(Set, new Set([1, 2, 3])))
 console.log('is Map:', Ty.is(Map, new Map([['a', 6], ['b', 8]])))
 console.log('is RegExp:', Ty.is(RegExp, /./g))
