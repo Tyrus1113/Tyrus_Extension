@@ -151,3 +151,38 @@ console.log('capitalizeAllWords:', Ty.capitalizeAllWords('patience. my old frien
 // 获取字节长度
 console.log('getByteLength:', Ty.getByteLength('abcdefg'))
 console.log('getByteLength:', Ty.getByteLength('中文测试'))
+
+// 判断类型
+const is = (type, val) => {
+    // eslint-disable-next-line no-sparse-arrays
+    var a = ![, null].includes(val) && val.constructor === type
+    console.log('val:', val)
+    return a
+}
+console.log('is Set:', is(Set, new Set([1, 2, 3])))
+console.log('is Set:', is(Map, new Map([['a', 6], ['b', 8]])))
+console.log('is RegExp:', is(RegExp, /./g))
+console.log('is Number:', is(Number, Number('123')))
+
+// 数组与对象数组去重
+const unique = (data, key) => {
+    const arr = []; const obj = {}
+    data.forEach((item, index) => {
+        const attr = key ? item[key] : item
+        if (!obj[attr]) {
+            obj[attr] = attr
+            arr.push(item)
+        }
+    })
+    return arr
+}
+const ARR = [
+    { name: 'Allen', age: 10 },
+    { name: 'Ben', age: 7 },
+    { name: 'Sarah', age: 8 },
+    { name: 'Allen', age: 9 },
+    { name: 'Candy', age: 8 }
+]
+const ARR01 = [1, 2, 2, 4, 4, 6, 8]
+console.log('unique:', unique(ARR, 'name'))
+console.log('unique:', unique(ARR01))
