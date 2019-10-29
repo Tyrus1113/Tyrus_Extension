@@ -173,9 +173,26 @@ const ARR = [
     { name: 'Candy', age: 8 }
 ]
 const ARR01 = [1, 2, 2, 4, 4, 6, 8]
+const ARR02 = [9, 6, 5, 7, 3, 2, 1]
 console.log('unique:', Ty.removeDuplicate(ARR, 'name'))
 console.log('unique:', Ty.removeDuplicate(ARR01))
 
 // 取数组中最大值 最小值
 console.log('getMax:', Ty.getMax([1, 10.1, 3, 4]), ...ARR01)
 console.log('getMin:', Ty.getMin([-1, 10.1, 3, 4]))
+
+// 数字添加千分符
+console.log('addYearMonthSort:', Ty.addThousandMark(30000))
+
+// 深拷贝引用数据类型
+console.log('ARR:', ARR)
+let deepCloneTest = Ty.deepClone(ARR)
+deepCloneTest[0].name = 'Ty'
+console.log('deepClone:', deepCloneTest, 'original ARR:', ARR)
+
+// 只执行一次的函数
+document.getElementById('onceBtn').addEventListener('click', Ty.onceCall(e => {
+    console.log('onceFunc called just once', e)
+}))
+
+console.log('hasClass:', Ty.hasClass(document.getElementById('onceBtn'), 'aa'))

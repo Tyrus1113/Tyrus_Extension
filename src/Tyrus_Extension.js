@@ -136,17 +136,14 @@ var Ty = {
 
     /**
      * 对象是否为空
-     * @method addNumberSection
+     * @method isEmptyObj
      *
      * @param  {Object}   _o  原对象
      * @return {Boolean}      返回 true 空 / false 非空
      */
-    isEmptyObj: function(_o) {
+    isEmptyObj: _o => {
 
-        // 参数类型校验
-        this.dataTypeCheck(arguments, ['Object'])
-
-        for (var k in _o) {
+        for (let k in _o) {
             if (_o.hasOwnProperty(k)) {
                 return false
             }
@@ -172,7 +169,7 @@ var Ty = {
         const arr = []
         const obj = {}
 
-        _a.forEach((item, index) => {
+        _a.forEach(item => {
 
             const attr = _k ? item[_k] : item
 
@@ -185,339 +182,89 @@ var Ty = {
     },
 
     /**
-     * 异步去重排序
-     * @method asyncUniqueSortArray
-     *
-     * @example
-     *          var _init = []
-     *          // 获取所有相同class的元素数组绑定事件
-     *          var _el = document.getElementsByClassName('_button')
-     *          for (var i = 0; i < _el.length; i++) {
-     *              _el[i].onclick = function () {
-     *
-     *                  // 获取值传入初始化的数组中
-     *                  _init.push(this.innerHTML)
-     *                  console.log(Ty.asyncUniqueSortArray(_init))
-     *
-     *                  // 可存储到storage进行验证
-     *                  Ty.setTheStorage('init', Ty.asyncUniqueSortArray(_init))
-     *                  console.log(Ty.getTheStorage('init'))
-     *              }
-     *          }
-     * @param  {String} _a  事件传入的数组
-     * @return {Array}      返回 去重排序后的数组
-     */
-    asyncUniqueSortArray: function(_a) {
-
-        // 参数类型校验
-        this.dataTypeCheck(arguments, ['Array'])
-
-        var a = []
-
-        for (var i = 0; i < _a.length; i++) {
-            if (a.indexOf(_a[i]) !== -1) {
-                a.splice(a.indexOf(_a[i]), 1)
-            }
-
-            a.push(_a[i])
-        }
-
-        return a
-    },
-
-    /**
-     * 并集 交集 差集
-     * @method UnionIntersectionDifferenceset
-     *
-     * @param  {Array} _a0  需要操作的数组
-     * @param  {Array} _a1  需要操作的数组
-     * @param  {Number} _s  指定并:0/交:1/差集:2
-     * @return {Array}      返回 操作后的数组
-     */
-    UnionIntersectionDifferenceset: function(_a0, _a1, _s) {
-
-        // 参数类型校验
-        this.dataTypeCheck(arguments, ['Array', 'Array', 'Number'])
-
-        var _r
-
-        switch (_s) {
-        case 0:
-            _r = _a0.concat(_a1.filter(function(_v) {
-                return _a0.indexOf(_v) === -1
-            }))
-            break
-        case 1:
-            _r = _a0.filter(function(_v) {
-                return _a1.indexOf(_v) > -1
-            })
-            break
-        case 2:
-            _r = _a0.filter(function(_v) {
-                return _a1.indexOf(_v) === -1
-            })
-            break
-        default:
-            _r = _a0.concat(_a1.filter(function(_v) {
-                return _a0.indexOf(_v) === -1
-            }))
-            break
-        }
-        return _r
-    },
-
-    /**
-     * 时间字段排序
-     * @method addYearMonthSort
-     *
-     * @param  {Array}   _a    原时间字段数组 时间格式：yyyy-mm
-     * @param  {Boolean} _x    true 从前到后排序 / 默认 false 从后到前排序
-     * @return {Array}         返回 新数组
-     */
-    addYearMonthSort: function(_a, _x) {
-
-        // 参数类型校验
-        this.dataTypeCheck(arguments, ['Array', 'Boolean'])
-
-        var _x = _x || false
-        
-        var t = []
-        for (var i = 0; i < _a.length; i++) {
-            t.push(_a[i].replace('-', ''))
-        }
-
-        // 给sort方法添加排序规则
-        var nt = t.sort(function(a, b) {
-            if (_x === true) {
-                return b - a
-            } else {
-                return a - b
-            }
-        })
-
-        var nn = []
-        for (var i = 0; i < nt.length; i++) {
-            var a = nt[i].replace(/(.{4})(.*)/, '$1-$2')
-            nn.push(a)
-        }
-
-        return nn
-    },
-
-    /**
-     * 数字数组添加千分符
+     * 数字添加千分符
      * @method addThousandMark
      *
-     * @param  {Array} _a   原数组
-     * @return {Array}      返回 新数组
+     * @example
+     *  Ty.addThousandMark(30000)
+     * 
+     * @param  {Number / String} _m   原数字
+     * @return {String}               返回 新数组
      */
-    addThousandMark: function(_a) {
-
-        // 参数类型校验
-        this.dataTypeCheck(arguments, ['Array'])
-
-        var n = []
-        for (var i = 0; i < _a.length; i++) {
-
-            var _str = _a[i].toString()
-            _str = _str.replace(/(\d{1,3})(?=(\d{3})+$)/g, '$1,')
-
-            n.push(_str)
-        }
-
-        return n
-    },
+    addThousandMark: _m => _m.toString().replace(/(\d{1,3})(?=(\d{3})+$)/g, '$1,'),
 
     /**
      * 深拷贝引用数据类型
-     * @method deepCloneObj
+     * @method deepClone
      *
+     * @example
+     *  Ty.deepClone(ARR)
+     * 
      * @param  {object} _x  原对象 Object Array Function 等
      * @return {object}     返回 新对象
      */
-    deepCloneObj: function(_x) {
-
-        // 参数类型校验
-        this.dataTypeCheck(arguments, ['Object'])
-
-        var o = _x instanceof Array ? [] : {}
-
-        if (_x && typeof _x === 'object') {
-            for (var key in _x) {
-                if (_x.hasOwnProperty(key)) {
-                    // 判断类型 递归复制调用者的子元素
-                    if (_x[key] && typeof _x[key] === 'object') {
-                        o[key] = this.deepCloneObj(_x[key])
-                    } else {
-                        o[key] = _x[key]
-                    }
-                }
-            }
-        }
-        return o
-
-        // 简化方式
-        // return JSON.parse(JSON.stringify(_x))
-    },
+    deepClone: _x => JSON.parse(JSON.stringify(_x)),
 
     /**
-     * 统计数组中相同项的个数
-     * @method getSameItems
-     *
-     * @param  {Array}   _a    原数组
-     * @return {Number}        遍历数组中出现相同项的数量
-     */
-    getSameItems: function(_a) {
-
-        // 参数类型校验
-        this.dataTypeCheck(arguments, ['Array'])
-
-        return _a.reduce(function(obj, name) {
-            obj[name] = obj[name] ? obj[name] + 1 : 1
-
-            return obj
-        }, {})
-    },
-
-    /**
-     * 无限参数合并对象
-     * @method mergeObject
-     *
-     * Object.assgin()
-     * 
-     * @param  {Object}   _o   需合并的对象
-     * @return {Object}        返回合并后的对象
-     */
-    mergeObject: function(_o) {
-
-        // 参数类型校验
-        var arg = []
-        for (let i = 0; i < arguments.length; i++) {
-            arg.push('Object')
-        }
-        this.dataTypeCheck(arguments, arg)
-
-        function mergeFunc(_o0, _o1) {
-            for (var obj in _o1) {
-                _o0[obj] = _o1[obj]
-            }
-            return _o0
-        }
-
-        // 先创建空对象与第一个参数合并
-        var self = {}
-        var o = mergeFunc(self, _o)
-
-        // 从第二个参数开始循环执行合并
-        for (var i = 0; i < arguments.length; i++) {
-            o = mergeFunc(o, arguments[i])
-        }
-
-        return o
-    },
-
-    /**
-     * 一次性函数
-     * @method onceFunc
+     * 只执行一次的函数
+     * @method onceCall
      *
      * @example
-     *      Ty.onceFunc()  // Just once
-     *      Ty.onceFunc()  // Miss
-     *      Ty.onceFunc()  // Miss
+     *  ELEMENT.addEventListener('click', Ty.onceCall((e) => {
+     *      console.log('onceFunc called just once:', e)
+     * }))
+     * @param  {Function} _fn  需要执行的操作
+     * @return {Function}      返回 唯一一次方法调用
      */
-    onceFunc: function() {
+    onceCall: _fn => {
 
-        console.log('Just once')
+        let lock = false
 
-        Ty.onceFunc = function() {
-            console.log('Miss')
+        return () => {
+            if (!lock) {
+                lock = true
+                // eslint-disable-next-line no-undef
+                _fn.call(this, arguments)
+            }
         }
     },
 
     /**
-     * 是否含有class名
+     * 是否含有class
      * @method hasClass
      *
-     * @param  {DOM}      _o    DOM元素
+     * @param  {DOM}      _d    DOM元素
      * @param  {String}   _c    class名称
-     * @return {Array / null}
+     * @return {Boolean}        返回是否含有class
      */
-    hasClass: function(_o, _c) {
-
-        // 参数类型校验
-        if (!_o.nodeType) {
-            var vali = Object.prototype.toString.call(_c).split(' ')[1].match(/[a-z]+/i)[0]
-            console.warn('Ty_err: 参数应为DOM元素 但获取到' + vali + '类型')
-            return 
-        }
-        this.dataTypeCheck([_c], ['String'])
-
-        return _o.classList.contains(_c)
-    },
+    hasClass: (_d, _c) => _d.classList.contains(_c),
 
     /**
      * 添加多个class
      * @method addClass
      *
-     * @param  {DOM}      _o    DOM元素
+     * @param  {DOM}      _d    DOM元素
      * @param  {String}   _c    class名称
      */
-    addClass: function(_o, _c) {
-
-        // 参数类型校验
-        if (!_o.nodeType) {
-            var vali = Object.prototype.toString.call(_c).split(' ')[1].match(/[a-z]+/i)[0]
-            console.warn('Ty_err: 参数应为DOM元素 但获取到' + vali + '类型')
-            return 
-        }
-        this.dataTypeCheck([_c], ['String'])
-
-        for (var i = 1; i < arguments.length; i++) {
-            _o.classList.add(arguments[i])
-        }
-    },
+    addClass: (_d, _c) => _d.classList.add(_c),
 
     /**
      * 移除多个class
      * @method removeClass
      *
-     * @param  {DOM}      _o    DOM元素
+     * @param  {DOM}      _d    DOM元素
      * @param  {String}   _c    class名称
      */
-    removeClass: function(_o, _c) {
-
-        // 参数类型校验
-        if (!_o.nodeType) {
-            var vali = Object.prototype.toString.call(_c).split(' ')[1].match(/[a-z]+/i)[0]
-            console.warn('Ty_err: 参数应为DOM元素 但获取到' + vali + '类型')
-            return 
-        }
-        this.dataTypeCheck([_c], ['String'])
-
-        for (var i = 1; i < arguments.length; i++) {
-            _o.classList.remove(arguments[i])
-        }
-    },
+    removeClass: (_d, _c) => _d.classList.remove(_c),
 
     /**
      * 切换class
      * @method toggleClass
      *
-     * @param  {DOM}      _o    DOM元素
+     * @param  {DOM}      _d    DOM元素
      * @param  {String}   _c    class名称
      */
-    toggleClass: function(_o, _c) {
-
-        // 参数类型校验
-        if (!_o.nodeType) {
-            var vali = Object.prototype.toString.call(_c).split(' ')[1].match(/[a-z]+/i)[0]
-            console.warn('Ty_err: 参数应为DOM元素 但获取到' + vali + '类型')
-            return 
-        }
-        this.dataTypeCheck([_c], ['String'])
-
-        _o.classList.toggle(_c)
-    },
+    toggleClass: (_d, _c) => _d.classList.toggle(_c),
 
     /**
      * 从url中获取某个参数的值
