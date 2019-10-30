@@ -75,7 +75,7 @@ var TyUI = {
      * @param  {String}     "yyyy-mm-dd hh-mm-ss"
      * @return {String}     返回 文字叙述 "刚刚“ "N分钟前" "N天前"等
      */
-    periodTime: function(_t) {
+    periodTime: _t => {
 
         // 把时间转换为时间戳
         const d = Date.parse(_t.replace(/-/gi, '/'))
@@ -117,25 +117,24 @@ var TyUI = {
      * @method dateFormatter
      *
      * @example
-     *          TyUI.dateFormatter('YYYY-MM-DD HH:mm:ss', new Date())
-     *          // 2019-09-12 19:06:24
-     *          TyUI.dateFormatter('YYYYMMDDHHmmss', new Date())
-     *          // 20190912191133
+     *  TyUI.dateFormatter('YYYY-MM-DD HH:mm:ss', new Date())
+     *  // 2019-09-12 19:06:24
+     *  TyUI.dateFormatter('YYYYMMDDHHmmss', new Date())
+     *  // 20190912191133
      * 
      * // 13位时间戳
      * @param  {String}  'YYYY-MM-DD HH:mm:ss' / 'YYYYMMDDHHmmss'
-     * 
      * @return {String}  2019-09-12 19:06:24 / 20190912191133
      */
-    dateFormatter: function(_fmt, _d) {
+    dateFormatter: (_fmt, _d) => {
 
-        var date = _d ? new Date(_d) : new Date()
-        var year = date.getFullYear() + ''
-        var month = date.getMonth() + 1
-        var day = date.getDate()
-        var hour = date.getHours()
-        var minutes = date.getMinutes()
-        var second = date.getSeconds()
+        const date = _d ? new Date(_d) : new Date()
+        const year = date.getFullYear() + ''
+        const month = date.getMonth() + 1
+        const day = date.getDate()
+        const hour = date.getHours()
+        const minutes = date.getMinutes()
+        const second = date.getSeconds()
 
         return _fmt.replace(/YYYY|yyyy/g, year)
             .replace(/YY|yy/g, year.substr(2, 2))
@@ -151,28 +150,28 @@ var TyUI = {
      * @method timeInterval
      *
      * @example
-     *          TyUI.timeInterval(1566867166000, 1567693791000)
+     *  TyUI.timeInterval(1566867166000, 1567693791000)
      * 
      * @param  {Number}     开始时间 1566867166000
      * @param  {Number}     结束时间 1567693791000
      * @return {Object}     { day: 9, hour: 13, minute: 37, second: 5 }
      */
-    timeInterval: function(_start, _end) {
+    timeInterval: (_start, _end) => {
         
-        var res = _end - _start
+        const res = _end - _start
         if (res < 0) { return false }
 
         // 计算天数后取余剩余毫秒再次计算
-        var DAY = Math.floor(res / (24 * 60 * 60 * 1000))
+        const DAY = Math.floor(res / (24 * 60 * 60 * 1000))
 
-        var surplus1 = res % (24 * 60 * 60 * 1000)
-        var HOUR = Math.floor(surplus1 / (60 * 60 * 1000))
+        const surplus1 = res % (24 * 60 * 60 * 1000)
+        const HOUR = Math.floor(surplus1 / (60 * 60 * 1000))
 
-        var surplus2 = surplus1 % (60 * 60 * 1000)
-        var MINUTE = Math.floor(surplus2 / (60 * 1000))
+        const surplus2 = surplus1 % (60 * 60 * 1000)
+        const MINUTE = Math.floor(surplus2 / (60 * 1000))
 
-        var surplus3 = surplus2 % (60 * 1000)
-        var SECOND = Math.floor(surplus3 / 1000)
+        const surplus3 = surplus2 % (60 * 1000)
+        const SECOND = Math.floor(surplus3 / 1000)
         
         return {
             day: DAY,
@@ -200,7 +199,7 @@ var TyUI = {
      *          console.log('_cli dosomthing')
      *      })
      */
-    sendNotification: function(_tit, _opt, _cli) {
+    sendNotification: (_tit, _opt, _cli) => {
    
         // 检查浏览器是否支持
         if (!window.Notification || !window.Notification.requestPermission()) {
@@ -243,9 +242,9 @@ var TyUI = {
      *          col2 : { x: 170, y: 70 }第二个色值的坐标
      *      })
      */
-    getImageColor: function(_params) {
+    getImageColor: _params => {
    
-        var img = new Image()
+        const img = new Image()
    
         // 解决跨越
         img.crossOrigin = ''
@@ -255,41 +254,28 @@ var TyUI = {
         _params.canvas.el.width = _params.canvas.width
         _params.canvas.el.height = _params.canvas.height
            
-        var ctx = _params.canvas.el.getContext('2d')
+        const ctx = _params.canvas.el.getContext('2d')
    
         img.onload = function() {
             // 开始绘图
             ctx.drawImage(img, 0, 0, _params.canvas.width, _params.canvas.height)
                
-            _params.el.style.background = 'linear-gradient(' +
-                   _params.direction +
-                   ', ' +
-                   getRGBA(_params.col1) +
-                   ', ' +
-                   getRGBA(_params.col2) + ')'
+            _params.el.style.background = `linear-gradient(${_params.direction}, ${getRGBA(_params.col1)}, ${getRGBA(_params.col2)})`
         }
    
         function getRGBA(_p) {
                
             // 获取图片像素信息
-            var pixel = ctx.getImageData(
+            const pixel = ctx.getImageData(
                 _p.x,
                 _p.y,
                 _params.canvas.width,
                 _params.canvas.height
             )
-            var data = pixel.data
+            const data = pixel.data
    
             // 获取rgba值
-            var rgba = 'rgba(' +
-                   data[0] +
-                   ',' +
-                   data[1] +
-                   ',' +
-                   data[2] +
-                   ',' +
-                   (data[3] / 255) +
-                   ')'
+            const rgba = `rgba(${data[0]}, ${data[1]}, ${data[2]}, ${(data[3] / 255)})`
    
             return rgba
         }
@@ -301,10 +287,10 @@ var TyUI = {
      *
      * @return {Boolean}     返回 是否滚动到页面最底部
      */
-    isScrollBorwserBottom: function() {
+    isScrollBorwserBottom: () => {
 
-        var _pos = 0
-        var _isBottom = false
+        let _pos = 0
+        let _isBottom = false
 
         // scrollHeight clientHeight
         // 在DTD已声明的情况下用documentElement 未声明的情况下用body
@@ -339,26 +325,26 @@ var TyUI = {
      *      })
      * 
      */
-    previewImg: function(_t) {
+    previewImg: _t => {
 
         if (!window.FileReader) {
             console.log('此设备不支持 new FileReader')
             return
         }
    
-        var div = document.getElementById('previewBox')
+        const div = document.getElementById('previewBox')
        
         if (_t.files && _t.files[0]) {
        
             div.innerHTML = '<img id="previewImg" class="preview-img" />'
-            var img = document.getElementById('previewImg')
+            const img = document.getElementById('previewImg')
        
-            var reader = new FileReader()
+            const reader = new FileReader()
        
             // 图片文件转换为base64
             reader.readAsDataURL(_t.files[0])
        
-            reader.onload = function(e) {
+            reader.onload = e => {
                 img.src = e.target.result
             }
         }
