@@ -233,6 +233,9 @@ var Ty = {
      * 注意：浏览器不会保留打开本地文件（file:///）的Cookie！
      * @method setCookie
      *
+     * @example
+     *  Ty.setCookie('name', 'Ty', 1)
+     * 
      * @param  {String}  _n  cookie名称
      * @param  {String}  _v  cookie值
      * @param  {Number}  _e  过期时间 单位：天
@@ -251,6 +254,9 @@ var Ty = {
      * 注意：浏览器不会保留打开本地文件（file:///）的Cookie！
      * @method getCookie
      *
+     * @example
+     *  Ty.getCookie('name')
+     * 
      * @param  {String}  _n  cookie名称
      * @return {String}      返回 Cookie
      */
