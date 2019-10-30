@@ -190,14 +190,14 @@ var TyUI = {
      * @param  {Function}  _cli  点击通知的回调函数
      * 
      * @example
-     *      var options = {
-     *          body: '通知的内容',
-     *          requireInteraction: true,
-     *          icon: '../static/img/img01.png'
-     *      }
-     *      TyUI.sendNotification('推送的内容', options, function() {
-     *          console.log('_cli dosomthing')
-     *      })
+     *  var options = {
+     *      body: '通知的内容',
+     *      requireInteraction: true,
+     *      icon: '../static/img/img01.png'
+     *  }
+     *  TyUI.sendNotification('推送的内容', options, function() {
+     *      console.log('_cli dosomthing')
+     *  })
      */
     sendNotification: (_tit, _opt, _cli) => {
    
@@ -226,21 +226,21 @@ var TyUI = {
      * 获取图片色值
      * @method getImageColor
      * 
-     * @param  {Object}    _params  画布信息
-     * 
      * @example
-     *      TyUI.getImageColor({
-     *          url: 图片的url,
-     *          canvas: {
-     *              el: document.getElementById('canvas') canvas元素,
-     *              width: 画布宽度,
-     *              height: 画布高度
-     *          }
-     *          el: document.getElementById('canv') 需要设置背景色的元素,
-     *          direction: '45deg' 渐变的方向,
-     *          col1: { x: 30, y: 30 } 第一个色值的坐标
-     *          col2 : { x: 170, y: 70 }第二个色值的坐标
-     *      })
+     *  TyUI.getImageColor({
+     *      url: 图片的url,
+     *      canvas: {
+     *          el: document.getElementById('canvas') canvas元素,
+     *          width: 画布宽度,
+     *          height: 画布高度
+     *      }
+     *      el: document.getElementById('canv') 需要设置背景色的元素,
+     *      direction: '45deg' 渐变的方向,
+     *      col1: { x: 30, y: 30 } 第一个色值的坐标
+     *      col2 : { x: 170, y: 70 }第二个色值的坐标
+     *  })
+     * 
+     * @param  {Object}    _params  画布信息
      */
     getImageColor: _params => {
    
@@ -317,13 +317,12 @@ var TyUI = {
      * 图片预览
      * @method previewImg
      *
-     * @param  {DOMEvent}  _t  事件对象 e.target
-     * 
      * @example 
-     *      ELEMENT.addEventListener('change', function(e) {
-     *          TyUI.previewImg(e.target)
-     *      })
+     *  ELEMENT.addEventListener('change', function(e) {
+     *      TyUI.previewImg(e.target)
+     *  })
      * 
+     * @param  {DOMEvent}  _t  事件对象 e.target
      */
     previewImg: _t => {
 
@@ -354,16 +353,15 @@ var TyUI = {
      * 获取图片原始尺寸
      * @method getNaturalDimensions
      *
+     * @example 
+     *  TyUI.getNaturalDimensions(la, natural => {
+     *      console.log(natural)
+     *  })
+     * 
      * @param  {DOM}        _el  图片元素
      * @param  {Function}   _f   回调
-     * 
-     * @example 
-     *       TyUI.getNaturalDimensions(la, natural => {
-     *           console.log(natural)
-     *       })
-     * 
      */
-    getNaturalDimensions: function(_el, _f) {
+    getNaturalDimensions: (_el, _f) => {
     
         if (_el.naturalWidth) {
             _f({
@@ -372,7 +370,7 @@ var TyUI = {
             })
         } else {
             // IE 6/7/8
-            var img = new Image()
+            const img = new Image()
             img.src = _el.src
 
             if (img.complete) {
@@ -381,7 +379,7 @@ var TyUI = {
                     height: img.height
                 })
             } else {
-                img.onload = function() {
+                img.onload = () => {
                     _f({
                         width: img.width,
                         height: img.height
@@ -398,17 +396,16 @@ var TyUI = {
      * @param  {DOM}  _imgs  需加载的所有图片元素
      * 
      * @example 
-     *      var lazyImgs = document.getElementsByClassName('lazy-image')
-     *      window.addEventListener('scroll', () => {
-     *          TyUI.lazyLoad(lazyImgs)
-     *      }, false)
-     * 
+     *  var lazyImgs = document.getElementsByClassName('lazy-image')
+     *  window.addEventListener('scroll', () => {
+     *      TyUI.lazyLoad(lazyImgs)
+     *  }, false)
      */
-    lazyLoad: function(_imgs) {
+    lazyLoad: _imgs => {
 
         function getOffsetParentTop(e) {
 
-            var ost = e.offsetTop
+            let ost = e.offsetTop
             // 向上查找所有 offsetParent
             // 叠加 offsetParent.offsetTop 精确元素到文档顶部的距离
             while (e.offsetParent) {
@@ -422,8 +419,8 @@ var TyUI = {
         // 如果已声明 <!DOCTYPE html> 
         // 使用 documentElement.clientHeight 获取浏览器可视高度
         // 而不是 body.clientHeight
-        var clientHeight = document.documentElement.clientHeight
-        var scrollTop = document.body.scrollTop || document.documentElement.scrollTop
+        const clientHeight = document.documentElement.clientHeight
+        const scrollTop = document.body.scrollTop || document.documentElement.scrollTop
     
         for (var i = 0; i < _imgs.length; i++) {
             
@@ -442,12 +439,12 @@ var TyUI = {
      * @param  {Boolean}  _isOpen  在popup打开/关闭时调用
      * 
      * @example 
-     *      ELEMENT.addEventListener('click', function() {
-     *          TyUI.scrollCrossDebug(true)
-     *          // ... 打开/关闭 popup 等操作
-     *      })
+     *  ELEMENT.addEventListener('click', function() {
+     *      TyUI.scrollCrossDebug(true)
+     *      // ... 打开/关闭 popup 等操作
+     *  })
      */
-    scrollCrossDebug: function(_isOpen) {
+    scrollCrossDebug: _isOpen => {
 
         if (_isOpen) {
 
@@ -469,12 +466,11 @@ var TyUI = {
      * @param  {DOMEvent}  _t  事件对象 e.target
      * 
      * @example 
-     *      ELEMENT.addEventListener('keyup', function(e) {
-     *          TyUI.formatterToFixed(e.target)
-     *      })
-     * 
+     *  ELEMENT.addEventListener('keyup', function(e) {
+     *      TyUI.formatterToFixed(e.target)
+     *  })
      */
-    formatterToFixed: function(_t) {
+    formatterToFixed: _t => {
         
         /* eslint no-useless-escape: "error" */
         // 清除“数字”和“.”以外的字符
@@ -492,24 +488,23 @@ var TyUI = {
         if (_t.value.indexOf('.') < 0 && _t.value !== '') {
             _t.value = parseFloat(_t.value)
         }
-
     },
 
     /**
      * 函数防抖
      * @method debounce
      *
+     * @example 
+     *  ELEMENT.addEventListener('keydown', TyUI.debounce(function(e) {}, 1500))
+     * 
      * @param  {Function}  _f  回调
      * @param  {Number}    _d  延迟
      * 
-     * @example 
-     *      ELEMENT.addEventListener('keydown', TyUI.debounce(function(e) {}, 1500))
-     * 
      * @return {FUNCTION}  返回目标函数节流执行
      */
-    debounce: function(_f, _d) {
+    debounce: (_f, _d) => {
 
-        var timer
+        let timer
 
         return function() {
 
@@ -533,10 +528,10 @@ var TyUI = {
      * 
      * @return {FUNCTION}  返回目标函数节流执行
      */
-    throttle: function(_f, _d) {
+    throttle: (_f, _d) => {
 
-        var switchCheck = true
-        var timer
+        let switchCheck = true
+        let timer
 
         return function() {
 
@@ -566,9 +561,9 @@ var TyUI = {
      *  所以分开执行
      * 
      * @example 
-     *      ELEMENT.addEventListener('click', () => {
-     *          TyUI.scrollX(document.getElementById('testBtn').offsetWidth)
-     *      })
+     *  ELEMENT.addEventListener('click', () => {
+     *      TyUI.scrollX(document.getElementById('testBtn').offsetWidth)
+     *  })
      * 
      */
     scrollX: function(_x) {
