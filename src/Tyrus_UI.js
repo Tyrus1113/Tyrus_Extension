@@ -354,6 +354,11 @@ var TyUI = {
      * 
      */
     previewImg: function(_t) {
+
+        if (!window.FileReader) {
+            console.log('此设备不支持 new FileReader')
+            return
+        }
    
         var div = document.getElementById('previewBox')
        
@@ -362,10 +367,7 @@ var TyUI = {
             div.innerHTML = '<img id="previewImg" class="preview-img" />'
             var img = document.getElementById('previewImg')
        
-            var reader
-            window.FileReader
-                ? reader = new FileReader()
-                : console.log('此设备不支持 new FileReader')
+            var reader = new FileReader()
        
             // 图片文件转换为base64
             reader.readAsDataURL(_t.files[0])
