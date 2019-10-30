@@ -109,7 +109,7 @@ TyUI.getNaturalDimensions(la, natural => {
 })
 
 // 格式化日期
-console.log('periodTime:', TyUI.periodTime(TyUI.dateFormatter('YYYY-MM-DD HH:mm:ss', new Date())))
+console.log('periodTime:', TyUI.periodTime(TyUI.dateFormatter('YYYY-MM-DD HH:mm:ss', '2019-10-30 12:11:00')))
 console.log('dateFormatter:', TyUI.dateFormatter('YYYY-MM-DD HH:mm:ss', 1567693791000))
 console.log('dateFormatter:', TyUI.dateFormatter('YYYYMMDDHHmmss', 1567693791000))
 console.log('timeInterval:', TyUI.timeInterval(1566867166000, 1567693791000))

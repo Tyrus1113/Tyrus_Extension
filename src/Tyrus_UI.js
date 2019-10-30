@@ -11,22 +11,20 @@ var TyUI = {
      * @method setRem
      *
      * @example
-     * TyUI.setRem()
-     * window.onresize = Ty.setRem 浏览器被重置大小时也需要调用
+     *  TyUI.setRem()
+     *  window.onresize = Ty.setRem 浏览器被重置大小时也需要调用
      * 
      */
-    setRem: function() {
+    setRem: () => {
 
-        var _doc = 0
-        var _clWidth = 0
+        let _doc = 0
         document.compatMode === 'CSS1Compat'
             ? _doc = document.documentElement
             : _doc = document.body
 
-        _clWidth = _doc.clientWidth
-
+        let _clWidth = _doc.clientWidth
         if (_clWidth > 750) _clWidth = 750
-        _doc.style.fontSize = _clWidth / 10 + 'px'
+        _doc.style.fontSize = `${_clWidth / 10}px`
     },
 
     /**
@@ -35,39 +33,32 @@ var TyUI = {
      *
      * @param  {DOM}   _el    DOM元素的 id 显示信息的容器
      */
-    getSystemInfo: function(_el) {
-
-        // 参数类型校验
-        if (!_el.nodeType) {
-            var vali = Object.prototype.toString.call(_el).split(' ')[1].match(/[a-z]+/i)[0]
-            console.warn('Ty_err: 参数应为DOM元素 但获取到' + vali + '类型')
-            return 
-        }
+    getSystemInfo: _el => {
 
         // 避免重复加载 清空列表中的元素
         _el.innerHTML = ''
 
         // 获取 userAgent 信息
-        var info = window.navigator.userAgent.split(' ')
-        var _ = new Date()
-        var time = `${_.getFullYear()}年${_.getMonth() + 1}月${_.getDate()}日`
-        var device = info[1].replace(/^\(|;$/g, '')
-        var version = info[6].replace(/_|;|\)/g, ' ')
+        const info = window.navigator.userAgent.split(' ')
+        const date = new Date()
+        const time = `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`
+        const device = info[1].replace(/^\(|;$/g, '')
+        const version = info[6].replace(/_|;|\)/g, ' ')
 
         // 获取显卡信息
-        var gl = document.createElement('canvas').getContext('experimental-webgl')
-        var debugInfo = gl.getExtension('WEBGL_debug_renderer_info')
-        var graphics = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL)
+        const gl = document.createElement('canvas').getContext('experimental-webgl')
+        const debugInfo = gl.getExtension('WEBGL_debug_renderer_info')
+        const graphics = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL)
 
-        var deviceInfo = [
+        const deviceInfo = [
             `当前时间: ${time}`,
             `当前设备: ${device}`,
-            `系统版本号: ${info[3] + ' ' + info[4] + ' ' + info[5] + ' ' + version}`,
+            `系统版本号: ${info[3]} ${info[4]} ${info[5]} ${version}`,
             `设备显卡: ${graphics}`
         ]
 
-        for (var i = 0; i < deviceInfo.length; i++) {
-            var _li = document.createElement('li')
+        for (let i = 0; i < deviceInfo.length; i++) {
+            const _li = document.createElement('li')
             _li.innerHTML = deviceInfo[i]
             _el.appendChild(_li)
         }
@@ -78,47 +69,42 @@ var TyUI = {
      * @method periodTime
      *
      * @example
-     *          var strDate = "2019-02-14 12:11:00"
-     *          TyUI.periodTime(strDate)  // 1周前
+     *  var strDate = "2019-02-14 12:11:00"
+     *  TyUI.periodTime(strDate)  // 1周前
+     * 
      * @param  {String}     "yyyy-mm-dd hh-mm-ss"
      * @return {String}     返回 文字叙述 "刚刚“ "N分钟前" "N天前"等
      */
     periodTime: function(_t) {
 
         // 把时间转换为时间戳
-        var d = Date.parse(_t.replace(/-/gi, '/'))
-        var minute = 1000 * 60
-        var hour = minute * 60
-        var day = hour * 24
-        var month = day * 30
-        var year = month * 12
+        const d = Date.parse(_t.replace(/-/gi, '/'))
+        const minute = 1000 * 60
+        const hour = minute * 60
+        const day = hour * 24
+        const month = day * 30
+        const year = month * 12
 
         // 获取当前时间戳
-        var now = new Date().getTime()
-        var diffValue = now - d
+        const now = new Date().getTime()
+        const diffValue = now - d
 
-        if (diffValue < 0) { return }
+        if (diffValue < 0) return
 
-        var yearC = diffValue / year
-        var monthC = diffValue / month
-        var weekC = diffValue / (7 * day)
-        var dayC = diffValue / day
-        var hourC = diffValue / hour
-        var minC = diffValue / minute
-        var _r = null
+        let _r = null
 
-        if (yearC >= 1) {
-            _r = parseInt(yearC) + '年前'
-        } else if (monthC >= 1) {
-            _r = parseInt(monthC) + '个月前'
-        } else if (weekC >= 1) {
-            _r = parseInt(weekC) + '周前'
-        } else if (dayC >= 1) {
-            _r = parseInt(dayC) + '天前'
-        } else if (hourC >= 1) {
-            _r = parseInt(hourC) + '小时前'
-        } else if (minC >= 1) {
-            _r = parseInt(minC) + '分钟前'
+        if (diffValue / year >= 1) {
+            _r = parseInt(diffValue / year) + '年前'
+        } else if (diffValue / month >= 1) {
+            _r = parseInt(diffValue / month) + '个月前'
+        } else if (diffValue / (7 * day) >= 1) {
+            _r = parseInt(diffValue / (7 * day)) + '周前'
+        } else if (diffValue / day >= 1) {
+            _r = parseInt(diffValue / day) + '天前'
+        } else if (diffValue / hour >= 1) {
+            _r = parseInt(diffValue / hour) + '小时前'
+        } else if (diffValue / minute >= 1) {
+            _r = parseInt(diffValue / minute) + '分钟前'
         } else {
             _r = '刚刚'
         }
