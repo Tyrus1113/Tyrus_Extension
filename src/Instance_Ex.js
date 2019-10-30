@@ -19,7 +19,7 @@ const options = {
     body: 'Welcome to Tyrus_Extension ~',
     icon: '/favicon_ty.ico'
 }
-TyUI.sendNotification('Tyrus_Extension', options, function() {
+TyUI.sendNotification('Tyrus_Extension', options, () => {
     console.log('_cli')
 })
 
@@ -49,11 +49,11 @@ document.getElementById('canvas').addEventListener('mousemove', TyUI.throttle(e 
 }, 1000))
 
 // 函数防抖
-document.getElementById('throttleTest').addEventListener('keydown', TyUI.debounce(function(e) {
+document.getElementById('throttleTest').addEventListener('keydown', TyUI.debounce(e => {
     console.log(e.target.value)
     fetch(`https://api.myjson.com/bins/jlxrd?&txt=${e.target.value}`, {
         method: 'get'
-    }).then(function(resp) {
+    }).then(resp => {
         resp.json().then((data) => {
             console.log(data)
         })
@@ -61,7 +61,7 @@ document.getElementById('throttleTest').addEventListener('keydown', TyUI.debounc
 }, 1500))
 
 // 懒加载
-var lazyImgs = document.getElementsByClassName('lazy-image')
+const lazyImgs = document.getElementsByClassName('lazy-image')
 
 window.addEventListener('scroll', () => {
     // console.log('scrollTop :', document.documentElement.scrollTop || document.body.scrollTop)
@@ -74,22 +74,22 @@ window.addEventListener('scroll', () => {
 }, false)
 
 // 实时截断小数点后两位之后的内容
-document.getElementById('formatterTest').addEventListener('keyup', function(e) {
+document.getElementById('formatterTest').addEventListener('keyup', e => {
     TyUI.formatterToFixed(e.target)
 })
 
 // 图片预览
-document.getElementById('previewInput').addEventListener('change', function(e) {
+document.getElementById('previewInput').addEventListener('change', e => {
     TyUI.previewImg(e.target)
 })
 
 // 解决滚动穿透问题
-document.getElementById('scrollCross').addEventListener('click', function() {
+document.getElementById('scrollCross').addEventListener('click', () => {
     TyUI.scrollCrossDebug(true)
     document.getElementById('popupMask').style.display = 'block'
     document.getElementById('popupContainer').style.display = 'block'
 })
-document.getElementById('popupMask').addEventListener('click', function() {
+document.getElementById('popupMask').addEventListener('click', () => {
     TyUI.scrollCrossDebug(false)
     document.getElementById('popupMask').style.display = 'none'
     document.getElementById('popupContainer').style.display = 'none'
@@ -103,7 +103,7 @@ document.getElementById('ScrollToAnywhere').addEventListener('click', () => {
 
 // 获取图片原始尺寸
 // 目标元素与懒加载测试元素相同 先把目标元素 .lazy-image 滑动到可视范围后再测试
-var la = document.getElementById('getNaturalDimensions')
+const la = document.getElementById('getNaturalDimensions')
 TyUI.getNaturalDimensions(la, natural => {
     console.log('getNaturalDimensions:', natural)
 })

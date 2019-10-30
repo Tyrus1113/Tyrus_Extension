@@ -256,14 +256,14 @@ var TyUI = {
            
         const ctx = _params.canvas.el.getContext('2d')
    
-        img.onload = function() {
+        img.onload = () => {
             // 开始绘图
             ctx.drawImage(img, 0, 0, _params.canvas.width, _params.canvas.height)
                
             _params.el.style.background = `linear-gradient(${_params.direction}, ${getRGBA(_params.col1)}, ${getRGBA(_params.col2)})`
         }
    
-        function getRGBA(_p) {
+        const getRGBA = _p => {
                
             // 获取图片像素信息
             const pixel = ctx.getImageData(
@@ -359,12 +359,12 @@ var TyUI = {
      *  })
      * 
      * @param  {DOM}        _el  图片元素
-     * @param  {Function}   _f   回调
+     * @param  {Function}   _fn  回调
      */
-    getNaturalDimensions: (_el, _f) => {
+    getNaturalDimensions: (_el, _fn) => {
     
         if (_el.naturalWidth) {
-            _f({
+            _fn({
                 width: _el.naturalWidth,
                 height: _el.naturalHeight
             })
@@ -374,13 +374,13 @@ var TyUI = {
             img.src = _el.src
 
             if (img.complete) {
-                _f({
+                _fn({
                     width: img.width,
                     height: img.height
                 })
             } else {
                 img.onload = () => {
-                    _f({
+                    _fn({
                         width: img.width,
                         height: img.height
                     })
@@ -403,7 +403,7 @@ var TyUI = {
      */
     lazyLoad: _imgs => {
 
-        function getOffsetParentTop(e) {
+        const getOffsetParentTop = e => {
 
             let ost = e.offsetTop
             // 向上查找所有 offsetParent
@@ -463,12 +463,12 @@ var TyUI = {
      * 实时截断小数点后两位之后的内容
      * @method formatterToFixed
      *
-     * @param  {DOMEvent}  _t  事件对象 e.target
-     * 
      * @example 
      *  ELEMENT.addEventListener('keyup', function(e) {
      *      TyUI.formatterToFixed(e.target)
      *  })
+     * 
+     * @param  {DOMEvent}  _t  事件对象 e.target
      */
     formatterToFixed: _t => {
         
@@ -566,7 +566,7 @@ var TyUI = {
      *  })
      * 
      */
-    scrollX: function(_x) {
+    scrollX: _x => {
 
         // 无参数 则X轴滚动到页面最左边
         _x = _x || 0
