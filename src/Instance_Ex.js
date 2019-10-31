@@ -64,7 +64,7 @@ document.getElementById('throttleTest').addEventListener('keydown', TyUI.debounc
 const lazyImgs = document.getElementsByClassName('lazy-image')
 
 window.addEventListener('scroll', () => {
-    // console.log('scrollTop :', document.documentElement.scrollTop || document.body.scrollTop)
+    console.log('scrollTop :', document.scrollingElement.scrollTop)
     
     // 判断滚动条是否滚动到页面最底部
     console.log('isScrollBorwserBottom :', TyUI.isScrollBorwserBottom())

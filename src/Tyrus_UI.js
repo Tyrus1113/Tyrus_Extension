@@ -17,10 +17,7 @@ var TyUI = {
      */
     setRem: () => {
 
-        let _doc = 0
-        document.compatMode === 'CSS1Compat'
-            ? _doc = document.documentElement
-            : _doc = document.body
+        let _doc = document.scrollingElement
 
         let _clWidth = _doc.clientWidth
         if (_clWidth > 750) _clWidth = 750
@@ -289,22 +286,10 @@ var TyUI = {
      */
     isScrollBorwserBottom: () => {
 
-        let _pos = 0
         let _isBottom = false
-
-        // scrollHeight clientHeight
-        // 在DTD已声明的情况下用documentElement 未声明的情况下用body
-        // document.compatMode 可以用来判断是否声明了DTD
-        // 值为 BackCompat 未声明  值为 CSS1Compat 已声明
-        if (document.compatMode === 'CSS1Compat') {
-            _pos = document.documentElement.scrollHeight - 
-                document.documentElement.scrollTop - 
-                document.documentElement.clientHeight
-        } else {
-            _pos = document.body.scrollHeight - 
-                document.body.scrollTop - 
-                document.body.clientHeight
-        }
+        const _pos = document.scrollingElement.scrollHeight - 
+                document.scrollingElement.scrollTop - 
+                document.scrollingElement.clientHeight
 
         if (_pos <= 0) {
             _isBottom = true
@@ -416,12 +401,9 @@ var TyUI = {
             return ost
         }
     
-        // 如果已声明 <!DOCTYPE html> 
-        // 使用 documentElement.clientHeight 获取浏览器可视高度
-        // 而不是 body.clientHeight
-        const clientHeight = document.documentElement.clientHeight
-        const scrollTop = document.body.scrollTop || document.documentElement.scrollTop
-    
+        const clientHeight = document.scrollingElement.clientHeight
+        const scrollTop = document.scrollingElement.scrollTop
+        
         for (var i = 0; i < _imgs.length; i++) {
             
             // 可视高度 + 滚动高度 > 当前元素距文档顶部的高度 则元素已进入浏览器可视范围
@@ -448,14 +430,14 @@ var TyUI = {
 
         if (_isOpen) {
 
-            let scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+            let scrollTop = document.scrollingElement.scrollTop
             document.body.style.cssText += `position: fixed; top: -${scrollTop}px; width: 100%;`
         } else {
 
             let body = document.body
             body.style.position = 'static'
             body.style.width = 'auto'
-            document.documentElement.scrollTop = document.body.scrollTop = -parseInt(body.style.top)
+            document.scrollingElement.scrollTop = -parseInt(body.style.top)
         }
     },
 
@@ -595,7 +577,7 @@ var TyUI = {
             window.requestAnimationFrame = fn => setTimeout(fn, 17)
         }
 
-        let s = document.documentElement.scrollTop || document.body.scrollTop
+        let s = document.scrollingElement.scrollTop
     
         let step = () => {
 
