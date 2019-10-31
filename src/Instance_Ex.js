@@ -28,8 +28,8 @@ TyUI.getImageColor({
     url: 'https://i.loli.net/2019/08/05/HoIAjlTLnURGQce.jpg',
     canvas: {
         el: document.getElementById('canvas'),
-        width: 200,
-        height: 100
+        width: 260,
+        height: 130
     },
     el: document.getElementById('canv'),
     direction: '45deg',
