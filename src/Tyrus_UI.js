@@ -192,7 +192,7 @@ var TyUI = {
      *      requireInteraction: true,
      *      icon: '../static/img/img01.png'
      *  }
-     *  TyUI.sendNotification('推送的内容', options, function() {
+     *  TyUI.sendNotification('推送的内容', options, () => {
      *      console.log('_cli dosomthing')
      *  })
      */
@@ -303,7 +303,7 @@ var TyUI = {
      * @method previewImg
      *
      * @example 
-     *  ELEMENT.addEventListener('change', function(e) {
+     *  ELEMENT.addEventListener('change', e => {
      *      TyUI.previewImg(e.target)
      *  })
      * 
@@ -421,7 +421,7 @@ var TyUI = {
      * @param  {Boolean}  _isOpen  在popup打开/关闭时调用
      * 
      * @example 
-     *  ELEMENT.addEventListener('click', function() {
+     *  ELEMENT.addEventListener('click', () => {
      *      TyUI.scrollCrossDebug(true)
      *      // ... 打开/关闭 popup 等操作
      *  })
@@ -446,7 +446,7 @@ var TyUI = {
      * @method formatterToFixed
      *
      * @example 
-     *  ELEMENT.addEventListener('keyup', function(e) {
+     *  ELEMENT.addEventListener('keyup', e => {
      *      TyUI.formatterToFixed(e.target)
      *  })
      * 
@@ -477,7 +477,7 @@ var TyUI = {
      * @method debounce
      *
      * @example 
-     *  ELEMENT.addEventListener('keydown', TyUI.debounce(function(e) {}, 1500))
+     *  ELEMENT.addEventListener('keydown', TyUI.debounce(e => {}, 1500))
      * 
      * @param  {Function}  _f  回调
      * @param  {Number}    _d  延迟
@@ -517,9 +517,7 @@ var TyUI = {
 
         return function() {
 
-            if (!switchCheck) {
-                return
-            }
+            if (!switchCheck) return
 
             switchCheck = false
             clearTimeout(timer)
