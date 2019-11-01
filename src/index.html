@@ -11,7 +11,11 @@
     <title>Tyrus_Extension</title>
 </head>
 <body>
-
+    <!-- 回到顶部 -->
+    <h4 id="goback" class="goback">
+        <t-icon class="t-arrow-up"></t-icon>
+    </h4>
+    
     <!-- 获取图片原始尺寸 -->
     <div class="get-natural-dimensions">
         <img id="getNaturalDimensions" src="https://placehold.it/520x260" />
@@ -34,7 +38,7 @@
     </div>
 
     <!-- 画布 -->
-    <div class="canvas-container">
+    <div id="canvasContainer" class="canvas-container">
         <canvas id="canvas"></canvas>
     </div>
     <!-- 获取图片色值 -->

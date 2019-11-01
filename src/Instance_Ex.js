@@ -10,6 +10,30 @@ import TyUI from './Tyrus_UI'
 TyUI.setRem()
 window.onresize = Ty.setRem
 
+// 懒加载
+const lazyImgs = document.getElementsByClassName('lazy-image')
+
+// 回到顶部
+const goback = document.getElementById('goback')
+goback.addEventListener('click', () => {
+    TyUI.scrollY()
+})
+
+// 滚动监听
+window.addEventListener('scroll', () => {
+    
+    // console.log('scrollTop :', document.scrollingElement.scrollTop)
+    document.scrollingElement.scrollTop >= 300
+        ? goback.style.display = 'block'
+        : goback.style.display = 'none'
+    
+    // 判断滚动条是否滚动到页面最底部
+    console.log('isScrollBorwserBottom :', TyUI.isScrollBorwserBottom())
+    
+    // 懒加载
+    TyUI.lazyLoad(lazyImgs)
+}, false)
+
 // 获取系统信息
 TyUI.getSystemInfo(document.getElementById('deviceInfo'))
 console.log(window.screen.width, window.screen.height)
@@ -60,19 +84,6 @@ document.getElementById('throttleTest').addEventListener('keydown', TyUI.debounc
     })
 }, 1500))
 
-// 懒加载
-const lazyImgs = document.getElementsByClassName('lazy-image')
-
-window.addEventListener('scroll', () => {
-    console.log('scrollTop :', document.scrollingElement.scrollTop)
-    
-    // 判断滚动条是否滚动到页面最底部
-    console.log('isScrollBorwserBottom :', TyUI.isScrollBorwserBottom())
-    
-    // 懒加载
-    TyUI.lazyLoad(lazyImgs)
-}, false)
-
 // 实时截断小数点后两位之后的内容
 document.getElementById('formatterTest').addEventListener('keyup', e => {
     TyUI.formatterToFixed(e.target)
@@ -97,8 +108,7 @@ document.getElementById('popupMask').addEventListener('click', () => {
 
 // 滚动到某处 (过渡动画)
 document.getElementById('ScrollToAnywhere').addEventListener('click', () => {
-    // TyUI.scrollY()
-    TyUI.scrollY(document.getElementById('formatterTest').offsetTop)
+    TyUI.scrollY(document.getElementById('canvasContainer').offsetTop)
 })
 
 // 获取图片原始尺寸
