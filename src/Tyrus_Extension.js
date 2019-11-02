@@ -345,7 +345,31 @@ var Ty = {
      * @param  {String}  _s     原字符串
      * @return {String} 返回    处理后的字符串
      */
-    getByteLength: _s => new Blob([_s]).size
+    getByteLength: _s => new Blob([_s]).size,
+
+    /**
+     * Base64解码
+     * @method decode
+     *
+     * @example
+     *  Ty.decode('dGhpcyUyMGlzJTIwdGVzdCUyMCVFNSU5MCVBQiVFNiU5QyU4OSVFNCVCOCVBRCVFNiU5NiU4NyUyMDEyMw==')
+     *  
+     * @param  {String}  _s     原字符串
+     * @return {String} 返回    解码后的字符串
+     */
+    decode: _s => window.decodeURIComponent(window.atob(_s)),
+    
+    /**
+     * Base64编码
+     * @method encode
+     *
+     * @example
+     *  Ty.encode('this is test 含有中文 123')
+     *  
+     * @param  {String}  _s     原字符串
+     * @return {String} 返回    编码码后的字符串
+     */
+    encode: _s => window.btoa(window.encodeURIComponent('this is test 含有中文 123'))
 
 } //  ---- **** Ty end **** ----
 
