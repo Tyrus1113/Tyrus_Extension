@@ -201,3 +201,11 @@ document.getElementById('onceBtn').addEventListener('click', Ty.onceCall(e => {
 }))
 
 console.log('isEmptyObj:', Ty.isEmptyObj({}))
+
+// Base64解码
+const decode = window.decodeURIComponent(window.atob('dGhpcyUyMGlzJTIwdGVzdCUyMCVFNSU5MCVBQiVFNiU5QyU4OSVFNCVCOCVBRCVFNiU5NiU4NyUyMDEyMw=='))
+console.log('decode:', decode)
+
+// Base64编码
+const encode = window.btoa(window.encodeURIComponent('this is test 含有中文 123'))
+console.log('encode:', encode)
