@@ -242,6 +242,7 @@ body {
 		&:hover {
 			background-color: rgba(255, 255, 255, 0.8);
 			box-shadow: 0px 8px 16px 6px rgba(102, 102, 102, 0.3);
+			animation: hoverBack .3s;
 		}
 
 		// css icon
@@ -269,6 +270,16 @@ body {
 			border-color: rgba(102, 102, 102, 0.6);
 			transform: translate(-50%, -25%) rotate(45deg);
 			-ms-transform: translate(-50%, -25%) rotate(45deg);
+		}
+	}
+
+	@keyframes hoverBack {
+		50% {
+			transform: scale(1.2);
+		}
+
+		100% {
+			transform: scale(1);
 		}
 	}
 
