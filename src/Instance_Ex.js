@@ -207,3 +207,16 @@ console.log('decode:', Ty.decode('dGhpcyUyMGlzJTIwdGVzdCUyMCVFNSU5MCVBQiVFNiU5Qy
 
 // Base64编码
 console.log('encode:', Ty.encode('this is test 含有中文 123'))
+
+// 点赞
+document.getElementById('thumbsBtn').addEventListener('click', function() {
+    if (!Ty.hasClass(this, 'thumbs-color')) {
+        this.classList.add('thumbs')
+        this.classList.add('thumbs-color')
+        this.addEventListener('animationend', () => {
+            this.classList.remove('thumbs')
+        })
+    } else {
+        this.classList.remove('thumbs-color')
+    }
+})
