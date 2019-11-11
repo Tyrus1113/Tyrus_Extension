@@ -29,7 +29,10 @@ module.exports = {
         // 增加路径别名
         alias: {
             '@': path.resolve(__dirname, 'src/')
-        }
+        },
+        // resolve.modules 用于配置webpack去哪些目录下查找第三方模块 默认是node_modules
+        // 第三方模块放在项目根目录时 就没必要按照默认一层层查找 直接指明存放的绝对位置
+        modules: [path.resolve(__dirname, 'node_modules')]
     },
     module: {
         rules: [
@@ -75,8 +78,10 @@ module.exports = {
                         }
                     }
                 ],
+                // 仅对src目录下文件使用babel-loader
+                include: path.resolve(__dirname, 'src'),
                 // 加快编译速度，不包含node_modules文件夹内容
-                exclude: /(node_module)/
+                exclude: path.resolve(__dirname, './node_modules')
             },
             {
                 test: /\.(png|svg|jpe?g|gif)$/,
