@@ -32,7 +32,10 @@ module.exports = {
         },
         // resolve.modules 用于配置webpack去哪些目录下查找第三方模块 默认是node_modules
         // 第三方模块放在项目根目录时 就没必要按照默认一层层查找 直接指明存放的绝对位置
-        modules: [path.resolve(__dirname, 'node_modules')]
+        modules: [path.resolve(__dirname, 'node_modules')],
+        // 第三方模块会定义多个入口文件 mainFields定义使用第三方模块的哪个入口文件
+        // 设置尽量少的值可以减少入口文件的搜索步骤
+        mainFields: ['main']
     },
     module: {
         rules: [
