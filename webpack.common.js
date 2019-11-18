@@ -28,7 +28,8 @@ module.exports = {
         extensions: ['.js', '.json'],
         // 增加路径别名
         alias: {
-            '@': path.resolve(__dirname, 'src/')
+            '@': path.resolve(__dirname, 'src/'),
+            '^': path.resolve(__dirname, 'static/')
         },
         // resolve.modules 用于配置webpack去哪些目录下查找第三方模块 默认是node_modules
         // 第三方模块放在项目根目录时 就没必要按照默认一层层查找 直接指明存放的绝对位置
