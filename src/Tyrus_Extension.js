@@ -34,6 +34,19 @@ const Ty = {
     isEqualItems: _arr => _arr.every(_i => _i === _arr[0]),
 
     /**
+     * 删除数组中符合条件的值 (基础数据类型)
+     * @method delItem
+     *
+     * @example
+     *  Ty.delItem([1, 2, 3, 4], 3)
+     * 
+     * @param  {Array}                  _arr   需要检查的数组
+     * @param  {Number/String/Boolean}  _name  需要删除的值
+     * @return {Array}                       返回 删除指定值后的新数组
+     */
+    delItem: (_arr, _name) => _arr.filter(_i => _i !== _name),
+
+    /**
      * 获取数组内的平均值
      * @method averageItems
      * 

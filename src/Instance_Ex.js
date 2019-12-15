@@ -216,6 +216,6 @@ document.getElementById('thumbsBtn').addEventListener('click', function() {
     }
 })
 
-// 删除数组中符合条件的值
-const delItem = (_arr, _name) => _arr.filter(_i => _i !== _name)
 console.log('delItem:', delItem([1, 2, 3, 4], 1))
+// 删除数组中符合条件的值 (基础数据类型)
+console.log('delItem:', Ty.delItem([1, 2, 3, 4], 3))
