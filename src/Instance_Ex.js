@@ -216,6 +216,5 @@ document.getElementById('thumbsBtn').addEventListener('click', function() {
     }
 })
 
-console.log('delItem:', delItem([1, 2, 3, 4], 1))
 // 删除数组中符合条件的值 (基础数据类型)
 console.log('delItem:', Ty.delItem([1, 2, 3, 4], 3))
