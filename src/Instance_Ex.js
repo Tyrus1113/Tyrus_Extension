@@ -145,10 +145,6 @@ console.log('difference:', Ty.difference([1, 2, 3, 5], [1, 2, 4]))
 // 交集
 console.log('intersection:', Ty.intersection([1, 2, 3], [1, 2, 4]))
 
-// 删除数组中符合条件的值 Testing...
-// const delItem = (_arr, _fn) => _arr.splice(_arr.findIndex(_i => _fn(_i)), 1)
-// console.log(delItem([1, 2, 3, 4], n => n > 3))
-
 // 删除字符串中的xml/html标签
 console.log('delHTMLTags:', Ty.delHTMLTags('<div id="popupMask"><a href="#">test text</a></div>'))
 
@@ -219,3 +215,7 @@ document.getElementById('thumbsBtn').addEventListener('click', function() {
         this.classList.remove('thumbs-color')
     }
 })
+
+// 删除数组中符合条件的值
+const delItem = (_arr, _name) => _arr.filter(_i => _i !== _name)
+console.log('delItem:', delItem([1, 2, 3, 4], 1))

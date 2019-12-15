@@ -4,7 +4,7 @@
  */
 
 //  ---- **** Ty start **** ----
-var TyUI = {
+const TyUI = {
 
     /**
      * 设置文档根节点字号
