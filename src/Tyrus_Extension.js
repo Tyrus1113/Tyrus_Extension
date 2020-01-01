@@ -386,4 +386,4 @@ const Ty = {
 
 } //  ---- **** Ty end **** ----
 
-export { Ty }
+module.exports = Ty
