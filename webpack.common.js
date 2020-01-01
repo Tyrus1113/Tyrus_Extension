@@ -19,9 +19,12 @@ const Webpack = require('webpack')
 module.exports = {
     entry: './src/index.js',
     output: {
-        filename: 'ty_bundle.[hash:8].js',
+        filename: 'bundle.js',
+        // filename: 'ty_bundle.[hash:8].js',
         path: path.resolve(__dirname, 'dist'),
-        publicPath: '/'
+        publicPath: '/',
+        libraryTarget: 'umd',
+        library: 'T'
     },
     resolve: {
         // 忽略后缀名 默认值 .js .json
