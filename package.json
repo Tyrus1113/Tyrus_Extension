@@ -1,6 +1,6 @@
 {
   "name": "tyrus_extension",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "a javascript extension",
   "main": "index.js",
   "scripts": {
