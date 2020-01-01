@@ -386,4 +386,4 @@ const Ty = {
 
 } //  ---- **** Ty end **** ----
 
-export default Ty
+export { Ty }

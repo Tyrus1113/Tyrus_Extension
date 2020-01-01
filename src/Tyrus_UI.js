@@ -597,4 +597,4 @@ const TyUI = {
 
 } //  ---- **** Ty end **** ----
 
-export default TyUI
+export { TyUI }
