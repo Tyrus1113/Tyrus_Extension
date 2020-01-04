@@ -21,10 +21,10 @@ module.exports = {
     output: {
         filename: 'bundle.js',
         // filename: 'ty_bundle.[hash:8].js',
-        path: path.resolve(__dirname, 'dist'),
-        publicPath: '/',
-        libraryTarget: 'umd',
-        library: 'T'
+        path: path.resolve(__dirname, 'dist')
+        // publicPath: '/',
+        // libraryTarget: 'umd',
+        // library: 'T'
     },
     resolve: {
         // 忽略后缀名 默认值 .js .json
@@ -111,9 +111,9 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin(['dist']),
         new HtmlWebpackPlugin({
-            title: 'Webpack App', // 默认值：Webpack App
-            filename: 'index.html', // 默认值： 'index.html'
-            template: path.resolve(__dirname, 'src/index.html'),
+            title: 'Webpack App',
+            filename: 'index.html',
+            template: path.resolve(__dirname, 'page/index.html'),
             favicon: 'favicon_ty.ico',
             minify: {
                 collapseWhitespace: true, // 是否移除空格 
