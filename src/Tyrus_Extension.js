@@ -242,10 +242,9 @@ const T = {
             for (let j = 0; j < vals.length; j++) {
                 arr.push(vals[j][i])
             }
-            console.log('arr:', arr)
             newArr.push(arr)
         }
-        console.log('newArr:', newArr)
+        return newArr
     },
     
     // ----------------------------- 以上为数据相关 以下为UI相关 -----------------------------
