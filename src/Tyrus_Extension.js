@@ -188,18 +188,20 @@ const T = {
      * 比较两个对象是否相同
      * @method isEqualObj
      *
+     * @example 
+     *  暂时对象中的值不可包含 NaN，Array，Object
+     * 
      * @param  {Object}  _o1  需要对比的对象
      * @param  {Object}  _o2  需要对比的对象
      * @return {Boolean}      返回 是否相同
      */
     isEqualObj: (_o1, _o2) => {
-        var o1 = Object.keys(_o1)
-        var o2 = Object.keys(_o2)
+        const o1 = Object.keys(_o1)
+        const o2 = Object.keys(_o2)
         if (o1.length !== o2.length) return false
         
-        for (var i = 0; i < o1.length; i++) {
-    
-            var key = o1[i]
+        for (let i = 0; i < o1.length; i++) {
+            const key = o1[i]
             if (_o1[key] !== _o2[key]) return false
         }
     
@@ -208,12 +210,45 @@ const T = {
 
     /**
      * 对象是否为空
-     * @method isEmpTObj
+     * @method isEmptyObj
      *
      * @param  {Object}   _o  原对象
      * @return {Boolean}      返回 true 非空 / false 空
      */
-    isEmpTObj: _o => Object.keys(_o).length !== 0,
+    isEmptyObj: _o => Object.keys(_o).length > 0,
+
+    /**
+     * 数组横向纵向相互转换
+     * @method transformArrayVerticallyAndHorizontally
+     * 
+     * @example
+     *    const OBJ01 = {
+     *        arr1: [163, 27, 191, 1515],
+     *        arr2: [179, 33, 195, 0],
+     *        arr3: [3351, 6272, 1717, 0],
+     *        arr4: [36, 71, 673, 533],
+     *        arr5: [0, 0, 1633, 0]
+     *    }
+     *   T.transformArrayVerticallyAndHorizontally(OBJ01)
+     * 
+     * @param  {Object}   _o  原对象
+     * @return {Array}        返回 树结构
+     */
+    transformArrayVerticallyAndHorizontally: (_o) => {
+        const vals = Object.values(_o)
+        const newArr = []
+        for (let i = 0; i < vals[0].length; i++) {
+            const arr = []
+            for (let j = 0; j < vals.length; j++) {
+                arr.push(vals[j][i])
+            }
+            console.log('arr:', arr)
+            newArr.push(arr)
+        }
+        console.log('newArr:', newArr)
+    },
+    
+    // ----------------------------- 以上为数据相关 以下为UI相关 -----------------------------
 
     /**
      * 去除多余空格
@@ -635,7 +670,9 @@ const T = {
             // 开始绘图
             ctx.drawImage(img, 0, 0, _params.canvas.width, _params.canvas.height)
                
-            _params.el.style.background = `linear-gradient(${_params.direction}, ${getRGBA(_params.col1)}, ${getRGBA(_params.col2)})`
+            _params.el.style.background = `linear-gradient(${_params.direction},
+                ${getRGBA(_params.col1)},
+                ${getRGBA(_params.col2)})`
         }
    
         const getRGBA = _p => {

@@ -68,7 +68,7 @@ T.getImageColor({
 
 // 函数节流
 document.getElementById('canvas').addEventListener('mousemove', T.throttle(e => {
-    console.log(`${e.clientX}, ${e.clienT}`)
+    console.log(`${e.clientX}, ${e.clientY}`)
 }, 1000))
 
 // 函数防抖
@@ -195,7 +195,7 @@ document.getElementById('onceBtn').addEventListener('click', T.onceCall(e => {
     console.log('onceFunc called just once', e)
 }))
 
-console.log('isEmpTObj:', T.isEmpTObj({ a: 1 }))
+console.log('isEmptyObj:', T.isEmptyObj({ a: 1 }))
 
 // Base64解码
 console.log('decode:', T.decode('dGhpcyUyMGlzJTIwdGVzdCUyMCVFNSU5MCVBQiVFNiU5QyU4OSVFNCVCOCVBRCVFNiU5NiU4NyUyMDEyMw=='))
@@ -217,3 +217,27 @@ document.getElementById('thumbsBtn').addEventListener('click', function() {
 
 // 删除数组中符合条件的值 (基础数据类型)
 console.log('delItem:', T.delItem([1, 2, 3, 4], 3))
+
+const OBJ01 = {
+    arr1: [163, 27, 191, 1515],
+    arr2: [179, 33, 195, 0],
+    arr3: [3351, 6272, 1717, 0],
+    arr4: [36, 71, 673, 533],
+    arr5: [0, 0, 1633, 0]
+}
+const ARR03 = [
+    [163, 27, 191, 1515],
+    [179, 33, 195, 0],
+    [3351, 6272, 1717, 0],
+    [36, 71, 673, 533],
+    [0, 0, 1633, 0]
+]
+const ARR04 = [
+    [163, 179, 3351, 36, 0],
+    [27, 33, 6272, 71, 0],
+    [191, 195, 1717, 673, 1633],
+    [1515, 0, 0, 533, 0]
+]
+
+// 数组横向纵向相互转换
+console.log('transformArrayVerticallyAndHorizontally:', T.transformArrayVerticallyAndHorizontally(OBJ01))
