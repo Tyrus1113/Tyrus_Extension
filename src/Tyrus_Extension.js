@@ -235,6 +235,7 @@ const T = {
      * @return {Array}        返回 树结构
      */
     transformArrayVerticallyAndHorizontally: (_o) => {
+        
         const vals = Object.values(_o)
         const newArr = []
         for (let i = 0; i < vals[0].length; i++) {
@@ -245,6 +246,34 @@ const T = {
             newArr.push(arr)
         }
         return newArr
+    },
+
+    /**
+    * 根据各级别id 递归定位到最终级别的对象中
+    * @method locateObject
+    *
+    * @param  {Array}   _a  原数组
+    * @param  {Array}   _i  各级别id
+    * @return {Object}      返回 定位到的对象
+    */
+    locateObject: (_a, _i) => {
+        let o = {}
+
+        for (let i = 0; i < _a.length; i++) {
+
+            if (_a[i].id === _i[0]) {
+
+                if (_a[i].children && _i.length > 0) {
+                    _i.shift()
+                    return T.locateObject(_a[i].children, _i)
+                } else {
+                    o = _a[i]
+                }
+                
+            }
+        }
+
+        return o
     },
     
     // ----------------------------- 以上为数据相关 以下为UI相关 -----------------------------

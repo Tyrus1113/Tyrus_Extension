@@ -242,3 +242,138 @@ const ARR04 = [
 
 // 数组横向纵向相互转换
 console.log('transformArrayVerticallyAndHorizontally:', T.transformArrayVerticallyAndHorizontally(OBJ01))
+
+const ARR05 = [
+    {
+        firstId: 163,
+        secondId: 27,
+        thirdId: 191
+    },
+    {
+        firstId: 163,
+        secondId: 27,
+        thirdId: 193
+    },
+    {
+        firstId: 179,
+        secondId: 33,
+        thirdId: 169
+    },
+    {
+        firstId: 179,
+        secondId: 35,
+        thirdId: 188
+    },
+    {
+        firstId: 673,
+        secondId: 1633,
+        thirdId: 1515
+    }
+]
+
+var ARR06 = [
+    {
+        id: 346,
+        title: 'AUDI4',
+        children: [
+            {
+                id: 358,
+                title: 'AUDI6'
+            },
+            {
+                id: 357,
+                title: 'AUDI5'
+            }
+        ]
+    },
+    {
+        id: 363,
+        title: 'AUDI10',
+        children: [
+            {
+                id: 345,
+                title: 'AUDI3'
+            },
+            {
+                id: 343,
+                title: 'AUDI2'
+            }
+        ]
+    },
+    {
+        id: 344,
+        title: 'AUDI1'
+    },
+    {
+        id: 274,
+        title: 'BMW6',
+        children: [
+            {
+                id: 275,
+                title: 'BMW7',
+                children: [
+                    {
+                        id: 277,
+                        title: 'BMW9'
+                    },
+                    {
+                        id: 276,
+                        title: 'BMW8'
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        id: 278,
+        title: 'BMW10',
+        children: [
+            {
+                id: 279,
+                title: 'BMW11',
+                children: [
+                    {
+                        id: 268,
+                        title: 'BMW2'
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        id: 283,
+        title: 'BENZ3',
+        children: [
+            {
+                id: 292,
+                title: 'BENZ53',
+                children: [
+                    {
+                        id: 290,
+                        title: 'BENZ43'
+                    },
+                    {
+                        id: 288,
+                        title: 'BENZ33'
+                    },
+                    {
+                        id: 291,
+                        title: 'BENZ52'
+                    }
+                ]
+            },
+            {
+                id: 287,
+                title: 'BENZ32',
+                children: [
+                    {
+                        id: 289,
+                        title: 'BENZ42'
+                    }
+                ]
+            }
+        ]
+    }
+]
+// 根据各级别id 递归定位到最终级别的对象中
+console.log('locateObject:', T.locateObject(ARR06, [274, 275, 276]))
