@@ -263,7 +263,7 @@ const T = {
 
             if (_a[i].id === _i[0]) {
 
-                if (_a[i].children && _i.length > 0) {
+                if (_a[i].children && _i.length > 1) {
                     _i.shift()
                     return T.locateObject(_a[i].children, _i)
                 } else {

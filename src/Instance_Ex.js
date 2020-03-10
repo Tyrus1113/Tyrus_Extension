@@ -318,7 +318,13 @@ var ARR06 = [
                     },
                     {
                         id: 276,
-                        title: 'BMW8'
+                        title: 'BMW8',
+                        children: [
+                            {
+                                id: 290,
+                                title: 'BMW10'
+                            }
+                        ]
                     }
                 ]
             }
@@ -376,4 +382,4 @@ var ARR06 = [
     }
 ]
 // 根据各级别id 递归定位到最终级别的对象中
-console.log('locateObject:', T.locateObject(ARR06, [274, 275, 276]))
+console.log('locateObject:', T.locateObject(ARR06, [274, 275, 276, 290]))
