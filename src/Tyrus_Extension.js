@@ -84,6 +84,19 @@ const T = {
     flattenItems: _arr => [].concat(..._arr.map(_i => Array.isArray(_i) ? T.flattenItems(_i) : _i)),
 
     /**
+     * 递归展平树结构
+     * @method flattenTree
+     *
+     * @example
+     *  T.flattenTree(ARR06)
+     * 
+     * @param  {Array}  _arr  需要检查的数组
+     * @param  {Number} _i    层级数
+     * @return {Array} 返回   展平后的数组
+     */
+    flattenTree: (_arr, _i = 0) => _arr.reduce((ar, { id, title, children = [] }) => ar.concat([{ id, title }], T.flattenTree(children, _i + 1)), []),
+
+    /**
      * 差集
      * @method difference
      *

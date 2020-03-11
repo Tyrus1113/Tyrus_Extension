@@ -321,7 +321,7 @@ var ARR06 = [
                         title: 'BMW8',
                         children: [
                             {
-                                id: 290,
+                                id: 293,
                                 title: 'BMW10'
                             }
                         ]
@@ -382,4 +382,7 @@ var ARR06 = [
     }
 ]
 // 根据各级别id 递归定位到最终级别的对象中
-console.log('locateObject:', T.locateObject(ARR06, [274, 275, 276, 290]))
+console.log('locateObject:', T.locateObject(ARR06, [274, 275, 276, 293]))
+
+// 递归展平树结构
+console.log('flatten:', T.flattenTree(ARR06))
