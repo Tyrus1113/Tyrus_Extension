@@ -73,15 +73,15 @@ const T = {
 
     /**
      * 递归展平数组
-     * @method flattenItems
+     * @method flattenArray
      *
      * @example
-     *  T.flattenItems([1, 2, 3, [5, ['test'], 7, [9, 10]]])
+     *  T.flattenArray([1, 2, 3, [5, ['test'], 7, [9, 10]]])
      * 
      * @param  {Array}  _arr  需要检查的数组
      * @return {Number} 返回   展平后的数组
      */
-    flattenItems: _arr => [].concat(..._arr.map(_i => Array.isArray(_i) ? T.flattenItems(_i) : _i)),
+    flattenArray: _arr => [].concat(..._arr.map(_i => Array.isArray(_i) ? T.flattenArray(_i) : _i)),
 
     /**
      * 递归展平树结构

@@ -137,7 +137,7 @@ console.log('averageItems:', T.averageItems([1, 2, 3, 4, 5]))
 console.log('hasItemCount:', T.hasItemCount([1, 2, 3, 4, 5, 1, 4], 4))
 
 // 递归展平数组
-console.log('flattenItems:', T.flattenItems([1, 2, 3, [5, ['test'], 7, [9, 10]]]))
+console.log('flattenArray:', T.flattenArray([1, 2, 3, [5, ['test'], 7, [9, 10]]]))
 
 // 差集
 console.log('difference:', T.difference([1, 2, 3, 5], [1, 2, 4]))
