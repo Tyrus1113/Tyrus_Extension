@@ -386,3 +386,9 @@ console.log('locateObject:', T.locateObject(ARR06, [274, 275, 276, 293]))
 
 // 递归展平树结构
 console.log('flatten:', T.flattenTree(ARR06))
+
+// 统计字符串中出现相同字母的数量
+console.log('countStringItem:', T.countStringItem('This is a test'))
+
+// 统计数组中出现相同数字的数量
+console.log('countNumberItem:', T.countNumberItem([2, 5, 8, 7, 5, 5]))

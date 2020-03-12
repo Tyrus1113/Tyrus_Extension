@@ -288,6 +288,36 @@ const T = {
 
         return o
     },
+
+    /**
+    * 统计字符串中出现相同字母的数量
+    * @method countStringItem
+    *
+    * @example 
+    *   T.countStringItem('This is a test')
+    * 
+    * @param  {String}   _s 原字符串
+    * @return {Object}      返回 统计数量的集合
+    */
+    countStringItem: _s => _s.split('').reduce((_d, _c) => {
+        _d[_c] ? _d[_c]++ : _d[_c] = 1
+        return _d
+    }, {}),
+    
+    /**
+    * 统计数组中出现相同数字的数量
+    * @method countStringItem
+    *
+    * @example 
+    *   T.countNumberItem([2, 5, 8, 7, 5, 5])
+    * 
+    * @param  {Number}   _a 原数组
+    * @return {Object}      返回 统计数量的集合
+    */
+    countNumberItem: _a => _a.reduce((_d, _c) => {
+        _d[_c] ? _d[_c]++ : _d[_c] = 1
+        return _d
+    }, {}),
     
     // ----------------------------- 以上为数据相关 以下为UI相关 -----------------------------
 
