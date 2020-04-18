@@ -118,9 +118,9 @@ T.getNaturalDimensions(la, natural => {
 })
 
 // 格式化日期
-console.log('periodTime:', T.periodTime(T.dateFormatter('YYYY-MM-DD HH:mm:ss', '2019-10-30 12:11:00')))
-console.log('dateFormatter:', T.dateFormatter('YYYY-MM-DD HH:mm:ss', 1567693791000))
-console.log('dateFormatter:', T.dateFormatter('YYYYMMDDHHmmss', 1567693791000))
+console.log('periodTime:', T.periodTime(T.dateFormatter('2020-4-18 22:19:00', 'YYYY-MM-DD HH:mm:ss')))
+console.log('dateFormatter:', T.dateFormatter(1567693791000))
+console.log('dateFormatter:', T.dateFormatter(1567693791000))
 // 时间间隔
 console.log('timeInterval:', T.timeInterval(1566867166000, 1567693791000))
 

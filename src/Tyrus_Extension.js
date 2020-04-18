@@ -1,6 +1,6 @@
 /*
- * @Trus_Extension
- * @Author: Trus
+ * @Tyrus_Extension
+ * @Author: Tyrus
  */
 
 //  ---- **** T start **** ----
@@ -598,16 +598,17 @@ const T = {
      * @method dateFormatter
      *
      * @example
-     *  T.dateFormatter('YYYY-MM-DD HH:mm:ss', new Date())
+     *  T.dateFormatter(new Date(),'YYYY-MM-DD HH:mm:ss')
      *  // 2019-09-12 19:06:24
-     *  T.dateFormatter('YYYYMMDDHHmmss', new Date())
+     *  T.dateFormatter(new Date(), 'YYYYMMDDHHmmss')
      *  // 20190912191133
      * 
      * // 13位时间戳
+     * @param  {Number}  1587218357414
      * @param  {String}  'YYYY-MM-DD HH:mm:ss' / 'YYYYMMDDHHmmss'
      * @return {String}  2019-09-12 19:06:24 / 20190912191133
      */
-    dateFormatter: (_fmt, _d) => {
+    dateFormatter: (_d = null, _fmt = 'YYYY-MM-DD HH:mm:ss') => {
 
         const date = _d ? new Date(_d) : new Date()
         const year = date.getFullYear() + ''
