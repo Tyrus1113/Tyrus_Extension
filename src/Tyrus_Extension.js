@@ -413,9 +413,26 @@ const T = {
      *  T.addThousandMark(30000)
      * 
      * @param  {Number / String} _m   原数字
-     * @return {String}               返回 新数组
+     * @return {String}               返回 新字符串
      */
     addThousandMark: _m => _m.toString().replace(/(\d{1,3})(?=(\d{3})+$)/g, '$1,'),
+
+    /**
+     * 数字添加万字符
+     * @method addTenThousandMark
+     *
+     * @example
+     *  T.addTenThousandMark(300000)
+     * 
+     * @param  {Number / String}  _m  原数字
+     * @param  {Number / Boolean} _p  是否添加小数点
+     * @return {String}               返回 新字符串
+     */
+    addTenThousandMark: (_m, _p = 1) => {
+        const str = _m.toString()
+        let point = Number(str[str.length - 4]) > 0 && _p ? `.${str[str.length - 4]}` : ''
+        return str.length > 4 ? `${str.slice(0, str.length - 4)}${point}万` : str
+    },
 
     /**
      * 删除字符串中的xml/html标签

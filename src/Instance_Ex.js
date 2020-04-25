@@ -184,6 +184,8 @@ console.log('getMin:', T.getMin([-1, 10.1, 3, 4]))
 
 // 数字添加千分符
 console.log('addYearMonthSort:', T.addThousandMark(30000))
+// 数字添加万字符
+console.log('addTenThousandMark:', T.addTenThousandMark(365000))
 
 // 深拷贝引用数据类型
 console.log('ARR:', ARR)
