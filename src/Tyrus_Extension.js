@@ -318,6 +318,32 @@ const T = {
         _d[_c] ? _d[_c]++ : _d[_c] = 1
         return _d
     }, {}),
+
+    /**
+    * 过滤掉多余字段
+    * @method filterField
+    *
+    * @example 
+    *   // 只保留原数组中的id和children
+    *   T.filterField([ {id: 1, children: [ { id: 1, children: [] } ] } ])
+    * 
+    * @param  {Number}   _a 原数组
+    * @return {Object}      返回 过滤后的数组
+    */
+    filterField: _a => {
+        const arr = []
+
+        for (let i = 0; i < _a.length; i++) {
+
+            const { id, children = [] } = _a[i]
+            arr.push({ id, children })
+      
+            if (children && children.length) {
+                arr[i].children = T.filterField(children)
+            }
+        }
+        return arr
+    },
     
     // ----------------------------- 以上为数据相关 以下为UI相关 -----------------------------
 

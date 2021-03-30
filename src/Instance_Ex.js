@@ -394,3 +394,6 @@ console.log('countStringItem:', T.countStringItem('This is a test'))
 
 // 统计数组中出现相同数字的数量
 console.log('countNumberItem:', T.countNumberItem([2, 5, 8, 7, 5, 5]))
+
+// 过滤掉多余字段
+console.log('filterField:', T.filterField(ARR06))
