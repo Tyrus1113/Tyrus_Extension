@@ -397,3 +397,8 @@ console.log('countNumberItem:', T.countNumberItem([2, 5, 8, 7, 5, 5]))
 
 // 过滤掉多余字段
 console.log('filterField:', T.filterField(ARR06))
+
+// 替换URL参数
+document.getElementById('testBtn').addEventListener('click', () => {
+    T.replaceURLParam('page', 16)
+})

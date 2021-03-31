@@ -432,6 +432,49 @@ const T = {
     getUrlParam: _n => decodeURIComponent(new URLSearchParams(location.search).get(_n)),
 
     /**
+    * 替换URL参数
+    * @method replaceURLParam
+    *
+    * @param  {String}            _k  字段名称
+    * @param  {String / Number}   _v  值
+    * @param  {Boolean / Number}  _j  处理后 跳转:1
+    * @param  {String}            _u  目标url
+
+    * @return {String}            返回  替换参数和值的URL
+    */
+    replaceURLParam: (_k, _v, _j, _u = window.location.href) => {
+
+        let newURL = ''
+
+        if (_u.indexOf(_k) < 0) {
+            _u.indexOf('?') < 0 ? _u += '?' : _u += '&'
+            _u += `${_k}=${_v}`
+
+            newURL = _u
+        } else {
+            const hrefArr = _u.split('?')
+            const urlParams = hrefArr[1].split('&')
+            
+            if (urlParams.length) {
+                for (let i = 0; i < urlParams.length; i++) {
+                    const item = urlParams[i]
+          
+                    if (item.split('=')[0] === _k) {
+                        console.log('item.split(=)[1]:', item.split('=')[1])
+                        urlParams.splice(i, 1, `${_k}=${_v}`)
+
+                        newURL = `${hrefArr[0]}?${urlParams.join('&')}`
+          
+                        break
+                    }
+                }
+            }
+        }
+  
+        _j ? window.location.href = newURL : window.history.pushState({ state: 0 }, '', newURL)
+    },
+
+    /**
      * 数字添加千分符
      * @method addThousandMark
      *
