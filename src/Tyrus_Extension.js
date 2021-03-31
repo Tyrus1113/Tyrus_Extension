@@ -447,27 +447,22 @@ const T = {
         let newURL = ''
 
         if (_u.indexOf(_k) < 0) {
+            // 未查找到相同字段 在url结尾新增参数
             _u.indexOf('?') < 0 ? _u += '?' : _u += '&'
             _u += `${_k}=${_v}`
 
             newURL = _u
         } else {
+            // 查找到相同字段 在url中替换参数和值
             const hrefArr = _u.split('?')
             const urlParams = hrefArr[1].split('&')
-            
-            if (urlParams.length) {
-                for (let i = 0; i < urlParams.length; i++) {
-                    const item = urlParams[i]
-          
-                    if (item.split('=')[0] === _k) {
-                        console.log('item.split(=)[1]:', item.split('=')[1])
-                        urlParams.splice(i, 1, `${_k}=${_v}`)
 
-                        newURL = `${hrefArr[0]}?${urlParams.join('&')}`
-          
-                        break
-                    }
-                }
+            if (urlParams.length) {
+                const idx = urlParams.findIndex(i => i.split('=')[0] === _k)
+                urlParams.splice(idx, 1, `${_k}=${_v}`)
+
+                // 重新拼接url
+                newURL = `${hrefArr[0]}?${urlParams.join('&')}`
             }
         }
   
