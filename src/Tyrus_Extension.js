@@ -264,16 +264,16 @@ const T = {
 
     /**
     * 根据各级别id (path) 递归定位到最终级别的对象中
-    * @method locateObjectOfPath
+    * @method locateOfPath
     * 
     * @example
-    * T.locateObjectOfPath(ARR06, [274, 275, 276, 293])
+    * T.locateOfPath(ARR06, [274, 275, 276, 293])
     *
     * @param  {Array}   _t  树结构
     * @param  {Array}   _i  各级别id (path)
     * @return {Object}      返回 定位到的对象
     */
-    locateObjectOfPath: (_t, _i) => {
+    locateOfPath: (_t, _i) => {
         let o = {}
         // 深拷贝path 避免影响原始数据
         const path = JSON.parse(JSON.stringify(_i))
@@ -284,7 +284,7 @@ const T = {
 
                 if (_t[i].children && _t[i].children.length && path.length > 1) {
                     path.shift()
-                    return T.locateObjectOfPath(_t[i].children, path)
+                    return T.locateOfPath(_t[i].children, path)
                 } else {
                     o = _t[i]
                 }
@@ -297,16 +297,16 @@ const T = {
 
     /**
     * 根据单独id 递归定位到最终级别的对象中
-    * @method locateObject
+    * @method locate
     *
     * @example
-    * T.locateObject(ARR06, 293)
+    * T.locate(ARR06, 293)
     * 
     * @param  {Array}   _t  树结构
     * @param  {Number}  _i  目标id
     * @return {Object}      返回 定位到的对象
     */
-    locateObject: (_t, _i) => {
+    locate: (_t, _i) => {
 
         for (let i = 0; i < _t.length; i++) {
 
@@ -316,14 +316,27 @@ const T = {
 
             } else if (_t[i].children && _t[i].children.length) {
 
-                const target = T.locateObject(_t[i].children, _i)
+                const target = T.locate(_t[i].children, _i)
 
                 if (target && Object.keys(target).length) {
                     return target
                 }
             }
         }
+    },
 
+    /**
+    * 查找树结构中符合条件的目标项 并返回集合
+    * @method findCondition
+    *
+    * @example
+    * 
+    * @param  {Array}   _t  树结构
+    * @param  {Array}  _a  保存符合条件的集合
+    * @return {Array}       返回 符合条件的数组集合
+    */
+    findCondition: (_t, _a) => {
+        
     },
 
     /**
