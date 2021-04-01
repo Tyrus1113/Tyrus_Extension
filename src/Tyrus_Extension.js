@@ -262,31 +262,61 @@ const T = {
     },
 
     /**
-    * 根据各级别id 递归定位到最终级别的对象中
+    * 根据各级别id (path) 递归定位到最终级别的对象中
     * @method locateObjectOfPath
     *
-    * @param  {Array}   _a  原数组
-    * @param  {Array}   _i  各级别id path
+    * @param  {Array}   _t  树结构
+    * @param  {Array}   _i  各级别id (path)
     * @return {Object}      返回 定位到的对象
     */
-    locateObjectOfPath: (_a, _i) => {
+    locateObjectOfPath: (_t, _i) => {
         let o = {}
+        // 深拷贝path 避免影响原始数据
+        const path = JSON.parse(JSON.stringify(_i))
 
-        for (let i = 0; i < _a.length; i++) {
+        for (let i = 0; i < _t.length; i++) {
 
-            if (_a[i].id === _i[0]) {
+            if (_t[i].id === path[0]) {
 
-                if (_a[i].children && _i.length > 1) {
-                    _i.shift()
-                    return T.locateObjectOfPath(_a[i].children, _i)
+                if (_t[i].children && _t[i].children.length && path.length > 1) {
+                    path.shift()
+                    return T.locateObjectOfPath(_t[i].children, path)
                 } else {
-                    o = _a[i]
+                    o = _t[i]
                 }
                 
             }
         }
 
         return o
+    },
+
+    /**
+    * 根据单独id 递归定位到最终级别的对象中
+    * @method locateObject
+    *
+    * @param  {Array}   _t  树结构
+    * @param  {Number}  _i  目标id
+    * @return {Object}      返回 定位到的对象
+    */
+    locateObject: (_t, _i) => {
+
+        for (let i = 0; i < _t.length; i++) {
+
+            if (_t[i].id === _i) {
+
+                return _t[i]
+
+            } else if (_t[i].children && _t[i].children.length) {
+
+                const target = T.locateObject(_t[i].children, _i)
+                
+                if (target && Object.keys(target).length) {
+                    return target
+                }
+            }
+        }
+
     },
 
     /**
