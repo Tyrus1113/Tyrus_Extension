@@ -263,13 +263,13 @@ const T = {
 
     /**
     * 根据各级别id 递归定位到最终级别的对象中
-    * @method locateObject
+    * @method locateObjectOfPath
     *
     * @param  {Array}   _a  原数组
-    * @param  {Array}   _i  各级别id
+    * @param  {Array}   _i  各级别id path
     * @return {Object}      返回 定位到的对象
     */
-    locateObject: (_a, _i) => {
+    locateObjectOfPath: (_a, _i) => {
         let o = {}
 
         for (let i = 0; i < _a.length; i++) {
@@ -278,7 +278,7 @@ const T = {
 
                 if (_a[i].children && _i.length > 1) {
                     _i.shift()
-                    return T.locateObject(_a[i].children, _i)
+                    return T.locateObjectOfPath(_a[i].children, _i)
                 } else {
                     o = _a[i]
                 }
