@@ -232,15 +232,6 @@ const T = {
     },
 
     /**
-     * 对象是否为空
-     * @method isEmptyObj
-     *
-     * @param  {Object}   _o  原对象
-     * @return {Boolean}      返回 true 非空 / false 空
-     */
-    isEmptyObj: _o => Object.keys(_o).length > 0,
-
-    /**
      * 数组横向纵向相互转换
      * @method transformArrayVerticallyAndHorizontally
      * 

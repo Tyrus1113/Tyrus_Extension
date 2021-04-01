@@ -198,8 +198,6 @@ document.getElementById('onceBtn').addEventListener('click', T.onceCall(e => {
     console.log('onceFunc called just once', e)
 }))
 
-console.log('isEmptyObj:', T.isEmptyObj({ a: 1 }))
-
 // Base64解码
 console.log('decode:', T.decode('dGhpcyUyMGlzJTIwdGVzdCUyMCVFNSU5MCVBQiVFNiU5QyU4OSVFNCVCOCVBRCVFNiU5NiU4NyUyMDEyMw=='))
 
