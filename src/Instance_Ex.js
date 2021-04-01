@@ -387,6 +387,9 @@ var ARR06 = [
 console.log('locateObjectOfPath:', T.locateObjectOfPath(ARR06, [274, 275, 276, 293]))
 console.log('locateObject:', T.locateObject(ARR06, 293))
 
+// 判断传入的数据类型
+console.log('whichType:', T.whichType(() => {}))
+
 // 递归展平树结构
 console.log('flatten:', T.flattenTree(ARR06))
 

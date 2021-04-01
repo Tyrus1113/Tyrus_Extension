@@ -198,6 +198,16 @@ const T = {
     is: (_t, _v) => ![undefined, null].includes(_v) && _v.constructor === _t,
 
     /**
+    * 判断传入的数据类型
+    * @method whichType
+    *
+    * @param  {Any}     v 值
+    * @return {String}  返回 数据类型名称
+    */
+
+    whichType: v => Object.prototype.toString.call(v).split(' ')[1].replace(']', ''),
+
+    /**
      * 比较两个对象是否相同
      * @method isEqualObj
      *
@@ -264,6 +274,9 @@ const T = {
     /**
     * 根据各级别id (path) 递归定位到最终级别的对象中
     * @method locateObjectOfPath
+    * 
+    * @example
+    * T.locateObjectOfPath(ARR06, [274, 275, 276, 293])
     *
     * @param  {Array}   _t  树结构
     * @param  {Array}   _i  各级别id (path)
@@ -295,6 +308,9 @@ const T = {
     * 根据单独id 递归定位到最终级别的对象中
     * @method locateObject
     *
+    * @example
+    * T.locateObject(ARR06, 293)
+    * 
     * @param  {Array}   _t  树结构
     * @param  {Number}  _i  目标id
     * @return {Object}      返回 定位到的对象
@@ -310,7 +326,7 @@ const T = {
             } else if (_t[i].children && _t[i].children.length) {
 
                 const target = T.locateObject(_t[i].children, _i)
-                
+
                 if (target && Object.keys(target).length) {
                     return target
                 }
