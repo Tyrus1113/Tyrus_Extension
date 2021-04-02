@@ -388,6 +388,9 @@ console.log('locate:', T.locate(ARR06, 293))
 // 判断传入的数据类型
 console.log('whichType:', T.whichType(() => {}))
 
+// 查找树结构中符合条件的目标项 并返回集合
+console.log('findCondition:', T.findCondition(ARR06, v => v < 300))
+
 // 递归展平树结构
 console.log('flatten:', T.flattenTree(ARR06))
 

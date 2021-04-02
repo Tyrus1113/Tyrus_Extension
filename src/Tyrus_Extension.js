@@ -42,7 +42,7 @@ const T = {
      * 
      * @param  {Array}                  _arr   需要检查的数组
      * @param  {Number/String/Boolean}  _name  需要删除的值
-     * @return {Array}                       返回 删除指定值后的新数组
+     * @return {Array}                         返回 删除指定值后的新数组
      */
     delItem: (_arr, _name) => _arr.filter(_i => _i !== _name),
 
@@ -267,13 +267,14 @@ const T = {
     * @method locateOfPath
     * 
     * @example
-    * T.locateOfPath(ARR06, [274, 275, 276, 293])
+    *   T.locateOfPath(ARR06, [274, 275, 276, 293])
     *
     * @param  {Array}   _t  树结构
     * @param  {Array}   _i  各级别id (path)
     * @return {Object}      返回 定位到的对象
     */
     locateOfPath: (_t, _i) => {
+
         let o = {}
         // 深拷贝path 避免影响原始数据
         const path = JSON.parse(JSON.stringify(_i))
@@ -300,7 +301,7 @@ const T = {
     * @method locate
     *
     * @example
-    * T.locate(ARR06, 293)
+    *   T.locate(ARR06, 293)
     * 
     * @param  {Array}   _t  树结构
     * @param  {Number}  _i  目标id
@@ -330,13 +331,27 @@ const T = {
     * @method findCondition
     *
     * @example
+    *   T.findCondition(ARR06, v => v < 300)
     * 
-    * @param  {Array}   _t  树结构
-    * @param  {Array}  _a  保存符合条件的集合
-    * @return {Array}       返回 符合条件的数组集合
+    * @param  {Array}      _t  树结构
+    * @param  {Function}   _f  返回条件
+    * @param  {Array}      _a  保存符合条件的集合
+    * @return {Array}      返回 符合条件的数组集合
     */
-    findCondition: (_t, _a) => {
-        
+    findCondition: (_t, _f, _a = []) => {
+
+        for (let i = 0; i < _t.length; i++) {
+
+            if (_f(_t[i].id)) {
+                _a.push(_t[i].id)
+            }
+
+            if (_t[i].children && _t[i].children.length) {
+                T.findCondition(_t[i].children, _f, _a)
+            }
+        }
+
+        return _a
     },
 
     /**
