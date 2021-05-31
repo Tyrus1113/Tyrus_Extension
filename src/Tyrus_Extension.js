@@ -968,6 +968,63 @@ const T = {
     },
 
     /**
+     * 网络图片转Base64
+     * @method iMGToBase64
+     *
+     * @example 
+     *  T.iMGToBase64('https://image.xxx.com/xxx.png', res => {
+     *      // 原因：直接使用a标签download属性下载 会导致部分浏览器不支持
+     *      // 利用canvas将网络图片转为Base64下载 确保兼容性
+     *      console.log(res)
+     *      var a = document.createElement('a')
+     *      var event = new MouseEvent('click')
+     *      a.download = 'download-img'
+     *      a.href = res
+     *      // 触发a的单击事件
+     *      a.dispatchEvent(event)
+     *  })
+     * 
+     * @param  {String}     _url      网络图片地址
+     * @param  {Boolean}    _download 是否下载
+     * @param  {Function}   _fn       回调 返回Base64格式
+     */
+    iMGToBase64: (_url, _download = true, _fn) => {
+
+        const img = new Image()
+        // 解决canvas转base64时报错网络资源跨域问题
+        img.crossOrigin = ''
+        img.src = _url
+
+        if (_url) {
+            img.onload = () => {
+                // 创建画布
+                const c = document.createElement('canvas')
+                c.width = img.width
+                c.height = img.height
+
+                const t = c.getContext('2d')
+                t.drawImage(img, 0, 0, img.width, img.height)
+
+                // 回调转为base64的结果
+                const r = c.toDataURL()
+
+                _fn && _fn(r)
+
+                if (_download) {
+                    // 转换Base64通常为下载操作
+                    const a = document.createElement('a')
+                    const e = new MouseEvent('click')
+                    a.download = 'download-img'
+                    a.href = r
+
+                    // 触发a的单击事件
+                    a.dispatchEvent(e)
+                }
+            }
+        }
+    },
+
+    /**
      * 获取图片原始尺寸
      * @method getNaturalDimensions
      *
@@ -1227,7 +1284,7 @@ const T = {
     
         step()
     }
-
+    
 } //  ---- **** T end **** ----
 
 module.exports = T

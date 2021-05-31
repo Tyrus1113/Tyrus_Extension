@@ -407,3 +407,6 @@ console.log('filterField:', T.filterField(ARR06))
 document.getElementById('testBtn').addEventListener('click', () => {
     T.replaceURLParam('page', 16)
 })
+
+// 网络图片转Base64
+T.iMGToBase64('https://qny.smzdm.com/202008/25/5f44cbc8d7145475.png', false)
