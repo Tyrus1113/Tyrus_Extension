@@ -992,7 +992,7 @@ const T = {
 
         const img = new Image()
         // 解决canvas转base64时报错网络资源跨域问题
-        img.crossOrigin = ''
+        img.crossOrigin = 'Anonymous'
         img.src = _url
 
         if (_url) {
